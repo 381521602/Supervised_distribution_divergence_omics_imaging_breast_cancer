@@ -1,0 +1,57 @@
+omics	task	variant	category	metric	mean	std
+CNV	PAM50	baseline	Baseline	accuracy	0.7176	0.0202
+CNV	PAM50	baseline	Baseline	macro_f1	0.6659	0.0319
+CNV	PAM50	mask_category_0	Development/Epithelium	accuracy	0.7091	0.0239
+CNV	PAM50	mask_category_0	Development/Epithelium	macro_f1	0.6616	0.0328
+CNV	PAM50	mask_category_1	Signaling/Transport	accuracy	0.7128	0.024
+CNV	PAM50	mask_category_1	Signaling/Transport	macro_f1	0.6589	0.0391
+CNV	PAM50	mask_category_2	Hormone/Metabolism	accuracy	0.7164	0.0256
+CNV	PAM50	mask_category_2	Hormone/Metabolism	macro_f1	0.6617	0.0332
+CNV	PAM50	mask_category_3	Immune/Inflammation	accuracy	0.7164	0.0193
+CNV	PAM50	mask_category_3	Immune/Inflammation	macro_f1	0.6641	0.0225
+CNV	PAM50	mask_category_4	Cell cycle/Proliferation	accuracy	0.7152	0.0215
+CNV	PAM50	mask_category_4	Cell cycle/Proliferation	macro_f1	0.6651	0.0309
+CNV	PAM50	mask_category_5	Other	accuracy	0.6737	0.0436
+CNV	PAM50	mask_category_5	Other	macro_f1	0.5904	0.0645
+CNV	Survival	baseline	Baseline	roc_auc	0.6642	0.0248
+CNV	Survival	baseline	Baseline	c_index	0.6679	0.0471
+CNV	Survival	mask_category_0	Development/Epithelium	roc_auc	0.6653	0.0247
+CNV	Survival	mask_category_0	Development/Epithelium	c_index	0.6642	0.0479
+CNV	Survival	mask_category_1	Signaling/Transport	roc_auc	0.6694	0.0343
+CNV	Survival	mask_category_1	Signaling/Transport	c_index	0.6718	0.0601
+CNV	Survival	mask_category_2	Hormone/Metabolism	roc_auc	0.662	0.0213
+CNV	Survival	mask_category_2	Hormone/Metabolism	c_index	0.6692	0.0508
+CNV	Survival	mask_category_3	Immune/Inflammation	roc_auc	0.6604	0.0292
+CNV	Survival	mask_category_3	Immune/Inflammation	c_index	0.6572	0.052
+CNV	Survival	mask_category_4	Cell cycle/Proliferation	roc_auc	0.6631	0.0226
+CNV	Survival	mask_category_4	Cell cycle/Proliferation	c_index	0.6717	0.0488
+CNV	Survival	mask_category_5	Other	roc_auc	0.5799	0.0814
+CNV	Survival	mask_category_5	Other	c_index	0.5688	0.0633
+miRNA	PAM50	baseline	Baseline	accuracy	0.8088	0.023
+miRNA	PAM50	baseline	Baseline	macro_f1	0.7783	0.0441
+miRNA	PAM50	mask_category_0	Development/Epithelium	accuracy	0.8028	0.0328
+miRNA	PAM50	mask_category_0	Development/Epithelium	macro_f1	0.7659	0.057
+miRNA	PAM50	mask_category_1	Signaling/Transport	accuracy	0.8028	0.0138
+miRNA	PAM50	mask_category_1	Signaling/Transport	macro_f1	0.767	0.0251
+miRNA	PAM50	mask_category_2	Hormone/Metabolism	accuracy	0.8129	0.0267
+miRNA	PAM50	mask_category_2	Hormone/Metabolism	macro_f1	0.7752	0.0315
+miRNA	PAM50	mask_category_3	Immune/Inflammation	accuracy	0.8048	0.0263
+miRNA	PAM50	mask_category_3	Immune/Inflammation	macro_f1	0.7685	0.0384
+miRNA	PAM50	mask_category_4	Cell cycle/Proliferation	accuracy	0.8008	0.0228
+miRNA	PAM50	mask_category_4	Cell cycle/Proliferation	macro_f1	0.754	0.0328
+miRNA	PAM50	mask_category_5	Other	accuracy	0.7264	0.0194
+miRNA	PAM50	mask_category_5	Other	macro_f1	0.5314	0.0365
+miRNA	Survival	baseline	Baseline	roc_auc	0.6056	0.0588
+miRNA	Survival	baseline	Baseline	c_index	0.5807	0.0768
+miRNA	Survival	mask_category_0	Development/Epithelium	roc_auc	0.6051	0.0615
+miRNA	Survival	mask_category_0	Development/Epithelium	c_index	0.5737	0.0825
+miRNA	Survival	mask_category_1	Signaling/Transport	roc_auc	0.5994	0.0722
+miRNA	Survival	mask_category_1	Signaling/Transport	c_index	0.5752	0.0848
+miRNA	Survival	mask_category_2	Hormone/Metabolism	roc_auc	0.5985	0.0442
+miRNA	Survival	mask_category_2	Hormone/Metabolism	c_index	0.5824	0.0633
+miRNA	Survival	mask_category_3	Immune/Inflammation	roc_auc	0.6005	0.0518
+miRNA	Survival	mask_category_3	Immune/Inflammation	c_index	0.5684	0.0811
+miRNA	Survival	mask_category_4	Cell cycle/Proliferation	roc_auc	0.6041	0.0629
+miRNA	Survival	mask_category_4	Cell cycle/Proliferation	c_index	0.5685	0.0795
+miRNA	Survival	mask_category_5	Other	roc_auc	0.5218	0.0553
+miRNA	Survival	mask_category_5	Other	c_index	0.564	0.0649

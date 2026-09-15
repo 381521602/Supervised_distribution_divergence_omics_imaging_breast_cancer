@@ -1,0 +1,7 @@
+omics	task	k_features	n_features	n_samples	features_file	matrix_file
+mRNA	PAM50_4class	200	200	833	mRNA_PAM50_4class_features.tsv	mRNA_PAM50_4class_matrix.tsv
+mRNA	OS	200	200	1073	mRNA_OS_features.tsv	mRNA_OS_matrix.tsv
+CNV	PAM50_4class	50	50	818	CNV_PAM50_4class_features.tsv	CNV_PAM50_4class_matrix.tsv
+CNV	OS	50	50	1057	CNV_OS_features.tsv	CNV_OS_matrix.tsv
+miRNA	PAM50_4class	200	200	497	miRNA_PAM50_4class_features.tsv	miRNA_PAM50_4class_matrix.tsv
+miRNA	OS	200	200	739	miRNA_OS_features.tsv	miRNA_OS_matrix.tsv

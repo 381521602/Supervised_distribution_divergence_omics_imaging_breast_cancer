@@ -1,0 +1,5 @@
+task	metric	mean	std
+PAM50	accuracy	0.8683	0.0322
+PAM50	macro_f1	0.8522	0.0461
+Survival	roc_auc	0.6992	0.0626
+Survival	c_index	0.6519	0.1053

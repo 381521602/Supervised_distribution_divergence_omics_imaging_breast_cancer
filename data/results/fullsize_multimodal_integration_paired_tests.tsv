@@ -1,0 +1,5 @@
+task	metric	best_integration	best_single	mean_diff_integ_minus_single	t_pvalue	wilcoxon_pvalue
+PAM50	accuracy	triple_gated	single_mRNA	-0.0082	0.2408	0.375
+PAM50	macro_f1	triple_gated	single_mRNA	0.0147	0.2426	0.3125
+Survival	roc_auc	late_fusion_avg	single_mRNA	0.0469	0.0228	0.0625
+Survival	c_index	late_fusion_avg	single_mRNA	0.0169	0.552	0.625

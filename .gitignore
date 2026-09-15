@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.log
+.DS_Store
+Thumbs.db
+*.tmp
+*.h5
+*.zip
+*.tar
+*.gz

@@ -1,0 +1,13 @@
+source	term_id	term_name	p_value	term_size	query_size	intersection_size
+KEGG	KEGG:04915	Estrogen signaling pathway	0.00041118002542670434	138	44	7
+GO:BP	GO:0008283	cell population proliferation	0.00041316481171853136	1961	81	24
+GO:BP	GO:0042127	regulation of cell population proliferation	0.0014101789391958764	1639	81	21
+GO:BP	GO:0048513	animal organ development	0.0025579566043621486	3018	81	29
+GO:BP	GO:0048856	anatomical structure development	0.013846866717986916	5948	81	42
+GO:BP	GO:0090068	positive regulation of cell cycle process	0.0143495693468978	259	81	8
+GO:BP	GO:0051302	regulation of cell division	0.015414079105233708	186	81	7
+GO:BP	GO:0007275	multicellular organism development	0.016410180418617852	4690	81	36
+GO:BP	GO:0032877	positive regulation of DNA endoreduplication	0.029467684559314394	2	81	2
+GO:BP	GO:0060429	epithelium development	0.03340030404121339	1234	81	16
+GO:BP	GO:0010564	regulation of cell cycle process	0.04403202953715342	728	81	12
+GO:BP	GO:0051782	negative regulation of cell division	0.048847054768500986	15	81	3

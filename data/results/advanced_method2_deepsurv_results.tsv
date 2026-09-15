@@ -1,0 +1,3 @@
+metric	mean	std
+roc_auc	0.7074	0.0535
+c_index	0.6534	0.046
