@@ -482,7 +482,7 @@ def build_main():
     )
 
     add_heading(doc, "2. 材料与方法", 1)
-    add_body(doc, "本部分仅给出核心方法与参数。具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15。")
+    add_body(doc, "本部分仅给出核心方法与参数。整体技术路线见图 1，样本量概况见表 1；具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15。")
     add_figure(doc, FIG / "fig1_route_v25.png", "Figure 1. Overall technical route. The three phases are data preparation, feature engineering, and modeling/fusion/evaluation; SHAP, Grad-CAM/saliency, and functional masking are used as downstream interpretability modules.", width=6.8)
     add_heading(doc, "2.1 数据来源与样本对齐", 2)
     add_body(
@@ -532,7 +532,7 @@ def build_main():
     add_numbered_formula(doc, "D_JSD(P||Q) = 0.5 ∑_x [ P(x) log_2( 2P(x) / (P(x)+Q(x)) ) + Q(x) log_2( 2Q(x) / (P(x)+Q(x)) ) ]", 2)
     add_body(
         doc,
-        "特征数量通过 200/50/200 基础数量及 2×、3×、4×、5× 扩增进行系统比较。最终 PAM50 数据集特征数分别为 mRNA 400、CNV 50、miRNA 600；生存数据集特征数分别为 mRNA 200、CNV 150、miRNA 600。选择依据为在 Accuracy/Macro-F1 或 ROC AUC/C-index 接近最优时，优先选择计算效率更高、稳定性更好的特征数；最终特征数量与图像尺寸对应关系见补充材料表 S3。",
+        "特征数量通过 200/50/200 基础数量及 2×、3×、4×、5× 扩增进行系统比较。最终 PAM50 数据集特征数分别为 mRNA 400、CNV 50、miRNA 600；生存数据集特征数分别为 mRNA 200、CNV 150、miRNA 600。选择依据为在 Accuracy/Macro-F1 或 ROC AUC/C-index 接近最优时，优先选择计算效率更高、稳定性更好的特征数；最终特征数量与 JSD 图像尺寸见表 2，更详细对应关系见补充材料表 S3。",
     )
     add_body(
         doc,
@@ -571,7 +571,7 @@ def build_main():
     add_body(doc, "MLP 与 FullSizeCNN 均使用 Adam 优化器，学习率 1×10⁻³、权重衰减 1×10⁻⁴，训练 30 个 epoch，批大小为 64。PAM50 使用交叉熵损失，输出四类概率；生存预测使用二元交叉熵损失，输出死亡风险概率。训练前仅在训练折上估计 StandardScaler 参数，测试折使用同一 scaler 变换。")
     add_body(
         doc,
-        "FullSizeCNN 的输入为 H×W×1 图像，第一层使用与 H×W 相同的全尺寸卷积核，输出 32 个 1×1 特征图；随后展平为 32 维向量，经 64 维全连接、ReLU 和 Dropout 后输出分类 logits 或生存风险。需要指出，该全尺寸卷积核在数学上等价于展平后的全连接投影，因此本文将其视为保留图像坐标接口的 full-field convolutional network，而不是滑动/局部卷积特征提取器；其图像接口主要用于后续归因可视化，而非依赖二维局部感受野获得预测增益。",
+        "FullSizeCNN 的输入为 H×W×1 图像，第一层使用与 H×W 相同的全尺寸卷积核，输出 32 个 1×1 特征图；随后展平为 32 维向量，经 64 维全连接、ReLU 和 Dropout 后输出分类 logits 或生存风险。结构如图 2 所示。需要指出，该全尺寸卷积核在数学上等价于展平后的全连接投影，因此本文将其视为保留图像坐标接口的 full-field convolutional network，而不是滑动/局部卷积特征提取器；其图像接口主要用于后续归因可视化，而非依赖二维局部感受野获得预测增益。",
     )
     add_figure(doc, FIG / "fig2_fullsize_cnn_v4.png", "Figure 2. FullSizeCNN architecture. An H×W×1 JSD image is transformed by a full-size convolutional layer with H×W kernels and 32 filters, flattened to 32 features, and passed through a 64-unit ReLU/Dropout MLP head. PAM50 uses H=W=20 and four output units; survival uses H=W=15 and one risk output.", width=6.2)
     add_body(
@@ -648,7 +648,7 @@ def build_main():
     )
     add_body(
         doc,
-        "在复杂方法中，Transformer 在 PAM50 上表现较好（Accuracy 0.9270、Macro-F1 0.9288），但生存 C-index 为 0.6938；Multi-task、DeepSurv、低秩双线性和 GNN 未在当前小样本上显示出稳定提升。",
+        "在复杂方法中，Transformer 在 PAM50 上表现较好（Accuracy 0.9270、Macro-F1 0.9288），但生存 C-index 为 0.6938；Multi-task、DeepSurv、低秩双线性和 GNN 未在当前小样本上显示出稳定提升。Figure 6 汇总了这些复杂方法的 PAM50 与生存结果。",
     )
     add_figure(doc, FIG / "fig5_advanced_methods_v2.png", "Figure 6. Advanced integration methods. A and B: PAM50 Accuracy and Macro-F1; C and D: survival ROC AUC and C-index. Methods include Multi-task, DeepSurv, Transformer, low-rank bilinear fusion, and GNN. Error bars represent 5-fold cross-validation SD.", width=6.4)
 
@@ -667,17 +667,21 @@ def build_main():
         doc,
         "SHAP 分析显示，mRNA PAM50 LogisticRegression 的关键基因包括 CYP2B7P1、TFF1、C1orf64、AGR3、KCNJ3、MIA、PPP1R14C、ESR1 和 STAC2。CNN saliency 与 SHAP 的共识基因包括 TCAM1P、MIA、SMC1B、PPP1R14C、KLK6、SLC6A11、FABP7 和 FOXC1。生存单变量 Cox 分析识别出 MS4A1、COL17A1、C2orf40、PLA2G2D、FABP7、CCL19 和 GZMB。通路富集提示雌激素信号、细胞增殖调控、细胞分裂和上皮发育等生物学过程；SHAP、saliency、consensus、survival Cox 与 pathway enrichment 图分别见补充材料图 S5–S9。",
     )
+    add_body(
+        doc,
+        "为进一步说明 JSD 图像化如何把表达值、判别重要性和功能注释统一到同一像素坐标系，Figure 7 将同一 mRNA 样本的表达灰度图（A）、JSD 重要性图（B）和功能类别图（C）并列，并将 SHAP 重要性（D）、CNN saliency（E）及功能类别/saliency 叠加图（F）映射回相同坐标。这样，模型归因和关键因子能够直接定位到对应的基因像素，而不只是在表格层面输出一个基因列表。",
+    )
     add_figure(doc, FIG / "fig7_jsd_v3.png", "Figure 7. JSD-based feature-mining visualization. A-C: grayscale expression, JSD importance, and functional category maps; D-F: SHAP importance, CNN saliency, and functional-category/saliency overlay maps. Axes indicate pixel positions; the JSD imaging scheme aligns expression, importance, function, and model attention in a common pixel coordinate system.", width=6.4)
 
     add_heading(doc, "3.7 功能类别遮盖与可解释性分析", 2)
     add_body(
         doc,
-        "为进一步解释组学图像中不同功能区域对模型的贡献，本研究在方案2（功能大类分块 + 中心高重要性 + 中心向外螺旋填充）图像上实施功能类别遮盖实验。与最初的 JSD 全局排序图像不同，方案2先按基因功能类别分块，再在块内按 JSD 降序，并以块平均重要性由中心向外螺旋填充，因此同一颜色区域对应同一功能模块，中心区域对应高 JSD 模块。该设计使图像像素邻接具有更明确的生物学含义，并支持对连续功能区域进行模块级遮挡。",
+        "为进一步解释组学图像中不同功能区域对模型的贡献，本研究在方案2（功能大类分块 + 中心高重要性 + 中心向外螺旋填充）图像上实施功能类别遮盖实验。与最初的 JSD 全局排序图像不同，方案2先按基因功能类别分块，再在块内按 JSD 降序，并以块平均重要性由中心向外螺旋填充，因此同一颜色区域对应同一功能模块，中心区域对应高 JSD 模块。该设计使图像像素邻接具有更明确的生物学含义，并支持对连续功能区域进行模块级遮挡；遮盖流程如图 8 所示。",
     )
     add_figure(doc, DATA / "interpretability/figures/fig_scheme2_masking_flow_en_v2.png", "Figure 8. Scheme-2 functional-category masking workflow. The target category pixels are set to zero, FullSizeCNN is retrained, and PAM50/survival performance is compared with the unmasked baseline. A, B, and C show the before-masking expression map, functional category map, and after-masking map, respectively.", width=6.4)
     add_body(
         doc,
-        "对 mRNA、CNV 和 miRNA 分别遮盖 Development/Epithelium、Signaling/Transport、Hormone/Metabolism、Cell cycle/Proliferation 和 Other 等类别。mRNA PAM50 基线 Accuracy 为 0.9244±0.0124，Macro-F1 为 0.9069±0.0133；遮盖 Other 后 Macro-F1 降至 0.8819±0.0210。mRNA 生存基线 C-index 为 0.6984±0.0756，遮盖 Other 后降至 0.6757±0.0715。CNV 和 miRNA 同样显示 Other 类遮盖后性能下降最明显，但由于 Other 类特征数量较多，下降幅度同时受模块大小影响；mRNA 结果见补充材料表 S16，CNV/miRNA 结果见补充材料表 S17。",
+        "对 mRNA、CNV 和 miRNA 分别遮盖 Development/Epithelium、Signaling/Transport、Hormone/Metabolism、Cell cycle/Proliferation 和 Other 等类别。mRNA PAM50 基线 Accuracy 为 0.9244±0.0124，Macro-F1 为 0.9069±0.0133；遮盖 Other 后 Macro-F1 降至 0.8819±0.0210。mRNA 生存基线 C-index 为 0.6984±0.0756，遮盖 Other 后降至 0.6757±0.0715。CNV 和 miRNA 同样显示 Other 类遮盖后性能下降最明显，但由于 Other 类特征数量较多，下降幅度同时受模块大小影响；CNV 与 miRNA 的遮盖结果见图 9，mRNA 结果见补充材料表 S16，CNV/miRNA 结果见补充材料表 S17。",
     )
     add_figure(doc, DATA / "interpretability/figures/fig_other_omics_category_masking_v3.png", "Figure 9. CNV and miRNA functional-category masking results. A-D: CNV PAM50, CNV Survival, miRNA PAM50, and miRNA Survival Accuracy or C-index. Error bars represent 5-fold cross-validation SD.", width=6.4)
     add_body(
