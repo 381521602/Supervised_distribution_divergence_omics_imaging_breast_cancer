@@ -52,6 +52,7 @@ This document describes each major component in the repository and how the files
 | `data/dense_equivalent_baseline_results.tsv` | Dense-equivalent baseline versus FullSizeCNN comparison. |
 | `data/random_permutation_control_results.tsv` | Per-repeat random-permutation ordering control results. |
 | `data/random_permutation_control_stats.tsv` | Summary statistics and empirical p-values for the ordering control. |
+| `data/stress_pathway_gene_sets.tsv` | Pathway–gene mapping, source annotation, and citation notes for the stress/adaptive-reprogramming signatures. |
 | `data/stress_pathway_analysis_results.tsv` | Stress / adaptive-reprogramming pathway enrichment and survival analysis. |
 | `data/pam50_gene_exclusion_results.tsv` | PAM50 50-gene exclusion sensitivity analysis. |
 

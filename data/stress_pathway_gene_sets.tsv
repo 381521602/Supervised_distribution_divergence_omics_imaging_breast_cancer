@@ -1,0 +1,152 @@
+pathway	gene	source_database	source_set_ID	citation
+Hypoxia	VEGFA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	SLC2A1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	LDHA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	PGK1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	ENO1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	CA9	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	BNIP3	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	NDRG1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	ADM	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	ALDOA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	GAPDH	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	TPI1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	P4HA1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	EGLN1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	EGLN3	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	LOX	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	PDK1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	ANGPTL4	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	HILPDA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	PFKL	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	HIF1A	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Hypoxia	HK2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	NQO1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	GCLC	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	GCLM	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	TXN	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	TXNRD1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	SOD1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	SOD2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	CAT	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	GPX1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	GPX4	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	PRDX1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	PRDX2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	HMOX1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	NFE2L2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	GSR	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	GSTM1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	GSTP1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+ROS	CYBA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	NDUFA1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	NDUFB1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	SDHA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	SDHB	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	UQCRC1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	COX5A	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	COX6A1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	ATP5A1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	ATP5B	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	COX4I1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	NDUFS1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	CYCS	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	ATP5F1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	UQCRFS1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	NDUFV1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	SDHD	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	COX7A2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+OXPHOS	NDUFB5	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	HSPA5	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	DDIT3	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	ATF4	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	ATF6	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	XBP1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	ERN1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	EIF2AK3	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	HSP90B1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	DNAJB9	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	EDEM1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	PPP1R15A	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	HERPUD1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	PDIA4	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	PDIA6	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	CALR	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	DNAJC3	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	SEC61A1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+UPR	GADD34	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	MTOR	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	RPTOR	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	RPS6KB1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	EIF4EBP1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	SREBF1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	TFRC	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	GAPDH	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	LDHA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	PGK1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	SLC2A1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	MTHFD2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	PPAT	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	ASNS	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	PHGDH	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	PSAT1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	PKM	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	RPS6	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+mTORC1	EIF4E	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	HK2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	PFKL	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	PFKP	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	ALDOA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	GAPDH	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	PGK1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	PGAM1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	ENO1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	PKM	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	LDHA	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	SLC2A1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	TPI1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	HK1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	GPI	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	GAPDHS	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	PGAM4	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+Glycolysis	ALDOC	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	VIM	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	CDH1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	CDH2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	SNAI1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	SNAI2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	TWIST1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	ZEB1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	ZEB2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	FN1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	COL1A1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	MMP2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	MMP9	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	CTNNB1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	ACTA2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	SERPINE1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	TGFB1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	ITGB1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+EMT	KRT19	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	BRCA1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	BRCA2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	RAD51	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	XRCC1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	XRCC5	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	XRCC6	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	PARP1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	MLH1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	MSH2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	MSH6	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	ATM	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	ATR	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	CHEK1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	CHEK2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	ERCC1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	ERCC2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	FEN1	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	LIG3	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	MRE11	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	RAD50	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	RAD51C	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.
+DNA repair	PALB2	Manual curated marker signature	NA	Compact canonical stress/adaptive-reprogramming marker signature for exploratory screening; see Supplementary S16.

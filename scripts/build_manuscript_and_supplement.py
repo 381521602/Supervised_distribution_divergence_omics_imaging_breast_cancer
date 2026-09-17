@@ -385,7 +385,7 @@ def add_metrics_note(doc):
     run = p.add_run(
         "说明：所有表格与图中结果均为“基于训练折内筛选特征的结果”，在 5 折交叉验证下给出均值±标准差。"
         "PAM50 四分类报告 Accuracy 和 Macro-F1；生存预测报告 ROC AUC 和 Cox C-index。"
-        "ROC AUC 以模型输出的死亡风险概率/风险分数作为连续预测分数计算；C-index 使用同一风险分数、生存时间与事件状态，通过 lifelines.utils.concordance_index 计算。"
+        "ROC AUC 以模型输出的死亡风险概率/风险分数作为连续预测分数计算；C-index 使用取负后的风险分数、生存时间与事件状态，通过 lifelines.utils.concordance_index 计算，风险分数越大代表死亡风险越高。"
     )
     set_run_font(run, size=9, color=MUTED, east="宋体")
     p.paragraph_format.space_after = Pt(8)
@@ -398,7 +398,7 @@ def build_main():
     # Title block
     add_paragraph(
         doc,
-        "Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction",
+        "Interpretable distribution-divergence-guided omics imaging and multi-omics integration for breast cancer molecular subtype reconstruction and survival risk modeling",
         align=WD_ALIGN_PARAGRAPH.CENTER,
         size=15,
         bold=True,
@@ -408,7 +408,7 @@ def build_main():
     )
     add_paragraph(
         doc,
-        "监督式分布散度引导的组学图像化与多组学融合用于乳腺癌分子分型及生存预测",
+        "可解释的监督式分布散度引导组学图像化与多组学整合用于乳腺癌分子亚型重建和生存风险建模",
         align=WD_ALIGN_PARAGRAPH.CENTER,
         size=12,
         bold=True,
@@ -427,8 +427,8 @@ def build_main():
     add_heading(doc, "摘要", 1)
     add_body(doc, "背景：乳腺癌的高度异质性使单一组学难以稳定刻画 PAM50 分子亚型和总生存风险。多组学整合具有理论上的互补优势，但组学数据存在特征维度高、样本量有限、分布尺度不一致以及特征之间缺乏自然二维邻接关系等问题。", size=10.5)
     add_body(doc, "方法：本研究以 TCGA-BRCA 的 mRNA、CNV 和 miRNA 为对象，提出一种监督式分布散度引导的组学空间表示框架（supervised information-divergence-guided omics spatial representation framework），即以 Jensen–Shannon divergence（JSD）评估每个特征的判别重要性，并将其编码为可解释的空间表示。所有特征筛选、标准化和模型拟合均在 5 折交叉验证训练折内完成；按 JSD 重要性降序并将高分特征置于中心，采用中心向外螺旋填充形成单通道灰度图，再输入全尺寸卷积神经网络（FullSizeCNN）。同时比较 LogisticRegression、RandomForest、GradientBoosting、SVC、KNN、MLP、CoxPH 及多种多组学融合策略。", size=10.5)
-    add_body(doc, "结果：在单组学 PAM50 四分类中，mRNA LogisticRegression 的 Accuracy 为 0.9628±0.0167、Macro-F1 为 0.9575±0.0199；CNV 最优 MLP 为 0.7213±0.0156；miRNA 最优 LogisticRegression 为 0.8410±0.0120。生存预测中，mRNA FullSizeCNN 的 C-index 为 0.7125±0.0303，CNV CoxPH 为 0.7109±0.0339，miRNA FullSizeCNN 为 0.6067±0.0703。多组学整合中，PAM50 的 Transformer 达到 Accuracy 0.9270±0.0132、Macro-F1 0.9288±0.0128；生存预测的三组学 Concat MLP 达到 C-index 0.7588±0.0492，CNN 晚期平均融合达到 ROC AUC 0.7591±0.0619。配对检验显示，上述最优融合均未较对应最优单组学形成统计显著优势（所有配对检验 p≥0.093）。可解释分析识别出 ESR1、TFF1、AGR3、FOXC1、MIA、FABP7、CCL19、MS4A1 等关键因子，富集于雌激素信号、细胞增殖调控、细胞分裂和上皮发育等通路。方案2功能类别遮盖分析在控制特征集合大小后，未能建立稳健的类别特异效应（masking analyses did not establish robust category-specific effects after controlling for feature-set size）。", size=10.5)
-    add_body(doc, "结论：监督式分布散度引导的组学空间表示框架能够将高维组学特征转换为适合全尺寸卷积建模的图像表示，并支持关键因子可视化；该表示的价值在于可解释性而非预测精度提升。mRNA 是 PAM50 分型重建的主要信号，生存预测更依赖多组学互补；当前整合策略的增益有限，尚需外部验证和更稳健的融合设计。", size=10.5)
+    add_body(doc, "结果：在单组学 PAM50 四分类中，mRNA LogisticRegression 的 Accuracy 为 0.9628±0.0167、Macro-F1 为 0.9575±0.0199；CNV 最优 MLP 为 0.7213±0.0156；miRNA 最优 LogisticRegression 为 0.8410±0.0120。生存风险建模中，mRNA FullSizeCNN 的 C-index 为 0.7125±0.0303，CNV CoxPH 为 0.7109±0.0339，miRNA FullSizeCNN 为 0.6067±0.0703。多组学整合中，PAM50 的 Transformer 达到 Accuracy 0.9270±0.0132、Macro-F1 0.9288±0.0128；生存风险建模的三组学 Concat MLP 达到 C-index 0.7588±0.0492，CNN 晚期平均融合达到 ROC AUC 0.7591±0.0619。配对检验显示，上述最优融合均未较对应最优单组学形成统计显著优势（所有配对检验 p≥0.093）。Dense-equivalent controls performed comparably to or better than FullSizeCNN, while JSD-guided spiral ordering did not significantly outperform random permutations, indicating that the principal value of imaging was interpretability rather than predictive gain。可解释分析识别出 ESR1、TFF1、AGR3、FOXC1、MIA、FABP7、CCL19、MS4A1 等关键因子，富集于雌激素信号、细胞增殖调控、细胞分裂和上皮发育等通路。方案2功能类别遮盖分析在控制特征集合大小后，未能建立稳健的类别特异效应。", size=10.5)
+    add_body(doc, "结论：监督式分布散度引导的组学空间表示框架能够把高维组学特征转换为适合全尺寸卷积建模的可解释图像坐标，并支持关键因子可视化。mRNA 是 PAM50 亚型重建的主要信号；生存风险建模显示多组学融合具有数值提升但未达到统计显著，提示存在需要独立验证的潜在互补信息。该表示的主要价值是可解释性而非由人工二维邻接带来的预测精度提升。", size=10.5)
     add_body(doc, "关键词：乳腺癌；多组学；组学图像化；Jensen–Shannon divergence；全尺寸卷积；PAM50；生存预测", size=10.5)
 
     add_heading(doc, "1. 引言", 1)
@@ -474,7 +474,7 @@ def build_main():
     )
     add_body(
         doc,
-        "本文提出三个假设：（1）JSD 排序比随机排序或平均表达排序更适合 PAM50 四分类和生存预测；（2）在小样本组学图像上，FullSizeCNN 能够提供与传统机器学习基线可比或互补的预测性能；（3）在统一交集样本上，多组学融合可较最优单组学带来生存预测上的稳健增益，但在 PAM50 中增益有限。",
+        "本文提出三个研究问题：（1）检验 JSD 引导的空间排序是否相较随机或表达量排序产生可检测的预测增益，并评估其主要价值是否体现于可解释性而非性能提升；（2）检验 FullSizeCNN 在小样本组学任务中能否达到传统机器学习的竞争性性能，并通过 Dense 等价基线区分图像空间结构与原始特征值本身的贡献；（3）检验统一样本集上的多组学融合是否提供相对于最优单组学的可重复增益。",
     )
     add_body(
         doc,
@@ -571,7 +571,7 @@ def build_main():
     add_body(doc, "MLP 与 FullSizeCNN 均使用 Adam 优化器，学习率 1×10⁻³、权重衰减 1×10⁻⁴，训练 30 个 epoch，批大小为 64。PAM50 使用交叉熵损失，输出四类概率；生存预测使用二元交叉熵损失，输出死亡风险概率。训练前仅在训练折上估计 StandardScaler 参数，测试折使用同一 scaler 变换。")
     add_body(
         doc,
-        "FullSizeCNN 的输入为 H×W×1 图像，第一层使用与 H×W 相同的全尺寸卷积核，输出 32 个 1×1 特征图；随后展平为 32 维向量，经 64 维全连接、ReLU 和 Dropout 后输出分类 logits 或生存风险。该结构参数较少，与图像尺寸解耦，适合当前小样本高维组学图像。",
+        "FullSizeCNN 的输入为 H×W×1 图像，第一层使用与 H×W 相同的全尺寸卷积核，输出 32 个 1×1 特征图；随后展平为 32 维向量，经 64 维全连接、ReLU 和 Dropout 后输出分类 logits 或生存风险。需要指出，该全尺寸卷积核在数学上等价于展平后的全连接投影，因此本文将其视为保留图像坐标接口的 full-field convolutional network，而不是滑动/局部卷积特征提取器；其图像接口主要用于后续归因可视化，而非依赖二维局部感受野获得预测增益。",
     )
     add_figure(doc, FIG / "fig2_fullsize_cnn_v4.png", "Figure 2. FullSizeCNN architecture. An H×W×1 JSD image is transformed by a full-size convolutional layer with H×W kernels and 32 filters, flattened to 32 features, and passed through a 64-unit ReLU/Dropout MLP head. PAM50 uses H=W=20 and four output units; survival uses H=W=15 and one risk output.", width=6.2)
     add_body(
@@ -599,7 +599,7 @@ def build_main():
     add_heading(doc, "3.1 组学图像示例", 2)
     add_body(
         doc,
-        "图 3 展示一个 PAM50 mRNA 样本和一个 Survival mRNA 样本的灰度表达图、JSD 权重图和基因功能类别图。图像中心区域对应高 JSD 特征，说明视觉上的中心区域直接编码了模型认为对结局判别更重要的基因。基因功能类别图以颜色标记基因功能类别，与 JSD 灰度图位置严格对应，便于后续把卷积模型关注区域转化为生物学解释。",
+        "图 3 展示一个 PAM50 mRNA 样本和一个 Survival mRNA 样本的灰度表达图、JSD 权重图和基因功能类别图。图像中心区域对应高 JSD 特征，说明视觉中心区域编码了基于训练数据类别分布差异获得的 JSD 判别重要性；只有 SHAP/saliency 才表示模型归因重要性。基因功能类别图以颜色标记基因功能类别，与 JSD 灰度图位置严格对应，便于后续把卷积模型关注区域转化为生物学解释。",
     )
     add_figure(doc, FIG / "fig3_example_v8.png", "Figure 3. Omics image examples. A1-A3: one PAM50 mRNA sample shown as a 20×20 grayscale expression map, JSD importance map, and gene functional category map. B1-B3: one survival mRNA sample shown as a 15×15 grayscale expression map, JSD importance map, and gene functional category map. Axes indicate pixel positions; high-JSD features are placed centrally, and the functional category map aligns pixel-wise with the expression and JSD maps.", width=6.4)
 
@@ -665,7 +665,7 @@ def build_main():
     )
     add_body(
         doc,
-        "SHAP 分析显示，mRNA PAM50 LogisticRegression 的关键基因包括 CYP2B7P1、TFF1、C1orf64、AGR3、KCNJ3、MIA、PPP1R14C、ESR1 和 STAC2。CNN saliency 与 SHAP 的共识基因包括 TCAM1P、MIA、SMC1B、PPP1R14C、KLK6、SLC6A11、FABP7 和 FOXC1。生存单变量 Cox 分析识别出 MS4A1、COL17A1、C2orf40、PLA2G2D、FABP7、CCL19 和 GZMB。通路富集提示雌激素信号、细胞增殖调控、细胞分裂和上皮发育等生物学过程；SHAP 与 saliency 单图见补充材料图 S3–S7。",
+        "SHAP 分析显示，mRNA PAM50 LogisticRegression 的关键基因包括 CYP2B7P1、TFF1、C1orf64、AGR3、KCNJ3、MIA、PPP1R14C、ESR1 和 STAC2。CNN saliency 与 SHAP 的共识基因包括 TCAM1P、MIA、SMC1B、PPP1R14C、KLK6、SLC6A11、FABP7 和 FOXC1。生存单变量 Cox 分析识别出 MS4A1、COL17A1、C2orf40、PLA2G2D、FABP7、CCL19 和 GZMB。通路富集提示雌激素信号、细胞增殖调控、细胞分裂和上皮发育等生物学过程；SHAP、saliency、consensus、survival Cox 与 pathway enrichment 图分别见补充材料图 S5–S9。",
     )
     add_figure(doc, FIG / "fig7_jsd_v3.png", "Figure 7. JSD-based feature-mining visualization. A-C: grayscale expression, JSD importance, and functional category maps; D-F: SHAP importance, CNN saliency, and functional-category/saliency overlay maps. Axes indicate pixel positions; the JSD imaging scheme aligns expression, importance, function, and model attention in a common pixel coordinate system.", width=6.4)
 
@@ -677,12 +677,12 @@ def build_main():
     add_figure(doc, DATA / "interpretability/figures/fig_scheme2_masking_flow_en_v2.png", "Figure 8. Scheme-2 functional-category masking workflow. The target category pixels are set to zero, FullSizeCNN is retrained, and PAM50/survival performance is compared with the unmasked baseline. A, B, and C show the before-masking expression map, functional category map, and after-masking map, respectively.", width=6.4)
     add_body(
         doc,
-        "对 mRNA、CNV 和 miRNA 分别遮盖 Development/Epithelium、Signaling/Transport、Hormone/Metabolism、Cell cycle/Proliferation 和 Other 等类别。mRNA PAM50 基线 Accuracy 为 0.9244±0.0124，Macro-F1 为 0.9069±0.0133；遮盖 Other 后 Macro-F1 降至 0.8819±0.0210。mRNA 生存基线 C-index 为 0.6984±0.0756，遮盖 Other 后降至 0.6757±0.0715。CNV 和 miRNA 同样显示 Other 类遮盖后性能下降最明显，但由于 Other 类特征数量较多，下降幅度同时受模块大小影响；mRNA 结果见补充材料表 S14，CNV/miRNA 结果见补充材料表 S15。",
+        "对 mRNA、CNV 和 miRNA 分别遮盖 Development/Epithelium、Signaling/Transport、Hormone/Metabolism、Cell cycle/Proliferation 和 Other 等类别。mRNA PAM50 基线 Accuracy 为 0.9244±0.0124，Macro-F1 为 0.9069±0.0133；遮盖 Other 后 Macro-F1 降至 0.8819±0.0210。mRNA 生存基线 C-index 为 0.6984±0.0756，遮盖 Other 后降至 0.6757±0.0715。CNV 和 miRNA 同样显示 Other 类遮盖后性能下降最明显，但由于 Other 类特征数量较多，下降幅度同时受模块大小影响；mRNA 结果见补充材料表 S16，CNV/miRNA 结果见补充材料表 S17。",
     )
     add_figure(doc, DATA / "interpretability/figures/fig_other_omics_category_masking_v3.png", "Figure 9. CNV and miRNA functional-category masking results. A-D: CNV PAM50, CNV Survival, miRNA PAM50, and miRNA Survival Accuracy or C-index. Error bars represent 5-fold cross-validation SD.", width=6.4)
     add_body(
         doc,
-        "为区分“功能模块特异性贡献”与“特征数量/区域大小效应”，对 mRNA 每个类别设置同数量随机基因遮盖对照。结果显示，功能类别遮盖与等量随机遮盖的性能差异在多数比较中未达到显著水平。对 mRNA PAM50 Other 基因重新富集发现，其仍显著富集于上皮细胞分化、上皮发育、组织发育、雌激素信号通路和细胞群体增殖等过程。SHAP 与 CNN saliency 共识基因的类别交叉分析显示，Top50 共识基因主要落在 Development/Epithelium 和 Other 中，其次是 Cell cycle/Proliferation、Signaling/Transport 和 Hormone/Metabolism。配对检验未显示大多数功能类别遮盖与基线之间存在稳健显著差异；折级指标见补充材料表 S16，配对检验见补充材料表 S17，Other 类二次富集见补充材料表 S18，共识基因重叠见补充材料表 S19。",
+        "为区分“功能模块特异性贡献”与“特征数量/区域大小效应”，对 mRNA 每个类别设置同数量随机基因遮盖对照。结果显示，功能类别遮盖与等量随机遮盖的性能差异在多数比较中未达到显著水平。对 mRNA PAM50 Other 基因重新富集发现，其仍显著富集于上皮细胞分化、上皮发育、组织发育、雌激素信号通路和细胞群体增殖等过程。SHAP 与 CNN saliency 共识基因的类别交叉分析显示，Top50 共识基因主要落在 Development/Epithelium 和 Other 中，其次是 Cell cycle/Proliferation、Signaling/Transport 和 Hormone/Metabolism。配对检验未显示大多数功能类别遮盖与基线之间存在稳健显著差异；折级指标见补充材料表 S18，配对检验见补充材料表 S19，Other 类二次富集见补充材料表 S20，共识基因重叠见补充材料表 S21。",
     )
 
     add_heading(doc, "4. 讨论", 1)
@@ -712,7 +712,7 @@ def build_main():
     )
     add_body(
         doc,
-        "面向 Molecular Stress Responses and Adaptive Reprogramming 这一目标主题，本研究在全转录组层面进一步考察了 Hypoxia、ROS、OXPHOS、UPR、mTORC1、Glycolysis、EMT 和 DNA repair 八条应激/适应性重编程通路与 JSD 高重要性基因、PAM50 亚型及生存风险的关系。结果显示，这些通路在 PAM50 任务的前 500 个 JSD 高重要性基因中均未显著富集（mTORC1 的 Fisher p=0.063 为边缘结果，其余 p≥0.32），单变量 Cox 分析也未发现任一通路评分与总生存显著相关（DNA repair HR 0.789、p=0.104 为最强但未达显著）。通路评分在 PAM50 亚型间高度差异（Kruskal-Wallis p<0.001），但这在表达定义亚型的背景下是预期现象。因此，在当前的 bulk 表达、精选标志基因框架下，尚未观察到这些经典应激通路对判别或预后的独立贡献；相关结果应作为探索性阴性发现，并提示后续需在单细胞、空间转录组或通路过表达/敲低层面进一步验证。乳腺癌转移中的翻译适应与应激重编程机制为后续研究提供了更广的生物学背景[49]。",
+        "面向 Molecular Stress Responses and Adaptive Reprogramming 这一目标主题，本研究在全转录组层面进一步考察了 Hypoxia、ROS、OXPHOS、UPR、mTORC1、Glycolysis、EMT 和 DNA repair 八条应激/适应性重编程通路与 JSD 高重要性基因、PAM50 亚型及生存风险的关系。结果显示，这些通路在前 500 个 JSD 高重要性基因中均未达到名义显著性富集（Fisher p 经 BH-FDR 校正后均不显著），单变量 Cox 分析也未发现任一通路评分与总生存显著相关。通路评分在 PAM50 亚型间高度差异（Kruskal-Wallis p<0.001），但这在表达定义亚型的背景下是预期现象。因此，在当前的 bulk 表达和紧凑型标志基因签名框架下，尚未观察到这些经典应激通路对判别或预后的独立贡献；相关结果应作为探索性阴性发现，并提示后续需在单细胞、空间转录组或通路过表达/敲低层面进一步验证。乳腺癌转移中的翻译适应与应激重编程机制为后续研究提供了更广的生物学背景[49]。",
     )
     add_body(
         doc,
@@ -731,7 +731,7 @@ def build_main():
     add_heading(doc, "5. 结论", 1)
     add_body(
         doc,
-        "本研究建立了 JSD 引导的组学图像化与多组学融合框架，能够同时支持乳腺癌 PAM50 四分类和总生存预测。mRNA 单组学在分子分型重建（subtype reconstruction）中表现最优，且其判别信息并非主要依赖经典 PAM50 基因面板；生存预测更依赖多组学互补。FullSizeCNN 为组学图像化提供了轻量、可解释的基线。未来可在外部数据和更稳健融合策略下进一步验证。",
+        "本研究建立了 JSD 引导的组学图像化与多组学融合框架，能够同时支持乳腺癌 PAM50 亚型重建和生存风险排序评估。mRNA 单组学在亚型重建中表现最优，且其判别信息并非主要依赖经典 PAM50 基因面板；多组学融合在生存风险建模中表现出数值提升但未达到统计显著，提示存在需要独立验证的潜在互补信息。FullSizeCNN 为组学图像化提供了轻量、可解释的基线。未来可在外部数据和更稳健融合策略下进一步验证。",
     )
 
     add_heading(doc, "参考文献与数据来源", 1)
@@ -1133,7 +1133,7 @@ def build_supplement():
     add_caption(doc, "Table S18. Fold-level metrics for mRNA equal-size random masking controls")
     equal_test = read_tsv("mrna_equal_mask_control_paired_tests.tsv")
     add_dataframe_table(doc, equal_test, [0.8, 1.4, 1.0, 0.9, 0.8, 0.9, 0.9])
-    add_caption(doc, "Table S19. Paired tests between mRNA functional-category masks and baseline")
+    add_caption(doc, "Table S19. Paired tests between mRNA functional-category masks and baseline. P values are unadjusted and should be interpreted descriptively because of the small number of folds and multiple comparisons.")
     add_figure(doc, DATA / "interpretability/figures/fig_mrna_equal_mask_control.png", "Figure S13. mRNA functional-category masks vs equal-size random masks.")
 
     add_heading(doc, "S15. Other 类二次富集与共识基因交叉验证", 1)
@@ -1150,16 +1150,16 @@ def build_supplement():
     add_heading(doc, "S16. 应激与适应性重编程通路分析", 1)
     add_body(
         doc,
-        "面向 Molecular Stress Responses and Adaptive Reprogramming 主题，在全转录组（TCGA-BRCA HiSeqV2，20,530 基因）上对 Hypoxia、ROS、OXPHOS、UPR、mTORC1、Glycolysis、EMT、DNA repair 八条通路进行了探索性分析：以精选标志基因集合计算每样本通路评分，并用 Fisher 精确检验考察其在前 500 个 JSD 高重要性基因中的富集，用 Kruskal-Wallis 检验考察其与 PAM50 亚型的关联，用单变量 Cox 回归考察其与总生存的关联。",
+        "面向 Molecular Stress Responses and Adaptive Reprogramming 主题，在全转录组（TCGA-BRCA HiSeqV2，20,530 基因）上对 Hypoxia、ROS、OXPHOS、UPR、mTORC1、Glycolysis、EMT、DNA repair 八条通路进行了探索性分析。这些通路采用人工整理的紧凑型标志基因签名，用于代表经典应激/适应性重编程程序，而非完整的 MSigDB Hallmark 或 Reactome 基因集；完整 pathway–gene 清单见 `data/stress_pathway_gene_sets.tsv`。以标志基因签名计算每样本通路评分，并用 Fisher 精确检验考察其在前 500 个 JSD 高重要性基因中的富集，用 Kruskal-Wallis 检验考察其与 PAM50 亚型的关联，用单变量 Cox 回归考察其与总生存的关联。所有 p 值均为原始未校正 p，同时报告 Benjamini–Hochberg FDR q-value。",
     )
     sp = read_tsv("stress_pathway_analysis_results.tsv")
     sp.columns = [
         "Pathway", "Genes in transcriptome", "Genes in top-500", "Enrichment OR",
-        "Fisher p", "PAM50 Kruskal-Wallis p", "Survival HR", "HR 95% lower",
-        "HR 95% upper", "Cox p",
+        "Fisher p", "Fisher BH-q", "PAM50 Kruskal-Wallis p", "PAM50 BH-q",
+        "Survival HR", "HR 95% lower", "HR 95% upper", "Cox p", "Cox BH-q",
     ]
-    add_dataframe_table(doc, sp, [1.0, 1.1, 0.9, 0.8, 0.8, 1.1, 0.7, 0.8, 0.8, 0.7])
-    add_caption(doc, "Table S22. Stress / adaptive-reprogramming pathway analysis over the full mRNA transcriptome (Fisher enrichment in top-500 JSD genes; Kruskal-Wallis for PAM50; univariate Cox for overall survival)")
+    add_dataframe_table(doc, sp, [1.0, 1.1, 0.9, 0.8, 0.7, 0.7, 1.1, 0.7, 0.7, 0.8, 0.8, 0.7, 0.7])
+    add_caption(doc, "Table S22. Stress / adaptive-reprogramming pathway analysis over the full mRNA transcriptome (Fisher enrichment in top-500 JSD genes; Kruskal-Wallis for PAM50; univariate Cox for overall survival). P values are raw and BH-FDR q-values are also shown.")
     add_figure(doc, FIG / "fig_stress_pathway.png", "Figure S14. Stress / adaptive-reprogramming pathway analysis. A: Fisher enrichment (-log10 p) of eight pathways among the top-500 JSD genes; B: univariate Cox hazard ratios for overall survival. No pathway is significantly enriched or prognostic; error bars show 95% confidence intervals.")
 
     add_heading(doc, "S17. PAM50 50 基因剔除敏感性分析", 1)
@@ -1200,6 +1200,7 @@ def build_supplement():
         "data/dense_equivalent_baseline_results.tsv",
         "data/random_permutation_control_results.tsv",
         "data/random_permutation_control_stats.tsv",
+        "data/stress_pathway_gene_sets.tsv",
         "data/stress_pathway_analysis_results.tsv",
         "data/omics_functional_category_annotation.tsv",
         "data/sample_level_provenance.tsv",
