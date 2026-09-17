@@ -1,0 +1,5 @@
+task	metric	nsre_spiral	mean_expression	random_mean	random_std	random_min	random_max	p_random_geq_nsre
+PAM50	accuracy	0.9316	0.9316	0.9267	0.0075	0.9112	0.94	0.25
+PAM50	macro_f1	0.9205	0.9232	0.9168	0.0076	0.9004	0.9298	0.4
+Survival	roc_auc	0.6768	0.6604	0.6698	0.0124	0.6393	0.6853	0.35
+Survival	c_index	0.7125	0.6914	0.7055	0.0124	0.6796	0.7237	0.35

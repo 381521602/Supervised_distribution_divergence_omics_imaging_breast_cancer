@@ -1,8 +1,8 @@
-# NSRE-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction
+# Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction
 
 This repository provides the analysis code, modeling-ready feature datasets, NSRE image arrays, selected result tables, and interpretability outputs for the manuscript:
 
-**NSRE-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction**
+**Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction**
 
 The repository is intended for research reproducibility. TCGA-BRCA raw omics data are public and can be obtained from GDC and UCSC Xena; only the processed modeling-ready tables and image arrays generated for this study are included here.
 
@@ -10,6 +10,10 @@ The repository is intended for research reproducibility. TCGA-BRCA raw omics dat
 
 - `scripts/`  
   Python scripts for data alignment, feature selection, NSRE scoring, omics imaging, single-omics modeling, multi-omics fusion, statistical tests, and interpretability analysis.
+- `docs/`  
+  Final Chinese manuscript and supplementary-material drafts:
+  - `docs/Supervised_distribution_divergence_guided_omics_imaging_manuscript_CN.docx`
+  - `docs/Supervised_distribution_divergence_guided_omics_imaging_supplementary_material_CN.docx`
 - `data/brca_labels_modeling_ready.tsv`  
   Modeling-ready clinical/molecular labels: case ID, PAM50 four-class label, OS event, and OS time.
 - `data/final_datasets/`  
@@ -20,6 +24,8 @@ The repository is intended for research reproducibility. TCGA-BRCA raw omics dat
   NSRE-ordered grayscale images and category/NSRE grids.
 - `data/results/`  
   Aggregated five-fold cross-validation results for single-omics, pairwise fusion, triple fusion, advanced methods, and statistical tests.
+- `data/supplementary_data/supplementary_data_tables.zip`  
+  Machine-readable CSV copies of all `data/**/*.tsv` result tables, together with `manifest.tsv` mapping each source table to its exported CSV.
 - `data/interpretability/`  
   SHAP, saliency, consensus gene, pathway enrichment, and functional-masking outputs.
 - `DATA_AND_CODE_MANIFEST.md`  

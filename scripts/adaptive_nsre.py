@@ -35,8 +35,8 @@ def nsre_between_histograms(p: np.ndarray, q: np.ndarray) -> float:
     q = (q + EPS) / (q.sum() + EPS * q.size)
     denom = p + q
     return float(
-        np.sum(p * np.log2(2.0 * p / denom))
-        + np.sum(q * np.log2(2.0 * q / denom))
+        0.5 * np.sum(p * np.log2(2.0 * p / denom))
+        + 0.5 * np.sum(q * np.log2(2.0 * q / denom))
     )
 
 

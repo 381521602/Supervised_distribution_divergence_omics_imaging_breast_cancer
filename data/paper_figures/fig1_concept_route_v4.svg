@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" font-family="Microsoft YaHei, Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#1E3A5F" flood-opacity="0.12"/>
+    </filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FBFD"/>
+      <stop offset="1" stop-color="#EDF3F8"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7D9CB7"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="760" fill="url(#bg)"/>
+
+  <text x="800" y="48" text-anchor="middle" font-size="29" font-weight="700" fill="#173A5E">NSRE-Guided Omics Imaging and Multi-Omics Fusion</text>
+  <text x="800" y="80" text-anchor="middle" font-size="17" fill="#5E6E83">基于 NSRE 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法概念图</text>
+
+  <!-- 1 Data -->
+  <g>
+    <rect x="60" y="128" width="225" height="360" rx="18" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="60" y="128" width="225" height="10" rx="5" fill="#2E6FA6"/>
+    <circle cx="98" cy="168" r="21" fill="#E8F1F8" stroke="#2E6FA6" stroke-width="2"/>
+    <text x="98" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#2E6FA6">1</text>
+    <g transform="translate(172.5 208)">
+      <rect x="-42" y="-36" width="84" height="20" rx="7" fill="#E8F1F8" stroke="#2E6FA6" stroke-width="4"/>
+      <path d="M-42 -26 h84" stroke="#2E6FA6" stroke-width="2"/>
+      <rect x="-42" y="-11" width="84" height="20" rx="7" fill="#BBD5EA" stroke="#2E6FA6" stroke-width="4"/>
+      <path d="M-42 -1 h84" stroke="#2E6FA6" stroke-width="2"/>
+      <rect x="-42" y="14" width="84" height="20" rx="7" fill="#D9EAF5" stroke="#2E6FA6" stroke-width="4"/>
+    </g>
+    <text x="172.5" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A5F">数据获取与样本对齐</text>
+
+    <g transform="translate(78 316)">
+      <path d="M0 0 h18 v12 h-18 z" fill="#D9EAF5" stroke="#2E6FA6" stroke-width="2"/>
+      <path d="M3 4 h12 M3 8 h8" stroke="#2E6FA6" stroke-width="1.5"/>
+      <text x="27" y="10" font-size="12" fill="#33465D">TCGA-BRCA 数据源</text>
+    </g>
+    <g transform="translate(78 346)">
+      <path d="M0 8 Q5 0 10 8 T20 8" fill="none" stroke="#348FB3" stroke-width="2"/>
+      <text x="27" y="12" font-size="12" fill="#33465D">mRNA / CNV / miRNA</text>
+    </g>
+    <g transform="translate(78 376)">
+      <circle cx="6" cy="6" r="5" fill="none" stroke="#4C84A0" stroke-width="2"/>
+      <circle cx="14" cy="6" r="5" fill="none" stroke="#4C84A0" stroke-width="2"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">统一交集样本</text>
+    </g>
+  </g>
+
+  <path d="M295 308 L304 308" stroke="#7D9CB7" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 2 Labels -->
+  <g>
+    <rect x="311" y="128" width="225" height="360" rx="18" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="311" y="128" width="225" height="10" rx="5" fill="#348FB3"/>
+    <circle cx="349" cy="168" r="21" fill="#E9F4F7" stroke="#348FB3" stroke-width="2"/>
+    <text x="349" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#348FB3">2</text>
+    <g transform="translate(423.5 208)">
+      <path d="M-40 -40 L40 -40 L40 40 L-40 40 Z" fill="#F7E2B5" stroke="#C4874A" stroke-width="4"/>
+      <circle cx="-16" cy="-3" r="6" fill="#A96832"/>
+      <path d="M6 -22 h24 M6 -8 h24 M6 6 h24 M6 20 h24" stroke="#8B5A2B" stroke-width="4" stroke-linecap="round"/>
+      <path d="M-40 -24 L-24 -40" stroke="#C4874A" stroke-width="4"/>
+    </g>
+    <text x="423.5" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A5F">临床标签定义</text>
+
+    <g transform="translate(329 316)">
+      <rect x="0" y="0" width="8" height="8" fill="#6AA4C9"/>
+      <rect x="11" y="0" width="8" height="8" fill="#F2A45A"/>
+      <rect x="0" y="11" width="8" height="8" fill="#D86C6C"/>
+      <rect x="11" y="11" width="8" height="8" fill="#81BBC8"/>
+      <text x="28" y="11" font-size="12" fill="#33465D">PAM50 四分类</text>
+    </g>
+    <g transform="translate(329 346)">
+      <path d="M0 10 C2 2 8 2 10 10 C12 18 18 18 20 10" fill="none" stroke="#C86A6A" stroke-width="2"/>
+      <text x="28" y="12" font-size="12" fill="#33465D">生存事件 / 删失</text>
+    </g>
+    <g transform="translate(329 376)">
+      <circle cx="10" cy="10" r="8" fill="none" stroke="#8B5A2B" stroke-width="2"/>
+      <path d="M10 6 v4 l3 2" fill="none" stroke="#8B5A2B" stroke-width="2"/>
+      <text x="28" y="12" font-size="12" fill="#33465D">生存时间</text>
+    </g>
+  </g>
+
+  <path d="M546 308 L555 308" stroke="#7D9CB7" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 3 Feature selection -->
+  <g>
+    <rect x="562" y="128" width="225" height="360" rx="18" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="562" y="128" width="225" height="10" rx="5" fill="#60A5C7"/>
+    <circle cx="600" cy="168" r="21" fill="#EAF4F8" stroke="#60A5C7" stroke-width="2"/>
+    <text x="600" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#60A5C7">3</text>
+    <g transform="translate(674.5 208)">
+      <path d="M-46 -40 L46 -8 L46 40 L-46 8 Z" fill="#EAF4F8" stroke="#4C84A0" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M-30 -3 h60 M-30 13 h60 M-30 29 h46" stroke="#2E6FA6" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <text x="674.5" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A5F">无泄漏特征筛选</text>
+
+    <g transform="translate(580 316)">
+      <path d="M0 12 h6 M6 12 h6 M12 12 h6" fill="none" stroke="#4C84A0" stroke-width="2"/>
+      <path d="M3 14 L6 7 L9 14" fill="none" stroke="#4C84A0" stroke-width="2"/>
+      <text x="27" y="12" font-size="12" fill="#33465D">低方差过滤</text>
+    </g>
+    <g transform="translate(580 346)">
+      <path d="M0 12 h12 M0 8 h12 M0 4 h12" stroke="#2E6FA6" stroke-width="2"/>
+      <path d="M12 12 h6 M12 8 h3 M12 4 h5" stroke="#2E6FA6" stroke-width="2"/>
+      <text x="27" y="12" font-size="12" fill="#33465D">F 值 / L1</text>
+    </g>
+    <g transform="translate(580 376)">
+      <rect x="0" y="0" width="6" height="12" fill="#BBD5EA"/>
+      <rect x="7" y="0" width="6" height="12" fill="#2E6FA6"/>
+      <path d="M15 0 v12" stroke="#4C84A0" stroke-width="2"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">NSRE 及组合</text>
+    </g>
+  </g>
+
+  <path d="M797 308 L806 308" stroke="#7D9CB7" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 4 NSRE image -->
+  <g>
+    <rect x="813" y="128" width="225" height="360" rx="18" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="813" y="128" width="225" height="10" rx="5" fill="#81BBC8"/>
+    <circle cx="851" cy="168" r="21" fill="#EAF4F5" stroke="#81BBC8" stroke-width="2"/>
+    <text x="851" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#81BBC8">4</text>
+    <g transform="translate(925.5 208)">
+      <rect x="-44" y="-44" width="88" height="88" rx="14" fill="#EDF6F7" stroke="#81BBC8" stroke-width="4"/>
+      <path d="M-20 -10 C-10 -20 2 0 12 -10 S30 0 36 -10" fill="none" stroke="#4C84A0" stroke-width="4" stroke-linecap="round"/>
+      <path d="M-20 4 C-10 -6 2 14 12 4 S30 14 36 4" fill="none" stroke="#4C84A0" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="-20" cy="-10" r="4" fill="#4C84A0"/>
+      <circle cx="36" cy="-10" r="4" fill="#4C84A0"/>
+    </g>
+    <text x="925.5" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A5F">NSRE 组学图像化</text>
+
+    <g transform="translate(831 316)">
+      <path d="M2 0 v12 M10 0 v12 M18 0 v12" stroke="#4C84A0" stroke-width="2"/>
+      <path d="M5 12 L1 8 M13 12 L9 8" stroke="#4C84A0" stroke-width="2"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">重要性降序</text>
+    </g>
+    <g transform="translate(831 346)">
+      <circle cx="8" cy="8" r="7" fill="none" stroke="#4C84A0" stroke-width="2"/>
+      <path d="M8 2 C11 5 5 8 8 12" fill="none" stroke="#4C84A0" stroke-width="2"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">中心螺旋填充</text>
+    </g>
+    <g transform="translate(831 376)">
+      <rect x="0" y="0" width="18" height="5" fill="#D9EAF5"/>
+      <rect x="0" y="7" width="18" height="5" fill="#BBD5EA"/>
+      <rect x="0" y="14" width="18" height="5" fill="#81BBC8"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">三通道特征图</text>
+    </g>
+  </g>
+
+  <path d="M1048 308 L1057 308" stroke="#7D9CB7" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 5 Modeling -->
+  <g>
+    <rect x="1064" y="128" width="225" height="360" rx="18" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="1064" y="128" width="225" height="10" rx="5" fill="#F2A45A"/>
+    <circle cx="1102" cy="168" r="21" fill="#FDF1E2" stroke="#F2A45A" stroke-width="2"/>
+    <text x="1102" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#F2A45A">5</text>
+    <g transform="translate(1176.5 208)" fill="none" stroke="#D18A42" stroke-width="3">
+      <circle cx="-28" cy="-16" r="7" fill="#F9D8AE"/>
+      <circle cx="-28" cy="16" r="7" fill="#F9D8AE"/>
+      <circle cx="22" cy="-16" r="7" fill="#F9D8AE"/>
+      <circle cx="22" cy="16" r="7" fill="#F9D8AE"/>
+      <circle cx="32" cy="0" r="7" fill="#F9D8AE"/>
+      <path d="M-21 -16 L15 -16 M-21 16 L15 16 M-28 -9 L-28 9 M22 -9 L22 9 M29 -16 L-16 9 M29 16 L-16 -9"/>
+    </g>
+    <text x="1176.5" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A5F">单组学建模</text>
+
+    <g transform="translate(1082 316)">
+      <path d="M0 12 h6 v-7 h7 v7 h6" fill="none" stroke="#C48649" stroke-width="2"/>
+      <text x="27" y="12" font-size="12" fill="#33465D">传统 ML</text>
+    </g>
+    <g transform="translate(1082 346)">
+      <circle cx="4" cy="6" r="3" fill="#F9D8AE"/>
+      <circle cx="15" cy="6" r="3" fill="#F9D8AE"/>
+      <path d="M7 6 h5" stroke="#D18A42" stroke-width="2"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">MLP</text>
+    </g>
+    <g transform="translate(1082 376)">
+      <rect x="0" y="0" width="16" height="16" fill="none" stroke="#F2A45A" stroke-width="2"/>
+      <rect x="5" y="5" width="6" height="6" fill="#F2A45A"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">FullSizeCNN</text>
+    </g>
+  </g>
+
+  <path d="M1299 308 L1308 308" stroke="#7D9CB7" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 6 Fusion -->
+  <g>
+    <rect x="1315" y="128" width="225" height="360" rx="18" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="1315" y="128" width="225" height="10" rx="5" fill="#D86C6C"/>
+    <circle cx="1353" cy="168" r="21" fill="#FAE8E8" stroke="#D86C6C" stroke-width="2"/>
+    <text x="1353" y="174" text-anchor="middle" font-size="17" font-weight="700" fill="#D86C6C">6</text>
+    <g transform="translate(1427.5 208)">
+      <path d="M-46 -28 L0 -10 M-46 0 L0 0 M-46 28 L0 10" fill="none" stroke="#C86A6A" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="12" cy="0" r="15" fill="#FAE8E8" stroke="#D86C6C" stroke-width="4"/>
+      <path d="M27 0 L45 0" stroke="#C86A6A" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <text x="1427.5" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A5F">多组学融合与评估</text>
+
+    <g transform="translate(1333 316)">
+      <path d="M0 3 h18 M0 9 h18" stroke="#C86A6A" stroke-width="2"/>
+      <circle cx="6" cy="6" r="4" fill="none" stroke="#C86A6A" stroke-width="2"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">拼接 / 注意力</text>
+    </g>
+    <g transform="translate(1333 346)">
+      <rect x="0" y="0" width="18" height="5" fill="#FAE8E8"/>
+      <rect x="0" y="7" width="18" height="5" fill="#E39A9A"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">Stacking</text>
+    </g>
+    <g transform="translate(1333 376)">
+      <path d="M0 12 h6 l3 -8 l3 8 h6" fill="none" stroke="#A23E3E" stroke-width="2"/>
+      <text x="27" y="11" font-size="12" fill="#33465D">AUC / C-index</text>
+    </g>
+  </g>
+
+  <rect x="800" y="612" width="400" height="44" rx="22" fill="#FBF0F0" stroke="#D9A3A3"/>
+  <text x="1000" y="641" text-anchor="middle" font-size="17" font-weight="700" fill="#A23E3E">下游可解释性：SHAP · Grad-CAM</text>
+
+  <text x="800" y="722" text-anchor="middle" font-size="13" fill="#6E7A8A">图 1. 研究方法概念图。特征筛选、标准化和模型拟合均在 5 折交叉验证训练折内完成。</text>
+</svg>

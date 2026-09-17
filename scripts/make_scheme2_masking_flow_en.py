@@ -16,9 +16,10 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
 IMG = ROOT / "data/images/PAM50/mRNA_reorder/scheme2_function_center"
-OUT = ROOT / "data/interpretability/figures/fig_scheme2_masking_flow_en.png"
+OUT = ROOT / "data/interpretability/figures/fig_scheme2_masking_flow_en_v2.png"
 
-plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "Arial"]
+plt.rcParams["font.family"] = "serif"
+plt.rcParams["font.serif"] = ["Times New Roman", "Times", "DejaVu Serif"]
 plt.rcParams["axes.unicode_minus"] = False
 
 CATEGORY_COLORS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#7f7f7f"]
@@ -91,13 +92,13 @@ def main():
     cmap = ListedColormap(CATEGORY_COLORS)
     ax0 = fig.add_axes([0.08, 0.03, 0.205, 0.451])
     ax0.imshow(original, cmap="gray", aspect="auto")
-    ax0.set_title("A. Before masking", fontsize=10.5, fontweight="bold")
+    ax0.set_title("A. Before masking", fontsize=12, fontweight="bold")
     ax0.set_xticks([])
     ax0.set_yticks([])
 
     ax1 = fig.add_axes([0.315, 0.03, 0.205, 0.451])
     ax1.imshow(cat_grid, cmap=cmap, vmin=0, vmax=5, aspect="auto")
-    ax1.set_title("B. Functional category map", fontsize=10.5, fontweight="bold")
+    ax1.set_title("B. Functional category map", fontsize=12, fontweight="bold")
     ax1.set_xticks([])
     ax1.set_yticks([])
     center = (cat_grid.shape[0] / 2 - 0.5, cat_grid.shape[1] / 2 - 0.5)
@@ -107,7 +108,7 @@ def main():
         xy=center,
         xytext=(center[0] + 1.6, center[1] - 2.2),
         color="white",
-        fontsize=7.5,
+        fontsize=9,
         fontweight="bold",
         ha="center",
         va="center",
@@ -116,7 +117,7 @@ def main():
 
     ax2 = fig.add_axes([0.55, 0.03, 0.205, 0.451])
     ax2.imshow(masked, cmap="gray", aspect="auto")
-    ax2.set_title("C. After masking \"Other\"", fontsize=10.5, fontweight="bold")
+    ax2.set_title("C. After masking \"Other\"", fontsize=12, fontweight="bold")
     ax2.set_xticks([])
     ax2.set_yticks([])
 
@@ -133,11 +134,11 @@ def main():
     ax_leg.set_xlim(0, 10)
     ax_leg.set_ylim(-0.2, len(labels) + 0.2)
     ax_leg.axis("off")
-    ax_leg.set_title("Color\nlegend", fontsize=8.5, fontweight="bold", loc="left")
+    ax_leg.set_title("Color\nlegend", fontsize=11, fontweight="bold", loc="left")
     for i, (label, color) in enumerate(zip(labels, CATEGORY_COLORS)):
         y = len(labels) - i - 0.5
         ax_leg.add_patch(plt.Rectangle((0.2, y - 0.30), 1.2, 0.60, color=color, clip_on=False))
-        ax_leg.text(1.8, y, label, va="center", ha="left", fontsize=7.3, color="#1E3A5F")
+        ax_leg.text(1.8, y, label, va="center", ha="left", fontsize=9.8, fontweight="bold", color="#1E3A5F")
 
     fig.savefig(OUT, dpi=300, bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close(fig)

@@ -7,5 +7,6 @@ Thumbs.db
 *.tmp
 *.h5
 *.zip
+!data/supplementary_data/supplementary_data_tables.zip
 *.tar
 *.gz

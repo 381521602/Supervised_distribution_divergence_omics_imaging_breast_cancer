@@ -1,0 +1,13 @@
+omics	task	metric	mean	std
+mRNA	PAM50	accuracy	0.9568	0.0184
+mRNA	PAM50	macro_f1	0.9521	0.0211
+CNV	PAM50	accuracy	0.7238	0.027
+CNV	PAM50	macro_f1	0.6703	0.0329
+miRNA	PAM50	accuracy	0.837	0.0073
+miRNA	PAM50	macro_f1	0.8104	0.0148
+mRNA	Survival	roc_auc	0.6596	0.0555
+mRNA	Survival	c_index	0.6802	0.0739
+CNV	Survival	roc_auc	0.6434	0.0421
+CNV	Survival	c_index	0.6563	0.0631
+miRNA	Survival	roc_auc	0.6471	0.0481
+miRNA	Survival	c_index	0.5961	0.0486

@@ -13,6 +13,8 @@ This document describes each major component in the repository and how the files
 | `data/brca_clinical.tsv` | TCGA-BRCA clinical fields used for survival status and time. |
 | `data/brca_unified_manifest.tsv` | Unified sample manifest for alignment checks. |
 | `data/brca_files.tsv` | Source-file inventory and sample barcode mapping. |
+| `data/sample_level_provenance.tsv` | Case-level provenance: sample IDs, sample type, PAM50 label, OS time/event, and omics availability. |
+| `data/omics_functional_category_annotation.tsv` | Complete feature-to-functional-category mapping used in the masking and interpretability analyses. |
 
 ## 2. Final pre-selected feature matrices
 
@@ -30,6 +32,7 @@ This document describes each major component in the repository and how the files
 | `data/images/Survival/` | NSRE-ordered images for survival single-omics CNN models. |
 | `data/images/examples/` | Example grayscale, NSRE, and functional-category grids. |
 | `data/images/report_figures/` | FullSizeCNN architecture and report-level comparison figures. |
+| `data/paper_figures/` | Final manuscript figures referenced by `build_manuscript_and_supplement.py` (Figures 1–7 and the Dense/random/stress/PAM50 sensitivity figures). |
 
 ## 4. Aggregated results
 
@@ -46,6 +49,11 @@ This document describes each major component in the repository and how the files
 | `data/results/scheme2_category_masking_results.tsv` | Scheme-2 functional-category masking results. |
 | `data/results/other_omics_category_masking_results.tsv` | CNV/miRNA functional-category masking results. |
 | `data/results/mrna_equal_mask_control_paired_tests.tsv` | Equal-size random masking control tests. |
+| `data/dense_equivalent_baseline_results.tsv` | Dense-equivalent baseline versus FullSizeCNN comparison. |
+| `data/random_permutation_control_results.tsv` | Per-repeat random-permutation ordering control results. |
+| `data/random_permutation_control_stats.tsv` | Summary statistics and empirical p-values for the ordering control. |
+| `data/stress_pathway_analysis_results.tsv` | Stress / adaptive-reprogramming pathway enrichment and survival analysis. |
+| `data/pam50_gene_exclusion_results.tsv` | PAM50 50-gene exclusion sensitivity analysis. |
 
 ## 5. Interpretability outputs
 
@@ -57,7 +65,7 @@ This document describes each major component in the repository and how the files
 | `data/interpretability/survival_key_factors.tsv` | Univariate survival key factors. |
 | `data/interpretability/mrna_pam50_top100_enrichment.tsv` | Top-100 gene enrichment. |
 | `data/interpretability/mrna_pam50_other_reenrichment.tsv` | Secondary enrichment for Other genes. |
-| `data/interpretability/figures/` | SHAP, saliency, enrichment, and masking figures. |
+| `data/interpretability/figures/` | SHAP, saliency, enrichment, and masking figures, including the final `fig_scheme2_masking_flow_en_v2.png` and `fig_other_omics_category_masking_v3.png` versions. |
 
 ## 6. Code
 
@@ -73,6 +81,19 @@ All runnable Python scripts are stored under `scripts/`. Key scripts include:
 - `run_interpretability_key_factors.py` — SHAP, saliency, and survival key factors.
 - `run_scheme2_category_masking.py`, `run_other_omics_category_masking.py`, and `run_mrna_equal_mask_control.py` — functional masking experiments.
 - `generate_nsre_images.py` and `adaptive_nsre.py` — NSRE scoring and omics image generation.
+- `run_dense_baseline.py` — Dense-equivalent baseline analysis.
+- `run_random_permutation_control.py` — random-permutation ordering control.
+- `run_stress_pathway_analysis.py` — stress / adaptive-reprogramming pathway analysis.
+- `pam50_gene_exclusion_sensitivity.py` — PAM50 50-gene exclusion sensitivity analysis.
+- `generate_annotation_mapping.py` and `generate_sample_provenance.py` — annotation and provenance files used by the manuscript.
+
+## 7. Machine-readable supplementary data and final drafts
+
+| Path | Description |
+| --- | --- |
+| `data/supplementary_data/supplementary_data_tables.zip` | CSV copies of all `data/**/*.tsv` result tables plus `manifest.tsv`. |
+| `docs/Supervised_distribution_divergence_guided_omics_imaging_manuscript_CN.docx` | Final Chinese manuscript draft. |
+| `docs/Supervised_distribution_divergence_guided_omics_imaging_supplementary_material_CN.docx` | Final Chinese supplementary-material draft. |
 
 ## Reproducibility notes
 
