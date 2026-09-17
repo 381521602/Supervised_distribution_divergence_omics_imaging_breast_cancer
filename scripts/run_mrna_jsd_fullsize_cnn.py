@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""NSRE-weighted full-size CNN for mRNA images."""
+"""JSD-weighted full-size CNN for mRNA images."""
 
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ from run_multistream_cnn import spiral_order
 PAM_DIR=ROOT/"data/final_datasets/PAM50"
 SUR_DIR=ROOT/"data/final_datasets/Survival"
 IMG=ROOT/"data/images"
-OUT=ROOT/"data/mrna_nsre_fullsize_cnn_results.tsv"
+OUT=ROOT/"data/mrna_jsd_fullsize_cnn_results.tsv"
 RANDOM_STATE=42; K_FOLDS=5; EPOCHS=30; BATCH_SIZE=64
 
 
@@ -42,11 +42,11 @@ class FullSizeCNN(nn.Module):
 
 def weight_map(task,omics,size):
     order=pd.read_csv(IMG/f"{task}/{omics}/order.tsv",sep="\t")
-    nsre=order["nsre"].values
-    if nsre.max()>nsre.min():
-        w=(nsre-nsre.min())/(nsre.max()-nsre.min()+1e-9)
+    jsd=order["jsd"].values
+    if jsd.max()>jsd.min():
+        w=(jsd-jsd.min())/(jsd.max()-jsd.min()+1e-9)
     else:
-        w=np.zeros_like(nsre)
+        w=np.zeros_like(jsd)
     grid=np.zeros((size,size),dtype=np.float32)
     positions=spiral_order(size)
     for pos,val in zip(positions,w):
@@ -87,8 +87,8 @@ def eval_pam50():
         pred=train(imgs[tr],y[tr],imgs[te],y[te],20,len(enc.classes_))
         accs.append(accuracy_score(y[te],pred)); f1s.append(f1_score(y[te],pred,average="macro"))
     return [
-        {"task":"PAM50","model":"NSRE_FullSizeCNN","metric":"accuracy","mean":round(float(np.mean(accs)),4),"std":round(float(np.std(accs)),4)},
-        {"task":"PAM50","model":"NSRE_FullSizeCNN","metric":"macro_f1","mean":round(float(np.mean(f1s)),4),"std":round(float(np.std(f1s)),4)},
+        {"task":"PAM50","model":"JSD_FullSizeCNN","metric":"accuracy","mean":round(float(np.mean(accs)),4),"std":round(float(np.std(accs)),4)},
+        {"task":"PAM50","model":"JSD_FullSizeCNN","metric":"macro_f1","mean":round(float(np.mean(f1s)),4),"std":round(float(np.std(f1s)),4)},
     ]
 
 
@@ -102,8 +102,8 @@ def eval_survival():
         prob=train(imgs[tr],y_event[tr],imgs[te],y_event[te],15,1,binary=True)
         aucs.append(roc_auc_score(y_event[te],prob)); cis.append(concordance_index(y_time[te],-prob,y_event[te]))
     return [
-        {"task":"Survival","model":"NSRE_FullSizeCNN","metric":"roc_auc","mean":round(float(np.mean(aucs)),4),"std":round(float(np.std(aucs)),4)},
-        {"task":"Survival","model":"NSRE_FullSizeCNN","metric":"c_index","mean":round(float(np.mean(cis)),4),"std":round(float(np.std(cis)),4)},
+        {"task":"Survival","model":"JSD_FullSizeCNN","metric":"roc_auc","mean":round(float(np.mean(aucs)),4),"std":round(float(np.std(aucs)),4)},
+        {"task":"Survival","model":"JSD_FullSizeCNN","metric":"c_index","mean":round(float(np.mean(cis)),4),"std":round(float(np.std(cis)),4)},
     ]
 
 

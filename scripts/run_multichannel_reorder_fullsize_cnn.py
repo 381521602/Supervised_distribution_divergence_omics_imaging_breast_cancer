@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """四套 PAM50/Survival mRNA 图谱作为多通道输入训练 FullSizeCNN。
 
-multichannel_4schemes: 原始 NSRE + scheme1 + scheme2 + scheme3 堆叠为 4 通道
-single_original_nsre: 原始 NSRE 单通道对照
+multichannel_4schemes: 原始 JSD + scheme1 + scheme2 + scheme3 堆叠为 4 通道
+single_original_jsd: 原始 JSD 单通道对照
 """
 
 from __future__ import annotations
@@ -105,7 +105,7 @@ def load_pam50_images():
     base = IMG / "PAM50/mRNA"
     reorder = IMG / "PAM50/mRNA_reorder"
     return {
-        "single_original_nsre": np.load(base / "images.npy"),
+        "single_original_jsd": np.load(base / "images.npy"),
         "multichannel_4schemes": np.concatenate(
             [
                 np.load(base / "images.npy"),
@@ -122,7 +122,7 @@ def load_survival_images():
     base = IMG / "Survival/mRNA"
     reorder = IMG / "Survival/mRNA_reorder"
     return {
-        "single_original_nsre": np.load(base / "images.npy"),
+        "single_original_jsd": np.load(base / "images.npy"),
         "multichannel_4schemes": np.concatenate(
             [
                 np.load(base / "images.npy"),

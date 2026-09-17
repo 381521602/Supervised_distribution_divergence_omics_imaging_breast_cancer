@@ -55,15 +55,15 @@ def main():
     t=doc.add_paragraph(); t.alignment=WD_ALIGN_PARAGRAPH.CENTER; r=t.add_run("特征扩增实验报告"); r.font.name="Calibri"; r.font.size=Pt(18); r.font.bold=True
 
     add_heading(doc,"1. 特征提取算法说明",1)
-    add_body(doc,"低方差过滤：去除几乎不变化的特征。F 值筛选：使用 ANOVA F 统计量，衡量特征与类别之间的线性相关性，选择 F 值最大的 k 个特征。L1 正则化：使用带 L1 惩罚的线性 SVM，通过稀疏权重自动选择特征。NSRE：新对称相对熵，度量正负类样本特征分布的距离，选择分布差异大的特征。组合方法：FClassif_NSRE 先粗筛再精筛；L1_NSRE 先 L1 后 NSRE。")
+    add_body(doc,"低方差过滤：去除几乎不变化的特征。F 值筛选：使用 ANOVA F 统计量，衡量特征与类别之间的线性相关性，选择 F 值最大的 k 个特征。L1 正则化：使用带 L1 惩罚的线性 SVM，通过稀疏权重自动选择特征。JSD：新对称相对熵，度量正负类样本特征分布的距离，选择分布差异大的特征。组合方法：FClassif_JSD 先粗筛再精筛；L1_JSD 先 L1 后 JSD。")
 
     add_heading(doc,"2. 机器学习与 MLP 算法说明",1)
     add_body(doc,"LogisticRegression：线性分类器，使用 L2 正则，最大迭代 2000。RandomForest：集成决策树。GradientBoosting：梯度提升树。SVC：支持向量机。KNN：k 近邻。MLP：多层感知器，结构为输入层-128-ReLU-Dropout-64-ReLU-Dropout-输出层，Adam 优化，学习率 0.001，权重衰减 1e-4。")
 
     add_heading(doc,"3. 实验结果",1)
     add_body(doc,"结果采用 5 折分层交叉验证，随机种子 42。")
-    add_figure(doc, FIG/"feature_scaling_accuracy.png", "图 1. FClassif_NSRE + LogisticRegression 的 Accuracy（mean ± std）")
-    add_figure(doc, FIG/"feature_scaling_macro_f1.png", "图 2. FClassif_NSRE + LogisticRegression 的 Macro-F1（mean ± std）")
+    add_figure(doc, FIG/"feature_scaling_accuracy.png", "图 1. FClassif_JSD + LogisticRegression 的 Accuracy（mean ± std）")
+    add_figure(doc, FIG/"feature_scaling_macro_f1.png", "图 2. FClassif_JSD + LogisticRegression 的 Macro-F1（mean ± std）")
 
     doc.save(OUT); print(f"Saved -> {OUT}")
 

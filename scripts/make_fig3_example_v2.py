@@ -53,10 +53,10 @@ def load_example(omics_dir, final_df, size, sample_idx=0):
     order = pd.read_csv(omics_dir / "order.tsv", sep="\t")
     positions = spiral_order(size)
     pos_gene = {pos: gene for pos, gene in zip(positions[: len(order)], order["feature"].tolist())}
-    gene_nsre = order.set_index("feature")["nsre"].to_dict()
+    gene_jsd = order.set_index("feature")["jsd"].to_dict()
     expr = {pos: float(sample[final_df.columns.get_loc(pos_gene[pos]) - 1]) for pos in pos_gene}
-    nsre = {pos: float(gene_nsre[pos_gene[pos]]) for pos in pos_gene}
-    return fill_grid(expr, size), fill_grid(nsre, size)
+    jsd = {pos: float(gene_jsd[pos_gene[pos]]) for pos in pos_gene}
+    return fill_grid(expr, size), fill_grid(jsd, size)
 
 
 def add_coordinate_axes(ax, size):
@@ -73,32 +73,32 @@ def add_coordinate_axes(ax, size):
 def main():
     pam_df = pd.read_csv(PAM_DIR / "mRNA_PAM50_final.tsv", sep="\t")
     sur_df = pd.read_csv(SUR_DIR / "mRNA_Survival_final.tsv", sep="\t")
-    pam_expr, pam_nsre = load_example(IMG_PAM, pam_df, 20)
-    sur_expr, sur_nsre = load_example(IMG_SUR, sur_df, 15)
+    pam_expr, pam_jsd = load_example(IMG_PAM, pam_df, 20)
+    sur_expr, sur_jsd = load_example(IMG_SUR, sur_df, 15)
     pam_cat = np.load(DATA / "images/examples/mRNA_category_grid.npy")
     sur_cat = np.load(DATA / "images/examples/Survival_mRNA_category_grid.npy")
 
     fig, axes = plt.subplots(2, 3, figsize=(11.0, 6.8), dpi=300)
     rows = [
-        ("A", pam_expr, pam_nsre, pam_cat, 20),
-        ("B", sur_expr, sur_nsre, sur_cat, 15),
+        ("A", pam_expr, pam_jsd, pam_cat, 20),
+        ("B", sur_expr, sur_jsd, sur_cat, 15),
     ]
 
-    for r, (row_label, expr_grid, nsre_grid, cat_grid, size) in enumerate(rows):
+    for r, (row_label, expr_grid, jsd_grid, cat_grid, size) in enumerate(rows):
         extent = (0, size, size, 0)
         vmin, vmax = expr_grid.min(), expr_grid.max()
         im_expr = axes[r, 0].imshow(expr_grid, cmap="gray", vmin=vmin, vmax=vmax, aspect="equal", extent=extent)
         axes[r, 0].set_title(f"{row_label}1  Grayscale expression", loc="left", fontsize=9, fontweight="bold", color="#1F4D78")
 
-        im_nsre = axes[r, 1].imshow(nsre_grid, cmap="magma", vmin=0, vmax=float(nsre_grid.max()), aspect="equal", extent=extent)
-        axes[r, 1].set_title(f"{row_label}2  NSRE importance map", loc="left", fontsize=9, fontweight="bold", color="#1F4D78")
+        im_jsd = axes[r, 1].imshow(jsd_grid, cmap="magma", vmin=0, vmax=float(jsd_grid.max()), aspect="equal", extent=extent)
+        axes[r, 1].set_title(f"{row_label}2  JSD importance map", loc="left", fontsize=9, fontweight="bold", color="#1F4D78")
 
         cmap = ListedColormap(CAT_COLORS)
         norm = BoundaryNorm(np.arange(-0.5, 6, 1), len(CAT_COLORS))
         im_cat = axes[r, 2].imshow(cat_grid, cmap=cmap, norm=norm, aspect="equal", extent=extent)
         axes[r, 2].set_title(f"{row_label}3  Gene functional category", loc="left", fontsize=9, fontweight="bold", color="#1F4D78")
 
-        for col, im in enumerate([im_expr, im_nsre, im_cat]):
+        for col, im in enumerate([im_expr, im_jsd, im_cat]):
             ax = axes[r, col]
             add_coordinate_axes(ax, size)
             divider = make_axes_locatable(ax)

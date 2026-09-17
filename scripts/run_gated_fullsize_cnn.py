@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Gated multi-stream FullSizeCNN with NSRE-weighted images."""
+"""Gated multi-stream FullSizeCNN with JSD-weighted images."""
 
 from __future__ import annotations
 
@@ -20,8 +20,8 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
-from run_nsre_weight_variants import weighted_images  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
+from run_jsd_weight_variants import weighted_images  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -113,14 +113,14 @@ def main() -> None:
         train_imgs, test_imgs = [], []
         for block, omics in zip(X_blocks, OMICS):
             scaler = StandardScaler().fit(block[tr]); Xtr = scaler.transform(block[tr]); Xte = scaler.transform(block[te])
-            scores = nsre_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
+            scores = jsd_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
             train_imgs.append(weighted_images(Xtr, SIZES[omics], order, scores))
             test_imgs.append(weighted_images(Xte, SIZES[omics], order, scores))
         pred = run_fold(train_imgs, test_imgs, y[tr], y[te], len(enc.classes_))
         accs.append(accuracy_score(y[te], pred)); f1s.append(f1_score(y[te], pred, average="macro"))
     rows = [
-        {"model": "Gated_NSRE_Weighted_FullSizeCNN", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
-        {"model": "Gated_NSRE_Weighted_FullSizeCNN", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
+        {"model": "Gated_JSD_Weighted_FullSizeCNN", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
+        {"model": "Gated_JSD_Weighted_FullSizeCNN", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
     ]
     with OUT.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["model", "metric", "value"], delimiter="\t")

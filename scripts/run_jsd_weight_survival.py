@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""NSRE-weighted FullSizeCNN for survival prediction."""
+"""JSD-weighted FullSizeCNN for survival prediction."""
 
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ from sklearn.preprocessing import StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
-from run_nsre_weight_variants import weighted_images  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
+from run_jsd_weight_variants import weighted_images  # noqa: E402
 from run_fullsize_cnn_survival import FullSizeCNN, MultiStreamFullSize, train_binary, train_cox, cox_loss  # noqa: E402
 import torch.nn as nn
 
@@ -28,7 +28,7 @@ import torch.nn as nn
 DATA = ROOT / "data"
 LABELS = DATA / "brca_labels_modeling_ready.tsv"
 FEAT_DIR = DATA / "selected_features"
-OUT = DATA / "nsre_weight_survival_results.tsv"
+OUT = DATA / "jsd_weight_survival_results.tsv"
 RANDOM_STATE = 42
 K_FOLDS = 5
 EPOCHS = 60
@@ -53,7 +53,7 @@ def run_single(omics, matrix, labels):
     aucs, cis = [], []
     for tr, te in cv.split(np.zeros(len(cases)), y_event):
         scaler = StandardScaler().fit(X[tr]); Xtr = scaler.transform(X[tr]); Xte = scaler.transform(X[te])
-        scores = nsre_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
+        scores = jsd_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
         Xtr_img = torch.tensor(make_weighted_images(Xtr, size, order, scores), dtype=torch.float32)
         Xte_img = torch.tensor(make_weighted_images(Xte, size, order, scores), dtype=torch.float32)
         model = FullSizeCNN(size, 1)
@@ -85,7 +85,7 @@ def run_multi(matrices, labels):
         train_imgs, test_imgs = [], []
         for block, omics in zip(blocks, OMICS):
             scaler = StandardScaler().fit(block[tr]); Xtr = scaler.transform(block[tr]); Xte = scaler.transform(block[te])
-            scores = nsre_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
+            scores = jsd_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
             train_imgs.append(torch.tensor(make_weighted_images(Xtr, SIZES[omics], order, scores), dtype=torch.float32))
             test_imgs.append(torch.tensor(make_weighted_images(Xte, SIZES[omics], order, scores), dtype=torch.float32))
         model = MultiStreamFullSize(1)
@@ -129,12 +129,12 @@ def main() -> None:
         matrix = pd.read_csv(FEAT_DIR / f"{omics}_OS_matrix.tsv", sep="\t", index_col=0)
         matrices[omics] = matrix
         auc, ci = run_single(omics, matrix, labels)
-        rows.append({"model": f"NSRE_Weight_{omics}", "metric": "roc_auc", "value": round(auc, 4)})
-        rows.append({"model": f"NSRE_Weight_{omics}", "metric": "c_index", "value": round(ci, 4)})
+        rows.append({"model": f"JSD_Weight_{omics}", "metric": "roc_auc", "value": round(auc, 4)})
+        rows.append({"model": f"JSD_Weight_{omics}", "metric": "c_index", "value": round(ci, 4)})
         print(f"{omics}: AUC={auc:.4f} C-index={ci:.4f}")
     auc, ci = run_multi([matrices[o] for o in OMICS], labels)
-    rows.append({"model": "NSRE_Weight_MultiStream", "metric": "roc_auc", "value": round(auc, 4)})
-    rows.append({"model": "NSRE_Weight_MultiStream", "metric": "c_index", "value": round(ci, 4)})
+    rows.append({"model": "JSD_Weight_MultiStream", "metric": "roc_auc", "value": round(auc, 4)})
+    rows.append({"model": "JSD_Weight_MultiStream", "metric": "c_index", "value": round(ci, 4)})
     print(f"MultiStream: AUC={auc:.4f} C-index={ci:.4f}")
     with OUT.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["model", "metric", "value"], delimiter="\t")

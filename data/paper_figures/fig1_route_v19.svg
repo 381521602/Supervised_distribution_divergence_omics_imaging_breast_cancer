@@ -1648,7 +1648,7 @@ z
     </g>
    </g>
    <g id="text_10">
-    <!-- Feature Engineering and NSRE Imaging -->
+    <!-- Feature Engineering and JSD Imaging -->
     <g style="fill: #ffffff" transform="translate(330.282 43.859081) scale(0.088 -0.088)">
      <defs>
       <path id="DejaVuSans-Bold-29" d="M 588 4666 
@@ -1927,7 +1927,7 @@ z
 " clip-path="url(#p2f43f532b0)" style="fill: #bdd7ee; stroke: #5e9cc4; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="text_13">
-    <!-- NSRE ranking -->
+    <!-- JSD ranking -->
     <g style="fill: #5e9cc4" transform="translate(351.486 177.443501) scale(0.087 -0.087)">
      <defs>
       <path id="DejaVuSans-Bold-4e" d="M 538 4863 

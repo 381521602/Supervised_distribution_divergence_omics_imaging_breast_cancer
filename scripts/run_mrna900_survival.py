@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""mRNA 900-feature NSRE-weighted FullSizeCNN for survival."""
+"""mRNA 900-feature JSD-weighted FullSizeCNN for survival."""
 
 from __future__ import annotations
 
@@ -21,9 +21,9 @@ from sklearn.preprocessing import StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from adaptive_nsre import select_features  # noqa: E402
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
-from run_nsre_weight_variants import weighted_images  # noqa: E402
+from adaptive_jsd import select_features  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
+from run_jsd_weight_variants import weighted_images  # noqa: E402
 from run_fullsize_cnn_survival import cox_loss  # noqa: E402
 
 
@@ -72,7 +72,7 @@ def main() -> None:
     aucs, cis = [], []
     for tr, te in cv.split(np.zeros(len(cases)), y_event):
         scaler = StandardScaler().fit(X[tr]); Xtr = scaler.transform(X[tr]); Xte = scaler.transform(X[te])
-        scores = nsre_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
+        scores = jsd_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
         Xtr_img = torch.tensor(weighted_images(Xtr, SIZE, order, scores), dtype=torch.float32)
         Xte_img = torch.tensor(weighted_images(Xte, SIZE, order, scores), dtype=torch.float32)
         model = FullSizeCNN(1); torch_seed(); opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4); crit = nn.BCEWithLogitsLoss(); yt = torch.tensor(y_event[tr], dtype=torch.float32).view(-1,1)
@@ -98,8 +98,8 @@ def main() -> None:
         with torch.no_grad(): hazard = model(Xte_img).numpy().ravel()
         cis.append(concordance_index(y_time[te], -hazard, y_event[te]))
     rows = [
-        {"model": "mRNA900_NSRE_Weighted_FullSizeCNN", "metric": "roc_auc", "value": round(float(np.mean(aucs)), 4)},
-        {"model": "mRNA900_NSRE_Weighted_FullSizeCNN", "metric": "c_index", "value": round(float(np.mean(cis)), 4)},
+        {"model": "mRNA900_JSD_Weighted_FullSizeCNN", "metric": "roc_auc", "value": round(float(np.mean(aucs)), 4)},
+        {"model": "mRNA900_JSD_Weighted_FullSizeCNN", "metric": "c_index", "value": round(float(np.mean(cis)), 4)},
     ]
     with OUT.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["model", "metric", "value"], delimiter="\t")

@@ -63,7 +63,7 @@ def main():
     ax.set_ylim(0, 84)
     ax.axis("off")
 
-    ax.text(75, 79, "NSRE-Guided Omics Imaging and Multi-Omics Fusion", ha="center", va="center", fontsize=18, fontweight="bold", color="#173A5E")
+    ax.text(75, 79, "JSD-Guided Omics Imaging and Multi-Omics Fusion", ha="center", va="center", fontsize=18, fontweight="bold", color="#173A5E")
     ax.text(75, 75, "A complete workflow for breast cancer molecular subtyping and survival prediction", ha="center", va="center", fontsize=11.5, color="#5E6E83")
 
     phases = [
@@ -84,8 +84,8 @@ def main():
             "title": "Feature Engineering & Imaging",
             "color": "#60A5C7",
             "subs": [
-                ("Feature selection", "Low-variance / F / L1\nNSRE"),
-                ("NSRE ranking", "Class discrimination"),
+                ("Feature selection", "Low-variance / F / L1\nJSD"),
+                ("JSD ranking", "Class discrimination"),
                 ("Scheme-2 imaging", "Center-high importance\nspiral filling"),
             ],
         },

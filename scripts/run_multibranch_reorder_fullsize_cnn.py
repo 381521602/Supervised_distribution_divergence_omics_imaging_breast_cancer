@@ -106,10 +106,10 @@ def image_variants(task):
     s2 = np.load(reorder / "scheme2_function_center/images.npy")
     s3 = np.load(reorder / "scheme3_expression_cluster/images.npy")
     return {
-        "single_original_nsre": [original],
-        "branches_nsre_scheme1": [original, s1],
-        "branches_nsre_scheme2": [original, s2],
-        "branches_nsre_scheme3": [original, s3],
+        "single_original_jsd": [original],
+        "branches_jsd_scheme1": [original, s1],
+        "branches_jsd_scheme2": [original, s2],
+        "branches_jsd_scheme3": [original, s3],
         "branches_4schemes": [original, s1, s2, s3],
     }
 

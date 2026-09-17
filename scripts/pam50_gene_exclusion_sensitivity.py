@@ -9,7 +9,7 @@ Compares three feature configurations on the mRNA PAM50 classification task:
 
 Models: LogisticRegression, MLP, FullSizeCNN.
 Protocol: 5-fold stratified CV, mean +/- SD of Accuracy and Macro-F1.
-Feature scaling and NSRE ordering are computed inside each training fold (no leakage).
+Feature scaling and JSD ordering are computed inside each training fold (no leakage).
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
 
 PAM_MRNA = ROOT / "data" / "final_datasets" / "PAM50" / "mRNA_PAM50_final.tsv"
 OUT = ROOT / "data" / "pam50_gene_exclusion_results.tsv"
@@ -84,7 +84,7 @@ class FullSizeCNN(nn.Module):
 def make_images(X: np.ndarray, y: np.ndarray) -> tuple:
     n = X.shape[1]
     size = int(np.ceil(np.sqrt(n)))
-    scores = nsre_scores(X, y)
+    scores = jsd_scores(X, y)
     order = np.argsort(scores)[::-1]
     positions = spiral_order(size)
     imgs = np.zeros((X.shape[0], 1, size, size), dtype=np.float32)

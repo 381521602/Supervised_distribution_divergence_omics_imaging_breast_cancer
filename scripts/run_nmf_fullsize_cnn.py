@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""NMF component activities -> NSRE-weighted images -> FullSizeCNN."""
+"""NMF component activities -> JSD-weighted images -> FullSizeCNN."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -124,14 +124,14 @@ def main() -> None:
             nmf = NMF(n_components=NMF_K[omics], init="nndsvda", random_state=RANDOM_STATE, max_iter=500)
             W_train = nmf.fit_transform(Xtr_nn)
             W_test = nmf.transform(Xte_nn)
-            scores = nsre_scores(W_train, y[tr]); order = np.argsort(scores)[::-1]
+            scores = jsd_scores(W_train, y[tr]); order = np.argsort(scores)[::-1]
             train_imgs.append(weighted_images(W_train, SIZES[omics], order, scores))
             test_imgs.append(weighted_images(W_test, SIZES[omics], order, scores))
         pred = run_fold(train_imgs, test_imgs, y[tr], y[te], len(enc.classes_))
         accs.append(accuracy_score(y[te], pred)); f1s.append(f1_score(y[te], pred, average="macro"))
     rows = [
-        {"model": "NMF_NSRE_FullSizeCNN", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
-        {"model": "NMF_NSRE_FullSizeCNN", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
+        {"model": "NMF_JSD_FullSizeCNN", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
+        {"model": "NMF_JSD_FullSizeCNN", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
     ]
     with OUT.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["model", "metric", "value"], delimiter="\t")

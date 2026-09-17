@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Random-permutation ordering control for FullSizeCNN.
 
-Compares the deterministic NSRE/JSD spiral ordering against:
+Compares the deterministic JSD/JSD spiral ordering against:
   - mean-expression ordering (descending),
   - N random permutations of the gene order (null distribution).
 

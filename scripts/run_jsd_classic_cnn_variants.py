@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""NSRE 原始图像上对比五类轻量经典 CNN 与 FullSizeCNN。"""
+"""JSD 原始图像上对比五类轻量经典 CNN 与 FullSizeCNN。"""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PAM_DIR = ROOT / "data/final_datasets/PAM50"
 SUR_DIR = ROOT / "data/final_datasets/Survival"
 IMG = ROOT / "data/images"
-OUT = ROOT / "data/nsre_classic_cnn_variants_results.tsv"
+OUT = ROOT / "data/jsd_classic_cnn_variants_results.tsv"
 RANDOM_STATE = 42
 K_FOLDS = 5
 EPOCHS = 30

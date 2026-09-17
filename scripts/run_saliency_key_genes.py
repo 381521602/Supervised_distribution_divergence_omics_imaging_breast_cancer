@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Gradient-based saliency + NSRE key-gene mining for the target model."""
+"""Gradient-based saliency + JSD key-gene mining for the target model."""
 
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
-from run_nsre_weight_variants import weighted_images  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
+from run_jsd_weight_variants import weighted_images  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -87,7 +87,7 @@ def main() -> None:
     train_imgs, test_imgs, orders, scores_list = [], [], [], []
     for block, omics in zip(X_blocks, OMICS):
         scaler = StandardScaler().fit(block[tr]); Xtr = scaler.transform(block[tr]); Xte = scaler.transform(block[te])
-        scores = nsre_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
+        scores = jsd_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
         orders.append(order); scores_list.append(scores)
         train_imgs.append(torch.tensor(make_weighted(Xtr, SIZES[omics], order, scores), dtype=torch.float32))
         test_imgs.append(torch.tensor(make_weighted(Xte, SIZES[omics], order, scores), dtype=torch.float32))
@@ -123,10 +123,10 @@ def main() -> None:
                 pixel_scores.append((sal[pos], feat_idx, matrices[oi].columns[feat_idx]))
         pixel_scores.sort(reverse=True, key=lambda x: x[0])
         for rank, (salv, feat_idx, gene) in enumerate(pixel_scores[:TOP_N], 1):
-            rows.append({"omics": o, "rank": rank, "gene": gene, "saliency": float(salv), "nsre": float(scores_list[oi][feat_idx])})
+            rows.append({"omics": o, "rank": rank, "gene": gene, "saliency": float(salv), "jsd": float(scores_list[oi][feat_idx])})
 
     with (OUT_DIR / "key_genes_saliency.tsv").open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["omics", "rank", "gene", "saliency", "nsre"], delimiter="\t")
+        writer = csv.DictWriter(handle, fieldnames=["omics", "rank", "gene", "saliency", "jsd"], delimiter="\t")
         writer.writeheader(); writer.writerows(rows)
     print(f"Wrote {len(rows)} key-gene rows -> {OUT_DIR / 'key_genes_saliency.tsv'}")
 

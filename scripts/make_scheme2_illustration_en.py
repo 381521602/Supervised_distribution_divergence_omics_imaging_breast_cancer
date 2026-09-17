@@ -50,7 +50,7 @@ def main():
     center = (cat_grid.shape[0] / 2 - 0.5, cat_grid.shape[1] / 2 - 0.5)
     ax_img.scatter(*center, s=110, marker="o", facecolor="none", edgecolor="white", linewidths=2.5)
     ax_img.annotate(
-        "center\n(high NSRE)",
+        "center\n(high JSD)",
         xy=center,
         xytext=(center[0] + 2.4, center[1] - 3.5),
         color="white",

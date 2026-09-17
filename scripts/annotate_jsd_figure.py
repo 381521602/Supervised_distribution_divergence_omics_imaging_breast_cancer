@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Annotate panel labels on the NSRE interpretability figure."""
+"""Annotate panel labels on the JSD interpretability figure."""
 
 from pathlib import Path
 
@@ -11,8 +11,8 @@ from matplotlib.image import imread
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "data" / "interpretability" / "figures" / "nsre_feature_mining_visualization.png"
-OUT = ROOT / "data" / "paper_figures" / "fig6_nsre_annotated.png"
+SRC = ROOT / "data" / "interpretability" / "figures" / "jsd_feature_mining_visualization.png"
+OUT = ROOT / "data" / "paper_figures" / "fig6_jsd_annotated.png"
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
 

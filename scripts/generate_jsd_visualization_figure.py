@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Generate NSRE-based feature-mining visualization."""
+"""Generate JSD-based feature-mining visualization."""
 
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ from run_multistream_cnn import spiral_order  # noqa: E402
 DATA = ROOT / "data"
 IMG = DATA / "images/PAM50/mRNA"
 INTERP = DATA / "interpretability"
-OUT = INTERP / "figures/nsre_feature_mining_visualization.png"
+OUT = INTERP / "figures/jsd_feature_mining_visualization.png"
 
 
 def fill_grid(values_by_pos, size=20):
@@ -43,10 +43,10 @@ def main():
     order = pd.read_csv(IMG / "order.tsv", sep="\t")
     positions = spiral_order(20)
     pos_gene = {pos: gene for pos, gene in zip(positions[: len(order)], order["feature"].tolist())}
-    gene_nsre = order.set_index("feature")["nsre"].to_dict()
+    gene_jsd = order.set_index("feature")["jsd"].to_dict()
 
     expr = {pos: float(sample[df.columns.get_loc(pos_gene[pos]) - 1]) for pos in pos_gene}
-    nsre = {pos: float(gene_nsre[pos_gene[pos]]) for pos in pos_gene}
+    jsd = {pos: float(gene_jsd[pos_gene[pos]]) for pos in pos_gene}
 
     shap = pd.read_csv(INTERP / "mrna_pam50_shap_importance.tsv", sep="\t").set_index("gene")["mean_importance"].to_dict()
     cnn = pd.read_csv(INTERP / "mrna_pam50_cnn_saliency_importance.tsv", sep="\t").set_index("gene")["mean_importance"].to_dict()
@@ -55,16 +55,16 @@ def main():
 
     cat_grid = np.load(DATA / "images/examples/mRNA_category_grid.npy")
     gray = fill_grid(expr)
-    nsre_grid = fill_grid(nsre)
+    jsd_grid = fill_grid(jsd)
     shap_grid = fill_grid(shap_map)
     cnn_grid = fill_grid(cnn_map)
 
     vmin, vmax = gray.min(), gray.max()
     fig, axes = plt.subplots(2, 3, figsize=(16, 9))
     im0 = axes[0, 0].imshow(gray, cmap="gray", vmin=vmin, vmax=vmax, aspect="equal")
-    axes[0, 0].set_title("NSRE grayscale expression")
-    im1 = axes[0, 1].imshow(nsre_grid, cmap="magma", aspect="equal")
-    axes[0, 1].set_title("NSRE importance map")
+    axes[0, 0].set_title("JSD grayscale expression")
+    im1 = axes[0, 1].imshow(jsd_grid, cmap="magma", aspect="equal")
+    axes[0, 1].set_title("JSD importance map")
     cat_colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#7f7f7f"]
     cat_names = {
         0: "Development/Epithelium",
@@ -93,7 +93,7 @@ def main():
             cbar.set_ticks([i + 0.5 for i in range(6)])
             cbar.set_ticklabels([cat_names[i].split("/")[0] for i in range(6)])
             cbar.ax.tick_params(labelsize=10)
-    fig.suptitle("NSRE image ordering for interpretable feature mining", fontsize=14)
+    fig.suptitle("JSD image ordering for interpretable feature mining", fontsize=14)
     fig.subplots_adjust(left=0.05, right=0.90, top=0.90, bottom=0.12, wspace=0.28, hspace=0.28)
     fig.savefig(OUT, dpi=160, bbox_inches="tight")
     plt.close(fig)

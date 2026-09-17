@@ -77,7 +77,7 @@ def main():
     r=title.add_run("基于多组学特征筛选与机器学习的乳腺癌 PAM50 分子分型研究"); r.font.name="Calibri"; r.font.size=Pt(17); r.font.bold=True
 
     add_heading(doc,"摘要",1)
-    add_body(doc,"乳腺癌具有高度分子异质性，PAM50 分子分型对精准治疗具有重要意义。本研究系统比较了低方差过滤、F 值、L1、NSRE 及其两两组合等特征提取方法，并评估逻辑回归、随机森林、梯度提升、支持向量机、K 近邻和多层感知器等模型在不同特征数量下的分类性能。结果表明，mRNA 使用 V_L1 特征方法结合 MLP、保留 400 个特征时，PAM50 四分类准确率达到 0.9136；miRNA 使用 V_F_NSRE 结合 MLP、600 个特征时准确率达到 0.8471；CNV 判别能力较弱，50 个特征即可。该研究为乳腺癌多组学特征筛选和模型选择提供了系统依据。")
+    add_body(doc,"乳腺癌具有高度分子异质性，PAM50 分子分型对精准治疗具有重要意义。本研究系统比较了低方差过滤、F 值、L1、JSD 及其两两组合等特征提取方法，并评估逻辑回归、随机森林、梯度提升、支持向量机、K 近邻和多层感知器等模型在不同特征数量下的分类性能。结果表明，mRNA 使用 V_L1 特征方法结合 MLP、保留 400 个特征时，PAM50 四分类准确率达到 0.9136；miRNA 使用 V_F_JSD 结合 MLP、600 个特征时准确率达到 0.8471；CNV 判别能力较弱，50 个特征即可。该研究为乳腺癌多组学特征筛选和模型选择提供了系统依据。")
 
     add_heading(doc,"1. 引言",1)
     add_body(doc,"乳腺癌是全球女性最常见的恶性肿瘤之一，其分子分型对治疗方案选择和预后判断具有决定性作用。PAM50 分型将乳腺癌分为 Luminal A、Luminal B、HER2-enriched、Basal-like 和 Normal-like 等亚型。随着高通量测序技术的发展，mRNA、CNV、miRNA 等多组学数据为分子分型提供了丰富信息，但高维、小样本、多源异质性等问题给特征筛选和模型构建带来挑战。传统机器学习方法通常将组学特征以向量形式输入，难以充分利用特征间的结构关系。本研究从特征提取算法、特征数量和机器学习模型三个维度系统评估 PAM50 分型性能，为多组学融合分析提供基础。")
@@ -88,7 +88,7 @@ def main():
     add_table(doc, ["组学","特征方法","特征数","样本数"], [
         ["mRNA","V_L1","400","833"],
         ["CNV","V_L1_F","50","818"],
-        ["miRNA","V_F_NSRE","600","497"],
+        ["miRNA","V_F_JSD","600","497"],
     ], [1600,2200,1600,1600])
 
     add_heading(doc,"2.2 数据预处理",2)
@@ -104,11 +104,11 @@ def main():
     add_heading(doc,"2.3.3 L1/LASSO",3)
     add_body(doc,"L1 正则化通过在损失函数中加入权重的绝对值惩罚，使部分权重收缩为零，从而实现特征选择。其优化目标为 min_w (1/2)||Xw-y||^2 + λ||w||_1。λ 控制稀疏程度，λ 越大，被保留的特征越少。本研究使用带 L1 惩罚的线性 SVM 进行特征选择，通过调整惩罚参数得到指定数量的特征。")
     add_equation(doc, '<m:oMathPara xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"><m:oMath><m:r><m:t>min_w</m:t></m:r><m:r><m:t>  (1/2)||Xw-y||</m:t></m:r><m:sSup><m:e><m:r><m:t>2</m:t></m:r></m:e><m:sup><m:r><m:t>2</m:t></m:r></m:sup></m:sSup><m:r><m:t> + λ||w||</m:t></m:r><m:sSub><m:e><m:r><m:t>1</m:t></m:r></m:e><m:sub><m:r><m:t>1</m:t></m:r></m:sub></m:sSub></m:oMath></m:oMathPara>')
-    add_heading(doc,"2.3.4 NSRE 新对称相对熵",3)
-    add_body(doc,"NSRE 通过比较正负类样本特征值概率分布的差异来评价特征重要性。对每个特征，先按分位数将连续值离散为若干区间，分别估计正类和负类样本的分布 p 和 q，然后计算 NSRE(p||q)=Σ p_i log2(2p_i/(p_i+q_i)) + Σ q_i log2(2q_i/(p_i+q_i))。该值越大，说明两类分布差异越大，特征越具有判别性。")
-    add_equation(doc, '<m:oMathPara xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"><m:oMath><m:r><m:t>NSRE(p||q)=</m:t></m:r><m:nary><m:naryPr><m:chr m:val="∑"/><m:limLoc m:val="subSup"/></m:naryPr><m:sub><m:r><m:t>i</m:t></m:r></m:sub><m:sup><m:r><m:t> </m:t></m:r></m:sup><m:e><m:r><m:t>p_i log2(2p_i/(p_i+q_i)) + q_i log2(2q_i/(p_i+q_i))</m:t></m:r></m:e></m:nary></m:oMath></m:oMathPara>')
+    add_heading(doc,"2.3.4 JSD 新对称相对熵",3)
+    add_body(doc,"JSD 通过比较正负类样本特征值概率分布的差异来评价特征重要性。对每个特征，先按分位数将连续值离散为若干区间，分别估计正类和负类样本的分布 p 和 q，然后计算 JSD(p||q)=Σ p_i log2(2p_i/(p_i+q_i)) + Σ q_i log2(2q_i/(p_i+q_i))。该值越大，说明两类分布差异越大，特征越具有判别性。")
+    add_equation(doc, '<m:oMathPara xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"><m:oMath><m:r><m:t>JSD(p||q)=</m:t></m:r><m:nary><m:naryPr><m:chr m:val="∑"/><m:limLoc m:val="subSup"/></m:naryPr><m:sub><m:r><m:t>i</m:t></m:r></m:sub><m:sup><m:r><m:t> </m:t></m:r></m:sup><m:e><m:r><m:t>p_i log2(2p_i/(p_i+q_i)) + q_i log2(2q_i/(p_i+q_i))</m:t></m:r></m:e></m:nary></m:oMath></m:oMathPara>')
     add_heading(doc,"2.3.5 组合方法",3)
-    add_body(doc,"为兼顾不同筛选策略，本研究将上述方法进行两两组合，形成九种特征提取流程：V_F、V_L1、V_NSRE、V_F_L1、V_F_NSRE、V_L1_F、V_L1_NSRE、V_NSRE_F、V_NSRE_L1。其中 V 表示先做低方差过滤，符号“_”后的方法依次执行。组合方式可以先用 F 值或 L1 进行粗筛，再用 NSRE 进行精筛，从而在保留判别特征的同时降低计算复杂度。")
+    add_body(doc,"为兼顾不同筛选策略，本研究将上述方法进行两两组合，形成九种特征提取流程：V_F、V_L1、V_JSD、V_F_L1、V_F_JSD、V_L1_F、V_L1_JSD、V_JSD_F、V_JSD_L1。其中 V 表示先做低方差过滤，符号“_”后的方法依次执行。组合方式可以先用 F 值或 L1 进行粗筛，再用 JSD 进行精筛，从而在保留判别特征的同时降低计算复杂度。")
     table = doc.add_table(rows=1, cols=3)
     hdr = table.rows[0].cells
     for i, txt in enumerate(["组合方法", "执行流程", "说明"]):
@@ -116,13 +116,13 @@ def main():
     rows = [
         ("V_F", "低方差过滤 → F 值", "先删除低方差特征，再按 F 值选择 top-k"),
         ("V_L1", "低方差过滤 → L1", "先删除低方差特征，再用 L1 稀疏选择"),
-        ("V_NSRE", "低方差过滤 → NSRE", "先删除低方差特征，再按 NSRE 选择"),
+        ("V_JSD", "低方差过滤 → JSD", "先删除低方差特征，再按 JSD 选择"),
         ("V_F_L1", "低方差过滤 → F 值 → L1", "F 值粗筛，L1 精筛"),
-        ("V_F_NSRE", "低方差过滤 → F 值 → NSRE", "F 值粗筛，NSRE 精筛"),
+        ("V_F_JSD", "低方差过滤 → F 值 → JSD", "F 值粗筛，JSD 精筛"),
         ("V_L1_F", "低方差过滤 → L1 → F 值", "L1 粗筛，F 值精筛"),
-        ("V_L1_NSRE", "低方差过滤 → L1 → NSRE", "L1 粗筛，NSRE 精筛"),
-        ("V_NSRE_F", "低方差过滤 → NSRE → F 值", "NSRE 粗筛，F 值精筛"),
-        ("V_NSRE_L1", "低方差过滤 → NSRE → L1", "NSRE 粗筛，L1 精筛"),
+        ("V_L1_JSD", "低方差过滤 → L1 → JSD", "L1 粗筛，JSD 精筛"),
+        ("V_JSD_F", "低方差过滤 → JSD → F 值", "JSD 粗筛，F 值精筛"),
+        ("V_JSD_L1", "低方差过滤 → JSD → L1", "JSD 粗筛，L1 精筛"),
     ]
     for row in rows:
         cells = table.add_row().cells
@@ -172,7 +172,7 @@ def main():
     add_heading(doc,"3. 结果",1)
     add_body(doc,"本研究在 PAM50 四分类任务上系统比较了 10 种特征提取方法、5 个特征倍数和 6 种机器学习模型的性能，共 900 组实验组合，每组均采用 5 折分层交叉验证，并以 Accuracy 和 Macro-F1 的均值与标准差作为评价指标。")
     add_body(doc,"总体来看，MLP 在 mRNA、CNV、miRNA 三组学上均优于 LogisticRegression、RandomForest、GradientBoosting、SVC 和 KNN；其中 KNN 在高维特征下表现最不稳定。三组学的判别能力排序为：mRNA 最强，miRNA 次之，CNV 最弱。")
-    add_body(doc,"在特征数量方面，mRNA 使用 V_L1 方法、保留 400 个特征时 Accuracy 为 0.9136，继续增加到 1000 特征仅带来约 0.0036 的微弱提升；miRNA 使用 V_F_NSRE 方法、保留 600 个特征时达到 0.8471 的性能拐点；CNV 使用 V_L1_F 方法、50 个特征时 Accuracy 为 0.7078，扩增特征数没有稳定收益。")
+    add_body(doc,"在特征数量方面，mRNA 使用 V_L1 方法、保留 400 个特征时 Accuracy 为 0.9136，继续增加到 1000 特征仅带来约 0.0036 的微弱提升；miRNA 使用 V_F_JSD 方法、保留 600 个特征时达到 0.8471 的性能拐点；CNV 使用 V_L1_F 方法、50 个特征时 Accuracy 为 0.7078，扩增特征数没有稳定收益。")
     add_body(doc,"以下图 1 至图 3 分别从特征数量、模型类型和所有算法三个角度展示结果，并通过误差棒反映 5 折交叉验证的波动。")
     add_body(doc,"关于模型间的差异显著性：本研究当前仅保存了各模型的 5 折均值和标准差，未保存每一折的预测分数，因此无法直接进行配对 t 检验或 Wilcoxon 符号秩检验。从标准差来看，多数模型之间的 Accuracy 差异在 0.02–0.05 左右，部分模型差异小于 1 个标准差，提示差异可能不具有统计显著性；而 MLP 与 KNN 之间的差距通常超过 1 个标准差，可能具有统计学意义。后续应在交叉验证过程中保存逐折分数，以便正式检验模型间的显著性。")
     add_figure(doc, FIG/"pam50_best_methods_by_k.png", "图 1. 各组学最优特征方法在不同特征数下的 Accuracy（mean ± std）")
@@ -181,7 +181,7 @@ def main():
     add_figure(doc, FIG/"pam50_lr_vs_mlp_macro_f1.png", "图 2b. LogisticRegression 与 MLP 最优 Macro-F1 对比")
     add_figure(doc, FIG/"pam50_all_models.png", "图 3. 各组学所有机器学习算法最优 Accuracy 对比（mean ± std）")
     add_figure(doc, FIG/"pam50_all_models_macro_f1.png", "图 3b. 各组学所有机器学习算法最优 Macro-F1 对比（mean ± std）")
-    add_body(doc,"图 1 和图 1b 分别展示了各组学最优特征方法在不同特征数量下的 Accuracy 与 Macro-F1。mRNA 的 V_L1+MLP 在 400 特征时即接近饱和，miRNA 的 V_F_NSRE+MLP 在 600 特征时达到拐点，CNV 在 50 特征时已足够。")
+    add_body(doc,"图 1 和图 1b 分别展示了各组学最优特征方法在不同特征数量下的 Accuracy 与 Macro-F1。mRNA 的 V_L1+MLP 在 400 特征时即接近饱和，miRNA 的 V_F_JSD+MLP 在 600 特征时达到拐点，CNV 在 50 特征时已足够。")
     add_body(doc,"图 2 和图 2b 比较了 LogisticRegression 与 MLP，结果表明 MLP 在各组学上均优于逻辑回归。图 3 和图 3b 进一步展示了所有机器学习算法的最优 Accuracy 与 Macro-F1，其中 MLP 表现最好，KNN 在多数组学上较弱。")
     add_body(doc,"综合结果见表 1。")
     add_heading(doc,"表 1 各组学最优组合",2)
@@ -189,14 +189,14 @@ def main():
     hdr=table.rows[0].cells
     for i,txt in enumerate(["组学","特征数","倍数","特征方法","模型","Accuracy"]):
         hdr[i].text=txt; set_cell_shading(hdr[i],"F2F4F7")
-    for row in [("mRNA","400","2×","V_L1","MLP","0.9136"),("miRNA","600","3×","V_F_NSRE","MLP","0.8471"),("CNV","50","1×","V_L1_F","MLP","0.7078")]:
+    for row in [("mRNA","400","2×","V_L1","MLP","0.9136"),("miRNA","600","3×","V_F_JSD","MLP","0.8471"),("CNV","50","1×","V_L1_F","MLP","0.7078")]:
         cells=table.add_row().cells
         for i,txt in enumerate(row): cells[i].text=txt
     set_table_widths(table,[1000,1000,1000,1800,1200,1200])
 
     add_heading(doc,"表 1 各组学最优组合的理由",2)
     add_body(doc,"mRNA：V_L1 + MLP + 400 特征的 Accuracy 为 0.9136。虽然 1000 特征时 Accuracy 略高（0.9172），但提升仅约 0.0036，计算成本却大幅增加，因此 400 特征在精度和效率之间更优。")
-    add_body(doc,"miRNA：V_F_NSRE + MLP + 600 特征的 Accuracy 为 0.8471。当特征数从 200 增加到 600 时性能明显提升，但继续增加到 800 或 1000 后性能下降，因此 600 是性能拐点。")
+    add_body(doc,"miRNA：V_F_JSD + MLP + 600 特征的 Accuracy 为 0.8471。当特征数从 200 增加到 600 时性能明显提升，但继续增加到 800 或 1000 后性能下降，因此 600 是性能拐点。")
     add_body(doc,"CNV：V_L1_F + MLP + 50 特征的 Accuracy 为 0.7078。CNV 本身判别能力较弱，增加特征数没有带来稳定提升，50 个特征已经足够，且计算效率最高。")
 
     add_heading(doc,"4. 讨论",1)

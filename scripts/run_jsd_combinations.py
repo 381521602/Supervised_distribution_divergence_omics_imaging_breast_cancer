@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Compare FClassif, NSRE, and their hybrid FClassif + NSRE."""
+"""Try several two-stage combinations of JSD with other feature selectors."""
 
 from __future__ import annotations
 
@@ -12,22 +12,23 @@ import numpy as np
 import pandas as pd
 from lifelines import CoxPHFitter
 from lifelines.utils import concordance_index
-from sklearn.feature_selection import SelectKBest, VarianceThreshold, f_classif
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_selection import SelectFromModel, SelectKBest, VarianceThreshold, f_classif
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold, cross_validate
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.svm import LinearSVC
 
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-
-from run_entropy_feature_selection import NSRESelector  # noqa: E402
+from run_entropy_feature_selection import JSDSelector  # noqa: E402
 
 
 DATA = ROOT / "data"
 LABELS = DATA / "brca_labels_modeling_ready.tsv"
-OUT = DATA / "fclassif_nsre_results.tsv"
+OUT = DATA / "jsd_combinations_results.tsv"
 MATRICES = {
     "mRNA": DATA / "external" / "xena" / "HiSeqV2",
     "CNV": DATA / "external" / "xena" / "Gistic2_CopyNumber_Gistic2_all_thresholded.by_genes",
@@ -38,34 +39,41 @@ RANDOM_STATE = 42
 K_FOLDS = 5
 
 
-def preprocess(method: str, n_features: int = 200):
+def make_selector(name: str, k: int):
+    if name == "FClassif":
+        return SelectKBest(score_func=f_classif, k=k)
+    if name == "JSD":
+        # Variance prefilter is already handled by the outer VarianceThreshold.
+        return JSDSelector(prefilter_k=max(k * 10, 1000), k=k)
+    if name == "L1":
+        return SelectFromModel(
+            LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE),
+            max_features=k,
+            threshold=-np.inf,
+        )
+    if name == "RF":
+        return SelectFromModel(
+            RandomForestClassifier(n_estimators=100, random_state=RANDOM_STATE, n_jobs=-1),
+            max_features=k,
+            threshold=-np.inf,
+        )
+    raise ValueError(name)
+
+
+def preprocess(method: str, n_features: int = 200) -> Pipeline:
     variance = VarianceThreshold(threshold=0.0)
-    if method == "FClassif200":
-        return Pipeline(
-            [
-                ("variance", variance),
-                ("select", SelectKBest(score_func=f_classif, k=n_features)),
-                ("scale", StandardScaler()),
-            ]
-        )
-    if method == "NSRE":
-        return Pipeline(
-            [
-                ("variance", variance),
-                ("entropy", NSRESelector(prefilter_k=2000, k=n_features)),
-                ("scale", StandardScaler()),
-            ]
-        )
-    if method == "FClassif_NSRE":
-        return Pipeline(
-            [
-                ("variance", variance),
-                ("fclassif", SelectKBest(score_func=f_classif, k=1000)),
-                ("entropy", NSRESelector(prefilter_k=1000, k=n_features)),
-                ("scale", StandardScaler()),
-            ]
-        )
-    raise ValueError(method)
+    sel1, sel2 = method.split("_")
+    # Stage 1 keeps a larger candidate pool; stage 2 narrows to final features.
+    k1 = max(n_features * 5, 1000)
+    k2 = n_features
+    return Pipeline(
+        [
+            ("variance", variance),
+            ("stage1", make_selector(sel1, k1)),
+            ("stage2", make_selector(sel2, k2)),
+            ("scale", StandardScaler()),
+        ]
+    )
 
 
 def cv_classification(omics: str, method: str, X, y) -> list[dict]:
@@ -101,14 +109,6 @@ def cv_classification(omics: str, method: str, X, y) -> list[dict]:
             "model": "LogisticRegression",
             "metric": "macro_f1",
             "value": round(float(np.mean(scores["test_f1_macro"])), 4),
-        },
-        {
-            "omics": omics,
-            "task": "PAM50_4class",
-            "feature_method": method,
-            "model": "LogisticRegression",
-            "metric": "balanced_accuracy",
-            "value": round(float(np.mean(scores["test_balanced_accuracy"])), 4),
         },
     ]
 
@@ -180,7 +180,7 @@ def align_matrix(matrix: pd.DataFrame, case_ids: list[str]):
 
 def main() -> None:
     labels = pd.read_csv(LABELS, sep="\t", dtype={"case_id": str})
-    methods = ["FClassif200", "NSRE", "FClassif_NSRE"]
+    methods = ["FClassif_JSD", "JSD_FClassif", "L1_JSD", "JSD_L1"]
     rows: list[dict] = []
 
     for omics, path in MATRICES.items():
@@ -193,7 +193,10 @@ def main() -> None:
         X, cases = align_matrix(matrix, pam_cases)
         y = labels.set_index("case_id").loc[cases, "pam50_4class"].values
         for method in methods:
-            rows.extend(cv_classification(omics, method, X, y))
+            try:
+                rows.extend(cv_classification(omics, method, X, y))
+            except Exception as exc:  # noqa: BLE001
+                print(f"  skip {omics}/PAM50/{method}: {exc}")
 
         os_cases = labels.loc[
             labels["os_event"].isin([0, 1]) & labels["os_time_days"].notna(),
@@ -203,8 +206,15 @@ def main() -> None:
         y_event = labels.set_index("case_id").loc[cases, "os_event"].astype(int).values
         y_time = labels.set_index("case_id").loc[cases, "os_time_days"].astype(float).values
         for method in methods:
-            rows.extend(cv_binary_auc(omics, method, X, y_event))
-            rows.extend(cv_cox_cindex(omics, method, X, y_time, y_event))
+            try:
+                rows.extend(cv_binary_auc(omics, method, X, y_event))
+            except Exception as exc:  # noqa: BLE001
+                print(f"  skip {omics}/OS_binary/{method}: {exc}")
+        for method in ["FClassif_JSD", "JSD_FClassif", "L1_JSD"]:
+            try:
+                rows.extend(cv_cox_cindex(omics, method, X, y_time, y_event))
+            except Exception as exc:  # noqa: BLE001
+                print(f"  skip {omics}/OS_Cox/{method}: {exc}")
 
     if rows:
         columns = ["omics", "task", "feature_method", "model", "metric", "value"]

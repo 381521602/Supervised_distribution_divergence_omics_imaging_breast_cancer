@@ -23,7 +23,7 @@ from sklearn.svm import LinearSVC, SVC
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from adaptive_nsre import NSRESelector  # noqa: E402
+from adaptive_jsd import JSDSelector  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -69,24 +69,24 @@ def make_selector(fs, k):
         return Pipeline([("var", var), ("f", SelectKBest(score_func=f_classif, k=k))])
     if fs == "V_L1":
         return Pipeline([("var", var), ("pre", SelectKBest(score_func=f_classif, k=min(k*5,2000))), ("l1", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=k, threshold=-np.inf))])
-    if fs == "V_NSRE":
-        return Pipeline([("var", var), ("nsre", NSRESelector(prefilter_k=min(k*5,1000), k=k))])
+    if fs == "V_JSD":
+        return Pipeline([("var", var), ("jsd", JSDSelector(prefilter_k=min(k*5,1000), k=k))])
     if fs == "V_F_L1":
         return Pipeline([("var", var), ("f", SelectKBest(score_func=f_classif, k=min(k*5,2000))), ("l1", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=k, threshold=-np.inf))])
-    if fs == "V_F_NSRE":
-        return Pipeline([("var", var), ("f", SelectKBest(score_func=f_classif, k=min(k*5,1000))), ("nsre", NSRESelector(prefilter_k=min(k*5,1000), k=k))])
+    if fs == "V_F_JSD":
+        return Pipeline([("var", var), ("f", SelectKBest(score_func=f_classif, k=min(k*5,1000))), ("jsd", JSDSelector(prefilter_k=min(k*5,1000), k=k))])
     if fs == "V_L1_F":
         return Pipeline([("var", var), ("l1", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=min(k*5,2000), threshold=-np.inf)), ("f", SelectKBest(score_func=f_classif, k=k))])
-    if fs == "V_L1_NSRE":
-        return Pipeline([("var", var), ("l1", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=min(k*5,2000), threshold=-np.inf)), ("nsre", NSRESelector(prefilter_k=min(k*5,1000), k=k))])
-    if fs == "V_NSRE_F":
-        return Pipeline([("var", var), ("nsre", NSRESelector(prefilter_k=min(k*5,1000), k=min(k*5,1000))), ("f", SelectKBest(score_func=f_classif, k=k))])
-    if fs == "V_NSRE_L1":
-        return Pipeline([("var", var), ("nsre", NSRESelector(prefilter_k=min(k*5,1000), k=min(k*5,1000))), ("l1", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=k, threshold=-np.inf))])
+    if fs == "V_L1_JSD":
+        return Pipeline([("var", var), ("l1", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=min(k*5,2000), threshold=-np.inf)), ("jsd", JSDSelector(prefilter_k=min(k*5,1000), k=k))])
+    if fs == "V_JSD_F":
+        return Pipeline([("var", var), ("jsd", JSDSelector(prefilter_k=min(k*5,1000), k=min(k*5,1000))), ("f", SelectKBest(score_func=f_classif, k=k))])
+    if fs == "V_JSD_L1":
+        return Pipeline([("var", var), ("jsd", JSDSelector(prefilter_k=min(k*5,1000), k=min(k*5,1000))), ("l1", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=k, threshold=-np.inf))])
     raise ValueError(fs)
 
 
-FEATURE_METHODS = ["V", "V_F", "V_L1", "V_NSRE", "V_F_L1", "V_F_NSRE", "V_L1_F", "V_L1_NSRE", "V_NSRE_F", "V_NSRE_L1"]
+FEATURE_METHODS = ["V", "V_F", "V_L1", "V_JSD", "V_F_L1", "V_F_JSD", "V_L1_F", "V_L1_JSD", "V_JSD_F", "V_JSD_L1"]
 
 
 def classifiers():

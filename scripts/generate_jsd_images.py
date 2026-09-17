@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Build grayscale omics images ordered by NSRE."""
+"""Build grayscale omics images ordered by JSD."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
 
 
 PAM_DIR = ROOT / "data" / "final_datasets" / "PAM50"
@@ -22,7 +22,7 @@ IMG_ROOT = ROOT / "data" / "images"
 
 
 def make_images(X, y, size):
-    scores = nsre_scores(X, y)
+    scores = jsd_scores(X, y)
     order = np.argsort(scores)[::-1]
     positions = spiral_order(size)
     n = X.shape[0]
@@ -44,7 +44,7 @@ def process(task_dir, task_name, config, label_cols):
         out_dir.mkdir(parents=True, exist_ok=True)
         np.save(out_dir / "images.npy", imgs)
         np.save(out_dir / "order.npy", order)
-        pd.DataFrame({"feature": df.drop(columns=label_cols).columns[order], "nsre": scores[order]}).to_csv(out_dir / "order.tsv", sep="\t", index=False)
+        pd.DataFrame({"feature": df.drop(columns=label_cols).columns[order], "jsd": scores[order]}).to_csv(out_dir / "order.tsv", sep="\t", index=False)
         print(f"{task_name}/{omics}: {imgs.shape}")
 
 

@@ -667,7 +667,7 @@ def build_main():
         doc,
         "SHAP 分析显示，mRNA PAM50 LogisticRegression 的关键基因包括 CYP2B7P1、TFF1、C1orf64、AGR3、KCNJ3、MIA、PPP1R14C、ESR1 和 STAC2。CNN saliency 与 SHAP 的共识基因包括 TCAM1P、MIA、SMC1B、PPP1R14C、KLK6、SLC6A11、FABP7 和 FOXC1。生存单变量 Cox 分析识别出 MS4A1、COL17A1、C2orf40、PLA2G2D、FABP7、CCL19 和 GZMB。通路富集提示雌激素信号、细胞增殖调控、细胞分裂和上皮发育等生物学过程；SHAP 与 saliency 单图见补充材料图 S3–S7。",
     )
-    add_figure(doc, FIG / "fig7_nsre_v3.png", "Figure 7. JSD-based feature-mining visualization. A-C: grayscale expression, JSD importance, and functional category maps; D-F: SHAP importance, CNN saliency, and functional-category/saliency overlay maps. Axes indicate pixel positions; the JSD imaging scheme aligns expression, importance, function, and model attention in a common pixel coordinate system.", width=6.4)
+    add_figure(doc, FIG / "fig7_jsd_v3.png", "Figure 7. JSD-based feature-mining visualization. A-C: grayscale expression, JSD importance, and functional category maps; D-F: SHAP importance, CNN saliency, and functional-category/saliency overlay maps. Axes indicate pixel positions; the JSD imaging scheme aligns expression, importance, function, and model attention in a common pixel coordinate system.", width=6.4)
 
     add_heading(doc, "3.7 功能类别遮盖与可解释性分析", 2)
     add_body(
@@ -1064,7 +1064,7 @@ def build_supplement():
     add_dataframe_table(doc, reorder, [2.0, 1.2, 1.3, 0.8, 0.8])
     add_caption(doc, "Table S11. JSD spiral ordering vs functional-reordering schemes (PAM50; mean±SD; features selected within each training fold)")
 
-    classic = read_tsv("nsre_classic_structures_results.tsv")
+    classic = read_tsv("jsd_classic_structures_results.tsv")
     add_dataframe_table(doc, classic, [2.0, 1.2, 1.3, 0.8, 0.8])
     add_caption(doc, "Table S12. Classical full-size convolutional structures (mean±SD; features selected within each training fold)")
 
@@ -1213,8 +1213,8 @@ def build_supplement():
         "scripts/run_other_omics_category_masking.py",
         "scripts/run_mrna_equal_mask_control.py",
         "scripts/supplement_masking_analyses.py",
-        "scripts/generate_nsre_images.py",
-        "scripts/adaptive_nsre.py",
+        "scripts/generate_jsd_images.py",
+        "scripts/adaptive_jsd.py",
         "scripts/pam50_gene_exclusion_sensitivity.py",
         "scripts/run_dense_baseline.py",
         "scripts/run_random_permutation_control.py",

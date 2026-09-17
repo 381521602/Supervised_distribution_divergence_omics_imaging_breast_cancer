@@ -155,11 +155,11 @@ def main():
     add_caption(doc, "图 5. top-100 共识基因通路富集")
     add_desc(doc, "主要富集通路包括雌激素信号通路、细胞增殖调控、细胞分裂、上皮发育等，与乳腺癌分子分型具有生物学一致性。")
 
-    doc.add_heading("7. NSRE 图像化的创新点与可视化优势", level=1)
-    doc.add_paragraph("FullSizeCNN 使用 NSRE 排序后的灰度图，使基因重要性可以直接映射回图像中的像素位置。相比普通表格特征，NSRE 图像能够同时展示原始表达、重要性排序、功能类别和模型关注区域。")
-    doc.add_picture(str(FIG / "nsre_feature_mining_visualization.png"), width=Inches(6.2))
-    add_caption(doc, "图 6. NSRE 图像化特征挖掘可视化")
-    add_desc(doc, "图中第一行展示灰度表达图、NSRE 重要性图和基因功能类别图；第二行展示 SHAP 重要性图、CNN saliency 图和表达+saliency 叠加图。该可视化方式使得模型解释能够直接定位到具体基因像素，支持后续关键因子挖掘。")
+    doc.add_heading("7. JSD 图像化的创新点与可视化优势", level=1)
+    doc.add_paragraph("FullSizeCNN 使用 JSD 排序后的灰度图，使基因重要性可以直接映射回图像中的像素位置。相比普通表格特征，JSD 图像能够同时展示原始表达、重要性排序、功能类别和模型关注区域。")
+    doc.add_picture(str(FIG / "jsd_feature_mining_visualization.png"), width=Inches(6.2))
+    add_caption(doc, "图 6. JSD 图像化特征挖掘可视化")
+    add_desc(doc, "图中第一行展示灰度表达图、JSD 重要性图和基因功能类别图；第二行展示 SHAP 重要性图、CNN saliency 图和表达+saliency 叠加图。该可视化方式使得模型解释能够直接定位到具体基因像素，支持后续关键因子挖掘。")
 
     doc.add_heading("8. 结论", level=1)
     for c in [

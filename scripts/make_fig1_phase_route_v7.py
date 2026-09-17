@@ -18,7 +18,7 @@ def icon(key: str, color: str) -> str:
         s += '<rect x="-20" y="-20" width="18" height="18" rx="3" fill="#6AA4C9"/><rect x="2" y="-20" width="18" height="18" rx="3" fill="#F2A45A"/><rect x="-20" y="2" width="18" height="18" rx="3" fill="#D86C6C"/><rect x="2" y="2" width="18" height="18" rx="3" fill="#81BBC8"/>'
     elif key == "variance":
         s += '<path d="M-26 20 v-40 M-9 20 v-26 M9 20 v-34 M26 20 v-16"/>'
-    elif key == "nsre":
+    elif key == "jsd":
         s += '<path d="M-24 22 V-14 h11 v36 M-6 22 V4 h11 v18 M12 22 V-4 h11 v26" stroke-width="3"/>'
     elif key == "sort":
         s += '<path d="M-22 -18 v38 M-30 11 l8 9 8 -9 M22 -18 v38 M14 11 l8 9 8 -9"/>'
@@ -164,7 +164,7 @@ def main():
             "#60A5C7",
             [
                 ("variance", "Feature selection", "Low-variance / F / L1", "#EAF4F8"),
-                ("nsre", "NSRE ranking", "Class discrimination", "#EAF4F8"),
+                ("jsd", "JSD ranking", "Class discrimination", "#EAF4F8"),
                 ("spiral", "Spiral imaging", "Gray / functional maps", "#EAF4F8"),
             ],
         ),
@@ -191,7 +191,7 @@ def main():
     svg.append('<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7D9CB7"/></marker>')
     svg.append("</defs>")
     svg.append('<rect width="1560" height="620" fill="url(#bg)"/>')
-    svg.append('<text x="780" y="36" text-anchor="middle" font-size="28" font-weight="700" fill="#173A5E">NSRE-Guided Omics Imaging and Multi-Omics Fusion</text>')
+    svg.append('<text x="780" y="36" text-anchor="middle" font-size="28" font-weight="700" fill="#173A5E">JSD-Guided Omics Imaging and Multi-Omics Fusion</text>')
     svg.append('<text x="780" y="62" text-anchor="middle" font-size="16" fill="#5E6E83">A method overview for breast cancer molecular subtyping and survival prediction</text>')
 
     for i, (no, title, color, subs) in enumerate(phases):

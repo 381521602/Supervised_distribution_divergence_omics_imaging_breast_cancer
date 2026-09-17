@@ -25,7 +25,7 @@ from run_multistream_cnn import spiral_order  # noqa: E402
 DATA = ROOT / "data"
 IMG = DATA / "images/PAM50/mRNA"
 INTERP = DATA / "interpretability"
-OUT = DATA / "paper_figures" / "fig7_nsre_v3.png"
+OUT = DATA / "paper_figures" / "fig7_jsd_v3.png"
 
 CAT_NAMES = {
     0: "Development / Epithelium",
@@ -77,17 +77,17 @@ def main():
     order = pd.read_csv(IMG / "order.tsv", sep="\t")
     positions = spiral_order(20)
     pos_gene = {pos: gene for pos, gene in zip(positions[: len(order)], order["feature"].tolist())}
-    gene_nsre = order.set_index("feature")["nsre"].to_dict()
+    gene_jsd = order.set_index("feature")["jsd"].to_dict()
 
     expr = {pos: float(sample[df.columns.get_loc(pos_gene[pos]) - 1]) for pos in pos_gene}
-    nsre = {pos: float(gene_nsre[pos_gene[pos]]) for pos in pos_gene}
+    jsd = {pos: float(gene_jsd[pos_gene[pos]]) for pos in pos_gene}
     shap = pd.read_csv(INTERP / "mrna_pam50_shap_importance.tsv", sep="\t").set_index("gene")["mean_importance"].to_dict()
     cnn = pd.read_csv(INTERP / "mrna_pam50_cnn_saliency_importance.tsv", sep="\t").set_index("gene")["mean_importance"].to_dict()
     shap_map = {pos: float(shap.get(pos_gene[pos], 0.0)) for pos in pos_gene}
     cnn_map = {pos: float(cnn.get(pos_gene[pos], 0.0)) for pos in pos_gene}
 
     gray = fill_grid(expr)
-    nsre_grid = fill_grid(nsre)
+    jsd_grid = fill_grid(jsd)
     shap_grid = fill_grid(shap_map)
     cnn_grid = fill_grid(cnn_map)
     cat_grid = np.load(DATA / "images/examples/mRNA_category_grid.npy")
@@ -97,8 +97,8 @@ def main():
     im0 = axes[0, 0].imshow(gray, cmap="gray", vmin=vmin, vmax=vmax, aspect="equal", extent=(0, 20, 20, 0))
     axes[0, 0].set_title("A  Grayscale expression", loc="left", fontsize=13.5, fontweight="bold", color="#1F4D78")
 
-    im1 = axes[0, 1].imshow(nsre_grid, cmap="magma", aspect="equal", extent=(0, 20, 20, 0))
-    axes[0, 1].set_title("B  NSRE importance map", loc="left", fontsize=13.5, fontweight="bold", color="#1F4D78")
+    im1 = axes[0, 1].imshow(jsd_grid, cmap="magma", aspect="equal", extent=(0, 20, 20, 0))
+    axes[0, 1].set_title("B  JSD importance map", loc="left", fontsize=13.5, fontweight="bold", color="#1F4D78")
 
     cmap = ListedColormap(CAT_COLORS)
     norm = BoundaryNorm(np.arange(-0.5, 6, 1), len(CAT_COLORS))

@@ -33,7 +33,7 @@ BATCH_SIZE = 64
 DEVICE = torch.device("cpu")
 OMICS = ["mRNA", "CNV", "miRNA"]
 SIZES = {"mRNA": 15, "CNV": 8, "miRNA": 15}
-ORDERINGS = {"mRNA": "NSRE", "CNV": "mean", "miRNA": "NSRE"}
+ORDERINGS = {"mRNA": "JSD", "CNV": "mean", "miRNA": "JSD"}
 
 
 def mean_order(X: np.ndarray) -> np.ndarray:

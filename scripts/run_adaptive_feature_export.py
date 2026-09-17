@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Export adaptive NSRE-selected features per omics for downstream fusion."""
+"""Export adaptive JSD-selected features per omics for downstream fusion."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from adaptive_nsre import select_features  # noqa: E402
+from adaptive_jsd import select_features  # noqa: E402
 
 
 DATA = ROOT / "data"

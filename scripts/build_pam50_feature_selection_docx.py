@@ -55,8 +55,8 @@ def main():
     t=doc.add_paragraph(); t.alignment=WD_ALIGN_PARAGRAPH.CENTER; r=t.add_run("PAM50 分型特征提取筛选详细报告"); r.font.name="Calibri"; r.font.size=Pt(18); r.font.bold=True
 
     add_heading(doc,"1. 特征提取算法",1)
-    add_body(doc,"低方差过滤：Var(x_j)<τ 的特征被删除，τ=0。F 值：F=MS_between/MS_within，选择 F 最大的 k 个特征。L1：min_w (1/2)||Xw-y||^2 + λ||w||_1，利用稀疏性自动选择特征。NSRE：NSRE(p||q)=Σ p_i log2(2p_i/(p_i+q_i)) + Σ q_i log2(2q_i/(p_i+q_i))，度量两类特征分布距离。")
-    add_body(doc,"两两组合包括：V_F、V_L1、V_NSRE、V_F_L1、V_F_NSRE、V_L1_F、V_L1_NSRE、V_NSRE_F、V_NSRE_L1。")
+    add_body(doc,"低方差过滤：Var(x_j)<τ 的特征被删除，τ=0。F 值：F=MS_between/MS_within，选择 F 最大的 k 个特征。L1：min_w (1/2)||Xw-y||^2 + λ||w||_1，利用稀疏性自动选择特征。JSD：JSD(p||q)=Σ p_i log2(2p_i/(p_i+q_i)) + Σ q_i log2(2q_i/(p_i+q_i))，度量两类特征分布距离。")
+    add_body(doc,"两两组合包括：V_F、V_L1、V_JSD、V_F_L1、V_F_JSD、V_L1_F、V_L1_JSD、V_JSD_F、V_JSD_L1。")
 
     add_heading(doc,"2. 机器学习算法",1)
     add_body(doc,"LogisticRegression：L2 正则，max_iter=2000。RandomForest：n_estimators=100。GradientBoosting：n_estimators=100。SVC：线性核。KNN：k=5。MLP：输入-128-ReLU-Dropout(0.3)-64-ReLU-Dropout(0.3)-输出，Adam(lr=0.001, weight_decay=0.0001)，15 个 epoch。")
@@ -75,7 +75,7 @@ def main():
         hdr[i].text=txt; set_cell_shading(hdr[i],"F2F4F7")
     rows=[
         ("mRNA","400","2×","V_L1","MLP","0.9136"),
-        ("miRNA","600","3×","V_F_NSRE","MLP","0.8471"),
+        ("miRNA","600","3×","V_F_JSD","MLP","0.8471"),
         ("CNV","50","1×","V_L1_F","MLP","0.7078"),
     ]
     for row in rows:

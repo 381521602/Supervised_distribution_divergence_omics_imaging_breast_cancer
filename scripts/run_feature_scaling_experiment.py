@@ -25,7 +25,7 @@ from sklearn.svm import LinearSVC, SVC
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from adaptive_nsre import NSRESelector  # noqa: E402
+from adaptive_jsd import JSDSelector  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -70,10 +70,10 @@ def make_selector(name, k):
         return Pipeline([("var", var), ("sel", SelectKBest(score_func=f_classif, k=k))])
     if name == "L1":
         return Pipeline([("var", var), ("pre", SelectKBest(score_func=f_classif, k=min(k * 5, 5000))), ("sel", SelectFromModel(LinearSVC(penalty="l1", dual=False, C=0.1, max_iter=5000, random_state=RANDOM_STATE), max_features=k, threshold=-np.inf))])
-    if name == "NSRE":
-        return Pipeline([("var", var), ("sel", NSRESelector(prefilter_k=max(k * 5, 1000), k=k))])
-    if name == "FClassif_NSRE":
-        return Pipeline([("var", var), ("f", SelectKBest(score_func=f_classif, k=min(k * 5, 5000))), ("nsre", NSRESelector(prefilter_k=min(k * 5, 5000), k=k))])
+    if name == "JSD":
+        return Pipeline([("var", var), ("sel", JSDSelector(prefilter_k=max(k * 5, 1000), k=k))])
+    if name == "FClassif_JSD":
+        return Pipeline([("var", var), ("f", SelectKBest(score_func=f_classif, k=min(k * 5, 5000))), ("jsd", JSDSelector(prefilter_k=min(k * 5, 5000), k=k))])
     raise ValueError(name)
 
 
@@ -99,7 +99,7 @@ def cv_mlp(omics, k):
     cv = StratifiedKFold(n_splits=K_FOLDS, shuffle=True, random_state=RANDOM_STATE)
     accs, f1s = [], []
     for tr, te in cv.split(np.zeros(len(y)), y):
-        sel = make_selector("FClassif_NSRE", k)
+        sel = make_selector("FClassif_JSD", k)
         sel.fit(X[tr], y[tr])
         Xtr_sel = sel.transform(X[tr])
         Xte_sel = sel.transform(X[te])
@@ -130,13 +130,13 @@ def main():
     for omics in OMICS:
         for mult in MULTIPLIERS:
             k = BASE_K[omics] * mult
-            for fs in ["FClassif", "FClassif_NSRE"]:
+            for fs in ["FClassif", "FClassif_JSD"]:
                 acc, f1 = cv_lr(omics, k, fs)
                 rows.append({"omics": omics, "k": k, "multiplier": mult, "feature_method": fs, "model": "LogisticRegression", "metric": "accuracy", "value": round(acc, 4)})
                 rows.append({"omics": omics, "k": k, "multiplier": mult, "feature_method": fs, "model": "LogisticRegression", "metric": "macro_f1", "value": round(f1, 4)})
             acc, f1 = cv_mlp(omics, k)
-            rows.append({"omics": omics, "k": k, "multiplier": mult, "feature_method": "FClassif_NSRE", "model": "MLP", "metric": "accuracy", "value": round(acc, 4)})
-            rows.append({"omics": omics, "k": k, "multiplier": mult, "feature_method": "FClassif_NSRE", "model": "MLP", "metric": "macro_f1", "value": round(f1, 4)})
+            rows.append({"omics": omics, "k": k, "multiplier": mult, "feature_method": "FClassif_JSD", "model": "MLP", "metric": "accuracy", "value": round(acc, 4)})
+            rows.append({"omics": omics, "k": k, "multiplier": mult, "feature_method": "FClassif_JSD", "model": "MLP", "metric": "macro_f1", "value": round(f1, 4)})
             print(f"{omics} k={k} done")
     with OUT.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["omics", "k", "multiplier", "feature_method", "model", "metric", "value"], delimiter="\t")

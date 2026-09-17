@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Gated NSRE-weighted full-size FullSizeCNN, single-omics."""
+"""Gated JSD-weighted full-size FullSizeCNN, single-omics."""
 
 from __future__ import annotations
 
@@ -21,8 +21,8 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
-from run_nsre_weight_variants import weighted_images  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
+from run_jsd_weight_variants import weighted_images  # noqa: E402
 from run_fullsize_cnn_survival import cox_loss  # noqa: E402
 
 
@@ -79,7 +79,7 @@ def eval_pam50(omics):
     accs, f1s = [], []
     for tr, te in cv.split(np.zeros(len(cases)), y):
         scaler = StandardScaler().fit(X[tr]); Xtr = scaler.transform(X[tr]); Xte = scaler.transform(X[te])
-        scores = nsre_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
+        scores = jsd_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
         Xtr_img = torch.tensor(make_weighted(Xtr, size, order, scores), dtype=torch.float32)
         Xte_img = torch.tensor(make_weighted(Xte, size, order, scores), dtype=torch.float32)
         model = GatedSingle(size, len(enc.classes_)); torch_seed(); opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4); crit = nn.CrossEntropyLoss(); yt = torch.tensor(y[tr], dtype=torch.long)
@@ -106,7 +106,7 @@ def eval_os(omics):
     aucs, cis = [], []
     for tr, te in cv.split(np.zeros(len(cases)), y_event):
         scaler = StandardScaler().fit(X[tr]); Xtr = scaler.transform(X[tr]); Xte = scaler.transform(X[te])
-        scores = nsre_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
+        scores = jsd_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
         Xtr_img = torch.tensor(make_weighted(Xtr, size, order, scores), dtype=torch.float32)
         Xte_img = torch.tensor(make_weighted(Xte, size, order, scores), dtype=torch.float32)
         model = GatedSingle(size, 1); torch_seed(); opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4); crit = nn.BCEWithLogitsLoss(); yt = torch.tensor(y_event[tr], dtype=torch.float32).view(-1,1)

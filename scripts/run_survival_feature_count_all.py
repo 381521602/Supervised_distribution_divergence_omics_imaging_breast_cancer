@@ -20,7 +20,7 @@ from sklearn.preprocessing import StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_entropy_feature_selection import NSRESelector  # noqa: E402
+from run_entropy_feature_selection import JSDSelector  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -55,7 +55,7 @@ def align_matrix(matrix: pd.DataFrame, case_ids: list[str]):
 def binary_auc(omics: str, X, y, k: int) -> dict:
     model = Pipeline(
         [
-            ("entropy", NSRESelector(prefilter_k=2000, k=k)),
+            ("entropy", JSDSelector(prefilter_k=2000, k=k)),
             ("scale", StandardScaler()),
             ("clf", LogisticRegression(max_iter=2000, random_state=RANDOM_STATE)),
         ]
@@ -75,7 +75,7 @@ def cox_cindex(omics: str, X, y_time, y_event, k: int) -> dict:
     cv = StratifiedKFold(n_splits=K_FOLDS, shuffle=True, random_state=RANDOM_STATE)
     c_indices: list[float] = []
     for train_idx, test_idx in cv.split(X, y_event):
-        sel = NSRESelector(prefilter_k=2000, k=k)
+        sel = JSDSelector(prefilter_k=2000, k=k)
         sel.fit(X[train_idx], y_event[train_idx])
         X_train = sel.transform(X[train_idx])
         X_test = sel.transform(X[test_idx])

@@ -162,11 +162,11 @@ def main():
     set_style(doc)
 
     add_title(doc, "基于组学图像化的预测结果总结")
-    doc.add_paragraph("本文档汇总基于 NSRE 图像化的 FullSizeCNN 及相关结构在 PAM50 分子分型和总生存期预测中的结果。所有结果均为基于预选特征的结果，采用 5 折交叉验证，报告均值 ± 标准差。")
+    doc.add_paragraph("本文档汇总基于 JSD 图像化的 FullSizeCNN 及相关结构在 PAM50 分子分型和总生存期预测中的结果。所有结果均为基于预选特征的结果，采用 5 折交叉验证，报告均值 ± 标准差。")
 
     # 2 data setup
     doc.add_heading("1. 数据与图像化设置", level=1)
-    doc.add_paragraph("各组学最终特征经 NSRE 排序后，按中心向外的螺旋方式生成单通道灰度图像。图像尺寸如下：")
+    doc.add_paragraph("各组学最终特征经 JSD 排序后，按中心向外的螺旋方式生成单通道灰度图像。图像尺寸如下：")
     add_table(
         doc,
         ["任务", "mRNA", "CNV", "miRNA"],
@@ -205,7 +205,7 @@ def main():
 
     # 5 classic structures
     doc.add_heading("4. 经典结构与轻量网络对比", level=1)
-    df_cls = read("nsre_classic_structures_results.tsv")
+    df_cls = read("jsd_classic_structures_results.tsv")
     models = ["FullSizeCNN", "GroupNorm_Mish_FullSizeCNN", "FCN_FullSize", "ResNet_FullSize", "MultiBranch_SE_FullSize"]
     rows = table_from_df(df_cls, variant_col="variant", variants=models, metrics=["accuracy", "macro_f1"])
     doc.add_heading("4.1 PAM50 分型", level=2)
@@ -227,13 +227,13 @@ def main():
     rows = table_from_df(df_reorder, variant_col="variant", metrics=["accuracy", "macro_f1"])
     doc.add_heading("5.1 PAM50 分型", level=2)
     add_table(doc, ["排序方案", "Accuracy", "Macro-F1"], rows, widths=[2.4, 2.0, 2.1], header_fill="E8EEF5")
-    add_description(doc, "表 6 显示，原始 NSRE 螺旋排序在 Accuracy 上最高，为 0.9316；方案 2 的 Macro-F1 最高，为 0.9243，但 Accuracy 略低。方案 1 和方案 2 与原始排序接近，方案 3 表现最弱。综合看，功能重排并未稳定超过 NSRE 排序。")
+    add_description(doc, "表 6 显示，原始 JSD 螺旋排序在 Accuracy 上最高，为 0.9316；方案 2 的 Macro-F1 最高，为 0.9243，但 Accuracy 略低。方案 1 和方案 2 与原始排序接近，方案 3 表现最弱。综合看，功能重排并未稳定超过 JSD 排序。")
     df_reorder_sur = read("reorder_fullsize_cnn_survival_results.tsv")
     rows = table_from_df(df_reorder_sur, variant_col="variant", metrics=["roc_auc", "c_index"])
     doc.add_heading("5.2 Survival 生存预测", level=2)
     add_table(doc, ["排序方案", "ROC AUC", "C-index"], rows, widths=[2.4, 2.0, 2.1], header_fill="E8EEF5")
-    add_description(doc, "表 7 显示，Survival 任务中原始 NSRE 螺旋排序仍最优，ROC AUC 为 0.6768、C-index 为 0.7125。方案 3 的 C-index 为 0.7066，最接近原始排序；方案 2 的 C-index 最低，为 0.6838。总体而言，重新规划基因空间顺序没有在生存预测中带来提升。")
-    doc.add_paragraph("配对检验显示，各排序方案之间总体上未形成稳健显著差异，原始 NSRE 螺旋排序仍是最稳默认方案。")
+    add_description(doc, "表 7 显示，Survival 任务中原始 JSD 螺旋排序仍最优，ROC AUC 为 0.6768、C-index 为 0.7125。方案 3 的 C-index 为 0.7066，最接近原始排序；方案 2 的 C-index 最低，为 0.6838。总体而言，重新规划基因空间顺序没有在生存预测中带来提升。")
+    doc.add_paragraph("配对检验显示，各排序方案之间总体上未形成稳健显著差异，原始 JSD 螺旋排序仍是最稳默认方案。")
 
     # 6 augmentation
     doc.add_heading("6. GAN / WGAN-GP 数据扩增", level=1)
@@ -268,7 +268,7 @@ def main():
     conclusions = [
         "PAM50 分型更适合直接使用 mRNA 单组学 FullSizeCNN，Accuracy 最高为 0.9316。",
         "Survival 生存预测更适合多组学概率晚期融合，ROC AUC 0.7591、C-index 0.7503 为当前图像化最优。",
-        "原始 NSRE 螺旋排序仍是最稳的图像化方式。",
+        "原始 JSD 螺旋排序仍是最稳的图像化方式。",
         "WGAN-GP 扩增收益有限且依赖任务和组学，不建议作为统一默认策略。",
         "图像化 FullSizeCNN 的主要价值体现在生存预测和多组学融合。",
     ]
@@ -280,7 +280,7 @@ def main():
     for f in [
         "fullsize_multimodal_integration_results.tsv",
         "wgan_gp_augmentation_all_omics_results.tsv",
-        "nsre_classic_structures_results.tsv",
+        "jsd_classic_structures_results.tsv",
         "reorder_fullsize_cnn_results.tsv",
     ]:
         p = doc.add_paragraph(style="List Bullet")

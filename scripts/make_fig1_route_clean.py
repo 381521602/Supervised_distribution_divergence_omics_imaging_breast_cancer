@@ -85,9 +85,9 @@ def main() -> None:
     fig.patch.set_facecolor("#F7FAFC")
 
     # Title block
-    ax.text(66, 67.6, "NSRE-Guided Omics Imaging and Multi-Omics Fusion for Breast Cancer",
+    ax.text(66, 67.6, "JSD-Guided Omics Imaging and Multi-Omics Fusion for Breast Cancer",
             ha="center", va="center", fontsize=16.5, fontweight="bold", color="#173A5E")
-    ax.text(66, 64.2, "基于 NSRE 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 — 方法路线",
+    ax.text(66, 64.2, "基于 JSD 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 — 方法路线",
             ha="center", va="center", fontsize=11.2, color="#5E6E83")
     ax.plot([3, 129], [61.5, 61.5], color="#D7E2EC", linewidth=1.2)
 
@@ -102,14 +102,14 @@ def main() -> None:
 
     module(ax, x1, y, w, h, "1", "数据获取与样本对齐", ["TCGA-BRCA 多组学数据", "mRNA / CNV / miRNA", "统一交集样本清单"], "#2E6FA6", "#24547F")
     module(ax, x2, y, w, h, "2", "临床标签定义", ["PAM50 四分类标签", "总生存 / 事件状态", "OS 时间与删失信息"], "#348FB3", "#2A718F")
-    module(ax, x3, y, w, h, "3", "无泄漏特征筛选", ["低方差 / ANOVA-F", "L1 / LASSO", "NSRE 及组合扩增"], "#60A5C7", "#4C84A0")
+    module(ax, x3, y, w, h, "3", "无泄漏特征筛选", ["低方差 / ANOVA-F", "L1 / LASSO", "JSD 及组合扩增"], "#60A5C7", "#4C84A0")
 
     arrow(ax, (x1 + w, y + h / 2), (x2, y + h / 2))
     arrow(ax, (x2 + w, y + h / 2), (x3, y + h / 2))
 
     # Row 2
     y2 = 16.0
-    module(ax, x1, y2, w, h, "4", "NSRE 组学图像化", ["重要性降序排序", "中心向外螺旋填充", "灰度 / 功能 / NSRE 图"], "#81BBC8", "#6799A5")
+    module(ax, x1, y2, w, h, "4", "JSD 组学图像化", ["重要性降序排序", "中心向外螺旋填充", "灰度 / 功能 / JSD 图"], "#81BBC8", "#6799A5")
     module(ax, x2, y2, w, h, "5", "单组学建模", ["LR / RF / GBM / SVC / KNN", "MLP", "FullSizeCNN"], "#F2A45A", "#C48649")
     module(ax, x3, y2, w, h, "6", "多组学融合与评估", ["拼接 / 注意力 / Stacking", "5 折交叉验证", "Acc / Macro-F1 / AUC / C-index"], "#D86C6C", "#AD5555")
 

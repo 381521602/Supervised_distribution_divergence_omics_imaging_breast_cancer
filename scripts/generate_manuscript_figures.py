@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Generate clean, error-bar manuscript figures for the NSRE imaging paper."""
+"""Generate clean, error-bar manuscript figures for the JSD imaging paper."""
 
 from pathlib import Path
 

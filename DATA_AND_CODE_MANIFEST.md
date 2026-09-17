@@ -80,7 +80,7 @@ All runnable Python scripts are stored under `scripts/`. Key scripts include:
 - `run_advanced_method*.py` — advanced deep integration methods.
 - `run_interpretability_key_factors.py` — SHAP, saliency, and survival key factors.
 - `run_scheme2_category_masking.py`, `run_other_omics_category_masking.py`, and `run_mrna_equal_mask_control.py` — functional masking experiments.
-- `generate_nsre_images.py` and `adaptive_nsre.py` — JSD scoring and omics image generation.
+- `generate_jsd_images.py` and `adaptive_jsd.py` — JSD scoring and omics image generation.
 - `run_dense_baseline.py` — Dense-equivalent baseline analysis.
 - `run_random_permutation_control.py` — random-permutation ordering control.
 - `run_stress_pathway_analysis.py` — stress / adaptive-reprogramming pathway analysis.

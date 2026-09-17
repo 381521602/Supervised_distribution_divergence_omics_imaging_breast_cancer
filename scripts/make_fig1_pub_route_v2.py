@@ -3,7 +3,7 @@
 """Build a high-density publication-style method overview figure.
 
 The figure combines a drawn six-stage technical pipeline with representative
-project figures (omics image examples, NSRE visualization, single-omics results,
+project figures (omics image examples, JSD visualization, single-omics results,
 triple-omics integration results, and advanced-method results).
 """
 
@@ -124,19 +124,19 @@ def draw_pipeline(draw: ImageDraw.ImageDraw):
             "light": (238, 247, 250),
             "items": [
                 "低方差 / F / L1",
-                "NSRE 对称相对熵",
+                "JSD 对称相对熵",
                 "组合与数量扩增",
             ],
         },
         {
             "no": "04",
-            "title": "NSRE 组学图像化",
+            "title": "JSD 组学图像化",
             "color": (129, 187, 216),
             "light": (240, 248, 251),
             "items": [
                 "重要性降序排序",
                 "中心向外螺旋填充",
-                "灰度 / 功能 / NSRE 图",
+                "灰度 / 功能 / JSD 图",
             ],
         },
         {
@@ -290,10 +290,10 @@ def draw_panels(canvas: Image.Image, draw: ImageDraw.ImageDraw):
         x2,
         bottom,
         "B",
-        "NSRE 图像化特征挖掘可视化",
+        "JSD 图像化特征挖掘可视化",
         palette[1],
     )
-    im = fit_preserve(load("fig6_nsre_annotated.png"), panel_w - 24, img_h - 20)
+    im = fit_preserve(load("fig6_jsd_annotated.png"), panel_w - 24, img_h - 20)
     draw.rectangle((x1 + 12, img_y + 10, x2 - 12, bottom - 10), outline=LINE, width=3)
     canvas.paste(im, (x1 + 12, img_y + 10))
 
@@ -390,14 +390,14 @@ def main() -> None:
     draw_text(
         draw,
         (MARGIN, 42),
-        "NSRE-guided Omics Imaging and Multi-omics Fusion for Breast Cancer Molecular Subtyping and Survival Prediction",
+        "JSD-guided Omics Imaging and Multi-omics Fusion for Breast Cancer Molecular Subtyping and Survival Prediction",
         font(46, bold=True),
         fill=INK,
     )
     draw_text(
         draw,
         (MARGIN, 120),
-        "基于 NSRE 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法与结果总览",
+        "基于 JSD 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法与结果总览",
         font(32),
         fill=MUTED,
     )

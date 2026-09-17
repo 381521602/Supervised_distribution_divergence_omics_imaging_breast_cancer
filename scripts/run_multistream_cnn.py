@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Multi-stream grayscale omics images + NSRE ordering + simple CNN baseline."""
+"""Multi-stream grayscale omics images + JSD ordering + simple CNN baseline."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from adaptive_nsre import nsre_between_histograms  # noqa: E402
+from adaptive_jsd import jsd_between_histograms  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -40,7 +40,7 @@ def load_matrix(path: Path) -> pd.DataFrame:
     return pd.read_csv(path, sep="\t", index_col=0)
 
 
-def nsre_scores(X: np.ndarray, y: np.ndarray, n_bins: int = 10) -> np.ndarray:
+def jsd_scores(X: np.ndarray, y: np.ndarray, n_bins: int = 10) -> np.ndarray:
     classes = np.unique(y)
     scores = np.zeros(X.shape[1], dtype=float)
     for j in range(X.shape[1]):
@@ -54,10 +54,10 @@ def nsre_scores(X: np.ndarray, y: np.ndarray, n_bins: int = 10) -> np.ndarray:
         bins = np.digitize(feature, qs[1:-1])
         hists = [np.bincount(bins[y == cls], minlength=n_bins) for cls in classes]
         if len(hists) == 2:
-            scores[j] = nsre_between_histograms(hists[0], hists[1])
+            scores[j] = jsd_between_histograms(hists[0], hists[1])
         else:
             pair_scores = [
-                nsre_between_histograms(hists[a], hists[b])
+                jsd_between_histograms(hists[a], hists[b])
                 for a in range(len(hists))
                 for b in range(a + 1, len(hists))
             ]
@@ -87,7 +87,7 @@ def spiral_order(size: int) -> list[tuple[int, int]]:
 
 
 def feature_order(X: np.ndarray, y: np.ndarray) -> np.ndarray:
-    scores = nsre_scores(X, y)
+    scores = jsd_scores(X, y)
     return np.argsort(scores)[::-1]
 
 
@@ -196,8 +196,8 @@ def main() -> None:
         f1s.append(f1_score(y[test_idx], pred, average="macro"))
 
     rows = [
-        {"model": "MultiStreamCNN_NSRE", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
-        {"model": "MultiStreamCNN_NSRE", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
+        {"model": "MultiStreamCNN_JSD", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
+        {"model": "MultiStreamCNN_JSD", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
     ]
     columns = ["model", "metric", "value"]
     with OUT.open("w", encoding="utf-8", newline="") as handle:

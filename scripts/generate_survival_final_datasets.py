@@ -20,9 +20,9 @@ OUT_DIR = ROOT / "data" / "final_datasets" / "Survival"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 CONFIG = {
-    "mRNA": ("V_NSRE_F", 200),
-    "CNV": ("V_L1_NSRE", 150),
-    "miRNA": ("V_L1_NSRE", 600),
+    "mRNA": ("V_JSD_F", 200),
+    "CNV": ("V_L1_JSD", 150),
+    "miRNA": ("V_L1_JSD", 600),
 }
 
 

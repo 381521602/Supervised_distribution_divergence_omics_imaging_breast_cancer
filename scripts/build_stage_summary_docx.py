@@ -222,18 +222,18 @@ def main() -> None:
 
     # 二、特征提取模块
     add_heading(doc, "二、特征提取模块", 1)
-    add_body(doc, "已实现多种传统特征筛选/提取方法，以及 NSRE 新对称相对熵筛选、One-vs-Rest NSRE 和两阶段组合方法。")
+    add_body(doc, "已实现多种传统特征筛选/提取方法，以及 JSD 新对称相对熵筛选、One-vs-Rest JSD 和两阶段组合方法。")
     add_table(
         doc,
         ["组学", "PAM50 分型最优方法", "说明"],
         [
-            ["mRNA", "FClassif → NSRE", "准确率最高，约 0.909"],
-            ["CNV", "L1 → One-vs-Rest NSRE", "准确率 0.674，优于 PCA"],
-            ["miRNA", "NSRE → L1", "准确率 0.825"],
+            ["mRNA", "FClassif → JSD", "准确率最高，约 0.909"],
+            ["CNV", "L1 → One-vs-Rest JSD", "准确率 0.674，优于 PCA"],
+            ["miRNA", "JSD → L1", "准确率 0.825"],
         ],
         [1400, 3000, 4960],
     )
-    add_figure(doc, FIG / "fig4_adaptive_pipeline.png", "图 2. 自适应 NSRE 特征筛选流程")
+    add_figure(doc, FIG / "fig4_adaptive_pipeline.png", "图 2. 自适应 JSD 特征筛选流程")
     add_body(doc, "自适应模块已固化，并导出每个组学、每个任务对应的“样本 × 200 个筛选特征”矩阵，可直接用于多组学融合。")
 
     # 三、单组学预测模块
@@ -245,9 +245,9 @@ def main() -> None:
         doc,
         ["组学", "最优方法", "Accuracy", "Macro-F1"],
         [
-            ["mRNA", "FClassif_NSRE", "0.9087", "0.8973"],
-            ["CNV", "L1_OvRNSRE", "0.6736", "0.6133"],
-            ["miRNA", "NSRE_L1", "0.8250", "0.7808"],
+            ["mRNA", "FClassif_JSD", "0.9087", "0.8973"],
+            ["CNV", "L1_OvRJSD", "0.6736", "0.6133"],
+            ["miRNA", "JSD_L1", "0.8250", "0.7808"],
         ],
         [2000, 3360, 2000, 2000],
     )
@@ -258,10 +258,10 @@ def main() -> None:
         doc,
         ["组学", "任务", "最优方法", "指标"],
         [
-            ["mRNA", "生存二分类", "L1_OvRNSRE", "AUC 0.6183"],
-            ["mRNA", "生存 Cox", "NSRE", "C-index 0.6339"],
-            ["CNV", "生存 Cox", "L1_NSRE", "C-index 0.5640"],
-            ["miRNA", "生存 Cox", "NSRE", "C-index 0.5048"],
+            ["mRNA", "生存二分类", "L1_OvRJSD", "AUC 0.6183"],
+            ["mRNA", "生存 Cox", "JSD", "C-index 0.6339"],
+            ["CNV", "生存 Cox", "L1_JSD", "C-index 0.5640"],
+            ["miRNA", "生存 Cox", "JSD", "C-index 0.5048"],
         ],
         [1800, 2500, 2600, 2460],
     )
@@ -270,7 +270,7 @@ def main() -> None:
     add_heading(doc, "关键结论", 2)
     add_bullets(doc, [
         "mRNA 是 PAM50 分型的主信号，单组学即可达到约 91% 准确率。",
-        "CNV 单独较弱，但通过 L1 + One-vs-Rest NSRE 后有明显改善。",
+        "CNV 单独较弱，但通过 L1 + One-vs-Rest JSD 后有明显改善。",
         "miRNA 中等，最优方法约 82% 准确率。",
         "生存预测单组学偏弱，为后续多组学融合提供了提升空间。",
     ])

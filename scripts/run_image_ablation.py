@@ -83,7 +83,7 @@ def evaluate(omics: str, ordering: str, size: int, X, y):
         scaler = StandardScaler().fit(X[train_idx])
         X_train = scaler.transform(X[train_idx])
         X_test = scaler.transform(X[test_idx])
-        if ordering == "NSRE":
+        if ordering == "JSD":
             order = feature_order(X_train, y[train_idx])
         elif ordering == "mean":
             order = mean_order(X_train)
@@ -109,7 +109,7 @@ def main() -> None:
         encoder = LabelEncoder()
         y = encoder.fit_transform(y_raw)
 
-        for ordering in ["NSRE", "mean", "random"]:
+        for ordering in ["JSD", "mean", "random"]:
             for size in SIZES[omics]:
                 acc, f1 = evaluate(omics, ordering, size, X, y)
                 rows.append({"omics": omics, "ordering": ordering, "size": size, "metric": "accuracy", "value": round(acc, 4)})

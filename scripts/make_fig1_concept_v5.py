@@ -37,7 +37,7 @@ def icon(key: str, color: str) -> str:
         s += '<path d="M-28 22 v-44 M-9 22 v-28 M10 22 v-36 M28 22 v-18"/>'
     elif key == "fl1":
         s += '<path d="M-30 22 h15 M-15 22 h15 M0 22 h15 M15 22 h15 M-30 10 h15 M0 10 h15" stroke-width="3"/>'
-    elif key == "nsre":
+    elif key == "jsd":
         s += '<path d="M-26 24 V-16 h12 v40 M-8 24 V4 h12 v20 M10 24 V-4 h12 v28" stroke-width="3"/>'
     elif key == "sort":
         s += '<path d="M-24 -20 v40 M-32 12 l8 8 8 -8 M24 -20 v40 M16 12 l8 8 8 -8"/>'
@@ -113,11 +113,11 @@ def main():
             "3",
             "无泄漏特征筛选",
             "#60A5C7",
-            [("variance", "低方差过滤", "#EAF4F8"), ("fl1", "F 值 / L1", "#EAF4F8"), ("nsre", "NSRE 及组合", "#EAF4F8")],
+            [("variance", "低方差过滤", "#EAF4F8"), ("fl1", "F 值 / L1", "#EAF4F8"), ("jsd", "JSD 及组合", "#EAF4F8")],
         ),
         (
             "4",
-            "NSRE 组学图像化",
+            "JSD 组学图像化",
             "#81BBC8",
             [("sort", "重要性降序", "#EAF4F5"), ("spiral", "中心螺旋填充", "#EAF4F5"), ("maps", "三通道特征图", "#EAF4F5")],
         ),
@@ -155,8 +155,8 @@ def main():
     svg.append('<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7D9CB7"/></marker>')
     svg.append("</defs>")
     svg.append('<rect width="1500" height="1060" fill="url(#bg)"/>')
-    svg.append('<text x="750" y="52" text-anchor="middle" font-size="30" font-weight="700" fill="#173A5E">NSRE-Guided Omics Imaging and Multi-Omics Fusion</text>')
-    svg.append('<text x="750" y="86" text-anchor="middle" font-size="17" fill="#5E6E83">基于 NSRE 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法概念图</text>')
+    svg.append('<text x="750" y="52" text-anchor="middle" font-size="30" font-weight="700" fill="#173A5E">JSD-Guided Omics Imaging and Multi-Omics Fusion</text>')
+    svg.append('<text x="750" y="86" text-anchor="middle" font-size="17" fill="#5E6E83">基于 JSD 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法概念图</text>')
 
     for i, (no, title, color, tiles) in enumerate(cards_data):
         x, y = positions[i]

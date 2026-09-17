@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""FullSizeCNN with an extra NSRE-score channel."""
+"""FullSizeCNN with an extra JSD-score channel."""
 
 from __future__ import annotations
 
@@ -20,13 +20,13 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
 
 
 DATA = ROOT / "data"
 LABELS = DATA / "brca_labels_modeling_ready.tsv"
 FEAT_DIR = DATA / "selected_features"
-OUT = DATA / "fullsize_nsre_channel_results.tsv"
+OUT = DATA / "fullsize_jsd_channel_results.tsv"
 RANDOM_STATE = 42
 K_FOLDS = 5
 EPOCHS = 60
@@ -64,7 +64,7 @@ class ConvBranch2(nn.Module):
         return x.flatten(1)
 
 
-class FullSizeNSREChannelNet(nn.Module):
+class FullSizeJSDChannelNet(nn.Module):
     def __init__(self, out_dim):
         super().__init__()
         self.mrna = ConvBranch2(SIZES["mRNA"], CHANNELS)
@@ -85,7 +85,7 @@ def torch_seed():
 
 def run_fold(train_imgs, test_imgs, y_train, y_test, out_dim):
     torch_seed()
-    model = FullSizeNSREChannelNet(out_dim).to(DEVICE)
+    model = FullSizeJSDChannelNet(out_dim).to(DEVICE)
     opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
     crit = nn.CrossEntropyLoss()
     X_train = [torch.tensor(x, dtype=torch.float32) for x in train_imgs]
@@ -120,14 +120,14 @@ def main() -> None:
         train_imgs, test_imgs = [], []
         for block, omics in zip(X_blocks, OMICS):
             scaler = StandardScaler().fit(block[tr]); Xtr = scaler.transform(block[tr]); Xte = scaler.transform(block[te])
-            scores = nsre_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
+            scores = jsd_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
             train_imgs.append(to_two_channel_images(Xtr, SIZES[omics], order, scores))
             test_imgs.append(to_two_channel_images(Xte, SIZES[omics], order, scores))
         pred = run_fold(train_imgs, test_imgs, y[tr], y[te], len(enc.classes_))
         accs.append(accuracy_score(y[te], pred)); f1s.append(f1_score(y[te], pred, average="macro"))
     rows = [
-        {"model": "FullSizeCNN_NSRE_Channel", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
-        {"model": "FullSizeCNN_NSRE_Channel", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
+        {"model": "FullSizeCNN_JSD_Channel", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
+        {"model": "FullSizeCNN_JSD_Channel", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
     ]
     with OUT.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["model", "metric", "value"], delimiter="\t")

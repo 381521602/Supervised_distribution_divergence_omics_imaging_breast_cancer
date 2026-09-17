@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Train traditional CNN on NSRE-ordered images."""
+"""Train traditional CNN on JSD-ordered images."""
 
 from __future__ import annotations
 

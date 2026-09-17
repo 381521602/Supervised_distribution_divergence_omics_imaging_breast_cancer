@@ -56,7 +56,7 @@ def main():
     ax.set_facecolor("#F8FBFD")
 
     ax.text(0.55, 5.85, "FullSizeCNN", ha="left", va="center", fontsize=18, fontweight="bold", color="#173A5E")
-    ax.text(0.55, 5.35, "A compact convolutional network for NSRE-ordered omics images", ha="left", va="center", fontsize=10.5, color="#5E6E83")
+    ax.text(0.55, 5.35, "A compact convolutional network for JSD-ordered omics images", ha="left", va="center", fontsize=10.5, color="#5E6E83")
 
     # 1. Input omics image
     box(ax, 0.55, 1.35, 2.10, 3.15, "#FFFFFF", "#7EA9CC", lw=1.4)

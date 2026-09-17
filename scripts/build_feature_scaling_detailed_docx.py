@@ -56,20 +56,20 @@ def main():
     t=doc.add_paragraph(); t.alignment=WD_ALIGN_PARAGRAPH.CENTER; r=t.add_run("特征扩增实验详细报告"); r.font.name="Calibri"; r.font.size=Pt(18); r.font.bold=True
 
     add_heading(doc,"1. 特征提取算法",1)
-    add_body(doc,"低方差过滤：Var(x_j) < τ 的特征被删除，τ=0。F 值：F = MS_between / MS_within，选择 F 最大的 k 个特征。L1：min_w (1/2)||Xw-y||^2 + λ||w||_1。NSRE：NSRE(p||q)=Σ p_i log2(2p_i/(p_i+q_i)) + Σ q_i log2(2q_i/(p_i+q_i))。组合：FClassif_NSRE 先用 F 值粗筛，再用 NSRE 精筛。")
+    add_body(doc,"低方差过滤：Var(x_j) < τ 的特征被删除，τ=0。F 值：F = MS_between / MS_within，选择 F 最大的 k 个特征。L1：min_w (1/2)||Xw-y||^2 + λ||w||_1。JSD：JSD(p||q)=Σ p_i log2(2p_i/(p_i+q_i)) + Σ q_i log2(2q_i/(p_i+q_i))。组合：FClassif_JSD 先用 F 值粗筛，再用 JSD 精筛。")
 
     add_heading(doc,"2. 机器学习与 MLP 算法",1)
     add_body(doc,"LogisticRegression：L2 正则，max_iter=2000。RandomForest：n_estimators=300。GradientBoosting：n_estimators=200。SVC：线性核。KNN：k=5。MLP：输入-128-ReLU-Dropout(0.3)-64-ReLU-Dropout(0.3)-输出，Adam(lr=0.001, weight_decay=0.0001)。")
 
     add_heading(doc,"3. 实验结果",1)
-    add_figure(doc, FIG/"feature_scaling_accuracy.png", "图 1. FClassif_NSRE + LogisticRegression 的 Accuracy（mean ± std）")
-    add_figure(doc, FIG/"feature_scaling_macro_f1.png", "图 2. FClassif_NSRE + LogisticRegression 的 Macro-F1（mean ± std）")
+    add_figure(doc, FIG/"feature_scaling_accuracy.png", "图 1. FClassif_JSD + LogisticRegression 的 Accuracy（mean ± std）")
+    add_figure(doc, FIG/"feature_scaling_macro_f1.png", "图 2. FClassif_JSD + LogisticRegression 的 Macro-F1（mean ± std）")
 
     add_heading(doc,"3.1 LogisticRegression 均值±标准差",2)
     lr = pd.read_csv(ROOT/"data/feature_scaling_lr_std.tsv", sep="\t")
     for omics in ["mRNA","CNV","miRNA"]:
         add_heading(doc, omics, 3)
-        sub = lr[(lr.omics==omics) & (lr.feature_method=="FClassif_NSRE")]
+        sub = lr[(lr.omics==omics) & (lr.feature_method=="FClassif_JSD")]
         rows = [[str(r["k"]), f"{r['mean']:.4f} ± {r['std']:.4f}"] for _, r in sub.iterrows()]
         add_table = doc.add_table(rows=1, cols=2)
         hdr=add_table.rows[0].cells; hdr[0].text="特征数"; hdr[1].text="Accuracy"

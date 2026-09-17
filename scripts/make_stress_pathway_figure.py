@@ -52,7 +52,7 @@ def main():
     ax.text(-np.log10(0.05) + 0.04, 7.3, "p=0.05", color="#B91C1C", fontsize=9, fontweight="bold")
     ax.set_yticks(range(len(order))[::-1])
     ax.set_yticklabels(order, fontsize=11, fontweight="bold")
-    ax.set_xlabel("-log10(p), Fisher enrichment in top-500 NSRE genes", fontsize=10, fontweight="bold")
+    ax.set_xlabel("-log10(p), Fisher enrichment in top-500 JSD genes", fontsize=10, fontweight="bold")
     ax.set_title("A. Stress-pathway enrichment", loc="left", fontweight="bold", color=DARK, fontsize=13)
     ax.grid(axis="x", linestyle="--", alpha=0.2, linewidth=0.6)
     ax.spines["top"].set_visible(False)

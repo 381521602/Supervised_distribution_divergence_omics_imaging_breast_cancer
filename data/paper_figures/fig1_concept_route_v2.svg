@@ -14,8 +14,8 @@
 
   <rect width="1600" height="680" fill="url(#bg)"/>
 
-  <text x="800" y="48" text-anchor="middle" font-size="29" font-weight="700" fill="#173A5E">NSRE-Guided Omics Imaging and Multi-Omics Fusion</text>
-  <text x="800" y="80" text-anchor="middle" font-size="17" fill="#5E6E83">基于 NSRE 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法概念图</text>
+  <text x="800" y="48" text-anchor="middle" font-size="29" font-weight="700" fill="#173A5E">JSD-Guided Omics Imaging and Multi-Omics Fusion</text>
+  <text x="800" y="80" text-anchor="middle" font-size="17" fill="#5E6E83">基于 JSD 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法概念图</text>
 
   <!-- Node 1 -->
   <g>
@@ -68,7 +68,7 @@
     </g>
     <text x="730" y="324" text-anchor="middle" font-size="18" font-weight="700" fill="#1E3A5F">无泄漏特征筛选</text>
     <text x="730" y="356" text-anchor="middle" font-size="13" fill="#5E6E83">低方差 / F / L1</text>
-    <text x="730" y="380" text-anchor="middle" font-size="13" fill="#5E6E83">NSRE 及其组合</text>
+    <text x="730" y="380" text-anchor="middle" font-size="13" fill="#5E6E83">JSD 及其组合</text>
   </g>
 
   <path d="M850 288 L880 288" stroke="#7D9CB7" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
@@ -86,9 +86,9 @@
       <circle cx="-22" cy="-10" r="4" fill="#4C84A0"/>
       <circle cx="34" cy="-10" r="4" fill="#4C84A0"/>
     </g>
-    <text x="1010" y="324" text-anchor="middle" font-size="18" font-weight="700" fill="#1E3A5F">NSRE 组学图像化</text>
+    <text x="1010" y="324" text-anchor="middle" font-size="18" font-weight="700" fill="#1E3A5F">JSD 组学图像化</text>
     <text x="1010" y="356" text-anchor="middle" font-size="13" fill="#5E6E83">中心向外螺旋填充</text>
-    <text x="1010" y="380" text-anchor="middle" font-size="13" fill="#5E6E83">灰度 / 功能 / NSRE 图</text>
+    <text x="1010" y="380" text-anchor="middle" font-size="13" fill="#5E6E83">灰度 / 功能 / JSD 图</text>
   </g>
 
   <path d="M1130 288 L1160 288" stroke="#7D9CB7" stroke-width="3" fill="none" marker-end="url(#arrow)"/>

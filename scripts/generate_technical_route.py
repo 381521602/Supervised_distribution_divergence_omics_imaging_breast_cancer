@@ -62,8 +62,8 @@ def main():
     # First row
     box(ax, 0.20, 3.55, 2.20, 1.55, "数据获取\nTCGA-BRCA\nmRNA / CNV / miRNA\n临床与随访", "#1F4D78", "#1F4D78")
     box(ax, 2.80, 3.55, 2.35, 1.55, "样本对齐与标签\nPAM50 四分类\n总生存事件 / 时间", "#2E74B5", "#2E74B5")
-    box(ax, 5.55, 3.55, 2.35, 1.55, "特征筛选\n低方差 / F 值\nL1 / NSRE", "#2E74B5", "#2E74B5")
-    box(ax, 8.30, 3.55, 2.35, 1.55, "NSRE 图像化\n排序 + 中心向外螺旋\n灰度图 / 功能类别图", "#0E7C86", "#0E7C86")
+    box(ax, 5.55, 3.55, 2.35, 1.55, "特征筛选\n低方差 / F 值\nL1 / JSD", "#2E74B5", "#2E74B5")
+    box(ax, 8.30, 3.55, 2.35, 1.55, "JSD 图像化\n排序 + 中心向外螺旋\n灰度图 / 功能类别图", "#0E7C86", "#0E7C86")
     box(ax, 10.90, 3.55, 1.90, 1.55, "建模\nFullSizeCNN\nML / MLP / CoxPH", "#6B46C1", "#6B46C1")
 
     # Second row
@@ -89,7 +89,7 @@ def main():
     arrow(ax, (6.15, 1.47), (6.53, 1.47))
     arrow(ax, (8.80, 1.47), (9.18, 1.47))
 
-    # Dashed feedback from interpretability to NSRE imaging / feature selection
+    # Dashed feedback from interpretability to JSD imaging / feature selection
     arrow(ax, (10.42, 0.75), (9.48, 3.53), color="#888888", style="-|>")
     ax.text(
         9.50,
@@ -101,7 +101,7 @@ def main():
         va="center",
     )
 
-    ax.text(6.5, 5.72, "NSRE 引导的组学图像化与多组学融合技术路线",
+    ax.text(6.5, 5.72, "JSD 引导的组学图像化与多组学融合技术路线",
             ha="center", va="center", fontsize=13, fontweight="bold", color="#0B2545")
 
     fig.subplots_adjust(left=0.005, right=0.995, top=0.90, bottom=0.005)

@@ -58,7 +58,7 @@ def main():
     ax.text(
         7.5,
         7.35,
-        "NSRE-Guided Omics Imaging and Multi-Omics Fusion for Breast Cancer",
+        "JSD-Guided Omics Imaging and Multi-Omics Fusion for Breast Cancer",
         ha="center",
         va="center",
         fontsize=17,
@@ -89,11 +89,11 @@ def main():
         ),
         (
             "II",
-            "FEATURE ENGINEERING\nAND NSRE IMAGING",
+            "FEATURE ENGINEERING\nAND JSD IMAGING",
             "#5E9CC4",
             [
                 ("Feature selection", "Low-variance  |  F  |  L1"),
-                ("NSRE ranking", "Class-discriminative importance"),
+                ("JSD ranking", "Class-discriminative importance"),
                 ("Spiral imaging", "Grayscale and functional-category maps"),
             ],
         ),

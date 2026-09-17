@@ -5,8 +5,8 @@
 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7D9CB7"/></marker>
 </defs>
 <rect width="1500" height="1040" fill="url(#bg)"/>
-<text x="750" y="52" text-anchor="middle" font-size="30" font-weight="700" fill="#173A5E">NSRE-Guided Omics Imaging and Multi-Omics Fusion</text>
-<text x="750" y="86" text-anchor="middle" font-size="17" fill="#5E6E83">基于 NSRE 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法概念图</text>
+<text x="750" y="52" text-anchor="middle" font-size="30" font-weight="700" fill="#173A5E">JSD-Guided Omics Imaging and Multi-Omics Fusion</text>
+<text x="750" y="86" text-anchor="middle" font-size="17" fill="#5E6E83">基于 JSD 引导组学图像化与多组学融合的乳腺癌分子分型及生存预测 · 方法概念图</text>
 <g transform="translate(60,150)">
 <rect x="0" y="0" width="440" height="360" rx="20" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
 <rect x="0" y="0" width="440" height="10" rx="5" fill="#2E6FA6"/>
@@ -35,14 +35,14 @@
 <text x="64" y="39" font-size="19" font-weight="700" fill="#1E3A5F">无泄漏特征筛选</text>
 <g transform="translate(1002,212)"><rect x="0" y="0" width="396" height="72" rx="12" fill="#EAF4F8" stroke="#C9D9E8" stroke-width="1.5"/><g transform="translate(46,36)"><g transform="translate(0,0)" fill="none" stroke="#60A5C7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M-26 20 v-40 M-9 20 v-26 M9 20 v-34 M26 20 v-16"/></g></g><text x="86" y="43" font-size="15.5" font-weight="700" fill="#24374E">低方差过滤</text></g>
 <g transform="translate(1002,294)"><rect x="0" y="0" width="396" height="72" rx="12" fill="#EAF4F8" stroke="#C9D9E8" stroke-width="1.5"/><g transform="translate(46,36)"><g transform="translate(0,0)" fill="none" stroke="#60A5C7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M-28 20 h13 M-15 20 h13 M-2 20 h13 M11 20 h13 M-28 8 h13 M-2 8 h13" stroke-width="3"/></g></g><text x="86" y="43" font-size="15.5" font-weight="700" fill="#24374E">F 值 / L1</text></g>
-<g transform="translate(1002,376)"><rect x="0" y="0" width="396" height="72" rx="12" fill="#EAF4F8" stroke="#C9D9E8" stroke-width="1.5"/><g transform="translate(46,36)"><g transform="translate(0,0)" fill="none" stroke="#60A5C7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M-24 22 V-14 h11 v36 M-6 22 V4 h11 v18 M12 22 V-4 h11 v26" stroke-width="3"/></g></g><text x="86" y="43" font-size="15.5" font-weight="700" fill="#24374E">NSRE 及组合</text></g>
+<g transform="translate(1002,376)"><rect x="0" y="0" width="396" height="72" rx="12" fill="#EAF4F8" stroke="#C9D9E8" stroke-width="1.5"/><g transform="translate(46,36)"><g transform="translate(0,0)" fill="none" stroke="#60A5C7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M-24 22 V-14 h11 v36 M-6 22 V4 h11 v18 M12 22 V-4 h11 v26" stroke-width="3"/></g></g><text x="86" y="43" font-size="15.5" font-weight="700" fill="#24374E">JSD 及组合</text></g>
 </g>
 <g transform="translate(60,560)">
 <rect x="0" y="0" width="440" height="360" rx="20" fill="#FFFFFF" stroke="#C9D9E8" stroke-width="1.5" filter="url(#shadow)"/>
 <rect x="0" y="0" width="440" height="10" rx="5" fill="#81BBC8"/>
 <circle cx="34" cy="32" r="20" fill="#FFFFFF" stroke="#81BBC8" stroke-width="2"/>
 <text x="34" y="38" text-anchor="middle" font-size="16" font-weight="700" fill="#81BBC8">4</text>
-<text x="64" y="39" font-size="19" font-weight="700" fill="#1E3A5F">NSRE 组学图像化</text>
+<text x="64" y="39" font-size="19" font-weight="700" fill="#1E3A5F">JSD 组学图像化</text>
 <g transform="translate(82,622)"><rect x="0" y="0" width="396" height="72" rx="12" fill="#EAF4F5" stroke="#C9D9E8" stroke-width="1.5"/><g transform="translate(46,36)"><g transform="translate(0,0)" fill="none" stroke="#81BBC8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M-22 -18 v38 M-30 11 l8 9 8 -9 M22 -18 v38 M14 11 l8 9 8 -9"/></g></g><text x="86" y="43" font-size="15.5" font-weight="700" fill="#24374E">重要性降序</text></g>
 <g transform="translate(82,704)"><rect x="0" y="0" width="396" height="72" rx="12" fill="#EAF4F5" stroke="#C9D9E8" stroke-width="1.5"/><g transform="translate(46,36)"><g transform="translate(0,0)" fill="none" stroke="#81BBC8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 C5 -2 11 0 9 6 C7 11 0 13 -6 9 C-11 5 -11 -2 -6 -7 C0 -12 11 -11 13 -4" stroke-width="3"/></g></g><text x="86" y="43" font-size="15.5" font-weight="700" fill="#24374E">中心螺旋填充</text></g>
 <g transform="translate(82,786)"><rect x="0" y="0" width="396" height="72" rx="12" fill="#EAF4F5" stroke="#C9D9E8" stroke-width="1.5"/><g transform="translate(46,36)"><g transform="translate(0,0)" fill="none" stroke="#81BBC8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="-26" y="-22" width="52" height="14" rx="4" fill="#D9EAF5"/><rect x="-26" y="-3" width="52" height="14" rx="4" fill="#BBD5EA"/><rect x="-26" y="16" width="52" height="14" rx="4" fill="#81BBC8"/></g></g><text x="86" y="43" font-size="15.5" font-weight="700" fill="#24374E">三通道特征图</text></g>

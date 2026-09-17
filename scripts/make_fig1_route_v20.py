@@ -112,11 +112,11 @@ def main():
         ),
         (
             "II",
-            "Feature Engineering\nand NSRE Imaging",
+            "Feature Engineering\nand JSD Imaging",
             "#5E9CC4",
             [
                 ("bars", "Feature selection", "Variance / F / L1"),
-                ("hist", "NSRE ranking", "Discriminative importance"),
+                ("hist", "JSD ranking", "Discriminative importance"),
                 ("spiral", "Spiral imaging", "Grayscale and category maps"),
             ],
             "#EAF4F8",

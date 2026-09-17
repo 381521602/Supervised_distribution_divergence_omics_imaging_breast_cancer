@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """按三种方案重新规划 PAM50 mRNA 图像基因顺序，并生成单样本三联图。
 
-方案1：功能大类分块 + 块内 NSRE 降序，行优先填充
-方案2：功能大类分块 + 中心高重要性（块均 NSRE 排序，中心向外螺旋填充）
+方案1：功能大类分块 + 块内 JSD 降序，行优先填充
+方案2：功能大类分块 + 中心高重要性（块均 JSD 排序，中心向外螺旋填充）
 方案3：样本表达相关性层次聚类排序，行优先填充
 """
 
@@ -60,8 +60,8 @@ def recover_gene_categories(order_idx: np.ndarray) -> np.ndarray:
 def load_gene_metadata(df: pd.DataFrame):
     feature_names = df.columns[1:].tolist()
     order_tsv = pd.read_csv(ORIG_IMG_DIR / "order.tsv", sep="\t")
-    nsre = order_tsv.set_index("feature")["nsre"].to_dict()
-    return feature_names, nsre
+    jsd = order_tsv.set_index("feature")["jsd"].to_dict()
+    return feature_names, jsd
 
 
 def make_images(X: np.ndarray, size: int, order: np.ndarray, positions) -> np.ndarray:
@@ -75,45 +75,45 @@ def make_images(X: np.ndarray, size: int, order: np.ndarray, positions) -> np.nd
     return images
 
 
-def make_grids(size, order, positions, cat, nsre_by_idx):
+def make_grids(size, order, positions, cat, jsd_by_idx):
     cat_grid = np.zeros((size, size), dtype=int)
-    nsre_grid = np.zeros((size, size), dtype=float)
+    jsd_grid = np.zeros((size, size), dtype=float)
     for (r, c), j in zip(positions, order):
         cat_grid[r, c] = cat[j]
-        nsre_grid[r, c] = nsre_by_idx[j]
-    return cat_grid, nsre_grid
+        jsd_grid[r, c] = jsd_by_idx[j]
+    return cat_grid, jsd_grid
 
 
-def save_scheme(name, order, positions, X, cat, nsre_by_idx, feature_names, nsre_map):
+def save_scheme(name, order, positions, X, cat, jsd_by_idx, feature_names, jsd_map):
     out = OUT_BASE / name
     out.mkdir(parents=True, exist_ok=True)
     np.save(out / "order.npy", order)
     images = make_images(X, 20, order, positions)
     np.save(out / "images.npy", images)
-    cat_grid, nsre_grid = make_grids(20, order, positions, cat, nsre_by_idx)
+    cat_grid, jsd_grid = make_grids(20, order, positions, cat, jsd_by_idx)
     np.save(out / "category_grid.npy", cat_grid)
-    np.save(out / "nsre_grid.npy", nsre_grid)
+    np.save(out / "jsd_grid.npy", jsd_grid)
     pd.DataFrame(
         {
             "feature": [feature_names[j] for j in order],
-            "nsre": [nsre_map[feature_names[j]] for j in order],
+            "jsd": [jsd_map[feature_names[j]] for j in order],
         }
     ).to_csv(out / "order.tsv", sep="\t", index=False)
     print(f"Saved scheme data -> {out}")
 
 
-def draw_triple(name, order, positions, X, cat, nsre_by_idx, sample_idx=0):
+def draw_triple(name, order, positions, X, cat, jsd_by_idx, sample_idx=0):
     size = 20
     sample = X[sample_idx]
     vmin = float(np.min(X))
     vmax = float(np.max(X))
     gray = np.zeros((size, size), dtype=float)
     cat_grid = np.zeros((size, size), dtype=int)
-    nsre_grid = np.zeros((size, size), dtype=float)
+    jsd_grid = np.zeros((size, size), dtype=float)
     for (r, c), j in zip(positions, order):
         gray[r, c] = sample[j]
         cat_grid[r, c] = cat[j]
-        nsre_grid[r, c] = nsre_by_idx[j]
+        jsd_grid[r, c] = jsd_by_idx[j]
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5), constrained_layout=True)
     im0 = axes[0].imshow(gray, cmap="gray", vmin=vmin, vmax=vmax, aspect="equal")
@@ -129,8 +129,8 @@ def draw_triple(name, order, positions, X, cat, nsre_by_idx, sample_idx=0):
     cbar1.set_ticklabels([CATEGORIES[i].split("/")[0] for i in range(6)])
     cbar1.ax.tick_params(labelsize=7)
 
-    im2 = axes[2].imshow(nsre_grid, cmap="magma", vmin=0, vmax=float(np.nanmax(nsre_grid)), aspect="equal")
-    axes[2].set_title("NSRE score", fontsize=10)
+    im2 = axes[2].imshow(jsd_grid, cmap="magma", vmin=0, vmax=float(np.nanmax(jsd_grid)), aspect="equal")
+    axes[2].set_title("JSD score", fontsize=10)
     axes[2].axis("off")
     fig.colorbar(im2, ax=axes[2], fraction=0.046, pad=0.04)
 
@@ -144,33 +144,33 @@ def draw_triple(name, order, positions, X, cat, nsre_by_idx, sample_idx=0):
 def main():
     df = pd.read_csv(PAM_DIR / "mRNA_PAM50_final.tsv", sep="\t")
     X = df.iloc[:, 1:].to_numpy(dtype=np.float32)
-    feature_names, nsre_map = load_gene_metadata(df)
-    nsre_by_idx = np.array([nsre_map[g] for g in feature_names], dtype=float)
+    feature_names, jsd_map = load_gene_metadata(df)
+    jsd_by_idx = np.array([jsd_map[g] for g in feature_names], dtype=float)
     orig_order = np.load(ORIG_IMG_DIR / "order.npy")
     cat = recover_gene_categories(orig_order)
 
-    # 方案1：功能类别顺序，块内 NSRE 降序，行优先
+    # 方案1：功能类别顺序，块内 JSD 降序，行优先
     block_order1 = []
     for c in sorted(set(cat.tolist())):
         idx = np.where(cat == c)[0]
-        idx = idx[np.argsort(nsre_by_idx[idx])[::-1]]
+        idx = idx[np.argsort(jsd_by_idx[idx])[::-1]]
         block_order1.extend(idx.tolist())
     order1 = np.asarray(block_order1, dtype=int)
     positions1 = row_major_positions(20)
-    save_scheme("scheme1_function_block", order1, positions1, X, cat, nsre_by_idx, feature_names, nsre_map)
-    draw_triple("scheme1_function_block", order1, positions1, X, cat, nsre_by_idx)
+    save_scheme("scheme1_function_block", order1, positions1, X, cat, jsd_by_idx, feature_names, jsd_map)
+    draw_triple("scheme1_function_block", order1, positions1, X, cat, jsd_by_idx)
 
-    # 方案2：功能块按平均 NSRE 排序，中心向外螺旋
+    # 方案2：功能块按平均 JSD 排序，中心向外螺旋
     blocks = []
     for c in set(cat.tolist()):
         idx = np.where(cat == c)[0]
-        idx = idx[np.argsort(nsre_by_idx[idx])[::-1]]
-        blocks.append((float(np.mean(nsre_by_idx[idx])), c, idx.tolist()))
+        idx = idx[np.argsort(jsd_by_idx[idx])[::-1]]
+        blocks.append((float(np.mean(jsd_by_idx[idx])), c, idx.tolist()))
     blocks.sort(key=lambda t: t[0], reverse=True)
     order2 = np.asarray([j for _, _, idx in blocks for j in idx], dtype=int)
     positions2 = spiral_order(20)
-    save_scheme("scheme2_function_center", order2, positions2, X, cat, nsre_by_idx, feature_names, nsre_map)
-    draw_triple("scheme2_function_center", order2, positions2, X, cat, nsre_by_idx)
+    save_scheme("scheme2_function_center", order2, positions2, X, cat, jsd_by_idx, feature_names, jsd_map)
+    draw_triple("scheme2_function_center", order2, positions2, X, cat, jsd_by_idx)
 
     # 方案3：表达相关性层次聚类
     corr = np.corrcoef(X.T)
@@ -181,8 +181,8 @@ def main():
     Z = linkage(condensed, method="average")
     order3 = np.asarray(leaves_list(Z), dtype=int)
     positions3 = row_major_positions(20)
-    save_scheme("scheme3_expression_cluster", order3, positions3, X, cat, nsre_by_idx, feature_names, nsre_map)
-    draw_triple("scheme3_expression_cluster", order3, positions3, X, cat, nsre_by_idx)
+    save_scheme("scheme3_expression_cluster", order3, positions3, X, cat, jsd_by_idx, feature_names, jsd_map)
+    draw_triple("scheme3_expression_cluster", order3, positions3, X, cat, jsd_by_idx)
 
     print("All reorder schemes completed.")
 

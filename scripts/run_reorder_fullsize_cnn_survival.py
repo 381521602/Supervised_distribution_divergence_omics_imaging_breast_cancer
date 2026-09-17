@@ -87,7 +87,7 @@ def main():
     y_time = df["os_time_days"].astype(float).values
 
     variants = [
-        ("original_nsre_spiral", IMG / "images.npy"),
+        ("original_jsd_spiral", IMG / "images.npy"),
         ("scheme1_function_block", REORDER / "scheme1_function_block/images.npy"),
         ("scheme2_function_center", REORDER / "scheme2_function_center/images.npy"),
         ("scheme3_expression_cluster", REORDER / "scheme3_expression_cluster/images.npy"),

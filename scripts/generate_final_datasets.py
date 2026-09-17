@@ -22,7 +22,7 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 CONFIG = {
     "mRNA": ("V_L1", 400),
     "CNV": ("V_L1_F", 50),
-    "miRNA": ("V_F_NSRE", 600),
+    "miRNA": ("V_F_JSD", 600),
 }
 
 

@@ -3,7 +3,7 @@
 """对比不同 PAM50 mRNA 图像排序下的基础 FullSizeCNN。
 
 variants:
-- original_nsre_spiral: 原始 NSRE 螺旋排序
+- original_jsd_spiral: 原始 JSD 螺旋排序
 - scheme1_function_block
 - scheme2_function_center
 - scheme3_expression_cluster
@@ -94,7 +94,7 @@ def main():
     y = enc.fit_transform(df["pam50"].values)
 
     variants = [
-        ("original_nsre_spiral", IMG / "images.npy"),
+        ("original_jsd_spiral", IMG / "images.npy"),
         ("scheme1_function_block", REORDER / "scheme1_function_block/images.npy"),
         ("scheme2_function_center", REORDER / "scheme2_function_center/images.npy"),
         ("scheme3_expression_cluster", REORDER / "scheme3_expression_cluster/images.npy"),

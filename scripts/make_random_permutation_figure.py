@@ -41,8 +41,8 @@ plt.rcParams.update(
 
 def main():
     null = pd.read_csv(DATA / "random_permutation_control_results.tsv", sep="\t")
-    # NSRE reference values (deterministic spiral)
-    nsre_ref = {
+    # JSD reference values (deterministic spiral)
+    jsd_ref = {
         ("PAM50", "accuracy"): 0.9316,
         ("PAM50", "macro_f1"): 0.9205,
         ("Survival", "roc_auc"): 0.6768,
@@ -60,23 +60,23 @@ def main():
     for ax, (task, metric, title, ylabel, ylim, color) in zip(axes.ravel(), panels):
         rnd = null[(null["task"] == task) & (null["ordering"] == "random") & (null["metric"] == metric)]["mean"].values
         expr = null[(null["task"] == task) & (null["ordering"] == "mean_expression") & (null["metric"] == metric)]["mean"].values[0]
-        nsre = nsre_ref[(task, metric)]
-        # empirical two-sided exceedance p-value: fraction of random runs >= NSRE
-        p_val = float(np.mean(rnd >= nsre))
+        jsd = jsd_ref[(task, metric)]
+        # empirical two-sided exceedance p-value: fraction of random runs >= JSD
+        p_val = float(np.mean(rnd >= jsd))
         stats_rows.append({
             "task": task,
             "metric": metric,
-            "nsre_spiral": round(nsre, 4),
+            "jsd_spiral": round(jsd, 4),
             "mean_expression": round(expr, 4),
             "random_mean": round(float(np.mean(rnd)), 4),
             "random_std": round(float(np.std(rnd)), 4),
             "random_min": round(float(np.min(rnd)), 4),
             "random_max": round(float(np.max(rnd)), 4),
-            "p_random_geq_nsre": round(p_val, 4),
+            "p_random_geq_jsd": round(p_val, 4),
         })
 
         ax.hist(rnd, bins=10, color=color, alpha=0.55, edgecolor="white")
-        ax.axvline(nsre, color=DARK, lw=2.0, ls="-", label=f"NSRE spiral ({nsre:.4f})")
+        ax.axvline(jsd, color=DARK, lw=2.0, ls="-", label=f"JSD spiral ({jsd:.4f})")
         ax.axvline(expr, color="#B91C1C", lw=1.8, ls="--", label=f"Mean expression ({expr:.4f})")
         ax.set_xlim(*ylim)
         ax.set_xlabel(ylabel, fontsize=11, fontweight="bold")

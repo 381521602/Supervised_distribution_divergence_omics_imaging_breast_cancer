@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Generate a colored gene-category map in NSRE order."""
+"""Generate a colored gene-category map in JSD order."""
 
 import json
 import urllib.request
@@ -88,7 +88,7 @@ def main():
     fig,ax=plt.subplots(figsize=(5,5),dpi=120)
     ax.imshow(grid,cmap=cmap,vmin=0,vmax=5,aspect="auto")
     ax.set_xticks([]); ax.set_yticks([])
-    ax.set_title("mRNA gene category map (NSRE order)",fontsize=10)
+    ax.set_title("mRNA gene category map (JSD order)",fontsize=10)
     # legend
     import matplotlib.patches as mpatches
     patches=[mpatches.Patch(color=COLORS[i],label=CATEGORIES[i]) for i in range(6)]

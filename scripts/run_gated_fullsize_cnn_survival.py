@@ -21,8 +21,8 @@ from sklearn.preprocessing import StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
-from run_nsre_weight_variants import weighted_images  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
+from run_jsd_weight_variants import weighted_images  # noqa: E402
 from run_fullsize_cnn_survival import cox_loss  # noqa: E402
 
 
@@ -93,7 +93,7 @@ def run_single(omics, matrix, labels):
     aucs, cis = [], []
     for tr, te in cv.split(np.zeros(len(cases)), y_event):
         scaler = StandardScaler().fit(X[tr]); Xtr = scaler.transform(X[tr]); Xte = scaler.transform(X[te])
-        scores = nsre_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
+        scores = jsd_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
         Xtr_img = torch.tensor(make_weighted_images(Xtr, size, order, scores), dtype=torch.float32)
         Xte_img = torch.tensor(make_weighted_images(Xte, size, order, scores), dtype=torch.float32)
         model = GatedSingle(size, 1); torch_seed(); opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4); crit = nn.BCEWithLogitsLoss(); yt = torch.tensor(y_event[tr], dtype=torch.float32).view(-1,1)
@@ -132,7 +132,7 @@ def run_multi(matrices, labels):
         train_imgs, test_imgs = [], []
         for block, omics in zip(blocks, OMICS):
             scaler = StandardScaler().fit(block[tr]); Xtr = scaler.transform(block[tr]); Xte = scaler.transform(block[te])
-            scores = nsre_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
+            scores = jsd_scores(Xtr, y_event[tr]); order = np.argsort(scores)[::-1]
             train_imgs.append(torch.tensor(make_weighted_images(Xtr, SIZES[omics], order, scores), dtype=torch.float32))
             test_imgs.append(torch.tensor(make_weighted_images(Xte, SIZES[omics], order, scores), dtype=torch.float32))
         model = GatedMultiStream(1); torch_seed(); opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4); crit = nn.BCEWithLogitsLoss(); yt = torch.tensor(y_event[tr], dtype=torch.float32).view(-1,1)

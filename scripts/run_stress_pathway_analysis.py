@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 """Stress / adaptive-reprogramming pathway analysis over the FULL mRNA transcriptome.
 
-The 400-feature NSRE subset is nearly disjoint from canonical stress markers, so the
+The 400-feature JSD subset is nearly disjoint from canonical stress markers, so the
 analysis is performed on the full TCGA-BRCA HiSeqV2 matrix. For eight curated pathways
 (Hypoxia, ROS, OXPHOS, UPR, mTORC1, Glycolysis, EMT, DNA repair) we report:
-  (1) Fisher enrichment among top-NSRE genes (full-transcriptome universe),
+  (1) Fisher enrichment among top-JSD genes (full-transcriptome universe),
   (2) Kruskal-Wallis association of a per-sample mean-z pathway score with PAM50 subtype,
   (3) univariate Cox association of the pathway score with overall survival.
 """
@@ -23,7 +23,7 @@ from scipy.stats import fisher_exact, kruskal
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from adaptive_nsre import nsre_between_histograms  # noqa: E402
+from adaptive_jsd import jsd_between_histograms  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -58,7 +58,7 @@ PATHWAYS = {
 }
 
 
-def nsre_scores(X, y):
+def jsd_scores(X, y):
     classes = np.unique(y)
     scores = np.zeros(X.shape[1], dtype=float)
     for j in range(X.shape[1]):
@@ -72,7 +72,7 @@ def nsre_scores(X, y):
         bins = np.digitize(feature, qs[1:-1])
         hists = [np.bincount(bins[y == cls], minlength=N_BINS) for cls in classes]
         pair_scores = [
-            nsre_between_histograms(hists[a], hists[b])
+            jsd_between_histograms(hists[a], hists[b])
             for a in range(len(hists))
             for b in range(a + 1, len(hists))
         ]
@@ -109,8 +109,8 @@ def main():
     y = pam_labels.set_index("prefix").loc[idx, "pam50_4class"].values
     print(f"PAM50 cohort: {len(idx)} samples, {X.shape[1]} genes", flush=True)
 
-    print("computing NSRE over full transcriptome ...", flush=True)
-    scores = nsre_scores(X, y)
+    print("computing JSD over full transcriptome ...", flush=True)
+    scores = jsd_scores(X, y)
     gene_names = np.array(expr.columns)
     order = np.argsort(scores)[::-1]
     top_genes = set(gene_names[order[:TOP_N]].tolist())

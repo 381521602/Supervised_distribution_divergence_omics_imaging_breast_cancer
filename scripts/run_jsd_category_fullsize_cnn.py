@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""原始 NSRE 图 + 三种重排方案图的两通道 FullSizeCNN 对比。"""
+"""原始 JSD 表达图 + 基因类别图谱双分支 FullSizeCNN。"""
 
 from __future__ import annotations
 
@@ -22,40 +22,41 @@ ROOT = Path(__file__).resolve().parent.parent
 PAM_DIR = ROOT / "data/final_datasets/PAM50"
 SUR_DIR = ROOT / "data/final_datasets/Survival"
 IMG = ROOT / "data/images"
-OUT = ROOT / "data/nsre_scheme_pairs_fullsize_cnn_results.tsv"
+OUT = ROOT / "data/jsd_category_fullsize_cnn_results.tsv"
 RANDOM_STATE = 42
 K_FOLDS = 5
 EPOCHS = 30
 BATCH_SIZE = 64
 
 
-class FullSizeCNN(nn.Module):
-    def __init__(self, size, out_dim, in_channels):
+class BranchFullSizeCNN(nn.Module):
+    def __init__(self, size, out_dim, in_channels_list):
         super().__init__()
-        self.conv = nn.Conv2d(in_channels, 32, kernel_size=(size, size))
+        self.branches = nn.ModuleList(
+            [nn.Conv2d(in_ch, 32, kernel_size=(size, size)) for in_ch in in_channels_list]
+        )
         self.head = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(32, 64),
+            nn.Linear(32 * len(in_channels_list), 64),
             nn.ReLU(),
             nn.Dropout(0.3),
             nn.Linear(64, out_dim),
         )
 
-    def forward(self, x):
-        x = self.conv(x)
-        x = F.relu(x)
-        return self.head(x)
+    def forward(self, xs):
+        feats = [F.relu(conv(x)) for conv, x in zip(self.branches, xs)]
+        return self.head(torch.cat(feats, dim=1))
 
 
-def train_pam50(Xtr, ytr, Xte, in_channels):
+def train_pam50(Xtr_list, ytr, Xte_list):
     torch.manual_seed(RANDOM_STATE)
     np.random.seed(RANDOM_STATE)
-    model = FullSizeCNN(20, 4, in_channels)
+    model = BranchFullSizeCNN(20, 4, [x.shape[1] for x in Xtr_list])
     opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
     crit = nn.CrossEntropyLoss()
-    Xt = torch.tensor(Xtr, dtype=torch.float32)
+    Xt = [torch.tensor(x, dtype=torch.float32) for x in Xtr_list]
     yt = torch.tensor(ytr, dtype=torch.long)
-    n = Xt.shape[0]
+    n = Xt[0].shape[0]
     for _ in range(EPOCHS):
         perm = torch.randperm(n)
         for i in range(0, n, BATCH_SIZE):
@@ -63,24 +64,24 @@ def train_pam50(Xtr, ytr, Xte, in_channels):
             if idx.shape[0] < 2:
                 continue
             opt.zero_grad()
-            loss = crit(model(Xt[idx]), yt[idx])
+            loss = crit(model([x[idx] for x in Xt]), yt[idx])
             loss.backward()
             opt.step()
     model.eval()
     with torch.no_grad():
-        logits = model(torch.tensor(Xte, dtype=torch.float32))
+        logits = model([torch.tensor(x, dtype=torch.float32) for x in Xte_list])
     return logits.argmax(dim=1).numpy()
 
 
-def train_survival(Xtr, ytr, Xte, in_channels):
+def train_survival(Xtr_list, ytr, Xte_list):
     torch.manual_seed(RANDOM_STATE)
     np.random.seed(RANDOM_STATE)
-    model = FullSizeCNN(15, 1, in_channels)
+    model = BranchFullSizeCNN(15, 1, [x.shape[1] for x in Xtr_list])
     opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
     crit = nn.BCEWithLogitsLoss()
-    Xt = torch.tensor(Xtr, dtype=torch.float32)
+    Xt = [torch.tensor(x, dtype=torch.float32) for x in Xtr_list]
     yt = torch.tensor(ytr, dtype=torch.float32).view(-1, 1)
-    n = Xt.shape[0]
+    n = Xt[0].shape[0]
     for _ in range(EPOCHS):
         perm = torch.randperm(n)
         for i in range(0, n, BATCH_SIZE):
@@ -88,28 +89,32 @@ def train_survival(Xtr, ytr, Xte, in_channels):
             if idx.shape[0] < 2:
                 continue
             opt.zero_grad()
-            loss = crit(model(Xt[idx]), yt[idx])
+            loss = crit(model([x[idx] for x in Xt]), yt[idx])
             loss.backward()
             opt.step()
     model.eval()
     with torch.no_grad():
-        logits = model(torch.tensor(Xte, dtype=torch.float32))
+        logits = model([torch.tensor(x, dtype=torch.float32) for x in Xte_list])
     return torch.sigmoid(logits).numpy().ravel()
 
 
-def stack(base, other):
-    return np.concatenate([base, other], axis=1)
+def onehot_grid(grid, n_samples, n_classes=6):
+    onehot = np.zeros((n_samples, n_classes, *grid.shape), dtype=np.float32)
+    for c in range(n_classes):
+        onehot[:, c, :, :] = (grid == c).astype(np.float32)
+    return onehot
 
 
 def image_variants(task):
-    base = IMG / task / "mRNA"
-    reorder = IMG / task / "mRNA_reorder"
-    original = np.load(base / "images.npy")
+    gray = np.load(IMG / task / "mRNA/images.npy")
+    if task == "PAM50":
+        cat_grid = np.load(IMG / "examples/mRNA_category_grid.npy")
+    else:
+        cat_grid = np.load(IMG / "examples/Survival_mRNA_category_grid.npy")
+    cat = onehot_grid(cat_grid, gray.shape[0])
     return {
-        "single_original_nsre": original,
-        "nsre_scheme1": stack(original, np.load(reorder / "scheme1_function_block/images.npy")),
-        "nsre_scheme2": stack(original, np.load(reorder / "scheme2_function_center/images.npy")),
-        "nsre_scheme3": stack(original, np.load(reorder / "scheme3_expression_cluster/images.npy")),
+        "jsd_single": [gray],
+        "jsd_category_two_branch": [gray, cat],
     }
 
 
@@ -121,8 +126,8 @@ def run_pam50():
     images = image_variants("PAM50")
     results = {name: {"acc": [], "f1": []} for name in images}
     for tr, te in cv.split(np.zeros(len(y)), y):
-        for name, imgs in images.items():
-            pred = train_pam50(imgs[tr], y[tr], imgs[te], imgs.shape[1])
+        for name, xs in images.items():
+            pred = train_pam50([x[tr] for x in xs], y[tr], [x[te] for x in xs])
             results[name]["acc"].append(accuracy_score(y[te], pred))
             results[name]["f1"].append(f1_score(y[te], pred, average="macro"))
     rows = []
@@ -140,8 +145,8 @@ def run_survival():
     images = image_variants("Survival")
     results = {name: {"auc": [], "ci": []} for name in images}
     for tr, te in cv.split(np.zeros(len(y_event)), y_event):
-        for name, imgs in images.items():
-            prob = train_survival(imgs[tr], y_event[tr], imgs[te], imgs.shape[1])
+        for name, xs in images.items():
+            prob = train_survival([x[tr] for x in xs], y_event[tr], [x[te] for x in xs])
             results[name]["auc"].append(roc_auc_score(y_event[te], prob))
             results[name]["ci"].append(concordance_index(y_time[te], -prob, y_event[te]))
     rows = []

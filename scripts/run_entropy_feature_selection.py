@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""NSRE (new symmetric relative entropy) feature selection + classical ML.
+"""JSD (new symmetric relative entropy) feature selection + classical ML.
 
-The project proposal uses NSRE:
-    NSRE(p||q) = sum_i p_i * log2(2*p_i/(p_i+q_i))
+The project proposal uses JSD:
+    JSD(p||q) = sum_i p_i * log2(2*p_i/(p_i+q_i))
                + sum_i q_i * log2(2*q_i/(p_i+q_i))
 
 Here each feature is discretized into quantile bins using the training fold,
-class-conditional histograms are estimated, and NSRE is averaged over all class
+class-conditional histograms are estimated, and JSD is averaged over all class
 pairs (PAM50) or computed between the two classes (survival event).
 
 Outputs: data/entropy_feature_selection_results.tsv
@@ -49,7 +49,7 @@ N_FEATURES = 200
 EPS = 1e-9
 
 
-def nsre_between_histograms(p: np.ndarray, q: np.ndarray) -> float:
+def jsd_between_histograms(p: np.ndarray, q: np.ndarray) -> float:
     p = np.asarray(p, dtype=float)
     q = np.asarray(q, dtype=float)
     p = (p + EPS) / (p.sum() + EPS * p.size)
@@ -61,8 +61,8 @@ def nsre_between_histograms(p: np.ndarray, q: np.ndarray) -> float:
     )
 
 
-class NSRESelector(BaseEstimator, TransformerMixin):
-    """Select top-k features by variance prefilter then NSRE."""
+class JSDSelector(BaseEstimator, TransformerMixin):
+    """Select top-k features by variance prefilter then JSD."""
 
     def __init__(self, prefilter_k: int = PREFILTER_K, k: int = N_FEATURES, n_bins: int = N_BINS):
         self.prefilter_k = prefilter_k
@@ -94,12 +94,12 @@ class NSRESelector(BaseEstimator, TransformerMixin):
                 hists.append(counts)
 
             if len(hists) == 2:
-                scores[j] = nsre_between_histograms(hists[0], hists[1])
+                scores[j] = jsd_between_histograms(hists[0], hists[1])
             else:
                 pair_scores = []
                 for a in range(len(hists)):
                     for b in range(a + 1, len(hists)):
-                        pair_scores.append(nsre_between_histograms(hists[a], hists[b]))
+                        pair_scores.append(jsd_between_histograms(hists[a], hists[b]))
                 scores[j] = float(np.mean(pair_scores)) if pair_scores else 0.0
 
         top_local = np.argsort(scores)[::-1][: self.k]
@@ -120,7 +120,7 @@ def cv_classification(omics: str, X, y) -> list[dict]:
     ]:
         model = Pipeline(
             [
-                ("entropy", NSRESelector()),
+                ("entropy", JSDSelector()),
                 ("scale", StandardScaler()),
                 ("clf", clf),
             ]
@@ -138,7 +138,7 @@ def cv_classification(omics: str, X, y) -> list[dict]:
             {
                 "omics": omics,
                 "task": "PAM50_4class",
-                "feature_method": "NSRE",
+                "feature_method": "JSD",
                 "model": clf_name,
                 "metric": "accuracy",
                 "value": round(float(np.mean(scores["test_accuracy"])), 4),
@@ -148,7 +148,7 @@ def cv_classification(omics: str, X, y) -> list[dict]:
             {
                 "omics": omics,
                 "task": "PAM50_4class",
-                "feature_method": "NSRE",
+                "feature_method": "JSD",
                 "model": clf_name,
                 "metric": "macro_f1",
                 "value": round(float(np.mean(scores["test_f1_macro"])), 4),
@@ -158,7 +158,7 @@ def cv_classification(omics: str, X, y) -> list[dict]:
             {
                 "omics": omics,
                 "task": "PAM50_4class",
-                "feature_method": "NSRE",
+                "feature_method": "JSD",
                 "model": clf_name,
                 "metric": "balanced_accuracy",
                 "value": round(float(np.mean(scores["test_balanced_accuracy"])), 4),
@@ -170,7 +170,7 @@ def cv_classification(omics: str, X, y) -> list[dict]:
 def cv_binary_auc(omics: str, X, y) -> list[dict]:
     model = Pipeline(
         [
-            ("entropy", NSRESelector()),
+            ("entropy", JSDSelector()),
             ("scale", StandardScaler()),
             ("clf", LogisticRegression(max_iter=2000, random_state=RANDOM_STATE)),
         ]
@@ -181,7 +181,7 @@ def cv_binary_auc(omics: str, X, y) -> list[dict]:
         {
             "omics": omics,
             "task": "OS_binary",
-            "feature_method": "NSRE",
+            "feature_method": "JSD",
             "model": "LogisticRegression",
             "metric": "roc_auc",
             "value": round(float(np.mean(scores["test_roc_auc"])), 4),
@@ -193,7 +193,7 @@ def cv_cox_cindex(omics: str, X, y_time, y_event) -> list[dict]:
     cv = StratifiedKFold(n_splits=K_FOLDS, shuffle=True, random_state=RANDOM_STATE)
     c_indices: list[float] = []
     for train_idx, test_idx in cv.split(X, y_event):
-        selector = NSRESelector(prefilter_k=PREFILTER_K, k=50)
+        selector = JSDSelector(prefilter_k=PREFILTER_K, k=50)
         selector.fit(X[train_idx], y_event[train_idx])
         X_train = selector.transform(X[train_idx])
         X_test = selector.transform(X[test_idx])
@@ -209,7 +209,7 @@ def cv_cox_cindex(omics: str, X, y_time, y_event) -> list[dict]:
         {
             "omics": omics,
             "task": "OS_Cox",
-            "feature_method": "NSRE",
+            "feature_method": "JSD",
             "model": "CoxPH",
             "metric": "c_index",
             "value": round(float(np.mean(c_indices)), 4),

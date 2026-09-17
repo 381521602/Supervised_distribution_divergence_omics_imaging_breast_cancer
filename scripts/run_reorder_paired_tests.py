@@ -107,7 +107,7 @@ def variants_for(task: str):
     base = IMG / task / "mRNA"
     reorder = IMG / task / "mRNA_reorder"
     return [
-        ("original_nsre_spiral", base / "images.npy"),
+        ("original_jsd_spiral", base / "images.npy"),
         ("scheme1_function_block", reorder / "scheme1_function_block/images.npy"),
         ("scheme2_function_center", reorder / "scheme2_function_center/images.npy"),
         ("scheme3_expression_cluster", reorder / "scheme3_expression_cluster/images.npy"),

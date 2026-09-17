@@ -199,7 +199,7 @@ z
 " clip-path="url(#pb87cef55da)" style="fill: #fbf0f0; stroke: #d9a3a3; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
-    <!-- NSRE-Guided Omics Imaging and Multi-Omics Fusion -->
+    <!-- JSD-Guided Omics Imaging and Multi-Omics Fusion -->
     <g style="fill: #173a5e" transform="translate(131.018906 99.636844) scale(0.18 -0.18)">
      <defs>
       <path id="DejaVuSans-Bold-31" d="M 588 4666 
@@ -2743,7 +2743,7 @@ z
     </g>
    </g>
    <g id="text_16">
-    <!-- Feature Engineering and NSRE Imaging -->
+    <!-- Feature Engineering and JSD Imaging -->
     <g style="fill: #ffffff" transform="translate(329.166 164.29425) scale(0.108 -0.108)">
      <use xlink:href="#DejaVuSans-Bold-29"/>
      <use xlink:href="#DejaVuSans-Bold-48" transform="translate(64.265625 0)"/>
@@ -2916,7 +2916,7 @@ z
     </g>
    </g>
    <g id="text_20">
-    <!-- NSRE ranking -->
+    <!-- JSD ranking -->
     <g style="fill: #5e9cc4" transform="translate(363.896469 84.044962) scale(0.092 -0.092)">
      <defs>
       <path id="DejaVuSans-Bold-4e" d="M 538 4863 

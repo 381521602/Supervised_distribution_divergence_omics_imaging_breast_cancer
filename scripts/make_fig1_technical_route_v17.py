@@ -92,7 +92,7 @@ def main():
     ax.set_facecolor("#F8FBFD")
 
     # Title block
-    ax.text(7.0, 6.88, "NSRE-Guided Omics Imaging and Multi-Omics Fusion", ha="center", va="center", fontsize=18, fontweight="bold", color="#173A5E")
+    ax.text(7.0, 6.88, "JSD-Guided Omics Imaging and Multi-Omics Fusion", ha="center", va="center", fontsize=18, fontweight="bold", color="#173A5E")
     ax.text(7.0, 6.48, "Technical route for breast cancer molecular subtyping and overall survival prediction", ha="center", va="center", fontsize=10.5, color="#5E6E83")
 
     # Phase definitions: (label, title, color, modules)
@@ -111,11 +111,11 @@ def main():
         ),
         (
             "II",
-            "Feature Engineering\nand NSRE Imaging",
+            "Feature Engineering\nand JSD Imaging",
             "#5E9CC4",
             [
                 ("Feature selection", ["Low-variance / F / L1", "within each training fold"]),
-                ("NSRE ranking", ["Class-discriminative", "symmetric relative entropy"]),
+                ("JSD ranking", ["Class-discriminative", "symmetric relative entropy"]),
                 ("Center-out spiral imaging", ["Grayscale expression maps", "functional category maps"]),
             ],
             "#EAF4F8",

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""PAM50 3x-feature NSRE-weighted FullSizeCNN multi-stream."""
+"""PAM50 3x-feature JSD-weighted FullSizeCNN multi-stream."""
 
 from __future__ import annotations
 
@@ -20,9 +20,9 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from adaptive_nsre import select_features  # noqa: E402
-from run_multistream_cnn import nsre_scores, spiral_order  # noqa: E402
-from run_nsre_weight_variants import weighted_images  # noqa: E402
+from adaptive_jsd import select_features  # noqa: E402
+from run_multistream_cnn import jsd_scores, spiral_order  # noqa: E402
+from run_jsd_weight_variants import weighted_images  # noqa: E402
 
 
 DATA = ROOT / "data"
@@ -90,7 +90,7 @@ def main() -> None:
         train_imgs, test_imgs = [], []
         for block, omics in zip(X_blocks, OMICS):
             scaler = StandardScaler().fit(block[tr]); Xtr = scaler.transform(block[tr]); Xte = scaler.transform(block[te])
-            scores = nsre_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
+            scores = jsd_scores(Xtr, y[tr]); order = np.argsort(scores)[::-1]
             train_imgs.append(torch.tensor(weighted_images(Xtr, SIZES[omics], order, scores), dtype=torch.float32))
             test_imgs.append(torch.tensor(weighted_images(Xte, SIZES[omics], order, scores), dtype=torch.float32))
         model = MultiStream(len(enc.classes_)); torch_seed(); opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4); crit = nn.CrossEntropyLoss(); yt = torch.tensor(y[tr], dtype=torch.long)
@@ -107,8 +107,8 @@ def main() -> None:
         pred = logits.argmax(dim=1).numpy()
         accs.append(accuracy_score(y[te], pred)); f1s.append(f1_score(y[te], pred, average="macro"))
     rows = [
-        {"model": "PAM50_3x_NSRE_Weighted_FullSizeCNN", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
-        {"model": "PAM50_3x_NSRE_Weighted_FullSizeCNN", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
+        {"model": "PAM50_3x_JSD_Weighted_FullSizeCNN", "metric": "accuracy", "value": round(float(np.mean(accs)), 4)},
+        {"model": "PAM50_3x_JSD_Weighted_FullSizeCNN", "metric": "macro_f1", "value": round(float(np.mean(f1s)), 4)},
     ]
     with OUT.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["model", "metric", "value"], delimiter="\t")

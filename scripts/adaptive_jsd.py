@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Reusable adaptive NSRE feature-selection module.
+"""Reusable adaptive JSD feature-selection module.
 
 The module chooses a feature-selection chain per omics and task:
-  - PAM50 mRNA : FClassif -> NSRE
-  - PAM50 CNV  : L1 -> One-vs-Rest NSRE
-  - PAM50 miRNA: NSRE -> L1
-  - OS all     : L1 -> NSRE
+  - PAM50 mRNA : FClassif -> JSD
+  - PAM50 CNV  : L1 -> One-vs-Rest JSD
+  - PAM50 miRNA: JSD -> L1
+  - OS all     : L1 -> JSD
 
 It exposes select_features(), which returns the selected feature names and the
 reduced sample x feature matrix.
@@ -28,7 +28,7 @@ N_BINS = 10
 EPS = 1e-9
 
 
-def nsre_between_histograms(p: np.ndarray, q: np.ndarray) -> float:
+def jsd_between_histograms(p: np.ndarray, q: np.ndarray) -> float:
     p = np.asarray(p, dtype=float)
     q = np.asarray(q, dtype=float)
     p = (p + EPS) / (p.sum() + EPS * p.size)
@@ -40,8 +40,8 @@ def nsre_between_histograms(p: np.ndarray, q: np.ndarray) -> float:
     )
 
 
-class NSRESelector(BaseEstimator, TransformerMixin):
-    """Average pairwise NSRE selector."""
+class JSDSelector(BaseEstimator, TransformerMixin):
+    """Average pairwise JSD selector."""
 
     def __init__(self, prefilter_k: int = 2000, k: int = 200, n_bins: int = N_BINS):
         self.prefilter_k = prefilter_k
@@ -68,10 +68,10 @@ class NSRESelector(BaseEstimator, TransformerMixin):
             bins = np.digitize(feature, qs[1:-1])
             hists = [np.bincount(bins[y == cls], minlength=self.n_bins) for cls in classes]
             if len(hists) == 2:
-                scores[j] = nsre_between_histograms(hists[0], hists[1])
+                scores[j] = jsd_between_histograms(hists[0], hists[1])
             else:
                 pair_scores = [
-                    nsre_between_histograms(hists[a], hists[b])
+                    jsd_between_histograms(hists[a], hists[b])
                     for a in range(len(hists))
                     for b in range(a + 1, len(hists))
                 ]
@@ -86,8 +86,8 @@ class NSRESelector(BaseEstimator, TransformerMixin):
         return X[:, self.selected_features_]
 
 
-class OvRNSRESelector(BaseEstimator, TransformerMixin):
-    """One-vs-rest NSRE selector."""
+class OvRJSDSelector(BaseEstimator, TransformerMixin):
+    """One-vs-rest JSD selector."""
 
     def __init__(self, k: int = 200, n_bins: int = N_BINS):
         self.k = k
@@ -112,7 +112,7 @@ class OvRNSRESelector(BaseEstimator, TransformerMixin):
             for cls in classes:
                 pos = np.bincount(bins[y == cls], minlength=self.n_bins)
                 neg = np.bincount(bins[y != cls], minlength=self.n_bins)
-                best = max(best, nsre_between_histograms(pos, neg))
+                best = max(best, jsd_between_histograms(pos, neg))
             scores[j] = best
 
         self.selected_features_ = np.argsort(scores)[::-1][: self.k]
@@ -141,19 +141,19 @@ def build_adaptive_pipeline(omics: str, task: str, k: int = 200) -> Pipeline:
     if task == "PAM50_4class":
         if omics == "mRNA":
             coarse = fclassif_selector(max(k * 5, 1000))
-            fine = NSRESelector(prefilter_k=max(k * 5, 1000), k=k)
+            fine = JSDSelector(prefilter_k=max(k * 5, 1000), k=k)
         elif omics == "CNV":
             coarse = l1_selector(max(k * 5, 1000))
-            fine = OvRNSRESelector(k=k)
+            fine = OvRJSDSelector(k=k)
         elif omics == "miRNA":
-            coarse = NSRESelector(prefilter_k=max(k * 5, 1000), k=max(k * 5, 1000))
+            coarse = JSDSelector(prefilter_k=max(k * 5, 1000), k=max(k * 5, 1000))
             fine = l1_selector(k)
         else:
             coarse = fclassif_selector(max(k * 5, 1000))
-            fine = NSRESelector(prefilter_k=max(k * 5, 1000), k=k)
+            fine = JSDSelector(prefilter_k=max(k * 5, 1000), k=k)
     elif task == "OS":
         coarse = l1_selector(max(k * 5, 1000))
-        fine = NSRESelector(prefilter_k=max(k * 5, 1000), k=k)
+        fine = JSDSelector(prefilter_k=max(k * 5, 1000), k=k)
     else:
         raise ValueError(task)
 

@@ -71,7 +71,7 @@ def fig_single_omics():
 
 
 def fig_classic_structures():
-    df = read("nsre_classic_structures_results.tsv")
+    df = read("jsd_classic_structures_results.tsv")
     models = ["FullSizeCNN", "GroupNorm_Mish_FullSizeCNN", "FCN_FullSize", "ResNet_FullSize", "MultiBranch_SE_FullSize"]
     pam_acc = []
     pam_f1 = []
