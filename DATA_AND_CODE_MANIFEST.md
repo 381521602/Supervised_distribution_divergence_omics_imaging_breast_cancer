@@ -22,15 +22,15 @@ This document describes each major component in the repository and how the files
 | --- | --- |
 | `data/final_datasets/PAM50/*.tsv` | Final mRNA/CNV/miRNA feature matrices for PAM50 four-class classification. |
 | `data/final_datasets/Survival/*.tsv` | Final mRNA/CNV/miRNA feature matrices for overall survival prediction. |
-| `data/selected_features/*` | Feature names, selected matrices, and NSRE score files. |
+| `data/selected_features/*` | Feature names, selected matrices, and JSD score files. |
 
 ## 3. Omics images
 
 | Path | Description |
 | --- | --- |
-| `data/images/PAM50/` | NSRE-ordered images for PAM50 single-omics CNN models. |
-| `data/images/Survival/` | NSRE-ordered images for survival single-omics CNN models. |
-| `data/images/examples/` | Example grayscale, NSRE, and functional-category grids. |
+| `data/images/PAM50/` | JSD-ordered images for PAM50 single-omics CNN models. |
+| `data/images/Survival/` | JSD-ordered images for survival single-omics CNN models. |
+| `data/images/examples/` | Example grayscale, JSD, and functional-category grids. |
 | `data/images/report_figures/` | FullSizeCNN architecture and report-level comparison figures. |
 | `data/paper_figures/` | Final manuscript figures referenced by `build_manuscript_and_supplement.py` (Figures 1–7 and the Dense/random/stress/PAM50 sensitivity figures). |
 
@@ -80,7 +80,7 @@ All runnable Python scripts are stored under `scripts/`. Key scripts include:
 - `run_advanced_method*.py` — advanced deep integration methods.
 - `run_interpretability_key_factors.py` — SHAP, saliency, and survival key factors.
 - `run_scheme2_category_masking.py`, `run_other_omics_category_masking.py`, and `run_mrna_equal_mask_control.py` — functional masking experiments.
-- `generate_nsre_images.py` and `adaptive_nsre.py` — NSRE scoring and omics image generation.
+- `generate_nsre_images.py` and `adaptive_nsre.py` — JSD scoring and omics image generation.
 - `run_dense_baseline.py` — Dense-equivalent baseline analysis.
 - `run_random_permutation_control.py` — random-permutation ordering control.
 - `run_stress_pathway_analysis.py` — stress / adaptive-reprogramming pathway analysis.

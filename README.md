@@ -1,6 +1,6 @@
 # Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction
 
-This repository provides the analysis code, modeling-ready feature datasets, NSRE image arrays, selected result tables, and interpretability outputs for the manuscript:
+This repository provides the analysis code, modeling-ready feature datasets, JSD image arrays, selected result tables, and interpretability outputs for the manuscript:
 
 **Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction**
 
@@ -9,7 +9,7 @@ The repository is intended for research reproducibility. TCGA-BRCA raw omics dat
 ## Repository layout
 
 - `scripts/`  
-  Python scripts for data alignment, feature selection, NSRE scoring, omics imaging, single-omics modeling, multi-omics fusion, statistical tests, and interpretability analysis.
+  Python scripts for data alignment, feature selection, JSD scoring, omics imaging, single-omics modeling, multi-omics fusion, statistical tests, and interpretability analysis.
 - `docs/`  
   Final Chinese manuscript and supplementary-material drafts:
   - `docs/Supervised_distribution_divergence_guided_omics_imaging_manuscript_CN.docx`
@@ -21,7 +21,7 @@ The repository is intended for research reproducibility. TCGA-BRCA raw omics dat
 - `data/selected_features/`  
   Feature names and per-omics selected feature matrices.
 - `data/images/`  
-  NSRE-ordered grayscale images and category/NSRE grids.
+  JSD-ordered grayscale images and category/JSD grids.
 - `data/results/`  
   Aggregated five-fold cross-validation results for single-omics, pairwise fusion, triple fusion, advanced methods, and statistical tests.
 - `data/supplementary_data/supplementary_data_tables.zip`  

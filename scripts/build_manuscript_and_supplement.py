@@ -426,7 +426,7 @@ def build_main():
 
     add_heading(doc, "摘要", 1)
     add_body(doc, "背景：乳腺癌的高度异质性使单一组学难以稳定刻画 PAM50 分子亚型和总生存风险。多组学整合具有理论上的互补优势，但组学数据存在特征维度高、样本量有限、分布尺度不一致以及特征之间缺乏自然二维邻接关系等问题。", size=10.5)
-    add_body(doc, "方法：本研究以 TCGA-BRCA 的 mRNA、CNV 和 miRNA 为对象，提出一种监督式分布散度引导的组学空间表示框架（supervised information-divergence-guided omics spatial representation framework），即以 Jensen–Shannon divergence（JSD；实现中简称 NSRE）评估每个特征的判别重要性，并将其编码为可解释的空间表示。所有特征筛选、标准化和模型拟合均在 5 折交叉验证训练折内完成；按 JSD/NSRE 重要性降序并将高分特征置于中心，采用中心向外螺旋填充形成单通道灰度图，再输入全尺寸卷积神经网络（FullSizeCNN）。同时比较 LogisticRegression、RandomForest、GradientBoosting、SVC、KNN、MLP、CoxPH 及多种多组学融合策略。", size=10.5)
+    add_body(doc, "方法：本研究以 TCGA-BRCA 的 mRNA、CNV 和 miRNA 为对象，提出一种监督式分布散度引导的组学空间表示框架（supervised information-divergence-guided omics spatial representation framework），即以 Jensen–Shannon divergence（JSD）评估每个特征的判别重要性，并将其编码为可解释的空间表示。所有特征筛选、标准化和模型拟合均在 5 折交叉验证训练折内完成；按 JSD 重要性降序并将高分特征置于中心，采用中心向外螺旋填充形成单通道灰度图，再输入全尺寸卷积神经网络（FullSizeCNN）。同时比较 LogisticRegression、RandomForest、GradientBoosting、SVC、KNN、MLP、CoxPH 及多种多组学融合策略。", size=10.5)
     add_body(doc, "结果：在单组学 PAM50 四分类中，mRNA LogisticRegression 的 Accuracy 为 0.9628±0.0167、Macro-F1 为 0.9575±0.0199；CNV 最优 MLP 为 0.7213±0.0156；miRNA 最优 LogisticRegression 为 0.8410±0.0120。生存预测中，mRNA FullSizeCNN 的 C-index 为 0.7125±0.0303，CNV CoxPH 为 0.7109±0.0339，miRNA FullSizeCNN 为 0.6067±0.0703。多组学整合中，PAM50 的 Transformer 达到 Accuracy 0.9270±0.0132、Macro-F1 0.9288±0.0128；生存预测的三组学 Concat MLP 达到 C-index 0.7588±0.0492，CNN 晚期平均融合达到 ROC AUC 0.7591±0.0619。配对检验显示，上述最优融合均未较对应最优单组学形成统计显著优势（所有配对检验 p≥0.093）。可解释分析识别出 ESR1、TFF1、AGR3、FOXC1、MIA、FABP7、CCL19、MS4A1 等关键因子，富集于雌激素信号、细胞增殖调控、细胞分裂和上皮发育等通路。方案2功能类别遮盖分析在控制特征集合大小后，未能建立稳健的类别特异效应（masking analyses did not establish robust category-specific effects after controlling for feature-set size）。", size=10.5)
     add_body(doc, "结论：监督式分布散度引导的组学空间表示框架能够将高维组学特征转换为适合全尺寸卷积建模的图像表示，并支持关键因子可视化；该表示的价值在于可解释性而非预测精度提升。mRNA 是 PAM50 分型重建的主要信号，生存预测更依赖多组学互补；当前整合策略的增益有限，尚需外部验证和更稳健的融合设计。", size=10.5)
     add_body(doc, "关键词：乳腺癌；多组学；组学图像化；Jensen–Shannon divergence；全尺寸卷积；PAM50；生存预测", size=10.5)
@@ -470,15 +470,15 @@ def build_main():
     )
     add_body(
         doc,
-        "本研究针对上述问题，提出以 Jensen–Shannon divergence（JSD；实现中简称 NSRE）引导的组学图像化框架：先评估每个基因或探针对结局类别的区分能力，再按 JSD/NSRE 重要性降序并以中心向外螺旋方式填充图像，使高重要性特征集中于图像中心；随后以全尺寸卷积神经网络（FullSizeCNN）作为图像化基线，并与多种传统机器学习、MLP 和经典 CNN 结构进行对比。该方案既保留原始表达值，又将判别重要性显式编码到二维空间，便于后续关键因子定位。",
+        "本研究针对上述问题，提出以 Jensen–Shannon divergence（JSD）引导的组学图像化框架：先评估每个基因或探针对结局类别的区分能力，再按 JSD 重要性降序并以中心向外螺旋方式填充图像，使高重要性特征集中于图像中心；随后以全尺寸卷积神经网络（FullSizeCNN）作为图像化基线，并与多种传统机器学习、MLP 和经典 CNN 结构进行对比。该方案既保留原始表达值，又将判别重要性显式编码到二维空间，便于后续关键因子定位。",
     )
     add_body(
         doc,
-        "本文提出三个假设：（1）NSRE 排序比随机排序或平均表达排序更适合 PAM50 四分类和生存预测；（2）在小样本组学图像上，FullSizeCNN 能够提供与传统机器学习基线可比或互补的预测性能；（3）在统一交集样本上，多组学融合可较最优单组学带来生存预测上的稳健增益，但在 PAM50 中增益有限。",
+        "本文提出三个假设：（1）JSD 排序比随机排序或平均表达排序更适合 PAM50 四分类和生存预测；（2）在小样本组学图像上，FullSizeCNN 能够提供与传统机器学习基线可比或互补的预测性能；（3）在统一交集样本上，多组学融合可较最优单组学带来生存预测上的稳健增益，但在 PAM50 中增益有限。",
     )
     add_body(
         doc,
-        "本文的贡献包括：提出 NSRE 引导的中心-螺旋组学图像化框架；系统比较传统机器学习、MLP、FullSizeCNN 及多种多组学融合策略；在严格 5 折交叉验证下报告均值和标准差；利用 SHAP、CNN saliency 和基因功能类别图开展关键因子可视化；并通过方案2功能类别遮盖实验与等量随机遮盖对照，评估不同功能模块对 PAM50 分类和生存预测的贡献。",
+        "本文的贡献包括：提出 JSD 引导的中心-螺旋组学图像化框架；系统比较传统机器学习、MLP、FullSizeCNN 及多种多组学融合策略；在严格 5 折交叉验证下报告均值和标准差；利用 SHAP、CNN saliency 和基因功能类别图开展关键因子可视化；并通过方案2功能类别遮盖实验与等量随机遮盖对照，评估不同功能模块对 PAM50 分类和生存预测的贡献。",
     )
 
     add_heading(doc, "2. 材料与方法", 1)
@@ -518,10 +518,10 @@ def build_main():
         "需要明确，除 CoxPH 与 DeepSurv 属于时间到事件模型外，其余模型（LogisticRegression、SVC、RandomForest、MLP、FullSizeCNN 等）以二元交叉熵拟合 OS 事件，本质上是死亡状态分类（mortality-status classification）；其输出被作为连续风险分数，再结合生存时间计算 C-index 进行生存排序评估（survival-ranking evaluation），因此本文所称“生存预测”并不等同于严格的风险率建模。",
     )
 
-    add_heading(doc, "2.3 特征筛选与 JSD/NSRE", 2)
+    add_heading(doc, "2.3 特征筛选与 JSD", 2)
     add_body(
         doc,
-        "为避免测试集信息泄漏，所有特征筛选均在每个交叉验证训练折内部完成。基础特征筛选方法包括低方差过滤、F 值（ANOVA）、L1/LASSO 和 Jensen–Shannon divergence（JSD；实现中简称 NSRE）[44]。JSD 通过比较不同类别中特征值的分箱直方图，计算两个离散分布之间的对称信息散度。",
+        "为避免测试集信息泄漏，所有特征筛选均在每个交叉验证训练折内部完成。基础特征筛选方法包括低方差过滤、F 值（ANOVA）、L1/LASSO 和 Jensen–Shannon divergence（JSD）[44]。JSD 通过比较不同类别中特征值的分箱直方图，计算两个离散分布之间的对称信息散度。",
     )
     add_body(doc, "低方差过滤首先移除训练折内方差为零或近似常数的特征；F 值采用单因素 ANOVA 比较连续特征在不同类别间均值差异；L1/LASSO 通过线性支持向量机的稀疏系数进行嵌入式选择。三种方法分别从稳定性、线性判别和稀疏正则化角度降低维度。特征筛选算法组合方式见补充材料表 S2。")
     add_numbered_formula(doc, "Var(x_j) = (1/N) ∑_i (x_ij - x̄_j)²;  F_j = MS_between / MS_within;  min_w (1/2) ||Xw - y||² + λ ||w||₁", 1)
@@ -542,11 +542,11 @@ def build_main():
     add_heading(doc, "2.4 组学图像化", 2)
     add_body(
         doc,
-        "对每个任务和组学，先计算每个特征的 JSD/NSRE 分数并按降序排序。采用中心向外的螺旋顺序，将最高重要性特征放在图像中心，次高重要性特征沿螺旋向外排列。若特征数小于网格容量，剩余位置补零。图像为单通道灰度图，像素值即对应组学特征值；模型训练时仅在训练折内估计标准化参数并应用于训练折与测试折。最终图像尺寸为：PAM50 mRNA 20×20、CNV 8×8、miRNA 25×25；生存 mRNA 15×15、CNV 13×13、miRNA 25×25。",
+        "对每个任务和组学，先计算每个特征的 JSD 分数并按降序排序。采用中心向外的螺旋顺序，将最高重要性特征放在图像中心，次高重要性特征沿螺旋向外排列。若特征数小于网格容量，剩余位置补零。图像为单通道灰度图，像素值即对应组学特征值；模型训练时仅在训练折内估计标准化参数并应用于训练折与测试折。最终图像尺寸为：PAM50 mRNA 20×20、CNV 8×8、miRNA 25×25；生存 mRNA 15×15、CNV 13×13、miRNA 25×25。",
     )
     add_body(
         doc,
-        "为增强像素邻接的生物学可解释性，进一步采用方案2：先按功能大类将特征分块，再在块内按 JSD/NSRE 降序，并按块平均 JSD/NSRE 由中心向外螺旋填充。mRNA 和 CNV 的功能类别基于基因功能注释，miRNA 先由 MIMAT 映射至 hsa-miR 名称，再按 miRNA 家族/已知功能归类。对应生成功能类别图；在遮盖实验中，将目标功能类别的像素区域置零后重新训练 FullSizeCNN，并与不遮盖基线及同数量随机基因遮盖对照比较。",
+        "为增强像素邻接的生物学可解释性，进一步采用方案2：先按功能大类将特征分块，再在块内按 JSD 降序，并按块平均 JSD 由中心向外螺旋填充。mRNA 和 CNV 的功能类别基于基因功能注释，miRNA 先由 MIMAT 映射至 hsa-miR 名称，再按 miRNA 家族/已知功能归类。对应生成功能类别图；在遮盖实验中，将目标功能类别的像素区域置零后重新训练 FullSizeCNN，并与不遮盖基线及同数量随机基因遮盖对照比较。",
     )
     add_dataframe_table(
         doc,
@@ -561,7 +561,7 @@ def build_main():
         ),
         [1.0, 0.8, 0.9, 1.0, 0.8],
     )
-    add_caption(doc, "Table 2. Final feature counts and NSRE image sizes")
+    add_caption(doc, "Table 2. Final feature counts and JSD image sizes")
 
     add_heading(doc, "2.5 模型", 2)
     add_body(
@@ -573,7 +573,7 @@ def build_main():
         doc,
         "FullSizeCNN 的输入为 H×W×1 图像，第一层使用与 H×W 相同的全尺寸卷积核，输出 32 个 1×1 特征图；随后展平为 32 维向量，经 64 维全连接、ReLU 和 Dropout 后输出分类 logits 或生存风险。该结构参数较少，与图像尺寸解耦，适合当前小样本高维组学图像。",
     )
-    add_figure(doc, FIG / "fig2_fullsize_cnn_v4.png", "Figure 2. FullSizeCNN architecture. An H×W×1 NSRE image is transformed by a full-size convolutional layer with H×W kernels and 32 filters, flattened to 32 features, and passed through a 64-unit ReLU/Dropout MLP head. PAM50 uses H=W=20 and four output units; survival uses H=W=15 and one risk output.", width=6.2)
+    add_figure(doc, FIG / "fig2_fullsize_cnn_v4.png", "Figure 2. FullSizeCNN architecture. An H×W×1 JSD image is transformed by a full-size convolutional layer with H×W kernels and 32 filters, flattened to 32 features, and passed through a 64-unit ReLU/Dropout MLP head. PAM50 uses H=W=20 and four output units; survival uses H=W=15 and one risk output.", width=6.2)
     add_body(
         doc,
         "多组学整合采用三类策略：（1）特征级简单拼接后接传统 ML/MLP；（2）每个组学独立 FullSizeCNN 分支后进行特征拼接、门控注意力融合或概率晚期平均融合；（3）9 模型 Stacking、Transformer 跨组学注意力、DeepSurv、低秩双线性融合、图神经网络和多任务学习等复杂策略。",
@@ -599,9 +599,9 @@ def build_main():
     add_heading(doc, "3.1 组学图像示例", 2)
     add_body(
         doc,
-        "图 3 展示一个 PAM50 mRNA 样本和一个 Survival mRNA 样本的灰度表达图、NSRE 权重图和基因功能类别图。图像中心区域对应高 NSRE 特征，说明视觉上的中心区域直接编码了模型认为对结局判别更重要的基因。基因功能类别图以颜色标记基因功能类别，与 NSRE 灰度图位置严格对应，便于后续把卷积模型关注区域转化为生物学解释。",
+        "图 3 展示一个 PAM50 mRNA 样本和一个 Survival mRNA 样本的灰度表达图、JSD 权重图和基因功能类别图。图像中心区域对应高 JSD 特征，说明视觉上的中心区域直接编码了模型认为对结局判别更重要的基因。基因功能类别图以颜色标记基因功能类别，与 JSD 灰度图位置严格对应，便于后续把卷积模型关注区域转化为生物学解释。",
     )
-    add_figure(doc, FIG / "fig3_example_v8.png", "Figure 3. Omics image examples. A1-A3: one PAM50 mRNA sample shown as a 20×20 grayscale expression map, NSRE importance map, and gene functional category map. B1-B3: one survival mRNA sample shown as a 15×15 grayscale expression map, NSRE importance map, and gene functional category map. Axes indicate pixel positions; high-NSRE features are placed centrally, and the functional category map aligns pixel-wise with the expression and NSRE maps.", width=6.4)
+    add_figure(doc, FIG / "fig3_example_v8.png", "Figure 3. Omics image examples. A1-A3: one PAM50 mRNA sample shown as a 20×20 grayscale expression map, JSD importance map, and gene functional category map. B1-B3: one survival mRNA sample shown as a 15×15 grayscale expression map, JSD importance map, and gene functional category map. Axes indicate pixel positions; high-JSD features are placed centrally, and the functional category map aligns pixel-wise with the expression and JSD maps.", width=6.4)
 
     add_heading(doc, "3.2 单组学预测", 2)
     add_body(doc, "Table 3 summarizes the overall best model for each task on full samples; Figure 4 shows all compared models with mean±SD. Full single-omics results are in Supplementary Table S4, and intersection single-omics baselines in Supplementary Table S5.")
@@ -667,12 +667,12 @@ def build_main():
         doc,
         "SHAP 分析显示，mRNA PAM50 LogisticRegression 的关键基因包括 CYP2B7P1、TFF1、C1orf64、AGR3、KCNJ3、MIA、PPP1R14C、ESR1 和 STAC2。CNN saliency 与 SHAP 的共识基因包括 TCAM1P、MIA、SMC1B、PPP1R14C、KLK6、SLC6A11、FABP7 和 FOXC1。生存单变量 Cox 分析识别出 MS4A1、COL17A1、C2orf40、PLA2G2D、FABP7、CCL19 和 GZMB。通路富集提示雌激素信号、细胞增殖调控、细胞分裂和上皮发育等生物学过程；SHAP 与 saliency 单图见补充材料图 S3–S7。",
     )
-    add_figure(doc, FIG / "fig7_nsre_v3.png", "Figure 7. NSRE-based feature-mining visualization. A-C: grayscale expression, NSRE importance, and functional category maps; D-F: SHAP importance, CNN saliency, and functional-category/saliency overlay maps. Axes indicate pixel positions; the NSRE imaging scheme aligns expression, importance, function, and model attention in a common pixel coordinate system.", width=6.4)
+    add_figure(doc, FIG / "fig7_nsre_v3.png", "Figure 7. JSD-based feature-mining visualization. A-C: grayscale expression, JSD importance, and functional category maps; D-F: SHAP importance, CNN saliency, and functional-category/saliency overlay maps. Axes indicate pixel positions; the JSD imaging scheme aligns expression, importance, function, and model attention in a common pixel coordinate system.", width=6.4)
 
     add_heading(doc, "3.7 功能类别遮盖与可解释性分析", 2)
     add_body(
         doc,
-        "为进一步解释组学图像中不同功能区域对模型的贡献，本研究在方案2（功能大类分块 + 中心高重要性 + 中心向外螺旋填充）图像上实施功能类别遮盖实验。与最初的 NSRE 全局排序图像不同，方案2先按基因功能类别分块，再在块内按 NSRE 降序，并以块平均重要性由中心向外螺旋填充，因此同一颜色区域对应同一功能模块，中心区域对应高 NSRE 模块。该设计使图像像素邻接具有更明确的生物学含义，并支持对连续功能区域进行模块级遮挡。",
+        "为进一步解释组学图像中不同功能区域对模型的贡献，本研究在方案2（功能大类分块 + 中心高重要性 + 中心向外螺旋填充）图像上实施功能类别遮盖实验。与最初的 JSD 全局排序图像不同，方案2先按基因功能类别分块，再在块内按 JSD 降序，并以块平均重要性由中心向外螺旋填充，因此同一颜色区域对应同一功能模块，中心区域对应高 JSD 模块。该设计使图像像素邻接具有更明确的生物学含义，并支持对连续功能区域进行模块级遮挡。",
     )
     add_figure(doc, DATA / "interpretability/figures/fig_scheme2_masking_flow_en_v2.png", "Figure 8. Scheme-2 functional-category masking workflow. The target category pixels are set to zero, FullSizeCNN is retrained, and PAM50/survival performance is compared with the unmasked baseline. A, B, and C show the before-masking expression map, functional category map, and after-masking map, respectively.", width=6.4)
     add_body(
@@ -692,7 +692,7 @@ def build_main():
     )
     add_body(
         doc,
-        "为区分“PAM50 分型预测”与“PAM50 基因面板重建”，本研究在 mRNA PAM50 任务上进行了 50 基因剔除敏感性分析：将最终 400 个 NSRE 排序特征中与经典 PAM50 50 基因重叠的 21 个基因剔除后，LogisticRegression 的 5 折 Accuracy 保持不变（0.9628±0.0138），MLP 与 FullSizeCNN 仅有轻微波动；而仅保留这 21 个 PAM50 基因时，LogisticRegression Accuracy 降至 0.9220±0.0076。该结果表明，NSRE 筛选出的 mRNA 特征集所携带的判别信息并非主要来自经典 PAM50 基因面板，而是覆盖了更广的转录组信号，因此本研究的 mRNA PAM50 任务应理解为对既有分子亚型的重建（subtype reconstruction），而非对 PAM50 50 基因面板的简单复现，也不宜被解释为独立的临床预后预测器。",
+        "为区分“PAM50 分型预测”与“PAM50 基因面板重建”，本研究在 mRNA PAM50 任务上进行了 50 基因剔除敏感性分析：将最终 400 个 JSD 排序特征中与经典 PAM50 50 基因重叠的 21 个基因剔除后，LogisticRegression 的 5 折 Accuracy 保持不变（0.9628±0.0138），MLP 与 FullSizeCNN 仅有轻微波动；而仅保留这 21 个 PAM50 基因时，LogisticRegression Accuracy 降至 0.9220±0.0076。该结果表明，JSD 筛选出的 mRNA 特征集所携带的判别信息并非主要来自经典 PAM50 基因面板，而是覆盖了更广的转录组信号，因此本研究的 mRNA PAM50 任务应理解为对既有分子亚型的重建（subtype reconstruction），而非对 PAM50 50 基因面板的简单复现，也不宜被解释为独立的临床预后预测器。",
     )
     add_body(
         doc,
@@ -700,7 +700,7 @@ def build_main():
     )
     add_body(
         doc,
-        "NSRE 图像化的优势在于提供可解释性，而不是仅仅追求最高预测精度。传统 CNN 将基因排列成任意二维结构，像素邻接关系可能缺乏生物学意义；本研究通过把 NSRE 高分基因放在中心，并同时绘制基因功能类别图和模型 saliency 图，使卷积关注区域可以直观映射到关键基因和通路。",
+        "JSD 图像化的优势在于提供可解释性，而不是仅仅追求最高预测精度。传统 CNN 将基因排列成任意二维结构，像素邻接关系可能缺乏生物学意义；本研究通过把 JSD 高分基因放在中心，并同时绘制基因功能类别图和模型 saliency 图，使卷积关注区域可以直观映射到关键基因和通路。",
     )
     add_body(
         doc,
@@ -708,7 +708,7 @@ def build_main():
     )
     add_body(
         doc,
-        "作为对排序假设的直接检验，本研究在 mRNA 上对 NSRE/JSD 螺旋排序与 20 次随机基因排列进行了对照。结果表明，NSRE 螺旋排序并未优于随机排列：PAM50 Accuracy 的 NSRE 结果为 0.9316，而 20 次随机排列的均值为 0.9267（范围 0.9112–0.9400，经验 p=0.25）；Survival C-index 的 NSRE 结果为 0.7125，随机排列均值为 0.7055（经验 p=0.35）。均值表达排序在 PAM50 Accuracy 上与 NSRE 完全一致（0.9316），进一步说明二维像素位置本身几乎不携带预测信息。据此，本文将组学图像化明确限定为一种“可解释的空间表示”，而不是能提升分类或生存预测精度的排序方法。",
+        "作为对排序假设的直接检验，本研究在 mRNA 上对 JSD 螺旋排序与 20 次随机基因排列进行了对照。结果表明，JSD 螺旋排序并未优于随机排列：PAM50 Accuracy 的 JSD 结果为 0.9316，而 20 次随机排列的均值为 0.9267（范围 0.9112–0.9400，经验 p=0.25）；Survival C-index 的 JSD 结果为 0.7125，随机排列均值为 0.7055（经验 p=0.35）。均值表达排序在 PAM50 Accuracy 上与 JSD 完全一致（0.9316），进一步说明二维像素位置本身几乎不携带预测信息。据此，本文将组学图像化明确限定为一种“可解释的空间表示”，而不是能提升分类或生存预测精度的排序方法。",
     )
     add_body(
         doc,
@@ -716,7 +716,7 @@ def build_main():
     )
     add_body(
         doc,
-        "与已有“表格数据→图像”的表示方法相比，DeepInsight 通过 t-SNE 把特征点布局为二维图像以利用 CNN 的局部感受野，DeepInsight-3D 进一步将其推广到多组学三维表示，Yan 等则基于转录组特征图进行癌型与生存预测[32-34]；SurvConvMixer 利用通路级基因表达图像进行癌症生存预测[50]，MoACNN-XGNet 则构建面向乳腺癌亚型的可解释多组学卷积网络[51]。本研究与这些工作的关键区别在于：其一，本研究使用监督式 JSD/NSRE 而非无监督降维来指导空间布局，并把基因功能类别与模型注意力对齐到同一像素坐标系，从而将空间位置直接绑定到可解释的生物学注释；其二，本文的 Dense 等价与随机排列对照表明，在本数据规模下二维空间布局本身并不带来预测增益，因此图像化被定位为可解释表示而非性能提升手段。这一结论与 DeepInsight 系列“图像化有助于 CNN 建模”的动机形成互补而非冲突——在更大样本或真实空间先验（如通路网络）可用时，空间结构才更可能产生增益。",
+        "与已有“表格数据→图像”的表示方法相比，DeepInsight 通过 t-SNE 把特征点布局为二维图像以利用 CNN 的局部感受野，DeepInsight-3D 进一步将其推广到多组学三维表示，Yan 等则基于转录组特征图进行癌型与生存预测[32-34]；SurvConvMixer 利用通路级基因表达图像进行癌症生存预测[50]，MoACNN-XGNet 则构建面向乳腺癌亚型的可解释多组学卷积网络[51]。本研究与这些工作的关键区别在于：其一，本研究使用监督式 JSD 而非无监督降维来指导空间布局，并把基因功能类别与模型注意力对齐到同一像素坐标系，从而将空间位置直接绑定到可解释的生物学注释；其二，本文的 Dense 等价与随机排列对照表明，在本数据规模下二维空间布局本身并不带来预测增益，因此图像化被定位为可解释表示而非性能提升手段。这一结论与 DeepInsight 系列“图像化有助于 CNN 建模”的动机形成互补而非冲突——在更大样本或真实空间先验（如通路网络）可用时，空间结构才更可能产生增益。",
     )
     add_body(
         doc,
@@ -726,12 +726,12 @@ def build_main():
         doc,
         "局限包括：仅使用 TCGA-BRCA 单中心回顾性数据，缺少独立外部队列；生存事件数量较少，类别不平衡；螺旋位置仍然不是真实生物学空间；复杂模型可能过拟合。统计推断方面，配对检验仅基于 5 折（n=5）的折级分数，统计功效有限，且未进行多重比较校正，因此边缘显著结果（如生存 ROC AUC 的配对 t 检验 p=0.093）需要谨慎解释；后续应采用 repeated CV、bootstrap 置信区间或折级效应量（如 Cohen's d）来增强证据强度。此外，特征数量选择与最终评估共用同一交叉验证，存在选择偏倚，理想情况下应使用嵌套交叉验证或独立验证集。",
     )
-    add_body(doc, "与已有研究相比，本工作的贡献不在于简单追求最高分类准确率，而在于提供一种可追溯、可映射到关键基因的组学图像化表示。该表示既保留原始特征值，又通过 NSRE 将判别重要性显式编码到图像空间，为后续关键因子挖掘和临床转化提供了统一接口。")
+    add_body(doc, "与已有研究相比，本工作的贡献不在于简单追求最高分类准确率，而在于提供一种可追溯、可映射到关键基因的组学图像化表示。该表示既保留原始特征值，又通过 JSD 将判别重要性显式编码到图像空间，为后续关键因子挖掘和临床转化提供了统一接口。")
 
     add_heading(doc, "5. 结论", 1)
     add_body(
         doc,
-        "本研究建立了 JSD/NSRE 引导的组学图像化与多组学融合框架，能够同时支持乳腺癌 PAM50 四分类和总生存预测。mRNA 单组学在分子分型重建（subtype reconstruction）中表现最优，且其判别信息并非主要依赖经典 PAM50 基因面板；生存预测更依赖多组学互补。FullSizeCNN 为组学图像化提供了轻量、可解释的基线。未来可在外部数据和更稳健融合策略下进一步验证。",
+        "本研究建立了 JSD 引导的组学图像化与多组学融合框架，能够同时支持乳腺癌 PAM50 四分类和总生存预测。mRNA 单组学在分子分型重建（subtype reconstruction）中表现最优，且其判别信息并非主要依赖经典 PAM50 基因面板；生存预测更依赖多组学互补。FullSizeCNN 为组学图像化提供了轻量、可解释的基线。未来可在外部数据和更稳健融合策略下进一步验证。",
     )
 
     add_heading(doc, "参考文献与数据来源", 1)
@@ -788,8 +788,8 @@ def build_main():
     add_body(doc, "[51] Li Q, Liu L, Zhang Q, Zhang X, Li N, Zhao Y, et al. MoACNN-XGNet: interpretable multi-omics convolutional network for breast cancer subtyping and prognostic genes identification. IEEE J Biomed Health Inform. 2025. doi:10.1109/JBHI.2025.3595381.")
 
     add_body(doc, "Data availability statement：本研究使用的原始公开数据来自 The Cancer Genome Atlas（TCGA-BRCA），可通过 NCI Genomic Data Commons（GDC）数据门户获取（project TCGA-BRCA），并可经 UCSC Xena 平台访问（dataset: TCGA Breast Cancer (BRCA)）。")
-    add_body(doc, "本研究的处理数据、特征选择与建模代码、NSRE/JSD 图像、结果表、补充材料及可复现说明已整理为代码与数据仓库并公开托管于 GitHub（repository: NSRE_omics_imaging_breast_cancer），仓库链接见正文末尾的 Code availability 条目。")
-    add_body(doc, "Code availability：https://github.com/381521602/NSRE_omics_imaging_breast_cancer")
+    add_body(doc, "本研究的处理数据、特征选择与建模代码、JSD 图像、结果表、补充材料及可复现说明已整理为代码与数据仓库并公开托管于 GitHub（repository: Supervised_distribution_divergence_omics_imaging_breast_cancer），仓库链接见正文末尾的 Code availability 条目。")
+    add_body(doc, "Code availability：https://github.com/381521602/Supervised_distribution_divergence_omics_imaging_breast_cancer")
     add_body(doc, "本文为中文初稿；正式投稿前将按目标期刊格式补充编号引用、作者单位、基金和利益冲突声明。")
 
     doc.save(OUT_MAIN)
@@ -901,7 +901,7 @@ def build_supplement():
     add_heading(doc, "S2. 特征提取算法", 1)
     add_body(
         doc,
-        "本研究比较了 4 种基础特征筛选方法及其两两组合[S4]。低方差过滤（V）移除近常数特征；F 值（ANOVA F）衡量连续特征与分类标签的线性判别能力；L1/LASSO 通过线性 SVM 的稀疏系数进行嵌入式选择[S5]；JSD/NSRE 基于类别间分箱直方图的 Jensen–Shannon divergence。",
+        "本研究比较了 4 种基础特征筛选方法及其两两组合[S4]。低方差过滤（V）移除近常数特征；F 值（ANOVA F）衡量连续特征与分类标签的线性判别能力；L1/LASSO 通过线性 SVM 的稀疏系数进行嵌入式选择[S5]；JSD 基于类别间分箱直方图的 Jensen–Shannon divergence。",
     )
     add_body(
         doc,
@@ -909,7 +909,7 @@ def build_supplement():
     )
     add_body(
         doc,
-        "组合方式包括 V、V_F、V_L1、V_NSRE、V_F_L1、V_F_NSRE、V_L1_F、V_L1_NSRE、V_NSRE_F、V_NSRE_L1，其中 V 表示低方差预过滤，下划线后的顺序表示先粗筛后精筛或先粗筛后嵌入选择。",
+        "组合方式包括 V、V_F、V_L1、V_JSD、V_F_L1、V_F_JSD、V_L1_F、V_L1_JSD、V_JSD_F、V_JSD_L1，其中 V 表示低方差预过滤，下划线后的顺序表示先粗筛后精筛或先粗筛后嵌入选择。",
     )
     add_dataframe_table(
         doc,
@@ -919,25 +919,25 @@ def build_supplement():
                     "V",
                     "V_F",
                     "V_L1",
-                    "V_NSRE",
+                    "V_JSD",
                     "V_F_L1",
-                    "V_F_NSRE",
+                    "V_F_JSD",
                     "V_L1_F",
-                    "V_L1_NSRE",
-                    "V_NSRE_F",
-                    "V_NSRE_L1",
+                    "V_L1_JSD",
+                    "V_JSD_F",
+                    "V_JSD_L1",
                 ],
                 "Description": [
                     "Low-variance filter",
                     "Low-variance + ANOVA F",
                     "Low-variance + L1/LASSO",
-                    "Low-variance + NSRE",
+                    "Low-variance + JSD",
                     "Low-variance + F coarse + L1 fine",
-                    "Low-variance + F coarse + NSRE fine",
+                    "Low-variance + F coarse + JSD fine",
                     "Low-variance + L1 coarse + F fine",
-                    "Low-variance + L1 coarse + NSRE fine",
-                    "Low-variance + NSRE coarse + F fine",
-                    "Low-variance + NSRE coarse + L1 fine",
+                    "Low-variance + L1 coarse + JSD fine",
+                    "Low-variance + JSD coarse + F fine",
+                    "Low-variance + JSD coarse + L1 fine",
                 ],
             }
         ),
@@ -964,7 +964,7 @@ def build_supplement():
         ),
         [1.0, 0.8, 0.9, 1.1, 1.0, 0.8],
     )
-    add_caption(doc, "Table S3. Final feature counts and NSRE image sizes")
+    add_caption(doc, "Table S3. Final feature counts and JSD image sizes")
 
     add_heading(doc, "S4. 单组学全部模型结果", 1)
     add_body(doc, "Table S4 reports full-sample single-omics 5-fold CV results based on final features selected within each training fold.")
@@ -1062,7 +1062,7 @@ def build_supplement():
     add_body(doc, "不同排序方案的 FullSizeCNN 结果、经典全尺寸卷积结构和 WGAN-GP 数据增强结果如下。WGAN-GP 数据增强基于 GAN、Wasserstein GAN 和梯度惩罚训练策略实现[S6-S8]。")
     reorder = read_tsv("reorder_fullsize_cnn_results.tsv")
     add_dataframe_table(doc, reorder, [2.0, 1.2, 1.3, 0.8, 0.8])
-    add_caption(doc, "Table S11. NSRE spiral ordering vs functional-reordering schemes (PAM50; mean±SD; features selected within each training fold)")
+    add_caption(doc, "Table S11. JSD spiral ordering vs functional-reordering schemes (PAM50; mean±SD; features selected within each training fold)")
 
     classic = read_tsv("nsre_classic_structures_results.tsv")
     add_dataframe_table(doc, classic, [2.0, 1.2, 1.3, 0.8, 0.8])
@@ -1096,12 +1096,12 @@ def build_supplement():
     add_caption(doc, "Table S14. Dense-equivalent baseline vs FullSizeCNN (5-fold CV, mean±SD; features selected within each training fold)")
     add_figure(doc, FIG / "fig_dense_equivalent.png", "Figure S3. Dense-equivalent baseline vs FullSizeCNN. A: PAM50 Accuracy; B: Survival C-index. The dense network with an identical first-layer parameter count performs comparably to, or better than, FullSizeCNN, indicating that the 2-D spatial arrangement does not itself provide a consistent predictive gain; error bars show 5-fold CV SD.")
 
-    add_body(doc, "为检验 NSRE/JSD 螺旋排序是否优于随机排序，对 mRNA 生成 20 次随机基因排列，并加入均值表达排序作为确定性对照。随机排列的分布、均值表达排序与 NSRE 螺旋排序的对比见 Table S15 与 Figure S4；经验 p 值为 20 次随机排列中不低于 NSRE 结果的占比。")
+    add_body(doc, "为检验 JSD 螺旋排序是否优于随机排序，对 mRNA 生成 20 次随机基因排列，并加入均值表达排序作为确定性对照。随机排列的分布、均值表达排序与 JSD 螺旋排序的对比见 Table S15 与 Figure S4；经验 p 值为 20 次随机排列中不低于 JSD 结果的占比。")
     rp = read_tsv("random_permutation_control_stats.tsv")
-    rp.columns = ["Task", "Metric", "NSRE spiral", "Mean expression", "Random mean", "Random std", "Random min", "Random max", "p(random ≥ NSRE)"]
+    rp.columns = ["Task", "Metric", "JSD spiral", "Mean expression", "Random mean", "Random std", "Random min", "Random max", "p(random ≥ JSD)"]
     add_dataframe_table(doc, rp, [0.9, 1.0, 0.9, 1.0, 0.9, 0.8, 0.8, 0.8, 1.0])
-    add_caption(doc, "Table S15. Random-permutation ordering control for mRNA (5-fold CV; NSRE spiral vs 20 random orders vs mean-expression ordering)")
-    add_figure(doc, FIG / "fig_random_permutation.png", "Figure S4. Random-permutation ordering control. A: PAM50 Accuracy; B: PAM50 Macro-F1; C: Survival ROC AUC; D: Survival C-index. Histograms show the distribution over 20 random gene orders; the NSRE spiral and mean-expression orderings fall within the null, so the spatial ordering does not itself improve prediction.")
+    add_caption(doc, "Table S15. Random-permutation ordering control for mRNA (5-fold CV; JSD spiral vs 20 random orders vs mean-expression ordering)")
+    add_figure(doc, FIG / "fig_random_permutation.png", "Figure S4. Random-permutation ordering control. A: PAM50 Accuracy; B: PAM50 Macro-F1; C: Survival ROC AUC; D: Survival C-index. Histograms show the distribution over 20 random gene orders; the JSD spiral and mean-expression orderings fall within the null, so the spatial ordering does not itself improve prediction.")
 
     add_heading(doc, "S11. 可解释性补充图", 1)
     add_body(doc, "SHAP、梯度 saliency 与 Grad-CAM 分别用于全局特征归因、单样本像素/基因重要性解释和卷积梯度定位[S9-S11]。")
@@ -1165,7 +1165,7 @@ def build_supplement():
     add_heading(doc, "S17. PAM50 50 基因剔除敏感性分析", 1)
     add_body(
         doc,
-        "为验证 mRNA PAM50 任务的判别信号是否主要来自经典 PAM50 50 基因面板，本研究在 mRNA PAM50 的最终 400 个 NSRE 排序特征上进行了剔除敏感性分析。三种配置分别为：Full 400 genes（完整 400 特征）、Exclude PAM50 genes（从 400 特征中删除与 PAM50 50 基因重叠的 21 个基因，剩 379 特征）和 PAM50 genes only（仅保留重叠的 21 个基因）。对每种配置重新计算 NSRE 排序并生成对应尺寸的灰度图，采用 LogisticRegression、MLP 和 FullSizeCNN 在统一 5 折分层交叉验证下评估 Accuracy 与 Macro-F1。",
+        "为验证 mRNA PAM50 任务的判别信号是否主要来自经典 PAM50 50 基因面板，本研究在 mRNA PAM50 的最终 400 个 JSD 排序特征上进行了剔除敏感性分析。三种配置分别为：Full 400 genes（完整 400 特征）、Exclude PAM50 genes（从 400 特征中删除与 PAM50 50 基因重叠的 21 个基因，剩 379 特征）和 PAM50 genes only（仅保留重叠的 21 个基因）。对每种配置重新计算 JSD 排序并生成对应尺寸的灰度图，采用 LogisticRegression、MLP 和 FullSizeCNN 在统一 5 折分层交叉验证下评估 Accuracy 与 Macro-F1。",
     )
     gex = read_tsv("pam50_gene_exclusion_results.tsv")
     config_labels = {
