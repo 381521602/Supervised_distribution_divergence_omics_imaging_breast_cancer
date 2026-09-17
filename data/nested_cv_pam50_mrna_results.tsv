@@ -1,0 +1,7 @@
+experiment	model	metric	mean	std
+nested_cv_PAM50_mRNA	LogisticRegression	accuracy	0.8392	0.0288
+nested_cv_PAM50_mRNA	LogisticRegression	macro_f1	0.8196	0.0374
+nested_cv_PAM50_mRNA	FullSizeCNN	accuracy	0.851	0.0282
+nested_cv_PAM50_mRNA	FullSizeCNN	macro_f1	0.831	0.0344
+nested_cv_PAM50_mRNA	Dense	accuracy	0.8449	0.0326
+nested_cv_PAM50_mRNA	Dense	macro_f1	0.8204	0.0383

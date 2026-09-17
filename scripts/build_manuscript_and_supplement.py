@@ -482,7 +482,7 @@ def build_main():
     )
 
     add_heading(doc, "2. 材料与方法", 1)
-    add_body(doc, "本部分仅给出核心方法与参数。整体技术路线见图 1，样本量概况见表 1；具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15。")
+    add_body(doc, "本部分仅给出核心方法与参数。整体技术路线见图 1，样本量概况见表 1；具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15；无泄漏嵌套交叉验证见表 S24，严格 PAM50 排除见表 S25，FullSizeCNN-Cox 见表 S26。")
     add_figure(doc, FIG / "fig1_route_v25.png", "Figure 1. Overall technical route. The three phases are data preparation, feature engineering, and modeling/fusion/evaluation; SHAP, Grad-CAM/saliency, and functional masking are used as downstream interpretability modules.", width=6.8)
     add_heading(doc, "2.1 数据来源与样本对齐", 2)
     add_body(
@@ -595,7 +595,7 @@ def build_main():
     add_metrics_note(doc)
 
     add_heading(doc, "3. 结果", 1)
-    add_body(doc, "正文展示代表性结果；完整逐模型、逐折均值和标准差见补充材料表 S4–S23。")
+    add_body(doc, "正文展示代表性结果；完整逐模型、逐折均值和标准差见补充材料表 S4–S26。")
     add_heading(doc, "3.1 组学图像示例", 2)
     add_body(
         doc,
@@ -713,6 +713,10 @@ def build_main():
     add_body(
         doc,
         "作为对排序假设的直接检验，本研究在 mRNA 上对 JSD 螺旋排序与 20 次随机基因排列进行了对照。结果表明，JSD 螺旋排序并未优于随机排列：PAM50 Accuracy 的 JSD 结果为 0.9316，而 20 次随机排列的均值为 0.9267（范围 0.9112–0.9400，经验 p=0.25）；Survival C-index 的 JSD 结果为 0.7125，随机排列均值为 0.7055（经验 p=0.35）。均值表达排序在 PAM50 Accuracy 上与 JSD 完全一致（0.9316），进一步说明二维像素位置本身几乎不携带预测信息。据此，本文将组学图像化明确限定为一种“可解释的空间表示”，而不是能提升分类或生存预测精度的排序方法。",
+    )
+    add_body(
+        doc,
+        "为控制特征数量选择与最终评估共用同一交叉验证可能带来的选择偏倚，本研究进一步在 mRNA PAM50 上进行了无泄漏嵌套交叉验证：外层 5-fold × 5 repeats，内层 3-fold 选择特征数（200/400），特征筛选采用 V_L1，并在所选特征上按 JSD 排序生成 FullSizeCNN 图像。结果显示，LogisticRegression 的 Accuracy 为 0.8392±0.0288，FullSizeCNN 为 0.8510±0.0282，Dense 等价基线为 0.8449±0.0326；三者均低于正文基于最终 400 特征的结果，且 FullSizeCNN 与 Dense 的差异未超过交叉验证标准差。这再次表明，二维空间布局本身并未提供稳定的预测增益，正文结果应理解为基于训练折内预选特征的 exploratory CV estimate；完整结果见补充材料表 S24–S26。",
     )
     add_body(
         doc,
@@ -1194,7 +1198,29 @@ def build_supplement():
     add_caption(doc, "Table S23. PAM50 50-gene exclusion sensitivity analysis for mRNA PAM50 (5-fold CV, mean±SD; features selected within each training fold)")
     add_figure(doc, FIG / "fig_pam50_gene_exclusion.png", "Figure S15. PAM50 50-gene exclusion sensitivity analysis. A: Accuracy; B: Macro-F1. Removing the 21 PAM50-overlapping genes barely changes performance, whereas the 21 PAM50 genes alone underperform the full 400-gene signature; error bars show 5-fold CV SD.")
 
-    add_heading(doc, "S18. 数据与脚本文件", 1)
+    add_heading(doc, "S18. 无泄漏嵌套交叉验证与严格 PAM50 排除", 1)
+    add_body(
+        doc,
+        "为检验特征数量选择与最终评估共用同一 5 折交叉验证可能带来的选择偏倚，本研究对 mRNA PAM50 增加了无泄漏嵌套交叉验证：外层 5-fold × 5 repeats，内层 3-fold 用于从候选特征数 {200, 400} 中选择，特征选择采用 VarianceThreshold + LinearSVC(L1)（V_L1），并按 JSD 排序生成 FullSizeCNN 图像。LogisticRegression、FullSizeCNN 和 Dense 等价基线均在外层测试折上评估。结果见 Table S24。", 
+    )
+    nested = read_tsv("nested_cv_pam50_mrna_results.tsv")
+    add_dataframe_table(doc, nested, [2.0, 1.3, 1.2, 0.8, 0.8])
+    add_caption(doc, "Table S24. Nested 5×5 cross-validation for mRNA PAM50 (inner 3-fold feature-number selection with V_L1; outer 5-fold × 5 repeats; mean±SD)")
+
+    strict = read_tsv("strict_pam50_exclusion_results.tsv")
+    add_dataframe_table(doc, strict, [1.8, 1.6, 1.0, 0.8, 0.8])
+    add_caption(doc, "Table S25. Strict PAM50 exclusion from the full transcriptome followed by fold-level feature selection (ANOVA F, k=400) and LogisticRegression (5-fold CV, mean±SD)")
+
+    add_heading(doc, "S19. FullSizeCNN-Cox 生存对照", 1)
+    add_body(
+        doc,
+        "为提供严格时间到事件版本的图像模型对照，在 mRNA Survival 图像上保持 FullSizeCNN 图像 backbone，将最后输出替换为 Cox negative partial log-likelihood，并在 5 折分层交叉验证下评估。结果见 Table S26。",
+    )
+    cox = read_tsv("fullsize_cnn_cox_survival_results.tsv")
+    add_dataframe_table(doc, cox, [1.8, 1.3, 1.0, 0.8, 0.8])
+    add_caption(doc, "Table S26. FullSizeCNN-Cox on mRNA Survival images (5-fold CV, mean±SD)")
+
+    add_heading(doc, "S20. 数据与脚本文件", 1)
     for item in [
         "data/final_datasets/PAM50/{mRNA,CNV,miRNA}_PAM50_final.tsv",
         "data/final_datasets/Survival/{mRNA,CNV,miRNA}_Survival_final.tsv",
@@ -1226,6 +1252,10 @@ def build_supplement():
         "scripts/run_stress_pathway_analysis.py",
         "scripts/generate_annotation_mapping.py",
         "scripts/generate_sample_provenance.py",
+        "data/nested_cv_pam50_mrna_results.tsv",
+        "data/fullsize_cnn_cox_survival_results.tsv",
+        "data/strict_pam50_exclusion_results.tsv",
+        "scripts/run_additional_validation_experiments.py",
     ]:
         add_bullet(doc, item)
     add_body(
@@ -1241,7 +1271,7 @@ def build_supplement():
         "复现时建议固定随机种子 42；所有特征筛选、标准化、数据增强和模型拟合均在交叉验证训练折内完成，测试折不参与任何预处理与参数选择。",
     )
 
-    add_heading(doc, "S19. 补充材料参考文献", 1)
+    add_heading(doc, "S21. 补充材料参考文献", 1)
     add_body(doc, "[S1] Grossman RL, Heath AP, Ferretti V, Varmus HE, Lowy DR, Kibbe WA, et al. Toward a Shared Vision for Cancer Genomic Data. N Engl J Med. 2016;375(12):1109-1112. doi:10.1056/NEJMp1607591. PMID:27653561.")
     add_body(doc, "[S2] Goldman MJ, Craft B, Hastie M, Repecka K, McDade F, Kamath A, et al. Visualizing and interpreting cancer genomics data via the Xena platform. Nat Biotechnol. 2020;38(6):675-678. doi:10.1038/s41587-020-0546-8. PMID:32444850.")
     add_body(doc, "[S3] Mermel CH, Schumacher SE, Hill B, Meyerson ML, Beroukhim R, Getz G. GISTIC2.0 facilitates sensitive and confident localization of the targets of focal somatic copy-number alteration in human cancers. Genome Biol. 2011;12(4):R41. doi:10.1186/gb-2011-12-4-r41. PMID:21527027.")

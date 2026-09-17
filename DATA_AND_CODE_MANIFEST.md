@@ -55,6 +55,9 @@ This document describes each major component in the repository and how the files
 | `data/stress_pathway_gene_sets.tsv` | Pathway–gene mapping, source annotation, and citation notes for the stress/adaptive-reprogramming signatures. |
 | `data/stress_pathway_analysis_results.tsv` | Stress / adaptive-reprogramming pathway enrichment and survival analysis. |
 | `data/pam50_gene_exclusion_results.tsv` | PAM50 50-gene exclusion sensitivity analysis. |
+| `data/nested_cv_pam50_mrna_results.tsv` | Nested 5×5 cross-validation robustness results for mRNA PAM50. |
+| `data/fullsize_cnn_cox_survival_results.tsv` | FullSizeCNN-Cox survival control results. |
+| `data/strict_pam50_exclusion_results.tsv` | Strict PAM50 exclusion from the full transcriptome. |
 
 ## 5. Interpretability outputs
 
@@ -87,6 +90,7 @@ All runnable Python scripts are stored under `scripts/`. Key scripts include:
 - `run_stress_pathway_analysis.py` — stress / adaptive-reprogramming pathway analysis.
 - `pam50_gene_exclusion_sensitivity.py` — PAM50 50-gene exclusion sensitivity analysis.
 - `generate_annotation_mapping.py` and `generate_sample_provenance.py` — annotation and provenance files used by the manuscript.
+- `run_additional_validation_experiments.py` — nested CV, FullSizeCNN-Cox, and strict PAM50 exclusion experiments.
 
 ## 7. Machine-readable supplementary data and final drafts
 

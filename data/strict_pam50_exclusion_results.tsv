@@ -1,0 +1,5 @@
+experiment	config	metric	mean	std
+strict_PAM50_exclusion	full_transcriptome	accuracy	0.8246	0.0163
+strict_PAM50_exclusion	full_transcriptome	macro_f1	0.8045	0.0181
+strict_PAM50_exclusion	exclude_pam50_genes	accuracy	0.8161	0.0226
+strict_PAM50_exclusion	exclude_pam50_genes	macro_f1	0.7931	0.0249
