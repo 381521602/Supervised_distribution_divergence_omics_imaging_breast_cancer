@@ -58,6 +58,7 @@ This document describes each major component in the repository and how the files
 | `data/nested_cv_pam50_mrna_results.tsv` | Nested 5×5 cross-validation robustness results for mRNA PAM50. |
 | `data/fullsize_cnn_cox_survival_results.tsv` | FullSizeCNN-Cox survival control results. |
 | `data/strict_pam50_exclusion_results.tsv` | Strict PAM50 exclusion from the full transcriptome. |
+| `data/statistical_robustness_effect_sizes.tsv` | Fold-level effect sizes and approximate 95% CIs for best-fusion comparisons. |
 
 ## 5. Interpretability outputs
 

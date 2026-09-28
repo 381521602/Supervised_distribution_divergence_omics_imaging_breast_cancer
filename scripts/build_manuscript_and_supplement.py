@@ -482,7 +482,7 @@ def build_main():
     )
 
     add_heading(doc, "2. 材料与方法", 1)
-    add_body(doc, "本部分仅给出核心方法与参数。整体技术路线见图 1，样本量概况见表 1；具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15；无泄漏嵌套交叉验证见表 S24，严格 PAM50 排除见表 S25，FullSizeCNN-Cox 见表 S26。")
+    add_body(doc, "本部分仅给出核心方法与参数。整体技术路线见图 1，样本量概况见表 1；具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15；无泄漏嵌套交叉验证见表 S24 与图 S16，严格 PAM50 排除见表 S25，FullSizeCNN-Cox 见表 S26，统计效应量见表 S27，已有方法比较见表 S28。")
     add_figure(doc, FIG / "fig1_route_v25.png", "Figure 1. Overall technical route. The three phases are data preparation, feature engineering, and modeling/fusion/evaluation; SHAP, Grad-CAM/saliency, and functional masking are used as downstream interpretability modules.", width=6.8)
     add_heading(doc, "2.1 数据来源与样本对齐", 2)
     add_body(
@@ -595,7 +595,7 @@ def build_main():
     add_metrics_note(doc)
 
     add_heading(doc, "3. 结果", 1)
-    add_body(doc, "正文展示代表性结果；完整逐模型、逐折均值和标准差见补充材料表 S4–S26。")
+    add_body(doc, "正文展示代表性结果；完整逐模型、逐折均值和标准差见补充材料表 S4–S28。")
     add_heading(doc, "3.1 组学图像示例", 2)
     add_body(
         doc,
@@ -1224,7 +1224,28 @@ def build_supplement():
     add_dataframe_table(doc, cox, [1.8, 1.3, 1.0, 0.8, 0.8])
     add_caption(doc, "Table S26. FullSizeCNN-Cox on mRNA Survival images (5-fold CV, mean±SD)")
 
-    add_heading(doc, "S20. 数据与脚本文件", 1)
+    add_heading(doc, "S20. 统计稳健性与已有方法比较", 1)
+    add_body(
+        doc,
+        "为帮助解释 5 折配对检验的统计证据强度，对最优融合与最优单组学之间的折级均值差计算了效应量（Cohen's d）与近似 95% 置信区间。由于仅基于 5 个折级分数，这些值应视为描述性比较而非严格的等价性检验。",
+    )
+    effect = read_tsv("statistical_robustness_effect_sizes.tsv")
+    add_dataframe_table(doc, effect, [1.0, 1.2, 1.8, 1.0, 0.8, 0.8, 0.8, 2.0])
+    add_caption(doc, "Table S27. Fold-level effect sizes and approximate 95% CIs for best-fusion vs best-single comparisons (n=5 folds; descriptive only)")
+    add_figure(doc, FIG / "fig_nested_cv_design.png", "Figure S16. Nested repeated CV design. Outer 5-fold × 5 repeats are used for evaluation; inner 3-fold CV selects the feature number from {200, 400}. All preprocessing, feature selection, JSD ranking, and model fitting are performed only within the corresponding training partition.")
+
+    comparison_rows = [
+        {"Method": "DeepInsight", "Supervision": "Unsupervised (t-SNE)", "Ordering": "Data-driven 2-D projection", "Traceable attribution": "Indirect", "Dense control": "No", "Random-order control": "No", "Nested CV": "No"},
+        {"Method": "DeepInsight-3D", "Supervision": "Unsupervised", "Ordering": "3-D projection", "Traceable attribution": "Indirect", "Dense control": "No", "Random-order control": "No", "Nested CV": "No"},
+        {"Method": "Yan et al. feature map", "Supervision": "Task-related", "Ordering": "Transcriptomic feature map", "Traceable attribution": "Partial", "Dense control": "No", "Random-order control": "No", "Nested CV": "No"},
+        {"Method": "SurvConvMixer", "Supervision": "Pathway-level", "Ordering": "Pathway image", "Traceable attribution": "Partial", "Dense control": "No", "Random-order control": "No", "Nested CV": "No"},
+        {"Method": "MoACNN-XGNet", "Supervision": "Multi-omics", "Ordering": "Interpretable multi-omics convolution", "Traceable attribution": "Partial", "Dense control": "No", "Random-order control": "No", "Nested CV": "No"},
+        {"Method": "This study (JSD-FullSizeCNN)", "Supervision": "Supervised JSD", "Ordering": "Deterministic center-out spiral", "Traceable attribution": "Pixel-to-gene mapping", "Dense control": "Yes", "Random-order control": "Yes", "Nested CV": "Yes"},
+    ]
+    add_dataframe_table(doc, pd.DataFrame(comparison_rows), [1.5, 1.5, 2.2, 1.7, 1.0, 1.2, 1.0])
+    add_caption(doc, "Table S28. Comparison with representative omics-to-image and interpretable deep-learning methods. The current framework differs by supervised divergence-guided ordering, pixel-to-gene traceability, and systematic falsification controls.")
+
+    add_heading(doc, "S21. 数据与脚本文件", 1)
     for item in [
         "data/final_datasets/PAM50/{mRNA,CNV,miRNA}_PAM50_final.tsv",
         "data/final_datasets/Survival/{mRNA,CNV,miRNA}_Survival_final.tsv",
@@ -1275,7 +1296,7 @@ def build_supplement():
         "复现时建议固定随机种子 42；所有特征筛选、标准化、数据增强和模型拟合均在交叉验证训练折内完成，测试折不参与任何预处理与参数选择。",
     )
 
-    add_heading(doc, "S21. 补充材料参考文献", 1)
+    add_heading(doc, "S22. 补充材料参考文献", 1)
     add_body(doc, "[S1] Grossman RL, Heath AP, Ferretti V, Varmus HE, Lowy DR, Kibbe WA, et al. Toward a Shared Vision for Cancer Genomic Data. N Engl J Med. 2016;375(12):1109-1112. doi:10.1056/NEJMp1607591. PMID:27653561.")
     add_body(doc, "[S2] Goldman MJ, Craft B, Hastie M, Repecka K, McDade F, Kamath A, et al. Visualizing and interpreting cancer genomics data via the Xena platform. Nat Biotechnol. 2020;38(6):675-678. doi:10.1038/s41587-020-0546-8. PMID:32444850.")
     add_body(doc, "[S3] Mermel CH, Schumacher SE, Hill B, Meyerson ML, Beroukhim R, Getz G. GISTIC2.0 facilitates sensitive and confident localization of the targets of focal somatic copy-number alteration in human cancers. Genome Biol. 2011;12(4):R41. doi:10.1186/gb-2011-12-4-r41. PMID:21527027.")
