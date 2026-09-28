@@ -59,6 +59,8 @@ This document describes each major component in the repository and how the files
 | `data/fullsize_cnn_cox_survival_results.tsv` | FullSizeCNN-Cox survival control results. |
 | `data/strict_pam50_exclusion_results.tsv` | Strict PAM50 exclusion from the full transcriptome. |
 | `data/statistical_robustness_effect_sizes.tsv` | Fold-level effect sizes and approximate 95% CIs for best-fusion comparisons. |
+| `data/metabric_external_validation_results.tsv` | METABRIC mRNA external single-omics validation results. |
+| `data/metabric_cnv_external_validation_results.tsv` | METABRIC CNV external single-omics validation results. |
 
 ## 5. Interpretability outputs
 
