@@ -482,7 +482,7 @@ def build_main():
     )
 
     add_heading(doc, "2. 材料与方法", 1)
-    add_body(doc, "本部分仅给出核心方法与参数。整体技术路线见图 1，样本量概况见表 1；具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15；无泄漏嵌套交叉验证见表 S24 与图 S16，严格 PAM50 排除见表 S25，FullSizeCNN-Cox 见表 S26，统计效应量见表 S27，已有方法比较见表 S28，METABRIC 外部验证见表 S29。")
+    add_body(doc, "本部分仅给出核心方法与参数。整体技术路线见图 1，样本量概况见表 1；具体样本清单见补充材料表 S1；特征筛选算法组合见表 S2，最终特征数量见表 S3；单组学全部结果见表 S4，交集单组学基线见表 S5；三组学融合结果见表 S6，两两组学融合结果见表 S7，Stacking 与复杂方法结果见表 S8–S9；融合统计检验见表 S10；图像化结构对比见表 S11–S13；全尺寸卷积 Dense 等价基线见表 S14 与图 S3；随机排列排序对照见表 S15 与图 S4；可解释性补充图见图 S5–S13；方案2功能类别遮盖与统计检验见表 S16–S21；应激与适应性重编程通路分析见表 S22 与图 S14；PAM50 50 基因剔除敏感性分析见表 S23 与图 S15；无泄漏嵌套交叉验证见表 S24 与图 S16，严格 PAM50 排除见表 S25，FullSizeCNN-Cox 见表 S26，统计效应量见表 S27，已有方法比较见表 S28，METABRIC 外部验证见表 S29，基因互作分析见 S22 与图 S17，社区重排对比见表 S30。")
     add_figure(doc, FIG / "fig1_route_v25.png", "Figure 1. Overall technical route. The three phases are data preparation, feature engineering, and modeling/fusion/evaluation; SHAP, Grad-CAM/saliency, and functional masking are used as downstream interpretability modules.", width=6.8)
     add_heading(doc, "2.1 数据来源与样本对齐", 2)
     add_body(
@@ -595,7 +595,7 @@ def build_main():
     add_metrics_note(doc)
 
     add_heading(doc, "3. 结果", 1)
-    add_body(doc, "正文展示代表性结果；完整逐模型、逐折均值和标准差见补充材料表 S4–S29。")
+    add_body(doc, "正文展示代表性结果；完整逐模型、逐折均值和标准差见补充材料表 S4–S30。")
     add_heading(doc, "3.1 组学图像示例", 2)
     add_body(
         doc,
@@ -721,6 +721,10 @@ def build_main():
     add_body(
         doc,
         "为区分死亡状态分类与严格时间到事件建模，本研究进一步将 FullSizeCNN 输出层替换为 Cox partial-likelihood objective，得到 FullSizeCNN-Cox 的 C-index 为 0.6818±0.0401，低于 BCE-based FullSizeCNN 的 0.7125±0.0303。这表明当前图像表示在严格删失感知生存建模下仍保留一定风险排序信息，但未显示出相对于传统时间到事件模型的明确优势；相关结果见补充材料表 S26。",
+    )
+    add_body(
+        doc,
+        "基因互作分析进一步显示，consensus genes 主要富集于激素信号、增殖与有丝分裂相关的 STRING 互作网络；跨组学分析也识别出若干 miRNA–mRNA 负相关及 CNV–mRNA 相关候选边。然而，按共表达社区重排 mRNA 图像后，FullSizeCNN 的 Accuracy 为 0.8931，并未超过原始 JSD 螺旋排序，说明生物邻接关系能够丰富可解释性，但尚未证明其能够稳定提升当前全尺寸卷积模型的预测性能。",
     )
     add_body(
         doc,
@@ -1258,7 +1262,21 @@ def build_supplement():
     add_dataframe_table(doc, ext, [0.8, 1.5, 1.2, 1.2, 0.8])
     add_caption(doc, "Table S29. METABRIC external single-omics validation for PAM50 and survival tasks (values are single external test-set estimates)")
 
-    add_heading(doc, "S22. 数据与脚本文件", 1)
+    add_heading(doc, "S22. 基因互作与网络重排分析", 1)
+    add_body(
+        doc,
+        "为考察基因互作关系是否能为图像化提供更贴近生物学的空间邻接，本研究在 PAM50 交集样本上构建了三类网络：mRNA 共表达网络、consensus-gene STRING PPI 网络，以及 miRNA–mRNA 负相关和 CNV–mRNA 相关的跨组学网络。根据共表达社区重新排列 mRNA 特征并生成 20×20 图像后，FullSizeCNN 的 Accuracy 为 0.8931，低于原始 JSD 螺旋排序，说明当前稀疏社区排序未带来预测增益，但可作为生物学邻接的补充表示。完整网络文件见 `data/gene_interaction/`。",
+    )
+    add_figure(doc, ROOT / "data/gene_interaction/fig_gene_interaction_overview.png", "Figure S17. Gene interaction analysis overview. A: consensus-gene STRING PPI; B: mRNA co-expression communities; C: top miRNA-mRNA negative correlations; D: top CNV-mRNA correlations.")
+    community = read_tsv("gene_interaction/community_reorder_fullsize_cnn_results.tsv")
+    community["variant"] = "community_reorder"
+    jsd_order = read_tsv("reorder_fullsize_cnn_results.tsv")
+    jsd_order = jsd_order[jsd_order["variant"] == "original_jsd_spiral"].copy()
+    order_cmp = pd.concat([jsd_order, community], ignore_index=True)[["variant", "task", "metric", "mean", "std"]]
+    add_dataframe_table(doc, order_cmp, [1.6, 0.9, 1.0, 0.8, 0.8])
+    add_caption(doc, "Table S30. Community-informed mRNA image ordering vs original JSD spiral ordering for FullSizeCNN PAM50 (5-fold CV, mean±SD)")
+
+    add_heading(doc, "S23. 数据与脚本文件", 1)
     for item in [
         "data/final_datasets/PAM50/{mRNA,CNV,miRNA}_PAM50_final.tsv",
         "data/final_datasets/Survival/{mRNA,CNV,miRNA}_Survival_final.tsv",
@@ -1309,7 +1327,7 @@ def build_supplement():
         "复现时建议固定随机种子 42；所有特征筛选、标准化、数据增强和模型拟合均在交叉验证训练折内完成，测试折不参与任何预处理与参数选择。",
     )
 
-    add_heading(doc, "S23. 补充材料参考文献", 1)
+    add_heading(doc, "S24. 补充材料参考文献", 1)
     add_body(doc, "[S1] Grossman RL, Heath AP, Ferretti V, Varmus HE, Lowy DR, Kibbe WA, et al. Toward a Shared Vision for Cancer Genomic Data. N Engl J Med. 2016;375(12):1109-1112. doi:10.1056/NEJMp1607591. PMID:27653561.")
     add_body(doc, "[S2] Goldman MJ, Craft B, Hastie M, Repecka K, McDade F, Kamath A, et al. Visualizing and interpreting cancer genomics data via the Xena platform. Nat Biotechnol. 2020;38(6):675-678. doi:10.1038/s41587-020-0546-8. PMID:32444850.")
     add_body(doc, "[S3] Mermel CH, Schumacher SE, Hill B, Meyerson ML, Beroukhim R, Getz G. GISTIC2.0 facilitates sensitive and confident localization of the targets of focal somatic copy-number alteration in human cancers. Genome Biol. 2011;12(4):R41. doi:10.1186/gb-2011-12-4-r41. PMID:21527027.")

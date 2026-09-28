@@ -1,0 +1,3 @@
+variant	task	metric	mean	std
+community_reorder	PAM50	accuracy	0.8931	0.0351
+community_reorder	PAM50	macro_f1	0.8758	0.0328

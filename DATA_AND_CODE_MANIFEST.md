@@ -61,6 +61,7 @@ This document describes each major component in the repository and how the files
 | `data/statistical_robustness_effect_sizes.tsv` | Fold-level effect sizes and approximate 95% CIs for best-fusion comparisons. |
 | `data/metabric_external_validation_results.tsv` | METABRIC mRNA external single-omics validation results. |
 | `data/metabric_cnv_external_validation_results.tsv` | METABRIC CNV external single-omics validation results. |
+| `data/gene_interaction/*` | Gene interaction networks, cross-omics correlations, and community-informed image ordering results. |
 
 ## 5. Interpretability outputs
 
@@ -94,6 +95,7 @@ All runnable Python scripts are stored under `scripts/`. Key scripts include:
 - `pam50_gene_exclusion_sensitivity.py` — PAM50 50-gene exclusion sensitivity analysis.
 - `generate_annotation_mapping.py` and `generate_sample_provenance.py` — annotation and provenance files used by the manuscript.
 - `run_additional_validation_experiments.py` — nested CV, FullSizeCNN-Cox, and strict PAM50 exclusion experiments.
+- `run_gene_interaction_analysis.py`, `run_cross_omics_interactions.py`, and `make_gene_interaction_figures.py` — gene interaction and cross-omics network analyses.
 
 ## 7. Machine-readable supplementary data and final drafts
 
