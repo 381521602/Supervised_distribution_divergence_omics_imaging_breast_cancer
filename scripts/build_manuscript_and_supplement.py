@@ -426,8 +426,8 @@ def build_main():
 
     add_heading(doc, "摘要", 1)
     add_body(doc, "背景：乳腺癌的高度异质性使单一组学难以稳定刻画 PAM50 分子亚型和总生存风险。多组学整合具有理论上的互补优势，但组学数据存在特征维度高、样本量有限、分布尺度不一致以及特征之间缺乏自然二维邻接关系等问题。", size=10.5)
-    add_body(doc, "方法：本研究以 TCGA-BRCA 的 mRNA、CNV 和 miRNA 为对象，提出一种监督式分布散度引导的组学空间表示框架（supervised information-divergence-guided omics spatial representation framework），即以 Jensen–Shannon divergence（JSD）评估每个特征的判别重要性，并将其编码为可解释的空间表示。所有特征筛选、标准化和模型拟合均在 5 折交叉验证训练折内完成；按 JSD 重要性降序并将高分特征置于中心，采用中心向外螺旋填充形成单通道灰度图，再输入全尺寸卷积神经网络（FullSizeCNN）。同时比较 LogisticRegression、RandomForest、GradientBoosting、SVC、KNN、MLP、CoxPH 及多种多组学融合策略。", size=10.5)
-    add_body(doc, "结果：在单组学 PAM50 四分类中，mRNA LogisticRegression 的 Accuracy 为 0.9628±0.0167、Macro-F1 为 0.9575±0.0199；CNV 最优 MLP 为 0.7213±0.0156；miRNA 最优 LogisticRegression 为 0.8410±0.0120。生存风险建模中，mRNA FullSizeCNN 的 C-index 为 0.7125±0.0303，CNV CoxPH 为 0.7109±0.0339，miRNA FullSizeCNN 为 0.6067±0.0703。多组学整合中，PAM50 的 Transformer 达到 Accuracy 0.9270±0.0132、Macro-F1 0.9288±0.0128；生存风险建模的三组学 Concat MLP 达到 C-index 0.7588±0.0492，CNN 晚期平均融合达到 ROC AUC 0.7591±0.0619。配对检验显示，上述最优融合均未较对应最优单组学形成统计显著优势（所有配对检验 p≥0.093）。Dense-equivalent controls performed comparably to or better than FullSizeCNN, while JSD-guided spiral ordering did not significantly outperform random permutations, indicating that the principal value of imaging was interpretability rather than predictive gain。可解释分析识别出 ESR1、TFF1、AGR3、FOXC1、MIA、FABP7、CCL19、MS4A1 等关键因子，富集于雌激素信号、细胞增殖调控、细胞分裂和上皮发育等通路。方案2功能类别遮盖分析在控制特征集合大小后，未能建立稳健的类别特异效应。", size=10.5)
+    add_body(doc, "方法：本研究以 TCGA-BRCA 的 mRNA、CNV 和 miRNA 为对象，提出一种监督式分布散度引导的组学空间表示框架（supervised information-divergence-guided omics spatial representation framework），即以 Jensen–Shannon divergence（JSD）评估每个特征的判别重要性，并将其编码为可解释的空间表示。固定特征数配置下，特征提取、标准化和模型拟合均在 5 折交叉验证训练折内完成；主分析的特征数选择与最终评估共用同一交叉验证，因此作为探索性估计，并以 nested repeated CV 进行敏感性分析。按 JSD 重要性降序并将高分特征置于中心，采用中心向外螺旋填充形成单通道灰度图，再输入全尺寸卷积神经网络（FullSizeCNN）。同时比较 LogisticRegression、RandomForest、GradientBoosting、SVC、KNN、MLP、CoxPH 及多种多组学融合策略。", size=10.5)
+    add_body(doc, "结果：在单组学 PAM50 四分类的探索性 5 折交叉验证中，mRNA LogisticRegression 的 Accuracy 为 0.9628±0.0167、Macro-F1 为 0.9575±0.0199；CNV 最优 MLP 为 0.7213±0.0156；miRNA 最优 LogisticRegression 为 0.8410±0.0120。无泄漏 nested repeated CV 中，mRNA PAM50 的 LogisticRegression、Dense 和 FullSizeCNN Accuracy 分别为 0.8392、0.8449 和 0.8510，说明性能对特征筛选与建模流程敏感。生存风险建模中，mRNA FullSizeCNN 的 C-index 为 0.7125±0.0303，CNV CoxPH 为 0.7109±0.0339，miRNA FullSizeCNN 为 0.6067±0.0703。多组学整合中，PAM50 的 Transformer 达到 Accuracy 0.9270±0.0132、Macro-F1 0.9288±0.0128；生存风险建模的三组学 Concat MLP 达到 C-index 0.7588±0.0492，CNN 晚期平均融合达到 ROC AUC 0.7591±0.0619。配对检验未提供存在统计可检测差异的证据（所有 p≥0.093）。Dense-equivalent controls performed comparably to or better than FullSizeCNN, while JSD-guided spiral ordering did not significantly outperform random permutations, indicating that the principal value of imaging was interpretability rather than predictive gain。可解释分析识别出 ESR1、TFF1、AGR3、FOXC1、MIA、FABP7、CCL19、MS4A1 等关键因子，富集于雌激素信号、细胞增殖调控、细胞分裂和上皮发育等通路。方案2功能类别遮盖分析在控制特征集合大小后，未能建立稳健的类别特异效应。", size=10.5)
     add_body(doc, "结论：监督式分布散度引导的组学空间表示框架能够把高维组学特征转换为适合全尺寸卷积建模的可解释图像坐标，并支持关键因子可视化。mRNA 是 PAM50 亚型重建的主要信号；生存风险建模显示多组学融合具有数值提升但未达到统计显著，提示存在需要独立验证的潜在互补信息。该表示的主要价值是可解释性而非由人工二维邻接带来的预测精度提升。", size=10.5)
     add_body(doc, "关键词：乳腺癌；多组学；组学图像化；Jensen–Shannon divergence；全尺寸卷积；PAM50；生存预测", size=10.5)
 
@@ -523,8 +523,8 @@ def build_main():
         doc,
         "为避免测试集信息泄漏，所有特征筛选均在每个交叉验证训练折内部完成。基础特征筛选方法包括低方差过滤、F 值（ANOVA）、L1/LASSO 和 Jensen–Shannon divergence（JSD）[44]。JSD 通过比较不同类别中特征值的分箱直方图，计算两个离散分布之间的对称信息散度。",
     )
-    add_body(doc, "低方差过滤首先移除训练折内方差为零或近似常数的特征；F 值采用单因素 ANOVA 比较连续特征在不同类别间均值差异；L1/LASSO 通过线性支持向量机的稀疏系数进行嵌入式选择。三种方法分别从稳定性、线性判别和稀疏正则化角度降低维度。特征筛选算法组合方式见补充材料表 S2。")
-    add_numbered_formula(doc, "Var(x_j) = (1/N) ∑_i (x_ij - x̄_j)²;  F_j = MS_between / MS_within;  min_w (1/2) ||Xw - y||² + λ ||w||₁", 1)
+    add_body(doc, "低方差过滤首先移除训练折内方差为零或近似常数的特征；F 值采用单因素 ANOVA 比较连续特征在不同类别间均值差异；L1 嵌入式选择使用线性支持向量机 LinearSVC(penalty='l1', dual=False, C=0.1, max_iter=5000) 的稀疏系数。三种方法分别从稳定性、线性判别和稀疏正则化角度降低维度。特征筛选算法组合方式见补充材料表 S2。")
+    add_numbered_formula(doc, "Var(x_j) = (1/N) ∑_i (x_ij - x̄_j)²;  F_j = MS_between / MS_within", 1)
     add_body(
         doc,
         "JSD 计算式：对类别 c 和 d 的特征直方图 P、Q，定义 D_JSD(P||Q) = 0.5 ∑_x [ P(x) log_2( 2P(x) / (P(x)+Q(x)) ) + Q(x) log_2( 2Q(x) / (P(x)+Q(x)) ) ]。二分类时直接计算两类间 JSD。多分类策略与具体组学相关：PAM50 mRNA 和生存数据使用平均 pairwise JSD，PAM50 CNV 使用 one-vs-rest max JSD，PAM50 miRNA 先使用 pairwise JSD 粗筛、再以 L1 精筛。为保证数值稳定，对直方图加入极小常数 ε 并进行概率归一化。",
@@ -536,7 +536,7 @@ def build_main():
     )
     add_body(
         doc,
-        "需要说明的是，特征数量的选择与最终性能评估共用同一 5 折交叉验证，因此本文报告的 Accuracy、Macro-F1、ROC AUC 与 C-index 属于探索性交叉验证估计（exploratory CV estimates），可能存在对最优特征数量的选择偏倚。受限于样本量，本文未另行构造嵌套交叉验证或独立验证集；最终特征数量应视为便于后续统一建模与比较的工作性设定，而非经过严格无偏验证的超参数。",
+        "需要说明的是，主分析中特征数量的选择与最终性能评估共用同一 5 折交叉验证，因此本文报告的 Accuracy、Macro-F1、ROC AUC 与 C-index 属于探索性交叉验证估计（exploratory CV estimates），可能存在对最优特征数量的选择偏倚。为评估该偏倚的大小，本文对 mRNA PAM50 关键模型增加了无泄漏 nested repeated CV：外层 5-fold × 5 repeats，内层 3-fold 选择特征数（200/400），特征筛选和图像排序均仅在训练折内完成；完整结果见补充材料表 S24。",
     )
 
     add_heading(doc, "2.4 组学图像化", 2)
@@ -720,6 +720,10 @@ def build_main():
     )
     add_body(
         doc,
+        "为区分死亡状态分类与严格时间到事件建模，本研究进一步将 FullSizeCNN 输出层替换为 Cox partial-likelihood objective，得到 FullSizeCNN-Cox 的 C-index 为 0.6818±0.0401，低于 BCE-based FullSizeCNN 的 0.7125±0.0303。这表明当前图像表示在严格删失感知生存建模下仍保留一定风险排序信息，但未显示出相对于传统时间到事件模型的明确优势；相关结果见补充材料表 S26。",
+    )
+    add_body(
+        doc,
         "面向 Molecular Stress Responses and Adaptive Reprogramming 这一目标主题，本研究在全转录组层面进一步考察了 Hypoxia、ROS、OXPHOS、UPR、mTORC1、Glycolysis、EMT 和 DNA repair 八条应激/适应性重编程通路与 JSD 高重要性基因、PAM50 亚型及生存风险的关系。结果显示，这些通路在前 500 个 JSD 高重要性基因中均未达到名义显著性富集（Fisher p 经 BH-FDR 校正后均不显著），单变量 Cox 分析也未发现任一通路评分与总生存显著相关。通路评分在 PAM50 亚型间高度差异（Kruskal-Wallis p<0.001），但这在表达定义亚型的背景下是预期现象。因此，在当前的 bulk 表达和紧凑型标志基因签名框架下，尚未观察到这些经典应激通路对判别或预后的独立贡献；相关结果应作为探索性阴性发现，并提示后续需在单细胞、空间转录组或通路过表达/敲低层面进一步验证。乳腺癌转移中的翻译适应与应激重编程机制为后续研究提供了更广的生物学背景[49]。",
     )
     add_body(
@@ -732,7 +736,7 @@ def build_main():
     )
     add_body(
         doc,
-        "局限包括：仅使用 TCGA-BRCA 单中心回顾性数据，缺少独立外部队列；生存事件数量较少，类别不平衡；螺旋位置仍然不是真实生物学空间；复杂模型可能过拟合。统计推断方面，配对检验仅基于 5 折（n=5）的折级分数，统计功效有限，且未进行多重比较校正，因此边缘显著结果（如生存 ROC AUC 的配对 t 检验 p=0.093）需要谨慎解释；后续应采用 repeated CV、bootstrap 置信区间或折级效应量（如 Cohen's d）来增强证据强度。此外，特征数量选择与最终评估共用同一交叉验证，存在选择偏倚，理想情况下应使用嵌套交叉验证或独立验证集。",
+        "局限包括：仅使用 TCGA-BRCA 单一回顾性队列，缺少独立外部队列验证；生存事件数量较少，类别不平衡；螺旋位置仍然不是真实生物学空间；复杂模型可能过拟合。统计推断方面，配对检验仅基于 5 折（n=5）的折级分数，统计功效有限，且未进行多重比较校正，因此 non-significant numerical differences（如生存 ROC AUC 的配对 t 检验 p=0.093）不应被解释为“两者无差异”；后续应采用 repeated CV、bootstrap 置信区间或折级效应量（如 Cohen's d）来增强证据强度。此外，主分析的特征数量选择与最终评估共用同一交叉验证，存在选择偏倚；虽然已对 mRNA PAM50 任务进行了 nested repeated-CV 敏感性分析，但主要多组学融合分析尚未在 nested CV 下全面重新评估，独立外部验证仍然必要。",
     )
     add_body(doc, "与已有研究相比，本工作的贡献不在于简单追求最高分类准确率，而在于提供一种可追溯、可映射到关键基因的组学图像化表示。该表示既保留原始特征值，又通过 JSD 将判别重要性显式编码到图像空间，为后续关键因子挖掘和临床转化提供了统一接口。")
 
@@ -1158,7 +1162,7 @@ def build_supplement():
     add_heading(doc, "S16. 应激与适应性重编程通路分析", 1)
     add_body(
         doc,
-        "面向 Molecular Stress Responses and Adaptive Reprogramming 主题，在全转录组（TCGA-BRCA HiSeqV2，20,530 基因）上对 Hypoxia、ROS、OXPHOS、UPR、mTORC1、Glycolysis、EMT、DNA repair 八条通路进行了探索性分析。这些通路采用人工整理的紧凑型标志基因签名，用于代表经典应激/适应性重编程程序，而非完整的 MSigDB Hallmark 或 Reactome 基因集；完整 pathway–gene 清单见 `data/stress_pathway_gene_sets.tsv`。以标志基因签名计算每样本通路评分，并用 Fisher 精确检验考察其在前 500 个 JSD 高重要性基因中的富集，用 Kruskal-Wallis 检验考察其与 PAM50 亚型的关联，用单变量 Cox 回归考察其与总生存的关联。所有 p 值均为原始未校正 p，同时报告 Benjamini–Hochberg FDR q-value。",
+        "面向 Molecular Stress Responses and Adaptive Reprogramming 主题，在全转录组（TCGA-BRCA HiSeqV2，20,530 基因）上对 Hypoxia、ROS、OXPHOS、UPR、mTORC1、Glycolysis、EMT、DNA repair 八条通路进行了探索性分析。这些通路采用人工整理的紧凑型标志基因签名，用于代表经典应激/适应性重编程程序，而非完整的 MSigDB Hallmark 或 Reactome 基因集；基因依据文献中经典 marker 先验选择，未根据本研究 TCGA 结果进行事后筛选。完整 pathway–gene 清单见 `data/stress_pathway_gene_sets.tsv`，其中包含 evidence_source、database_ID 和 selection_rule 字段。以标志基因签名计算每样本通路评分，并用 Fisher 精确检验考察其在前 500 个 JSD 高重要性基因中的富集，用 Kruskal-Wallis 检验考察其与 PAM50 亚型的关联，用单变量 Cox 回归考察其与总生存的关联。所有 p 值均为原始未校正 p，同时报告 Benjamini–Hochberg FDR q-value。",
     )
     sp = read_tsv("stress_pathway_analysis_results.tsv")
     sp.columns = [
