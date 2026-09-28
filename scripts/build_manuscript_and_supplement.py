@@ -384,7 +384,7 @@ def add_metrics_note(doc):
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     run = p.add_run(
         "说明：所有表格与图中结果均为“基于训练折内筛选特征的结果”，在 5 折交叉验证下给出均值±标准差。"
-        "PAM50 四分类报告 Accuracy 和 Macro-F1；生存预测报告 ROC AUC 和 Cox C-index。"
+        "PAM50 四分类报告 Accuracy 和 Macro-F1；生存风险建模报告 ROC AUC 和 Cox C-index。"
         "ROC AUC 以模型输出的死亡风险概率/风险分数作为连续预测分数计算；C-index 使用取负后的风险分数、生存时间与事件状态，通过 lifelines.utils.concordance_index 计算，风险分数越大代表死亡风险越高。"
     )
     set_run_font(run, size=9, color=MUTED, east="宋体")
@@ -427,9 +427,9 @@ def build_main():
     add_heading(doc, "摘要", 1)
     add_body(doc, "背景：乳腺癌的高度异质性使单一组学难以稳定刻画 PAM50 分子亚型和总生存风险。多组学整合具有理论上的互补优势，但组学数据存在特征维度高、样本量有限、分布尺度不一致以及特征之间缺乏自然二维邻接关系等问题。", size=10.5)
     add_body(doc, "方法：本研究以 TCGA-BRCA 的 mRNA、CNV 和 miRNA 为对象，提出一种监督式分布散度引导的组学空间表示框架（supervised information-divergence-guided omics spatial representation framework），即以 Jensen–Shannon divergence（JSD）评估每个特征的判别重要性，并将其编码为可解释的空间表示。固定特征数配置下，特征提取、标准化和模型拟合均在 5 折交叉验证训练折内完成；主分析的特征数选择与最终评估共用同一交叉验证，因此作为探索性估计，并以 nested repeated CV 进行敏感性分析。按 JSD 重要性降序并将高分特征置于中心，采用中心向外螺旋填充形成单通道灰度图，再输入全尺寸卷积神经网络（FullSizeCNN）。同时比较 LogisticRegression、RandomForest、GradientBoosting、SVC、KNN、MLP、CoxPH 及多种多组学融合策略。", size=10.5)
-    add_body(doc, "结果：在单组学 PAM50 四分类的探索性 5 折交叉验证中，mRNA LogisticRegression 的 Accuracy 为 0.9628±0.0167、Macro-F1 为 0.9575±0.0199；CNV 最优 MLP 为 0.7213±0.0156；miRNA 最优 LogisticRegression 为 0.8410±0.0120。无泄漏 nested repeated CV 中，mRNA PAM50 的 LogisticRegression、Dense 和 FullSizeCNN Accuracy 分别为 0.8392、0.8449 和 0.8510，说明性能对特征筛选与建模流程敏感。生存风险建模中，mRNA FullSizeCNN 的 C-index 为 0.7125±0.0303，CNV CoxPH 为 0.7109±0.0339，miRNA FullSizeCNN 为 0.6067±0.0703。多组学整合中，PAM50 的 Transformer 达到 Accuracy 0.9270±0.0132、Macro-F1 0.9288±0.0128；生存风险建模的三组学 Concat MLP 达到 C-index 0.7588±0.0492，CNN 晚期平均融合达到 ROC AUC 0.7591±0.0619。配对检验未提供存在统计可检测差异的证据（所有 p≥0.093）。Dense-equivalent controls performed comparably to or better than FullSizeCNN, while JSD-guided spiral ordering did not significantly outperform random permutations, indicating that the principal value of imaging was interpretability rather than predictive gain。可解释分析识别出 ESR1、TFF1、AGR3、FOXC1、MIA、FABP7、CCL19、MS4A1 等关键因子，富集于雌激素信号、细胞增殖调控、细胞分裂和上皮发育等通路。方案2功能类别遮盖分析在控制特征集合大小后，未能建立稳健的类别特异效应。", size=10.5)
+    add_body(doc, "结果：在单组学 PAM50 四分类的探索性 5 折交叉验证中，mRNA LogisticRegression 的 Accuracy 为 0.9628±0.0167、Macro-F1 为 0.9575±0.0199；CNV 最优 MLP 为 0.7213±0.0156；miRNA 最优 LogisticRegression 为 0.8410±0.0120。无泄漏 nested repeated CV 中，mRNA PAM50 的 LogisticRegression、Dense 和 FullSizeCNN Accuracy 分别为 0.8392、0.8449 和 0.8510，说明性能对特征筛选与建模流程敏感。生存风险建模中，mRNA FullSizeCNN 的 C-index 为 0.7125±0.0303，CNV CoxPH 为 0.7109±0.0339，miRNA FullSizeCNN 为 0.6067±0.0703。多组学整合中，PAM50 的 Transformer 达到 Accuracy 0.9270±0.0132、Macro-F1 0.9288±0.0128；生存风险建模的三组学 Concat MLP 达到 C-index 0.7588±0.0492，CNN 晚期平均融合达到 ROC AUC 0.7591±0.0619。配对检验未提供存在统计可检测差异的证据（所有 p≥0.093）。Dense-equivalent controls performed comparably to or better than FullSizeCNN, while JSD-guided spiral ordering did not significantly outperform random permutations, indicating that the principal value of imaging was interpretability rather than predictive gain. 可解释分析识别出 ESR1、TFF1、AGR3、FOXC1、MIA、FABP7、CCL19、MS4A1 等关键因子，富集于雌激素信号、细胞增殖调控、细胞分裂和上皮发育等通路。方案2功能类别遮盖分析在控制特征集合大小后，未能建立稳健的类别特异效应。", size=10.5)
     add_body(doc, "结论：监督式分布散度引导的组学空间表示框架能够把高维组学特征转换为适合全尺寸卷积建模的可解释图像坐标，并支持关键因子可视化。mRNA 是 PAM50 亚型重建的主要信号；生存风险建模显示多组学融合具有数值提升但未达到统计显著，提示存在需要独立验证的潜在互补信息。该表示的主要价值是可解释性而非由人工二维邻接带来的预测精度提升。", size=10.5)
-    add_body(doc, "关键词：乳腺癌；多组学；组学图像化；Jensen–Shannon divergence；全尺寸卷积；PAM50；生存预测", size=10.5)
+    add_body(doc, "关键词：乳腺癌；多组学；组学图像化；Jensen–Shannon divergence；全尺寸卷积；PAM50；生存风险建模", size=10.5)
 
     add_heading(doc, "1. 引言", 1)
     add_body(
@@ -478,7 +478,7 @@ def build_main():
     )
     add_body(
         doc,
-        "本文的贡献包括：提出 JSD 引导的中心-螺旋组学图像化框架；系统比较传统机器学习、MLP、FullSizeCNN 及多种多组学融合策略；在严格 5 折交叉验证下报告均值和标准差；利用 SHAP、CNN saliency 和基因功能类别图开展关键因子可视化；并通过方案2功能类别遮盖实验与等量随机遮盖对照，评估不同功能模块对 PAM50 分类和生存预测的贡献。",
+        "本文的贡献包括：提出 JSD 引导的中心-螺旋组学图像化框架；系统比较传统机器学习、MLP、FullSizeCNN 及多种多组学融合策略；在严格 5 折交叉验证下报告均值和标准差；利用 SHAP、CNN saliency 和基因功能类别图开展关键因子可视化；并通过方案2功能类别遮盖实验与等量随机遮盖对照，评估不同功能模块对 PAM50 分类和生存风险建模的贡献。",
     )
 
     add_heading(doc, "2. 材料与方法", 1)
@@ -515,7 +515,7 @@ def build_main():
     )
     add_body(
         doc,
-        "需要明确，除 CoxPH 与 DeepSurv 属于时间到事件模型外，其余模型（LogisticRegression、SVC、RandomForest、MLP、FullSizeCNN 等）以二元交叉熵拟合 OS 事件，本质上是死亡状态分类（mortality-status classification）；其输出被作为连续风险分数，再结合生存时间计算 C-index 进行生存排序评估（survival-ranking evaluation），因此本文所称“生存预测”并不等同于严格的风险率建模。",
+        "需要明确，除 CoxPH 与 DeepSurv 属于时间到事件模型外，其余模型（LogisticRegression、SVC、RandomForest、MLP、FullSizeCNN 等）以二元交叉熵拟合 OS 事件，本质上是死亡状态分类（mortality-status classification）；其输出被作为连续风险分数，再结合生存时间计算 C-index 进行生存排序评估（survival-ranking evaluation），因此本文所称“生存风险建模”并不等同于严格的风险率建模。",
     )
 
     add_heading(doc, "2.3 特征筛选与 JSD", 2)
@@ -566,9 +566,9 @@ def build_main():
     add_heading(doc, "2.5 模型", 2)
     add_body(
         doc,
-        "传统机器学习基线包括 LogisticRegression、RandomForest、GradientBoosting、线性 SVC、KNN 和 MLP；生存预测另纳入 CoxPH。LogisticRegression 使用 L2 默认正则并增加最大迭代；RandomForest 使用 200 棵树；GradientBoosting 使用 100 轮；SVC 使用线性核；KNN 使用 k=5；MLP 采用 128-64 隐层和 Dropout。CoxPH 采用 top-100 方差特征和 0.1 惩罚。",
+        "传统机器学习基线包括 LogisticRegression、RandomForest、GradientBoosting、线性 SVC、KNN 和 MLP；生存风险建模另纳入 CoxPH。LogisticRegression 使用 L2 默认正则并增加最大迭代；RandomForest 使用 200 棵树；GradientBoosting 使用 100 轮；SVC 使用线性核；KNN 使用 k=5；MLP 采用 128-64 隐层和 Dropout。CoxPH 作为传统时间到事件比较模型，使用单独定义的 top-100 方差特征和 0.1 惩罚。",
     )
-    add_body(doc, "MLP 与 FullSizeCNN 均使用 Adam 优化器，学习率 1×10⁻³、权重衰减 1×10⁻⁴，训练 30 个 epoch，批大小为 64。PAM50 使用交叉熵损失，输出四类概率；生存预测使用二元交叉熵损失，输出死亡风险概率。训练前仅在训练折上估计 StandardScaler 参数，测试折使用同一 scaler 变换。")
+    add_body(doc, "MLP 与 FullSizeCNN 均使用 Adam 优化器，学习率 1×10⁻³、权重衰减 1×10⁻⁴，训练 30 个 epoch，批大小为 64。PAM50 使用交叉熵损失，输出四类概率；生存风险建模使用二元交叉熵损失，输出死亡风险概率。训练前仅在训练折上估计 StandardScaler 参数，测试折使用同一 scaler 变换。")
     add_body(
         doc,
         "FullSizeCNN 的输入为 H×W×1 图像，第一层使用与 H×W 相同的全尺寸卷积核，输出 32 个 1×1 特征图；随后展平为 32 维向量，经 64 维全连接、ReLU 和 Dropout 后输出分类 logits 或生存风险。结构如图 2 所示。需要指出，该全尺寸卷积核在数学上等价于展平后的全连接投影，因此本文将其视为保留图像坐标接口的 full-field convolutional network，而不是滑动/局部卷积特征提取器；其图像接口主要用于后续归因可视化，而非依赖二维局部感受野获得预测增益。",
@@ -597,7 +597,7 @@ def build_main():
     add_heading(doc, "2.7 基因互作与网络重排分析", 2)
     add_body(
         doc,
-        "为考察基因互作关系是否能为图像化提供更贴近生物学的空间邻接，在 PAM50 交集样本上构建三类网络：mRNA 共表达网络、consensus-gene STRING PPI 网络，以及 miRNA–mRNA 负相关和 CNV–mRNA 相关网络。mRNA 共表达网络基于最终特征的 Pearson 相关，边阈值为 |r|≥0.75；PPI 使用 STRING 数据库的 high-confidence 边；跨组学相关使用 Spearman 相关并保留最强候选边。随后按共表达社区重排 mRNA 特征，生成与原始 JSD 螺旋排序相同的 20×20 灰度图，并用 FullSizeCNN 进行 5 折交叉验证比较。",
+        "为考察基因互作关系是否能为图像化提供更贴近生物学的空间邻接，在 PAM50 交集样本上构建三类网络：mRNA 共表达网络、consensus-gene STRING PPI 网络，以及 miRNA–mRNA 负相关和 CNV–mRNA 相关网络。mRNA 共表达网络基于最终特征的 Pearson 相关，边阈值为 |r|≥0.75；该阈值较保守，因此网络社区较稀疏，结果应作为高置信边描述而非最终生物学模块定义。PPI 使用 STRING 数据库的 high-confidence 边；跨组学相关使用 Spearman 相关并保留最强候选边。随后按共表达社区重排 mRNA 特征，生成与原始 JSD 螺旋排序相同的 20×20 灰度图，并用 FullSizeCNN 进行 5 折交叉验证比较。",
     )
 
     add_heading(doc, "3. 结果", 1)
@@ -613,7 +613,7 @@ def build_main():
     add_body(doc, "Table 3 summarizes the overall best model for each task on full samples; Figure 4 shows all compared models with mean±SD. Full single-omics results are in Supplementary Table S4, and intersection single-omics baselines in Supplementary Table S5.")
     add_body(
         doc,
-        "单组学结果显示，mRNA 对 PAM50 的判别能力最强，miRNA 次之，CNV 最弱；生存预测中 mRNA 与 CNV 的 C-index 接近，miRNA 较弱。各任务、各指标下的最优模型及其 5 折交叉验证 mean±SD 见表 3，完整模型比较见图 4 与补充表 S4。",
+        "单组学结果显示，mRNA 对 PAM50 的判别能力最强，miRNA 次之，CNV 最弱；生存风险建模中 mRNA 与 CNV 的 C-index 接近，miRNA 较弱。各任务、各指标下的最优模型及其 5 折交叉验证 mean±SD 见表 3，完整模型比较见图 4 与补充表 S4。",
     )
     single_all = read_tsv("comprehensive_batch1_single_omics_results.tsv")
     single_best_rows = []
@@ -643,14 +643,14 @@ def build_main():
     )
     add_body(
         doc,
-        "生存预测中，CNN 晚期平均融合的 ROC AUC 为 0.7591±0.0619，三组学 Concat MLP 的 C-index 为 0.7588±0.0492；两者分别高于交集最优单组学 mRNA MLP（ROC AUC 0.7258±0.0690）和 mRNA FullSizeCNN（C-index 0.7448±0.0705），但统计检验显示提升未达到显著水平（补充表 S10）。",
+        "生存风险建模中，CNN 晚期平均融合的 ROC AUC 为 0.7591±0.0619，三组学 Concat MLP 的 C-index 为 0.7588±0.0492；两者分别高于交集最优单组学 mRNA MLP（ROC AUC 0.7258±0.0690）和 mRNA FullSizeCNN（C-index 0.7448±0.0705），但统计检验显示提升未达到显著水平（补充表 S10）。在相同图像 backbone 下使用 Cox partial-likelihood 的 FullSizeCNN-Cox 得到 C-index 0.6818±0.0401，低于 BCE-based FullSizeCNN，进一步说明当前图像表示在严格时间到事件建模下未显示明确优势。",
     )
     add_figure(doc, FIG / "fig4_triple_integration_v2.png", "Figure 5. Triple-omics fusion results. A and B: PAM50 Accuracy and Macro-F1; C and D: survival ROC AUC and C-index. Error bars represent 5-fold cross-validation SD. PAM50 intersection n=493; survival intersection n=731.", width=6.4)
 
     add_heading(doc, "3.4 两两组学、Stacking 与复杂方法", 2)
     add_body(
         doc,
-        "两两组学中，PAM50 的 mRNA+CNV LogisticRegression 达到 Accuracy 0.9633±0.0039；mRNA+miRNA LogisticRegression 为 0.9095；CNV+miRNA LogisticRegression 为 0.8438。生存预测中，mRNA+CNV Concat MLP 的 C-index 为 0.7451，mRNA+miRNA Concat MLP 为 0.7337，CNV+miRNA CNN LateAvg 为 0.7216。9 模型 Stacking 的 PAM50 Accuracy 为 0.9229，生存 C-index 为 0.7321、ROC AUC 为 0.7469，未稳定超过最优简单融合。",
+        "两两组学中，PAM50 的 mRNA+CNV LogisticRegression 达到 Accuracy 0.9633±0.0039；mRNA+miRNA LogisticRegression 为 0.9095；CNV+miRNA LogisticRegression 为 0.8438。生存风险建模中，mRNA+CNV Concat MLP 的 C-index 为 0.7451，mRNA+miRNA Concat MLP 为 0.7337，CNV+miRNA CNN LateAvg 为 0.7216。9 模型 Stacking 的 PAM50 Accuracy 为 0.9229，生存 C-index 为 0.7321、ROC AUC 为 0.7469，未稳定超过最优简单融合。",
     )
     add_body(
         doc,
@@ -698,14 +698,14 @@ def build_main():
     add_heading(doc, "3.8 基因互作与网络重排分析", 2)
     add_body(
         doc,
-        "mRNA consensus genes 的 STRING PPI 网络主要涉及 ESR1、PGR、MYBL2、BIRC5 和 E2F8，提示激素信号与细胞增殖/有丝分裂程序的耦合。mRNA 共表达网络在较高阈值下形成较稀疏的社区结构；miRNA–mRNA 与 CNV–mRNA 分析识别出若干候选跨组学调控边。按共表达社区重排 mRNA 图像后，FullSizeCNN 的 Accuracy 为 0.8931，低于原始 JSD 螺旋排序，说明生物邻接关系能够提供可解释性上下文，但当前未带来预测性能提升；完整网络文件与总览图见补充材料 S22、图 S17，社区重排对比见表 S30。",
+        "mRNA consensus genes 的 STRING PPI 网络主要涉及 ESR1、PGR、MYBL2、BIRC5 和 E2F8，提示激素信号与细胞增殖/有丝分裂程序的耦合；由于仅保留高置信边，PPI 结果应视为探索性证据。mRNA 共表达网络在较高阈值下形成较稀疏的社区结构；miRNA–mRNA 与 CNV–mRNA 分析识别出若干候选跨组学调控边。按共表达社区重排 mRNA 图像后，FullSizeCNN 的 Accuracy 为 0.8931，低于原始 JSD 螺旋排序，说明生物邻接关系能够提供可解释性上下文，但当前未带来预测性能提升；完整网络文件与总览图见补充材料 S22、图 S17，社区重排对比见表 S30。",
     )
     add_figure(doc, ROOT / "data/gene_interaction/fig_gene_interaction_overview.png", "Figure 10. Gene interaction analysis overview. A: consensus-gene STRING PPI; B: mRNA co-expression communities; C: top miRNA-mRNA negative correlations; D: top CNV-mRNA correlations. The community-informed ordering is compared with the JSD spiral ordering in Supplementary Table S30.", width=6.4)
 
     add_heading(doc, "4. 讨论", 1)
     add_body(
         doc,
-        "在本数据集中，mRNA 是 PAM50 分型的主要信号源，其 LogisticRegression 和 SVC 已接近高精度，而 FullSizeCNN 在小样本下也达到 0.93 以上 Accuracy。CNV 单独预测能力有限，但在生存预测中 CoxPH 和 LogisticRegression 的 C-index 与 mRNA 接近，提示拷贝数变异可能携带与长期结局相关的补充信息。miRNA 的样本量较小，单组学性能较低。",
+        "在本数据集中，mRNA 是 PAM50 分型的主要信号源，其 LogisticRegression 和 SVC 已接近高精度，而 FullSizeCNN 在小样本下也达到 0.93 以上 Accuracy。CNV 单独预测能力有限，但在生存风险建模中 CoxPH 和 LogisticRegression 的 C-index 与 mRNA 接近，提示拷贝数变异可能携带与长期结局相关的补充信息。miRNA 的样本量较小，单组学性能较低。",
     )
     add_body(
         doc,
@@ -713,7 +713,7 @@ def build_main():
     )
     add_body(
         doc,
-        "多组学融合对 PAM50 的增益有限，主要原因是 mRNA 已具有强判别能力，其他组学在高维小样本条件下容易引入噪声。生存任务中，简单拼接 MLP 和 CNN 晚期平均融合的均值优于单组学，说明多组学在生存风险预测中的互补性更强；但配对 t 检验与 Wilcoxon 检验均未达到 0.05 显著性水平（ROC AUC 的配对 t 检验 p=0.093），提示当前样本量不足以稳定区分融合策略。",
+        "多组学融合对 PAM50 的增益有限，主要原因是 mRNA 已具有强判别能力，其他组学在高维小样本条件下容易引入噪声。生存风险建模中，简单拼接 MLP 和 CNN 晚期平均融合的均值优于单组学，说明多组学在生存风险建模中的互补性更强；但配对 t 检验与 Wilcoxon 检验均未达到 0.05 显著性水平（ROC AUC 的配对 t 检验 p=0.093），提示当前样本量不足以稳定区分融合策略。",
     )
     add_body(
         doc,
@@ -721,15 +721,15 @@ def build_main():
     )
     add_body(
         doc,
-        "为进一步检验二维空间结构本身是否带来额外增益，本研究训练了与 FullSizeCNN 参数量一致的 Dense 等价基线（Flatten→Dense(32)→Dense(64)→输出，首层参数量与全尺寸卷积核完全相同）。结果显示，该 Dense 基线在 PAM50 上整体优于或持平 FullSizeCNN（mRNA Accuracy 0.9568±0.0184 对 0.9316±0.0071；CNV 0.7238 对 0.7164；miRNA 0.8370 对 0.8230），而生存预测中两者互有高低且差异未超过交叉验证标准差（mRNA C-index 0.6802 对 0.7125）。因此，本数据中的判别信息主要来自原始特征数值本身，而非人为构造的二维邻接结构；FullSizeCNN 图像化的价值在于把特征重要性、功能类别和模型注意力统一到同一像素坐标系，从而支撑可解释分析，而非提升预测精度。",
+        "为进一步检验二维空间结构本身是否带来额外增益，本研究训练了与 FullSizeCNN 参数量一致的 Dense 等价基线（Flatten→Dense(32)→Dense(64)→输出，首层参数量与全尺寸卷积核完全相同）。结果显示，该 Dense 基线在 PAM50 上整体优于或持平 FullSizeCNN（mRNA Accuracy 0.9568±0.0184 对 0.9316±0.0071；CNV 0.7238 对 0.7164；miRNA 0.8370 对 0.8230），而生存风险建模中两者互有高低且差异未超过交叉验证标准差（mRNA C-index 0.6802 对 0.7125）。因此，本数据中的判别信息主要来自原始特征数值本身，而非人为构造的二维邻接结构；FullSizeCNN 图像化的价值在于把特征重要性、功能类别和模型注意力统一到同一像素坐标系，从而支撑可解释分析，而非提升预测精度。",
     )
     add_body(
         doc,
-        "作为对排序假设的直接检验，本研究在 mRNA 上对 JSD 螺旋排序与 20 次随机基因排列进行了对照。结果表明，JSD 螺旋排序并未优于随机排列：PAM50 Accuracy 的 JSD 结果为 0.9316，而 20 次随机排列的均值为 0.9267（范围 0.9112–0.9400，经验 p=0.25）；Survival C-index 的 JSD 结果为 0.7125，随机排列均值为 0.7055（经验 p=0.35）。均值表达排序在 PAM50 Accuracy 上与 JSD 完全一致（0.9316），进一步说明二维像素位置本身几乎不携带预测信息。据此，本文将组学图像化明确限定为一种“可解释的空间表示”，而不是能提升分类或生存预测精度的排序方法。",
+        "作为对排序假设的直接检验，本研究在 mRNA 上对 JSD 螺旋排序与 20 次随机基因排列进行了对照。结果表明，JSD 螺旋排序并未优于随机排列：PAM50 Accuracy 的 JSD 结果为 0.9316，而 20 次随机排列的均值为 0.9267（范围 0.9112–0.9400，经验 p=0.25）；Survival C-index 的 JSD 结果为 0.7125，随机排列均值为 0.7055（经验 p=0.35）。均值表达排序在 PAM50 Accuracy 上与 JSD 完全一致（0.9316），进一步说明二维像素位置本身几乎不携带预测信息。据此，本文将组学图像化明确限定为一种“可解释的空间表示”，而不是能提升分类或生存风险排序精度的排序方法。",
     )
     add_body(
         doc,
-        "为控制特征数量选择与最终评估共用同一交叉验证可能带来的选择偏倚，本研究进一步在 mRNA PAM50 上进行了无泄漏嵌套交叉验证：外层 5-fold × 5 repeats，内层 3-fold 选择特征数（200/400），特征筛选采用 V_L1，并在所选特征上按 JSD 排序生成 FullSizeCNN 图像。结果显示，LogisticRegression 的 Accuracy 为 0.8392±0.0288，FullSizeCNN 为 0.8510±0.0282，Dense 等价基线为 0.8449±0.0326；三者均低于正文基于最终 400 特征的结果，且 FullSizeCNN 与 Dense 的差异未超过交叉验证标准差。这再次表明，二维空间布局本身并未提供稳定的预测增益，正文结果应理解为基于训练折内预选特征的 exploratory CV estimate；完整结果见补充材料表 S24–S26。",
+        "为控制特征数量选择与最终评估共用同一交叉验证可能带来的选择偏倚，本研究进一步在 mRNA PAM50 上进行了无泄漏嵌套交叉验证：外层 5-fold × 5 repeats，内层 3-fold 选择特征数（200/400），特征筛选采用 V_L1，并在所选特征上按 JSD 排序生成 FullSizeCNN 图像。结果显示，LogisticRegression 的 Accuracy 为 0.8392±0.0288，FullSizeCNN 为 0.8510±0.0282，Dense 等价基线为 0.8449±0.0326；三者均低于正文基于最终 400 特征的结果，且 FullSizeCNN 与 Dense 的差异未超过交叉验证标准差。该差异可能同时来自特征数选择和特征筛选流程的改变，而非单一的选择偏倚，因此不能把 0.9628 与 0.8392 的落差完全归因于原主结果的乐观偏差。这再次表明，二维空间布局本身并未提供稳定的预测增益，正文结果应理解为基于训练折内预选特征的 exploratory CV estimate；完整结果见补充材料表 S24–S26。",
     )
     add_body(
         doc,
@@ -814,7 +814,7 @@ def build_main():
     add_body(doc, "[48] Lundberg SM, Lee SI. A unified approach to interpreting model predictions. In: Advances in Neural Information Processing Systems. 2017;30:4765-4774. arXiv:1705.07874.")
     add_body(doc, "[49] Chen S, Navickas A, Goodarzi H. Translational adaptation in breast cancer metastasis and emerging therapeutic opportunities. Trends Pharmacol Sci. 2024;45(4):304-318. doi:10.1016/j.tips.2024.02.002.")
     add_body(doc, "[50] Wang S, Liu Y, Zhang H, Liu Z. SurvConvMixer: robust and interpretable cancer survival prediction based on ConvMixer using pathway-level gene expression images. BMC Bioinformatics. 2024;25(1):133. doi:10.1186/s12859-024-05745-2.")
-    add_body(doc, "[51] Li Q, Liu L, Zhang Q, Zhang X, Li N, Zhao Y, et al. MoACNN-XGNet: interpretable multi-omics convolutional network for breast cancer subtyping and prognostic genes identification. IEEE J Biomed Health Inform. 2025. doi:10.1109/JBHI.2025.3595381.")
+    add_body(doc, "[51] Li Q, Liu L, Zhang Q, Zhang X, Li N, Zhao Y, et al. MoACNN-XGNet: interpretable multi-omics convolutional network for breast cancer subtyping and prognostic genes identification. IEEE J Biomed Health Inform. 2025. Early access. doi:10.1109/JBHI.2025.3595381.")
 
     add_body(doc, "Data availability statement：本研究使用的原始公开数据来自 The Cancer Genome Atlas（TCGA-BRCA），可通过 NCI Genomic Data Commons（GDC）数据门户获取（project TCGA-BRCA），并可经 UCSC Xena 平台访问（dataset: TCGA Breast Cancer (BRCA)）。")
     add_body(doc, "本研究的处理数据、特征选择与建模代码、JSD 图像、结果表、补充材料及可复现说明已整理为代码与数据仓库并公开托管于 GitHub（repository: Supervised_distribution_divergence_omics_imaging_breast_cancer），仓库链接见正文末尾的 Code availability 条目。")
@@ -1280,7 +1280,7 @@ def build_supplement():
         doc,
         "为考察基因互作关系是否能为图像化提供更贴近生物学的空间邻接，本研究在 PAM50 交集样本上构建了三类网络：mRNA 共表达网络、consensus-gene STRING PPI 网络，以及 miRNA–mRNA 负相关和 CNV–mRNA 相关的跨组学网络。根据共表达社区重新排列 mRNA 特征并生成 20×20 图像后，FullSizeCNN 的 Accuracy 为 0.8931，低于原始 JSD 螺旋排序，说明当前稀疏社区排序未带来预测增益，但可作为生物学邻接的补充表示。完整网络文件见 `data/gene_interaction/`。",
     )
-    add_figure(doc, ROOT / "data/gene_interaction/fig_gene_interaction_overview.png", "Figure S17. Gene interaction analysis overview. A: consensus-gene STRING PPI; B: mRNA co-expression communities; C: top miRNA-mRNA negative correlations; D: top CNV-mRNA correlations.")
+    add_figure(doc, ROOT / "data/gene_interaction/fig_gene_interaction_overview.png", "Figure S17. Gene interaction analysis overview. A: consensus-gene STRING PPI; B: mRNA co-expression communities; C: top miRNA-mRNA negative correlations; D: top CNV-mRNA correlations. A larger version is shown as Figure 10 in the main text.")
     community = read_tsv("gene_interaction/community_reorder_fullsize_cnn_results.tsv")
     community["variant"] = "community_reorder"
     jsd_order = read_tsv("reorder_fullsize_cnn_results.tsv")
