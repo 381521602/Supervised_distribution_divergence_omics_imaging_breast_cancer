@@ -700,6 +700,7 @@ def build_main():
         doc,
         "mRNA consensus genes 的 STRING PPI 网络主要涉及 ESR1、PGR、MYBL2、BIRC5 和 E2F8，提示激素信号与细胞增殖/有丝分裂程序的耦合。mRNA 共表达网络在较高阈值下形成较稀疏的社区结构；miRNA–mRNA 与 CNV–mRNA 分析识别出若干候选跨组学调控边。按共表达社区重排 mRNA 图像后，FullSizeCNN 的 Accuracy 为 0.8931，低于原始 JSD 螺旋排序，说明生物邻接关系能够提供可解释性上下文，但当前未带来预测性能提升；完整网络文件与总览图见补充材料 S22、图 S17，社区重排对比见表 S30。",
     )
+    add_figure(doc, ROOT / "data/gene_interaction/fig_gene_interaction_overview.png", "Figure 10. Gene interaction analysis overview. A: consensus-gene STRING PPI; B: mRNA co-expression communities; C: top miRNA-mRNA negative correlations; D: top CNV-mRNA correlations. The community-informed ordering is compared with the JSD spiral ordering in Supplementary Table S30.", width=6.4)
 
     add_heading(doc, "4. 讨论", 1)
     add_body(
