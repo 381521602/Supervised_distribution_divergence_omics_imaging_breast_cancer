@@ -594,6 +594,12 @@ def build_main():
     add_body(doc, "分析使用 Python 3.11 及相关科学计算库完成：scikit-learn 用于传统机器学习与交叉验证，PyTorch 用于 MLP、FullSizeCNN 和深度融合模型，lifelines 用于 CoxPH 与 C-index，SHAP 和梯度 saliency 用于可解释性。固定随机种子为 42。")
     add_metrics_note(doc)
 
+    add_heading(doc, "2.7 基因互作与网络重排分析", 2)
+    add_body(
+        doc,
+        "为考察基因互作关系是否能为图像化提供更贴近生物学的空间邻接，在 PAM50 交集样本上构建三类网络：mRNA 共表达网络、consensus-gene STRING PPI 网络，以及 miRNA–mRNA 负相关和 CNV–mRNA 相关网络。mRNA 共表达网络基于最终特征的 Pearson 相关，边阈值为 |r|≥0.75；PPI 使用 STRING 数据库的 high-confidence 边；跨组学相关使用 Spearman 相关并保留最强候选边。随后按共表达社区重排 mRNA 特征，生成与原始 JSD 螺旋排序相同的 20×20 灰度图，并用 FullSizeCNN 进行 5 折交叉验证比较。",
+    )
+
     add_heading(doc, "3. 结果", 1)
     add_body(doc, "正文展示代表性结果；完整逐模型、逐折均值和标准差见补充材料表 S4–S30。")
     add_heading(doc, "3.1 组学图像示例", 2)
@@ -687,6 +693,12 @@ def build_main():
     add_body(
         doc,
         "为区分“功能模块特异性贡献”与“特征数量/区域大小效应”，对 mRNA 每个类别设置同数量随机基因遮盖对照。结果显示，功能类别遮盖与等量随机遮盖的性能差异在多数比较中未达到显著水平。对 mRNA PAM50 Other 基因重新富集发现，其仍显著富集于上皮细胞分化、上皮发育、组织发育、雌激素信号通路和细胞群体增殖等过程。SHAP 与 CNN saliency 共识基因的类别交叉分析显示，Top50 共识基因主要落在 Development/Epithelium 和 Other 中，其次是 Cell cycle/Proliferation、Signaling/Transport 和 Hormone/Metabolism。配对检验未显示大多数功能类别遮盖与基线之间存在稳健显著差异；折级指标见补充材料表 S18，配对检验见补充材料表 S19，Other 类二次富集见补充材料表 S20，共识基因重叠见补充材料表 S21。",
+    )
+
+    add_heading(doc, "3.8 基因互作与网络重排分析", 2)
+    add_body(
+        doc,
+        "mRNA consensus genes 的 STRING PPI 网络主要涉及 ESR1、PGR、MYBL2、BIRC5 和 E2F8，提示激素信号与细胞增殖/有丝分裂程序的耦合。mRNA 共表达网络在较高阈值下形成较稀疏的社区结构；miRNA–mRNA 与 CNV–mRNA 分析识别出若干候选跨组学调控边。按共表达社区重排 mRNA 图像后，FullSizeCNN 的 Accuracy 为 0.8931，低于原始 JSD 螺旋排序，说明生物邻接关系能够提供可解释性上下文，但当前未带来预测性能提升；完整网络文件与总览图见补充材料 S22、图 S17，社区重排对比见表 S30。",
     )
 
     add_heading(doc, "4. 讨论", 1)
