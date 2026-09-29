@@ -1,8 +1,8 @@
-# Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction
+# Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtype reconstruction and survival risk modeling
 
 This repository provides the analysis code, modeling-ready feature datasets, JSD image arrays, selected result tables, and interpretability outputs for the manuscript:
 
-**Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtyping and survival prediction**
+**Supervised distribution-divergence-guided omics imaging and multi-omics fusion for breast cancer molecular subtype reconstruction and survival risk modeling**
 
 The repository is intended for research reproducibility. TCGA-BRCA raw omics data are public and can be obtained from GDC and UCSC Xena; only the processed modeling-ready tables and image arrays generated for this study are included here.
 
@@ -17,7 +17,7 @@ The repository is intended for research reproducibility. TCGA-BRCA raw omics dat
 - `data/brca_labels_modeling_ready.tsv`  
   Modeling-ready clinical/molecular labels: case ID, PAM50 four-class label, OS event, and OS time.
 - `data/final_datasets/`  
-  Final pre-selected feature matrices for PAM50 and survival tasks.
+  Final feature matrices for PAM50 and survival tasks (features selected within each cross-validation training fold).
 - `data/selected_features/`  
   Feature names and per-omics selected feature matrices.
 - `data/images/`  

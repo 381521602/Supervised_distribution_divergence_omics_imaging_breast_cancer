@@ -16,12 +16,12 @@ This document describes each major component in the repository and how the files
 | `data/sample_level_provenance.tsv` | Case-level provenance: sample IDs, sample type, PAM50 label, OS time/event, and omics availability. |
 | `data/omics_functional_category_annotation.tsv` | Complete feature-to-functional-category mapping used in the masking and interpretability analyses. |
 
-## 2. Final pre-selected feature matrices
+## 2. Final feature matrices
 
 | Path | Task |
 | --- | --- |
 | `data/final_datasets/PAM50/*.tsv` | Final mRNA/CNV/miRNA feature matrices for PAM50 four-class classification. |
-| `data/final_datasets/Survival/*.tsv` | Final mRNA/CNV/miRNA feature matrices for overall survival prediction. |
+| `data/final_datasets/Survival/*.tsv` | Final mRNA/CNV/miRNA feature matrices for survival risk modeling. |
 | `data/selected_features/*` | Feature names, selected matrices, and JSD score files. |
 
 ## 3. Omics images
@@ -32,7 +32,7 @@ This document describes each major component in the repository and how the files
 | `data/images/Survival/` | JSD-ordered images for survival single-omics CNN models. |
 | `data/images/examples/` | Example grayscale, JSD, and functional-category grids. |
 | `data/images/report_figures/` | FullSizeCNN architecture and report-level comparison figures. |
-| `data/paper_figures/` | Final manuscript figures referenced by `build_manuscript_and_supplement.py` (Figures 1–7 and the Dense/random/stress/PAM50 sensitivity figures). |
+| `data/paper_figures/` | Final manuscript figures referenced by `build_manuscript_and_supplement.py` (main-text Figures 1–10 and the Dense/random/stress/PAM50-sensitivity supplementary figures). |
 
 ## 4. Aggregated results
 
