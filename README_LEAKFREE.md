@@ -105,3 +105,26 @@ historical comparison only and should not be cited as unbiased estimates.
 - The integer copy-number discretization is a standard convention, not the
   GISTIC2 algorithm; it agrees with Xena GISTIC2 thresholded calls on 50.6% of
   overlapping gene-sample cells (Cohen's kappa 0.257, Pearson r 0.565).
+
+## METABRIC candidate-gene replication (Table S32)
+
+The independent candidate-gene validation uses METABRIC mRNA z-scores and
+clinical annotations obtained from cBioPortal. To regenerate the inputs:
+
+```bash
+python scripts/download_metabric_filtered.py      # clinical files
+python scripts/fetch_metabric_selected_genes.py   # mRNA z-score matrix (selected genes)
+python scripts/fetch_metabric_top_genes.py        # mRNA z-score matrix (top genes)
+```
+
+The subtype labels are the PAM50-derived Claudin categories from the METABRIC
+clinical file (`CLAUDIN_SUBTYPE`, Curtis et al. 2012), restricted to the four
+main classes (claudin-low, Normal, and unannotated samples excluded). Then:
+
+```bash
+python scripts/run_candidate_gene_metabric.py
+```
+
+produces `data/results/candidate_gene_metabric_validation_v2.tsv` with per-gene
+subtype means, univariable Cox HR (95% CI), BH-FDR q-values, and multivariable
+Cox (age + Nottingham Prognostic Index + subtype) sensitivity results.

@@ -7,7 +7,7 @@ import pandas as pd
 
 D = Path(__file__).resolve().parent.parent / "data"
 RAW = D / "cnv_gene_matrix.tsv"
-LABELS = D.parent / "github_release" / "data" / "brca_labels_modeling_ready.tsv"
+LABELS = D / "brca_labels_modeling_ready.tsv"
 OUT = D / "cnv_gene_case_matrix.tsv"
 
 
