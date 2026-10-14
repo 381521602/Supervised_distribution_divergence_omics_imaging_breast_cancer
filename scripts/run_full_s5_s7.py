@@ -197,9 +197,11 @@ def single(task):
     binary = task == "OS"
     m1, m2 = ("roc_auc", "c_index") if binary else ("accuracy", "macro_f1")
     names = list(ml_models().keys()) + ["MLP", "FullSizeCNN", "Dense"] + (["CoxPH"] if binary else [])
-    res = {n: [] for n in names}
     cv = StratifiedKFold(n_splits=K_FOLDS, shuffle=True, random_state=RANDOM_STATE)
+    rows = []
     for o in OMICS:
+        res = {n: [] for n in names}
+        res2 = {n: [] for n in names}
         for tr, te in cv.split(np.zeros(len(y)), y):
             pipe = fold_sel(X, y, task, o, tr)
             Xtr = pipe.transform(X[o][tr]); Xte = pipe.transform(X[o][te])
@@ -209,12 +211,24 @@ def single(task):
             ite = make_images(Xte[:, order], np.arange(Xte.shape[1]), SZ)
             for name, clf in ml_models().items():
                 m = clf.fit(Xtr, y[tr])
-                r = m.predict_proba(Xte)[:, 1] if binary and hasattr(m, "predict_proba") else (m.decision_function(Xte) if binary else m.predict(Xte))
-                res[name].append((roc_auc_score(y[te], r) if binary else accuracy_score(y[te], r)))
+                if binary:
+                    r = m.predict_proba(Xte)[:, 1] if hasattr(m, "predict_proba") else m.decision_function(Xte)
+                    res[name].append(roc_auc_score(y[te], r))
+                    res2[name].append(concordance_index(yt[te], -r, y[te]))
+                else:
+                    pred = m.predict(Xte)
+                    res[name].append(accuracy_score(y[te], pred))
+                    res2[name].append(f1_score(y[te], pred, average="macro"))
             p = train_mlp(Xtr, y[tr], Xte, binary)
-            res["MLP"].append(roc_auc_score(y[te], p) if binary else accuracy_score(y[te], p.argmax(1)))
+            if binary:
+                res["MLP"].append(roc_auc_score(y[te], p)); res2["MLP"].append(concordance_index(yt[te], -p, y[te]))
+            else:
+                res["MLP"].append(accuracy_score(y[te], p.argmax(1))); res2["MLP"].append(f1_score(y[te], p.argmax(1), average="macro"))
             p = train_single_prob(itr, y[tr], ite, SZ, binary)
-            res["FullSizeCNN"].append(roc_auc_score(y[te], p) if binary else accuracy_score(y[te], p.argmax(1)))
+            if binary:
+                res["FullSizeCNN"].append(roc_auc_score(y[te], p)); res2["FullSizeCNN"].append(concordance_index(yt[te], -p, y[te]))
+            else:
+                res["FullSizeCNN"].append(accuracy_score(y[te], p.argmax(1))); res2["FullSizeCNN"].append(f1_score(y[te], p.argmax(1), average="macro"))
             # Dense baseline
             torch.manual_seed(RANDOM_STATE); np.random.seed(RANDOM_STATE)
             dm = Dense(Xtr.shape[1], 1 if binary else 4)
@@ -234,7 +248,10 @@ def single(task):
             with torch.no_grad():
                 pd_ = dm(torch.tensor(Xte, dtype=torch.float32))
             pd_ = torch.sigmoid(pd_).numpy().ravel() if binary else F.softmax(pd_, dim=1).numpy()
-            res["Dense"].append(roc_auc_score(y[te], pd_) if binary else accuracy_score(y[te], pd_.argmax(1)))
+            if binary:
+                res["Dense"].append(roc_auc_score(y[te], pd_)); res2["Dense"].append(concordance_index(yt[te], -pd_, y[te]))
+            else:
+                res["Dense"].append(accuracy_score(y[te], pd_.argmax(1))); res2["Dense"].append(f1_score(y[te], pd_.argmax(1), average="macro"))
             if binary:
                 vtop = np.argsort(np.var(Xtr, axis=0))[::-1][:100]
                 dftr = pd.DataFrame(Xtr[:, vtop]); dftr["time"] = yt[tr]; dftr["event"] = y[tr]
@@ -245,13 +262,15 @@ def single(task):
                 except Exception:
                     h = np.zeros(Xte.shape[0])
                 res["CoxPH"].append(roc_auc_score(y[te], h))
+                res2["CoxPH"].append(concordance_index(yt[te], -h, y[te]))
         print(f"[single {o} {task}] done", flush=True)
-    rows = []
-    for o in OMICS:
         for nm in names:
             rows.append({"omics": o, "task": "PAM50" if task == "PAM50_4class" else "Survival",
                          "model": nm, "metric": m1, "mean": round(float(np.mean(res[nm])), 4),
                          "std": round(float(np.std(res[nm])), 4), "n": len(cases)})
+            rows.append({"omics": o, "task": "PAM50" if task == "PAM50_4class" else "Survival",
+                         "model": nm, "metric": m2, "mean": round(float(np.mean(res2[nm])), 4),
+                         "std": round(float(np.std(res2[nm])), 4), "n": len(cases)})
     return rows
 
 
