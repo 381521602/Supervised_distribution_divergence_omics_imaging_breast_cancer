@@ -109,8 +109,8 @@ def make_C():
 
 
 def merge():
-    fig = plt.figure(figsize=(15, 10.8))
-    gs = fig.add_gridspec(2, 2, height_ratios=[3.5, 1], hspace=0.06, wspace=0.04,
+    fig = plt.figure(figsize=(14, 10.2))
+    gs = fig.add_gridspec(2, 2, height_ratios=[2.9, 1.2], hspace=0.08, wspace=0.04,
                           left=0.015, right=0.985, top=0.985, bottom=0.015)
     axA = fig.add_subplot(gs[0, :])
     imgA = imread(A)
