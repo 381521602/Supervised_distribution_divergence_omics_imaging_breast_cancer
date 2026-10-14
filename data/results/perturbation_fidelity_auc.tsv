@@ -1,0 +1,7 @@
+model	ranking	deletion_auc
+LogisticRegression	JSD	0.6514
+LogisticRegression	SHAP	0.6114
+LogisticRegression	Random	0.666
+FullSizeCNN	JSD	0.7756
+FullSizeCNN	Saliency	0.674
+FullSizeCNN	Random	0.7887
