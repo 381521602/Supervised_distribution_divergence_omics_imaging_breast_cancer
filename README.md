@@ -79,6 +79,8 @@ The original cohort-level (exploratory) results remain available under
 estimates. The English manuscript and supplementary material reflect the
 leak-free results (`docs/*_EN.docx`).
 
+See `README_LEAKFREE.md` for the step-by-step reproduction guide.
+
 ## License
 
 Code and processed data are provided for academic research use. See `LICENSE` for the current terms.
