@@ -33,8 +33,8 @@ plt.rcParams.update({
 
 
 def draw_heatmap(mat, row_labels, col_labels, value_fmt, title, out, figsize, na_text="NA"):
-    blue_cmap = LinearSegmentedColormap.from_list(
-        "bc_blue", ["#E8F0F8", "#A9C8E8", "#4F86C6", "#1F4D78"]
+    green_cmap = LinearSegmentedColormap.from_list(
+        "bc_green", ["#E8F5E9", "#A5D6A7", "#43A047", "#1B5E20"]
     )
     # per-column min-max normalization
     norm = np.full_like(mat, np.nan, dtype=float)
@@ -46,30 +46,30 @@ def draw_heatmap(mat, row_labels, col_labels, value_fmt, title, out, figsize, na
             norm[:, j] = (col - lo) / (hi - lo) if hi > lo else 0.0
 
     fig, ax = plt.subplots(figsize=figsize)
-    im = ax.imshow(norm, cmap=blue_cmap, aspect="auto", vmin=0, vmax=1)
+    im = ax.imshow(norm, cmap=green_cmap, aspect="auto", vmin=0, vmax=1)
     ax.set_xticks(np.arange(len(col_labels)))
-    ax.set_xticklabels(col_labels, fontsize=9.5, fontweight="bold")
+    ax.set_xticklabels(col_labels, fontsize=11, fontweight="bold")
     ax.set_yticks(np.arange(len(row_labels)))
-    ax.set_yticklabels(row_labels, fontsize=10, fontweight="bold")
-    ax.set_title(title, loc="left", fontweight="bold", color=DARK, fontsize=12)
+    ax.set_yticklabels(row_labels, fontsize=12, fontweight="bold")
+    ax.set_title(title, loc="left", fontweight="bold", color=DARK, fontsize=13.5)
 
     for i in range(len(row_labels)):
         for j in range(len(col_labels)):
             v = mat[i, j]
             if np.isnan(v):
-                ax.text(j, i, na_text, ha="center", va="center", fontsize=10,
+                ax.text(j, i, na_text, ha="center", va="center", fontsize=11,
                         fontweight="bold", color="#888888")
             else:
                 color = "white" if (not np.isnan(norm[i, j]) and norm[i, j] > 0.55) else "#1a1a1a"
                 ax.text(j, i, value_fmt.format(v), ha="center", va="center",
-                        fontsize=9.5, fontweight="bold", color=color)
+                        fontsize=11, fontweight="bold", color=color)
 
     ax.set_xticks(np.arange(len(col_labels) + 1) - 0.5, minor=True)
     ax.set_yticks(np.arange(len(row_labels) + 1) - 0.5, minor=True)
     ax.grid(which="minor", color="white", linewidth=1.0)
     ax.tick_params(which="minor", length=0)
     cb = fig.colorbar(im, ax=ax, fraction=0.05, pad=0.04)
-    cb.set_label("Per-column normalized", fontsize=9, fontweight="bold")
+    cb.set_label("Per-column normalized", fontsize=10.5, fontweight="bold")
     fig.tight_layout()
     fig.savefig(out, dpi=300)
     plt.close(fig)
@@ -89,7 +89,7 @@ def make_B():
             if not sub.empty:
                 mat[i, j] = float(sub["mean"].iloc[0])
     draw_heatmap(mat, labels, [m[2] for m in metrics], "{:.3f}",
-                 "Triple-omics fusion (leak-free)", B_OUT, figsize=(5.4, 2.9))
+                 "Triple-omics fusion (leak-free)", B_OUT, figsize=(6.0, 3.3))
 
 
 def make_C():
@@ -105,15 +105,20 @@ def make_C():
             if not sub.empty:
                 mat[i, j] = float(sub["mean"].iloc[0])
     draw_heatmap(mat, methods, labels, "{:.3f}",
-                 "Advanced methods (leak-free)", C_OUT, figsize=(5.8, 2.9), na_text="NA")
+                 "Advanced methods (leak-free)", C_OUT, figsize=(6.4, 3.3), na_text="NA")
 
 
 def merge():
-    fig = plt.figure(figsize=(16, 9.5))
-    gs = fig.add_gridspec(2, 2, height_ratios=[1.35, 0.62], hspace=0.06, wspace=0.03,
-                          left=0.02, right=0.98, top=0.97, bottom=0.02)
-    for ax, path, label in [(fig.add_subplot(gs[0, :]), A, "A"),
-                            (fig.add_subplot(gs[1, 0]), B_OUT, "B"),
+    fig = plt.figure(figsize=(15, 10.8))
+    gs = fig.add_gridspec(2, 2, height_ratios=[3.5, 1], hspace=0.06, wspace=0.04,
+                          left=0.015, right=0.985, top=0.985, bottom=0.015)
+    axA = fig.add_subplot(gs[0, :])
+    imgA = imread(A)
+    axA.imshow(imgA, aspect="equal")
+    axA.set_axis_off()
+    axA.text(0.002, 0.995, "A", transform=axA.transAxes, fontsize=18, fontweight="bold",
+             va="top", ha="left", color="black")
+    for ax, path, label in [(fig.add_subplot(gs[1, 0]), B_OUT, "B"),
                             (fig.add_subplot(gs[1, 1]), C_OUT, "C")]:
         img = imread(path)
         ax.imshow(img, interpolation="nearest", aspect="auto")
