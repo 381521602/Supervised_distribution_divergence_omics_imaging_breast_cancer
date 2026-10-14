@@ -1,0 +1,5 @@
+task	fusion	fusion_mean	single_mean	mean_diff	ttest_p	wilcoxon_p	n
+PAM50	Concat_MLP	0.8353	0.8519	-0.0166	0.5412	0.625	486
+PAM50	CNN_LateAvg	0.8415	0.8519	-0.0104	0.6531	0.625	486
+Survival	Concat_MLP	0.641	0.5841	0.057	0.1659	0.3125	725
+Survival	CNN_LateAvg	0.6742	0.5841	0.0901	0.0966	0.0625	725
