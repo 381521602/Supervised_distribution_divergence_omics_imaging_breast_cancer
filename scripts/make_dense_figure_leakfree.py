@@ -31,7 +31,9 @@ plt.rcParams.update({
 
 
 def main():
-    df = pd.read_csv(SRC, sep="\t")
+    base = pd.read_csv(SRC, sep="\t")
+    cnv = pd.read_csv(ROOT / "data" / "leakfree_cnv_single_rerun.tsv", sep="\t")
+    df = pd.concat([base[base["omics"] != "CNV"], cnv], ignore_index=True)
     dense = df[df["model"] == "Dense"]
     cnn = df[df["model"] == "FullSizeCNN"]
 

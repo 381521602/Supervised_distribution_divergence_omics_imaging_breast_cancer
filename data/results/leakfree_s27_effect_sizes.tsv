@@ -1,0 +1,5 @@
+task	metric	comparison	mean_difference	ci_lower	ci_upper	cohens_d	interpretation
+Survival	roc_auc	CNN_LateAvg_vs_miRNA_RF	0.0107	-0.1387	0.1601	0.089	not significant
+Survival	roc_auc	Concat_MLP_vs_miRNA_RF	-0.0224	-0.1432	0.0984	-0.2306	not significant
+PAM50	accuracy	CNN_LateAvg_vs_mRNA_RF	-0.0104	-0.0702	0.0493	-0.2169	not significant
+PAM50	accuracy	Concat_MLP_vs_mRNA_RF	-0.0166	-0.0857	0.0525	-0.2983	not significant

@@ -1,0 +1,5 @@
+task	fusion	single	metric	fusion_mean	single_mean	mean_diff	ttest_p	wilcoxon_p	n
+Survival	CNN_LateAvg	miRNA_RF	roc_auc	0.6742	0.6634	0.0107	0.8519	1.0	5
+Survival	Concat_MLP	miRNA_RF	roc_auc	0.641	0.6634	-0.0224	0.6333	0.8125	5
+PAM50	CNN_LateAvg	mRNA_RF	accuracy	0.8415	0.8519	-0.0104	0.6531	0.625	5
+PAM50	Concat_MLP	mRNA_RF	accuracy	0.8353	0.8519	-0.0166	0.5412	0.625	5
