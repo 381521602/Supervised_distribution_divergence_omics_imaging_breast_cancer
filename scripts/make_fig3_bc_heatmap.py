@@ -8,6 +8,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.image import imread
 
 D = Path(r"E:\组学数据图像化\data\paper_figures")
@@ -32,6 +33,9 @@ plt.rcParams.update({
 
 
 def draw_heatmap(mat, row_labels, col_labels, value_fmt, title, out, figsize, na_text="NA"):
+    blue_cmap = LinearSegmentedColormap.from_list(
+        "bc_blue", ["#E8F0F8", "#A9C8E8", "#4F86C6", "#1F4D78"]
+    )
     # per-column min-max normalization
     norm = np.full_like(mat, np.nan, dtype=float)
     for j in range(mat.shape[1]):
@@ -42,7 +46,7 @@ def draw_heatmap(mat, row_labels, col_labels, value_fmt, title, out, figsize, na
             norm[:, j] = (col - lo) / (hi - lo) if hi > lo else 0.0
 
     fig, ax = plt.subplots(figsize=figsize)
-    im = ax.imshow(norm, cmap="viridis", aspect="auto", vmin=0, vmax=1)
+    im = ax.imshow(norm, cmap=blue_cmap, aspect="auto", vmin=0, vmax=1)
     ax.set_xticks(np.arange(len(col_labels)))
     ax.set_xticklabels(col_labels, fontsize=9.5, fontweight="bold")
     ax.set_yticks(np.arange(len(row_labels)))
