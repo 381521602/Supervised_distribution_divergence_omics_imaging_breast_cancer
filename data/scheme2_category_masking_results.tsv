@@ -1,0 +1,29 @@
+variant	category	task	metric	mean	std
+baseline	Baseline	PAM50	accuracy	0.9244	0.0124
+baseline	Baseline	PAM50	macro_f1	0.9069	0.0133
+mask_category_0	Development / Epithelium	PAM50	accuracy	0.922	0.0152
+mask_category_0	Development / Epithelium	PAM50	macro_f1	0.9086	0.0191
+mask_category_1	Signaling / Transport	PAM50	accuracy	0.9136	0.0145
+mask_category_1	Signaling / Transport	PAM50	macro_f1	0.9057	0.0174
+mask_category_2	Hormone / Metabolism	PAM50	accuracy	0.9256	0.0155
+mask_category_2	Hormone / Metabolism	PAM50	macro_f1	0.9099	0.0182
+mask_category_3	Immune / Inflammation	PAM50	accuracy	0.916	0.0137
+mask_category_3	Immune / Inflammation	PAM50	macro_f1	0.8948	0.0198
+mask_category_4	Cell cycle / Proliferation	PAM50	accuracy	0.9171	0.0239
+mask_category_4	Cell cycle / Proliferation	PAM50	macro_f1	0.9071	0.0285
+mask_category_5	Other	PAM50	accuracy	0.8967	0.0311
+mask_category_5	Other	PAM50	macro_f1	0.8826	0.0393
+baseline	Baseline	Survival	roc_auc	0.665	0.0784
+baseline	Baseline	Survival	c_index	0.6984	0.0756
+mask_category_0	Development / Epithelium	Survival	roc_auc	0.6797	0.0496
+mask_category_0	Development / Epithelium	Survival	c_index	0.7184	0.0456
+mask_category_1	Signaling / Transport	Survival	roc_auc	0.6661	0.075
+mask_category_1	Signaling / Transport	Survival	c_index	0.6967	0.0674
+mask_category_2	Hormone / Metabolism	Survival	roc_auc	0.6745	0.0794
+mask_category_2	Hormone / Metabolism	Survival	c_index	0.7071	0.0795
+mask_category_3	Immune / Inflammation	Survival	roc_auc	0.6736	0.0737
+mask_category_3	Immune / Inflammation	Survival	c_index	0.707	0.0691
+mask_category_4	Cell cycle / Proliferation	Survival	roc_auc	0.676	0.0628
+mask_category_4	Cell cycle / Proliferation	Survival	c_index	0.7187	0.0477
+mask_category_5	Other	Survival	roc_auc	0.6054	0.0492
+mask_category_5	Other	Survival	c_index	0.6514	0.0444
