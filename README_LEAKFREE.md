@@ -73,6 +73,10 @@ python scripts/run_paired_tests.py
 
 # out-of-fold predictions (per patient, per fold)
 python scripts/run_oof_predictions.py
+
+# nine-model stacking (leak-free) and same-fold paired tests vs best single/fusion
+python scripts/run_leakfree_stacking.py
+python scripts/run_stacking_paired_tests.py
 ```
 
 ## Outputs
@@ -86,6 +90,9 @@ python scripts/run_oof_predictions.py
 - `data/results/leakfree_survival_methods.tsv`
 - `data/results/leakfree_paired_tests.tsv`
 - `data/leakfree_oof_predictions.tsv`
+- `data/results/leakfree_stacking_results.tsv`
+- `data/results/leakfree_stacking_paired_tests.tsv`
+- `data/results/leakfree_stacking_fold_scores.tsv`
 
 The old cohort-level (exploratory) results remain under `data/results/` for
 historical comparison only and should not be cited as unbiased estimates.

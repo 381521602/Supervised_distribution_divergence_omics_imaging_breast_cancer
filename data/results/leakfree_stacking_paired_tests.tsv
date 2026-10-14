@@ -1,0 +1,8 @@
+task	model_a	model_b	metric	a_mean	b_mean	diff	ttest_p	wilcoxon_p	n
+PAM50	Stacking_9	mRNA_RF	accuracy	0.8518	0.8519	-0.0001	0.9949	1.0	486
+PAM50	Stacking_9	CNN_LateAvg	accuracy	0.8518	0.8415	0.0103	0.0895	0.25	486
+PAM50	Stacking_9	Concat_MLP	accuracy	0.8518	0.8353	0.0165	0.1785	0.25	486
+Survival	Stacking_9	mRNA_RF	roc_auc	0.6683	0.5841	0.0842	0.1019	0.1875	725
+Survival	Stacking_9	miRNA_RF	roc_auc	0.6683	0.6634	0.0048	0.931	1.0	725
+Survival	Stacking_9	CNN_LateAvg	roc_auc	0.6683	0.6742	-0.0059	0.5071	0.4375	725
+Survival	Stacking_9	Concat_MLP	roc_auc	0.6683	0.641	0.0273	0.2429	0.3125	725

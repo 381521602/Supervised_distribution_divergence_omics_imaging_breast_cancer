@@ -42,7 +42,10 @@ This document describes each major component in the repository and how the files
 | `data/results/comprehensive_intersection_single_omics_results.tsv` | Intersection-sample single-omics baselines. |
 | `data/results/comprehensive_triple_integration_results.tsv` | Triple-omics fusion results. |
 | `data/results/comprehensive_pairwise_integration_results.tsv` | Pairwise-omics fusion results. |
-| `data/results/final_9model_stacking_results.tsv` | Nine-model Stacking results. |
+| `data/results/final_9model_stacking_results.tsv` | Nine-model Stacking results (historical, cohort-level pre-selected; superseded by the leak-free version below). |
+| `data/results/leakfree_stacking_results.tsv` | Nine-model Stacking results, leak-free (features/JSD inside each fold). |
+| `data/results/leakfree_stacking_paired_tests.tsv` | Paired t-test / Wilcoxon for leak-free stacking vs best single-omics and fusion. |
+| `data/results/leakfree_stacking_fold_scores.tsv` | Per-fold scores for leak-free stacking and comparison models. |
 | `data/results/fullsize_multimodal_integration_results.tsv` | FullSizeCNN multi-omics integration results. |
 | `data/results/fullsize_multimodal_integration_paired_tests.tsv` | Paired tests for FullSizeCNN integration. |
 | `data/results/advanced_method*.tsv` | Multi-task, DeepSurv, Transformer, low-rank bilinear, and GNN results. |
@@ -95,6 +98,8 @@ All runnable Python scripts are stored under `scripts/`. Key scripts include:
 - `pam50_gene_exclusion_sensitivity.py` — PAM50 50-gene exclusion sensitivity analysis.
 - `generate_annotation_mapping.py` and `generate_sample_provenance.py` — annotation and provenance files used by the manuscript.
 - `run_additional_validation_experiments.py` — nested CV, FullSizeCNN-Cox, and strict PAM50 exclusion experiments.
+- `run_leakfree_stacking.py` — leak-free nine-model stacking on the three-omics intersection.
+- `run_stacking_paired_tests.py` — same-fold paired t-test / Wilcoxon for stacking vs best single omics and fusion.
 - `run_gene_interaction_analysis.py`, `run_cross_omics_interactions.py`, and `make_gene_interaction_figures.py` — gene interaction and cross-omics network analyses.
 
 ## 7. Machine-readable supplementary data and final drafts
