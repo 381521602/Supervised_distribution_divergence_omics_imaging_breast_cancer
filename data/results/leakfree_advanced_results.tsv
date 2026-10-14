@@ -1,0 +1,7 @@
+method	task	metric	mean	std	n
+Transformer	PAM50	accuracy	0.8106	0.0476	486
+Transformer	PAM50	macro_f1	0.7854	0.044	486
+Transformer	Survival	roc_auc	0.5746	0.0505	725
+Transformer	Survival	c_index	0.5677	0.0649	725
+DeepSurv	Survival	roc_auc	0.6222	0.0625	725
+DeepSurv	Survival	c_index	0.6252	0.0569	725

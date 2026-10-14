@@ -1,0 +1,9 @@
+scheme	task	metric	mean	std	n_samples
+Concat_LR	PAM50	accuracy	0.8085	0.0653	486
+Concat_MLP	PAM50	accuracy	0.8353	0.0316	486
+CNN_LateAvg	PAM50	accuracy	0.8415	0.0327	486
+CNN_Gated	PAM50	accuracy	0.8003	0.0539	486
+Concat_LR	Survival	roc_auc	0.6234	0.0382	725
+Concat_MLP	Survival	roc_auc	0.641	0.0504	725
+CNN_LateAvg	Survival	roc_auc	0.6742	0.0385	725
+CNN_Gated	Survival	roc_auc	0.6255	0.0399	725

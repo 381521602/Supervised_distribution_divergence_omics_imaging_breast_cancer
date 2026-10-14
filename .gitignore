@@ -10,3 +10,4 @@ Thumbs.db
 !data/supplementary_data/supplementary_data_tables.zip
 *.tar
 *.gz
+!data/cnv_gene_case_matrix.tsv.gz

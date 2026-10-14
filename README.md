@@ -50,6 +50,35 @@ The raw TCGA-BRCA data are available from:
 
 Random seed 42 was used for the analyses. All feature selection, scaling, augmentation, and model fitting were performed within cross-validation training folds; test folds were not used for preprocessing or parameter selection.
 
+## Important update: leak-free re-analysis (2026-10)
+
+An audit of the earlier pipeline identified that feature selection and JSD
+ordering had been performed on the full cohort before cross-validation, which
+could leak test-fold labels into feature choice and inflate the reported
+five-fold estimates. We therefore re-ran all single-omics, pairwise, triple-omics
+fusion, and advanced-method analyses with feature selection, scaling, JSD
+ordering, and image generation performed strictly inside each training fold.
+
+The corrected leak-free results are provided under `data/results/leakfree_*.tsv`:
+
+- `leakfree_single_omics_results.tsv` — mRNA and miRNA single-omics (leak-free).
+- `leakfree_cnv_single_rerun.tsv` — CNV single-omics using the corrected GDC gene-level CNV matrix.
+- `leakfree_intersection_single_full.tsv` — single-omics baselines on the triple-omics intersection.
+- `leakfree_pairwise_fusion_full.tsv` — pairwise-omics fusion.
+- `leakfree_cnv_fusion_rerun.tsv` — triple-omics fusion.
+- `leakfree_advanced_results.tsv` — Transformer and DeepSurv.
+- `leakfree_survival_methods.tsv` — CoxNet, random survival forest, and time-dependent AUC.
+
+The corrected gene-level CNV matrix (case_id x genes, thresholded to -2/-1/0/1/2)
+is provided as `data/cnv_gene_case_matrix.tsv.gz`, rebuilt from GDC Gene Level
+Copy Number files (`scripts/download_gdc_cnv.py`,
+`scripts/build_gdc_cnv_matrix.py`, `scripts/finalize_cnv_matrix.py`).
+
+The original cohort-level (exploratory) results remain available under
+`data/results/` for historical comparison but should be treated as optimistic
+estimates. The English manuscript and supplementary material reflect the
+leak-free results (`docs/*_EN.docx`).
+
 ## License
 
 Code and processed data are provided for academic research use. See `LICENSE` for the current terms.

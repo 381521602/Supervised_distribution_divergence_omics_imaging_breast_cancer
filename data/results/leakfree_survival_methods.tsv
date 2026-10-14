@@ -1,0 +1,10 @@
+omics	model	metric	mean	std	times
+mRNA	CoxNet	c_index	0.6321	0.0519	
+mRNA	RSF	c_index	0.6235	0.0607	
+CNV	CoxNet	c_index	0.5554	0.0388	
+CNV	RSF	c_index	0.5581	0.0434	
+miRNA	CoxNet	c_index	0.573	0.0543	
+miRNA	RSF	c_index	0.6563	0.044	
+mRNA		time_dependent_auc	0.6128		1174.0,2348.0,7455.0
+CNV		time_dependent_auc	0.4594		1147.0,2335.0,7455.0
+miRNA		time_dependent_auc			all times must be within follow-up time of test da
