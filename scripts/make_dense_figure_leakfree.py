@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "leakfree_single_omics_results.tsv"
 OUT = ROOT / "data" / "paper_figures" / "fig_dense_equivalent.png"
 

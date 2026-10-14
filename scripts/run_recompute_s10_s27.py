@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 FOLDS = ROOT / "data" / "leakfree_stacking_fold_scores.tsv"
 OUT_S10 = ROOT / "data" / "leakfree_s10_survival_paired.tsv"
 OUT_S27 = ROOT / "data" / "leakfree_s27_effect_sizes.tsv"

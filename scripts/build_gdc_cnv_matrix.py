@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-D = Path(r"E:\组学数据图像化\data")
+D = Path(__file__).resolve().parent.parent / "data"
 GDC = D / "gdc_cnv"
 OUT = D / "cnv_gene_matrix.tsv"
 

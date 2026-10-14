@@ -19,9 +19,9 @@ from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from sklearn.model_selection import StratifiedKFold
 from lifelines.utils import concordance_index
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-sys.path.insert(0, str(ROOT / "github_release" / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from run_full_s5_s7 import (
     align,

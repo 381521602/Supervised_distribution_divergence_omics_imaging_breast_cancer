@@ -14,11 +14,11 @@ from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import LabelEncoder
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 D = ROOT / "data"
 XENA = D / "external" / "xena"
-GH = ROOT / "github_release"
-sys.path.insert(0, str(GH / "scripts"))
+GH = ROOT
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from adaptive_jsd import build_adaptive_pipeline
 
 LABELS = GH / "data" / "brca_labels_modeling_ready.tsv"

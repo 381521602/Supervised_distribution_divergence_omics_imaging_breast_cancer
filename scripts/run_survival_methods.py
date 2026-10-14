@@ -13,11 +13,11 @@ from sksurv.ensemble import RandomSurvivalForest
 from sksurv.metrics import concordance_index_censored, cumulative_dynamic_auc
 from sksurv.util import Surv
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 D = ROOT / "data"
 XENA = D / "external" / "xena"
-GH = ROOT / "github_release"
-sys.path.insert(0, str(GH / "scripts"))
+GH = ROOT
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from adaptive_jsd import build_adaptive_pipeline
 
 LABELS = GH / "data" / "brca_labels_modeling_ready.tsv"

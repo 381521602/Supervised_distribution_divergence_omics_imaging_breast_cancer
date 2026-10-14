@@ -17,8 +17,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import StratifiedKFold
 
 ROOT = Path(r"E:\组学数据图像化")
-sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "github_release" / "scripts"))
+sys.path.insert(0, str(ROOT / "scripts"))
 
 from run_full_s5_s7 import (
     align, fold_sel, jsd_scores, load_omics, make_images,
@@ -170,6 +170,39 @@ def main():
         w.writerow(["model", "ranking", "fraction_removed", "mean_accuracy", "std_accuracy"])
         w.writerows(rows)
     print("wrote", OUT_TSV)
+
+    # per-fold deletion AUC and paired tests (JSD vs Random)
+    import scipy.stats as st
+    OUT_AUC = ROOT / "data" / "perturbation_fidelity_auc_perfold.tsv"
+    valid = {"LogisticRegression": ["JSD", "SHAP", "Random"],
+             "FullSizeCNN": ["JSD", "Saliency", "Random"]}
+    auc_rows = []
+    paired_rows = []
+    for m in models:
+        for r in valid[m]:
+            fold_aucs = []
+            for fi in range(5):
+                accs = [curves[m][r][f][fi] for f in FRACTIONS]
+                fold_aucs.append(float(np.trapz(accs, FRACTIONS)))
+            auc_rows.append([m, r, round(float(np.mean(fold_aucs)), 4),
+                             round(float(np.std(fold_aucs)), 4), ",".join(f"{a:.4f}" for a in fold_aucs)])
+        jsd = np.array([np.trapz([curves[m]["JSD"][f][fi] for f in FRACTIONS], FRACTIONS) for fi in range(5)])
+        rnd = np.array([np.trapz([curves[m]["Random"][f][fi] for f in FRACTIONS], FRACTIONS) for fi in range(5)])
+        t, p = st.ttest_rel(jsd, rnd)
+        try:
+            _, wp = st.wilcoxon(jsd, rnd)
+        except ValueError:
+            wp = float("nan")
+        paired_rows.append([m, "JSD_vs_Random", round(float(np.mean(jsd)), 4),
+                            round(float(np.mean(rnd)), 4), round(float(p), 4), round(float(wp), 4)])
+    with OUT_AUC.open("w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh, delimiter="\t")
+        w.writerow(["model", "ranking", "mean_auc", "std_auc", "fold_aucs"])
+        w.writerows(auc_rows)
+    print("wrote", OUT_AUC)
+    print("JSD vs Random paired tests (mean JSD AUC, mean Random AUC, t p, wilcoxon p):")
+    for r in paired_rows:
+        print("  ", r)
 
     import matplotlib
     matplotlib.use("Agg")

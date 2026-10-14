@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-D = Path(r"E:\组学数据图像化\data")
+D = Path(__file__).resolve().parent.parent / "data"
 RAW = D / "cnv_gene_matrix.tsv"
 LABELS = D.parent / "github_release" / "data" / "brca_labels_modeling_ready.tsv"
 OUT = D / "cnv_gene_case_matrix.tsv"

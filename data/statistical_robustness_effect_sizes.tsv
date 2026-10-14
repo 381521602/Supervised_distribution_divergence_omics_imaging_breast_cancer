@@ -1,5 +1,5 @@
 task	metric	comparison	mean_difference	ci_lower	ci_upper	cohens_d	interpretation
-PAM50	accuracy	transformer vs mRNA_LR	0.0	-0.0223	0.0223	0.0	non-significant; descriptive comparison only
-PAM50	macro_f1	transformer vs mRNA_LR	0.0104	-0.0195	0.0403	0.431	non-significant; descriptive comparison only
-Survival	roc_auc	late_fusion_avg vs mRNA_MLP	0.0333	-0.048	0.1146	0.508	non-significant; descriptive comparison only
-Survival	c_index	concat_mlp vs mRNA_FullSizeCNN	0.014	-0.0614	0.0894	0.23	non-significant; descriptive comparison only
+PAM50	accuracy	CNN_LateAvg_vs_mRNA_RF	-0.0104	-0.0702	0.0493	-0.2169	non-significant; descriptive only
+PAM50	accuracy	Concat_MLP_vs_mRNA_RF	-0.0166	-0.0857	0.0525	-0.2983	non-significant; descriptive only
+Survival	roc_auc	CNN_LateAvg_vs_miRNA_RF	0.0107	-0.1387	0.1601	0.089	non-significant; descriptive only
+Survival	roc_auc	Concat_MLP_vs_miRNA_RF	-0.0224	-0.1432	0.0984	-0.2306	non-significant; descriptive only

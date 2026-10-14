@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, roc_auc_score
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 from run_metabric_external_validation import (
     load_metabric_clinical,

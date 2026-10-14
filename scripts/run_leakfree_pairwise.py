@@ -16,11 +16,11 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 D = ROOT / "data"
 XENA = D / "external" / "xena"
-GH = ROOT / "github_release"
-sys.path.insert(0, str(GH / "scripts"))
+GH = ROOT
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from adaptive_jsd import build_adaptive_pipeline, jsd_between_histograms
 from run_multistream_cnn import spiral_order
 

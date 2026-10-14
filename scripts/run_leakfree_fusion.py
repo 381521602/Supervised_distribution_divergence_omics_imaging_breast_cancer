@@ -17,10 +17,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.svm import SVC
 
-ROOT = Path(r"E:\组学数据图像化")
+ROOT = Path(__file__).resolve().parent.parent
 XENA = ROOT / "data" / "external" / "xena"
-GH = ROOT / "github_release"
-sys.path.insert(0, str(GH / "scripts"))
+GH = ROOT
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from adaptive_jsd import build_adaptive_pipeline, jsd_between_histograms
 from run_multistream_cnn import spiral_order
 from run_fullsize_multimodal_integration import Branch, train_multi, train_single_prob
