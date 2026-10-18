@@ -1,0 +1,1609 @@
+sample	true_label	LogisticRegression	Dense	FullSizeCNN
+MB-0002	Luminal A	2	2	2
+MB-0005	Luminal B	2	2	2
+MB-0006	Luminal B	2	1	1
+MB-0008	Luminal B	3	3	3
+MB-0010	Luminal B	3	3	3
+MB-0014	Luminal B	2	3	3
+MB-0028	Luminal B	3	3	3
+MB-0035	HER2-enriched	1	1	1
+MB-0036	Luminal A	2	2	2
+MB-0039	Luminal B	2	3	2
+MB-0046	Luminal A	3	3	3
+MB-0053	Luminal B	3	3	3
+MB-0054	Luminal B	3	3	3
+MB-0056	Luminal B	3	3	3
+MB-0059	Luminal A	2	2	2
+MB-0060	Luminal B	3	3	3
+MB-0062	Basal-like	0	0	0
+MB-0064	Luminal B	3	3	3
+MB-0066	Luminal B	2	2	2
+MB-0068	Luminal A	2	2	2
+MB-0071	Luminal B	3	3	3
+MB-0079	HER2-enriched	3	3	3
+MB-0083	Luminal B	3	3	3
+MB-0093	Luminal B	3	3	3
+MB-0095	Luminal B	3	3	3
+MB-0097	Luminal A	2	2	2
+MB-0099	Luminal B	3	3	3
+MB-0100	Basal-like	0	0	0
+MB-0102	Luminal B	3	3	3
+MB-0106	Luminal A	2	2	2
+MB-0107	Luminal B	3	3	3
+MB-0109	Basal-like	3	3	3
+MB-0111	Luminal A	2	2	2
+MB-0112	Luminal A	2	2	2
+MB-0113	HER2-enriched	1	1	1
+MB-0114	Luminal A	2	2	2
+MB-0115	Basal-like	0	0	0
+MB-0117	Luminal A	2	2	2
+MB-0119	Luminal B	2	3	3
+MB-0120	Luminal B	1	1	1
+MB-0121	Luminal A	2	2	2
+MB-0122	Luminal A	2	2	2
+MB-0123	Luminal B	3	3	3
+MB-0124	Luminal A	2	2	2
+MB-0125	Luminal B	2	2	2
+MB-0126	Luminal A	2	2	2
+MB-0129	HER2-enriched	1	1	1
+MB-0130	Luminal A	2	2	2
+MB-0131	Luminal A	2	2	2
+MB-0133	Luminal A	2	2	2
+MB-0134	Luminal B	2	3	2
+MB-0135	Luminal B	3	3	3
+MB-0136	Luminal A	2	2	2
+MB-0138	Luminal A	2	2	2
+MB-0139	Luminal A	2	2	2
+MB-0140	Luminal B	3	3	3
+MB-0142	Luminal A	2	2	2
+MB-0143	Luminal A	2	2	2
+MB-0144	Luminal B	2	2	2
+MB-0145	Luminal A	2	2	2
+MB-0146	Luminal B	3	3	3
+MB-0147	Luminal A	2	2	2
+MB-0148	HER2-enriched	1	1	1
+MB-0149	Basal-like	0	0	0
+MB-0150	Basal-like	0	0	0
+MB-0151	Luminal B	2	2	2
+MB-0152	HER2-enriched	1	1	1
+MB-0154	Luminal A	2	2	2
+MB-0158	Basal-like	0	1	1
+MB-0159	Basal-like	1	1	1
+MB-0162	Luminal A	2	2	2
+MB-0163	Basal-like	0	0	0
+MB-0165	Luminal A	3	1	3
+MB-0166	Luminal A	2	2	2
+MB-0167	Luminal B	3	3	3
+MB-0170	Luminal A	2	2	2
+MB-0172	Luminal A	2	2	2
+MB-0173	Luminal B	3	3	3
+MB-0175	Luminal A	2	2	2
+MB-0176	Luminal A	2	2	2
+MB-0177	Luminal A	2	2	2
+MB-0178	Luminal B	3	3	3
+MB-0180	Luminal A	2	2	2
+MB-0181	Luminal A	2	2	2
+MB-0184	Luminal A	2	2	2
+MB-0185	Luminal B	3	3	3
+MB-0188	HER2-enriched	1	1	1
+MB-0191	Basal-like	0	0	0
+MB-0193	Luminal B	2	2	2
+MB-0194	Luminal A	2	2	2
+MB-0195	Luminal B	2	3	3
+MB-0197	Luminal B	3	3	3
+MB-0198	Luminal B	3	3	3
+MB-0199	Luminal A	2	2	2
+MB-0200	Basal-like	0	0	0
+MB-0201	Basal-like	1	1	1
+MB-0202	Luminal A	2	2	2
+MB-0203	Luminal A	2	2	2
+MB-0204	Luminal A	2	2	2
+MB-0207	Luminal A	2	2	2
+MB-0214	Basal-like	0	0	0
+MB-0215	Luminal B	2	2	2
+MB-0218	Luminal B	2	3	3
+MB-0221	HER2-enriched	1	1	1
+MB-0223	Luminal A	2	2	2
+MB-0224	Luminal A	2	2	2
+MB-0225	Luminal B	3	3	3
+MB-0226	Luminal A	2	2	2
+MB-0227	Luminal A	2	2	2
+MB-0229	Luminal A	2	2	2
+MB-0230	HER2-enriched	1	1	1
+MB-0231	Luminal A	2	2	2
+MB-0232	Luminal A	2	2	2
+MB-0233	Luminal A	2	3	3
+MB-0234	Luminal B	3	3	3
+MB-0235	Luminal A	2	2	2
+MB-0236	Luminal A	3	3	3
+MB-0239	Luminal A	2	2	2
+MB-0242	Luminal B	2	2	2
+MB-0243	Luminal B	2	2	2
+MB-0245	Luminal A	2	2	2
+MB-0247	Luminal A	2	2	2
+MB-0248	Luminal A	2	2	2
+MB-0249	HER2-enriched	1	1	1
+MB-0256	Luminal A	2	2	2
+MB-0257	Luminal A	2	2	2
+MB-0258	Luminal A	2	2	2
+MB-0259	Basal-like	0	0	0
+MB-0260	Luminal A	2	2	2
+MB-0261	Luminal B	2	2	2
+MB-0262	HER2-enriched	3	3	3
+MB-0263	Luminal A	2	2	2
+MB-0264	HER2-enriched	2	2	2
+MB-0266	Luminal A	2	2	2
+MB-0268	Luminal B	3	3	3
+MB-0270	Luminal B	3	3	3
+MB-0272	Luminal B	3	3	3
+MB-0273	Luminal A	2	2	2
+MB-0278	Basal-like	0	0	0
+MB-0283	Luminal B	3	3	3
+MB-0287	Luminal B	2	3	3
+MB-0290	Luminal A	2	2	2
+MB-0291	Luminal B	3	3	3
+MB-0292	HER2-enriched	1	1	1
+MB-0295	Luminal A	2	2	2
+MB-0299	Basal-like	0	0	0
+MB-0301	Luminal A	2	2	2
+MB-0302	Luminal A	2	2	2
+MB-0304	Luminal B	3	3	3
+MB-0306	Luminal A	1	3	3
+MB-0308	Luminal A	2	2	2
+MB-0309	Luminal A	2	2	2
+MB-0310	Luminal A	2	2	2
+MB-0311	Luminal B	3	3	3
+MB-0312	Luminal B	3	3	3
+MB-0313	Luminal B	3	3	3
+MB-0314	HER2-enriched	1	1	1
+MB-0315	Luminal A	2	2	2
+MB-0316	Basal-like	0	0	0
+MB-0317	Luminal A	2	2	2
+MB-0319	Luminal B	2	2	2
+MB-0320	Luminal A	2	2	2
+MB-0321	Luminal A	2	2	2
+MB-0322	Luminal A	2	2	2
+MB-0324	Luminal A	2	3	3
+MB-0325	Luminal B	3	3	3
+MB-0327	Luminal A	3	2	3
+MB-0328	Luminal B	3	3	3
+MB-0336	Luminal B	3	3	3
+MB-0339	Luminal B	2	2	2
+MB-0340	Basal-like	0	0	0
+MB-0341	Luminal A	2	2	2
+MB-0345	Luminal A	2	2	2
+MB-0346	HER2-enriched	1	1	1
+MB-0348	Luminal A	2	2	2
+MB-0349	Luminal B	3	3	3
+MB-0350	Basal-like	0	0	0
+MB-0351	Luminal B	2	2	2
+MB-0353	Luminal A	2	2	2
+MB-0356	Luminal A	2	2	2
+MB-0358	Luminal A	2	2	2
+MB-0359	Luminal A	2	2	2
+MB-0360	Luminal B	3	3	2
+MB-0361	HER2-enriched	1	1	1
+MB-0362	Luminal A	2	2	2
+MB-0363	Luminal B	3	3	3
+MB-0364	Luminal A	2	2	2
+MB-0366	Luminal A	2	2	2
+MB-0368	Luminal B	3	3	3
+MB-0369	Luminal B	2	2	2
+MB-0370	Luminal B	2	3	3
+MB-0371	Luminal B	3	3	3
+MB-0372	Basal-like	0	0	0
+MB-0373	Luminal B	3	3	3
+MB-0374	Luminal B	3	3	3
+MB-0377	Luminal A	2	2	2
+MB-0378	HER2-enriched	1	1	1
+MB-0379	Luminal A	2	2	2
+MB-0380	Luminal B	3	3	3
+MB-0381	HER2-enriched	1	1	1
+MB-0382	Luminal A	2	2	2
+MB-0383	Luminal B	2	3	3
+MB-0384	Luminal B	3	3	3
+MB-0385	Luminal B	3	3	3
+MB-0386	Luminal A	3	2	2
+MB-0389	Luminal B	3	3	3
+MB-0394	Luminal A	2	2	2
+MB-0395	HER2-enriched	1	1	1
+MB-0396	Basal-like	0	0	0
+MB-0397	Luminal A	2	2	2
+MB-0398	Luminal B	3	3	3
+MB-0399	HER2-enriched	1	1	1
+MB-0404	Luminal A	2	3	3
+MB-0405	Luminal B	2	2	2
+MB-0406	Luminal B	3	3	3
+MB-0408	Luminal A	2	2	2
+MB-0410	Luminal A	2	2	2
+MB-0411	Luminal A	2	2	2
+MB-0412	Luminal B	3	3	3
+MB-0413	Luminal A	2	2	2
+MB-0417	HER2-enriched	2	2	2
+MB-0418	HER2-enriched	3	3	3
+MB-0419	Luminal A	2	2	2
+MB-0421	HER2-enriched	3	1	1
+MB-0422	Luminal A	2	2	2
+MB-0425	Luminal A	2	2	2
+MB-0427	Luminal A	2	3	3
+MB-0428	Luminal A	3	3	3
+MB-0429	Luminal B	3	3	3
+MB-0431	Luminal A	2	2	2
+MB-0434	Luminal B	3	3	3
+MB-0436	HER2-enriched	0	0	0
+MB-0437	Luminal B	2	3	3
+MB-0438	HER2-enriched	1	1	1
+MB-0439	Luminal B	3	3	3
+MB-0440	Luminal B	3	3	3
+MB-0444	Luminal B	3	2	2
+MB-0445	Luminal A	2	2	2
+MB-0448	Luminal B	3	3	3
+MB-0449	Luminal A	2	2	2
+MB-0451	Luminal A	2	2	2
+MB-0452	Luminal B	3	3	3
+MB-0453	HER2-enriched	0	1	1
+MB-0454	Luminal A	2	2	2
+MB-0455	Luminal B	3	3	3
+MB-0459	Luminal B	2	2	2
+MB-0463	Luminal A	2	2	2
+MB-0464	Basal-like	1	1	1
+MB-0465	Luminal B	1	1	1
+MB-0466	Luminal A	2	2	2
+MB-0467	HER2-enriched	1	1	1
+MB-0468	Luminal A	2	2	2
+MB-0469	Luminal B	3	3	3
+MB-0471	Luminal A	2	2	2
+MB-0472	Luminal B	2	2	2
+MB-0474	Luminal B	3	3	3
+MB-0475	Luminal A	2	3	3
+MB-0479	HER2-enriched	1	1	1
+MB-0480	Luminal A	2	2	2
+MB-0481	Basal-like	0	0	0
+MB-0483	Luminal B	3	3	3
+MB-0484	HER2-enriched	2	2	2
+MB-0485	Luminal A	2	2	2
+MB-0486	Luminal A	2	2	2
+MB-0488	Basal-like	2	2	2
+MB-0490	Luminal A	2	2	2
+MB-0491	Luminal A	3	2	2
+MB-0492	Luminal B	3	3	3
+MB-0497	Luminal A	2	2	2
+MB-0500	Basal-like	0	0	0
+MB-0501	Luminal A	2	2	2
+MB-0503	Luminal A	2	2	2
+MB-0504	Luminal A	2	2	2
+MB-0505	Luminal A	2	2	2
+MB-0506	HER2-enriched	1	1	1
+MB-0507	Luminal A	2	2	2
+MB-0509	Basal-like	3	3	3
+MB-0511	Luminal A	2	2	2
+MB-0512	Luminal A	2	2	2
+MB-0513	Luminal A	2	2	2
+MB-0514	Luminal B	3	2	3
+MB-0516	Basal-like	0	0	0
+MB-0517	Luminal A	2	2	2
+MB-0521	Luminal A	2	2	2
+MB-0522	HER2-enriched	1	1	1
+MB-0525	Basal-like	0	0	0
+MB-0526	Luminal B	3	3	3
+MB-0528	Luminal A	2	2	2
+MB-0529	Luminal A	2	2	2
+MB-0532	Luminal B	3	3	3
+MB-0535	Luminal A	2	2	2
+MB-0536	Luminal B	3	3	3
+MB-0538	Luminal A	2	2	2
+MB-0539	Basal-like	1	1	1
+MB-0541	Luminal A	2	2	2
+MB-0543	Basal-like	3	3	3
+MB-0544	Luminal B	2	2	2
+MB-0549	Luminal B	3	3	3
+MB-0550	Luminal B	3	3	3
+MB-0552	HER2-enriched	1	1	1
+MB-0553	Luminal A	2	2	2
+MB-0554	Luminal A	2	2	2
+MB-0559	Luminal A	2	3	3
+MB-0568	Luminal A	2	2	2
+MB-0569	Luminal B	3	3	3
+MB-0570	Luminal B	3	3	3
+MB-0571	Luminal A	2	2	2
+MB-0574	Luminal A	2	2	2
+MB-0575	Luminal A	2	2	2
+MB-0576	Luminal B	3	3	3
+MB-0577	Luminal B	3	3	3
+MB-0579	Luminal B	2	2	2
+MB-0580	Luminal A	2	3	3
+MB-0581	Basal-like	1	1	1
+MB-0582	Basal-like	0	0	0
+MB-0583	Luminal A	2	2	2
+MB-0584	Luminal B	2	3	2
+MB-0585	Luminal B	2	3	3
+MB-0586	Luminal A	2	2	2
+MB-0587	Luminal A	3	3	3
+MB-0589	Luminal B	3	2	2
+MB-0590	Luminal B	3	3	3
+MB-0591	Luminal B	2	3	3
+MB-0592	Luminal B	2	2	2
+MB-0593	HER2-enriched	1	1	1
+MB-0594	Luminal B	2	3	2
+MB-0596	Luminal A	2	2	2
+MB-0598	Luminal B	3	3	3
+MB-0599	Luminal A	2	2	2
+MB-0600	Luminal A	2	2	2
+MB-0601	Luminal B	3	3	3
+MB-0603	Luminal A	2	2	2
+MB-0605	Luminal A	2	2	2
+MB-0606	Luminal B	2	2	2
+MB-0607	Luminal A	2	2	2
+MB-0609	Luminal A	2	2	2
+MB-0611	Luminal B	2	2	3
+MB-0614	Luminal A	2	2	2
+MB-0616	Luminal B	3	3	3
+MB-0618	Luminal B	2	2	2
+MB-0621	Luminal A	2	2	2
+MB-0624	Luminal A	2	2	2
+MB-0626	Luminal B	3	3	3
+MB-0630	Luminal B	3	3	3
+MB-0631	Luminal A	2	2	2
+MB-0632	Luminal A	2	2	2
+MB-0636	Luminal A	2	2	2
+MB-0637	Luminal B	3	3	3
+MB-0639	Basal-like	0	0	0
+MB-0642	Luminal A	2	2	2
+MB-0643	HER2-enriched	1	1	1
+MB-0646	Luminal B	3	3	3
+MB-0649	Luminal A	2	2	2
+MB-0650	Luminal A	2	2	2
+MB-0652	HER2-enriched	1	1	1
+MB-0653	HER2-enriched	3	3	1
+MB-0654	Luminal A	2	2	2
+MB-0660	HER2-enriched	1	1	1
+MB-0661	Luminal A	2	2	2
+MB-0663	HER2-enriched	1	1	1
+MB-0664	Basal-like	0	0	0
+MB-0666	Luminal A	3	3	3
+MB-0667	Luminal B	3	3	3
+MB-0869	Basal-like	0	0	0
+MB-0874	Basal-like	0	0	0
+MB-0877	Luminal B	3	3	3
+MB-0880	Luminal A	2	2	2
+MB-0882	Luminal B	3	3	3
+MB-0884	Luminal B	3	3	3
+MB-0891	Luminal A	2	2	2
+MB-0895	Luminal B	3	1	1
+MB-0899	Luminal A	2	2	2
+MB-0901	Basal-like	0	0	0
+MB-0904	Luminal A	2	2	2
+MB-2513	Luminal A	1	1	1
+MB-2517	HER2-enriched	1	1	1
+MB-2536	Luminal A	2	2	2
+MB-2564	Luminal A	2	2	2
+MB-2610	Luminal A	2	2	2
+MB-2613	Luminal B	3	3	3
+MB-2614	Luminal A	2	2	2
+MB-2617	Luminal B	3	3	3
+MB-2618	Luminal B	3	3	3
+MB-2624	Luminal A	2	2	2
+MB-2626	Luminal B	2	2	1
+MB-2629	Luminal B	2	3	3
+MB-2632	HER2-enriched	1	1	1
+MB-2634	Luminal B	3	3	3
+MB-2642	Luminal B	3	3	3
+MB-2645	Basal-like	0	0	0
+MB-2669	Luminal A	2	2	2
+MB-2686	Luminal B	3	3	3
+MB-2705	Luminal B	3	3	3
+MB-2708	Luminal B	3	3	3
+MB-2711	Luminal A	2	2	2
+MB-2712	Luminal A	2	2	2
+MB-2718	Basal-like	0	0	0
+MB-2721	Luminal A	2	2	2
+MB-2725	Luminal A	2	2	2
+MB-2728	Luminal B	3	3	3
+MB-2730	Luminal B	3	3	3
+MB-2735	Luminal B	2	1	1
+MB-2742	HER2-enriched	1	1	1
+MB-2745	Luminal A	2	2	2
+MB-2747	Luminal A	2	2	2
+MB-2749	Luminal A	2	2	2
+MB-2750	Luminal A	2	2	2
+MB-2752	Luminal A	2	2	2
+MB-2753	Basal-like	0	0	0
+MB-2760	Luminal B	2	2	2
+MB-2763	Luminal B	3	3	3
+MB-2767	Luminal B	3	3	3
+MB-2769	Luminal B	3	3	3
+MB-2770	Luminal A	2	2	2
+MB-2771	Basal-like	2	0	0
+MB-2772	Luminal B	3	3	3
+MB-2774	Luminal B	2	2	3
+MB-2779	Luminal A	3	3	3
+MB-2781	Luminal B	3	3	3
+MB-2786	Luminal A	2	2	2
+MB-2790	Luminal A	2	2	2
+MB-2791	Luminal A	2	2	2
+MB-2792	HER2-enriched	2	1	2
+MB-2793	Luminal B	2	2	2
+MB-2797	Luminal A	2	2	2
+MB-2801	Luminal A	3	3	3
+MB-2803	Luminal B	3	3	3
+MB-2814	Luminal B	2	2	2
+MB-2819	Luminal A	2	2	2
+MB-2820	Luminal A	2	2	2
+MB-2827	Basal-like	0	0	0
+MB-2834	HER2-enriched	1	1	1
+MB-2835	Luminal A	2	2	2
+MB-2838	Luminal A	3	3	3
+MB-2840	Luminal A	2	2	2
+MB-2842	Basal-like	0	0	0
+MB-2843	Luminal A	2	2	2
+MB-2844	Luminal B	3	3	3
+MB-2846	Basal-like	2	1	1
+MB-2847	HER2-enriched	1	1	1
+MB-2848	Luminal A	2	2	2
+MB-2849	Basal-like	1	0	0
+MB-2851	Luminal A	2	2	2
+MB-2853	Luminal B	2	2	2
+MB-2854	Luminal A	2	2	2
+MB-2858	Luminal B	3	3	3
+MB-2863	Luminal A	2	2	2
+MB-2867	Luminal A	2	2	2
+MB-2901	Luminal B	3	3	3
+MB-2912	Basal-like	0	0	0
+MB-2916	Luminal A	2	2	2
+MB-2917	Basal-like	0	0	0
+MB-2919	Luminal B	2	2	2
+MB-2922	HER2-enriched	1	1	1
+MB-2923	HER2-enriched	1	1	1
+MB-2927	Luminal A	2	2	2
+MB-2929	HER2-enriched	1	1	1
+MB-2931	Luminal B	2	2	2
+MB-2932	Luminal B	3	3	3
+MB-2933	Luminal A	2	2	2
+MB-2939	Luminal B	3	3	3
+MB-2944	Luminal A	2	2	2
+MB-2947	Luminal A	2	2	2
+MB-2951	Luminal A	2	3	2
+MB-2952	Luminal A	2	2	2
+MB-2953	Luminal B	3	3	3
+MB-2954	Luminal B	2	3	3
+MB-2960	Luminal A	2	2	2
+MB-2964	HER2-enriched	1	1	1
+MB-2966	Luminal A	3	3	3
+MB-2969	Luminal A	2	2	2
+MB-2970	Luminal A	2	2	2
+MB-2971	Luminal A	2	2	2
+MB-2977	Luminal A	2	2	2
+MB-2983	Luminal B	3	3	3
+MB-2984	Luminal B	3	3	3
+MB-2990	Luminal A	2	2	2
+MB-2994	Luminal A	3	3	3
+MB-2996	Luminal A	2	2	2
+MB-2999	Luminal A	2	3	3
+MB-3002	Luminal A	2	2	2
+MB-3005	Luminal A	2	2	2
+MB-3007	Luminal B	2	2	2
+MB-3008	Luminal A	2	2	2
+MB-3014	Basal-like	0	0	0
+MB-3016	Luminal B	3	3	3
+MB-3021	Luminal A	2	2	3
+MB-3025	HER2-enriched	1	1	1
+MB-3026	Luminal A	2	2	2
+MB-3028	Luminal B	2	1	2
+MB-3031	HER2-enriched	3	1	1
+MB-3032	Luminal A	2	2	2
+MB-3033	Luminal A	2	2	2
+MB-3035	Luminal A	2	2	2
+MB-3037	Luminal A	2	2	2
+MB-3046	Basal-like	0	0	0
+MB-3049	Luminal A	2	2	2
+MB-3050	Luminal B	2	3	3
+MB-3057	Basal-like	0	0	0
+MB-3058	Basal-like	2	0	0
+MB-3060	Luminal B	3	3	3
+MB-3063	Basal-like	0	0	0
+MB-3064	Luminal A	2	2	2
+MB-3079	Luminal A	2	2	2
+MB-3083	Luminal B	3	3	3
+MB-3088	Luminal A	2	2	2
+MB-3092	Luminal B	2	2	2
+MB-3102	Luminal A	3	3	3
+MB-3103	Luminal B	3	1	1
+MB-3104	Luminal A	2	2	2
+MB-3105	Luminal A	2	2	2
+MB-3110	Luminal A	2	2	2
+MB-3121	Luminal A	2	2	2
+MB-3122	HER2-enriched	1	1	1
+MB-3123	Basal-like	0	0	0
+MB-3153	Basal-like	0	0	0
+MB-3165	Basal-like	3	1	1
+MB-3167	Luminal A	2	2	2
+MB-3171	Luminal A	2	2	2
+MB-3181	Luminal B	3	3	3
+MB-3211	Basal-like	0	0	0
+MB-3218	Basal-like	0	0	0
+MB-3222	Luminal A	2	2	2
+MB-3228	Luminal A	2	2	2
+MB-3235	Luminal B	3	3	3
+MB-3252	Luminal A	2	2	2
+MB-3253	Luminal B	3	3	3
+MB-3254	Luminal A	2	2	2
+MB-3266	Luminal B	2	3	3
+MB-3272	Luminal B	3	3	3
+MB-3275	Luminal B	3	3	3
+MB-3277	Basal-like	0	0	0
+MB-3297	Basal-like	0	0	0
+MB-3298	Luminal A	2	2	2
+MB-3300	Luminal B	2	3	2
+MB-3301	Luminal B	3	3	3
+MB-3303	Luminal B	3	3	3
+MB-3328	Luminal A	2	2	2
+MB-3329	HER2-enriched	1	1	1
+MB-3341	Luminal A	2	2	3
+MB-3344	Luminal A	2	2	2
+MB-3350	Luminal B	2	3	2
+MB-3351	Luminal A	2	2	2
+MB-3355	HER2-enriched	1	1	1
+MB-3357	Luminal B	3	3	3
+MB-3360	Luminal B	3	3	1
+MB-3361	Luminal B	1	1	1
+MB-3363	Basal-like	0	0	0
+MB-3365	Luminal A	2	2	2
+MB-3371	Luminal B	3	3	3
+MB-3378	Luminal A	2	2	2
+MB-3379	Luminal A	2	2	2
+MB-3381	Luminal A	2	2	2
+MB-3382	Luminal B	3	3	3
+MB-3386	HER2-enriched	1	1	1
+MB-3388	Luminal B	3	3	3
+MB-3389	Luminal B	3	3	3
+MB-3396	Basal-like	1	1	1
+MB-3402	Luminal B	3	3	3
+MB-3403	Luminal A	2	2	2
+MB-3412	Luminal A	2	2	2
+MB-3417	Luminal B	2	2	2
+MB-3430	Luminal A	2	2	2
+MB-3435	HER2-enriched	1	1	1
+MB-3436	Luminal B	2	3	3
+MB-3437	Luminal B	2	3	3
+MB-3439	Luminal A	2	2	3
+MB-3450	Luminal A	2	2	2
+MB-3453	Basal-like	0	0	0
+MB-3462	Luminal A	2	2	2
+MB-3466	HER2-enriched	3	3	3
+MB-3467	HER2-enriched	1	1	1
+MB-3470	HER2-enriched	1	1	1
+MB-3487	Luminal B	3	3	3
+MB-3488	HER2-enriched	1	1	1
+MB-3490	Luminal B	3	3	3
+MB-3492	Luminal B	3	3	3
+MB-3497	HER2-enriched	1	1	1
+MB-3500	Basal-like	0	0	0
+MB-3502	Basal-like	0	0	0
+MB-3506	Luminal B	3	3	3
+MB-3510	Luminal A	2	2	2
+MB-3525	Luminal B	3	3	3
+MB-3528	HER2-enriched	1	1	1
+MB-3530	HER2-enriched	2	2	2
+MB-3545	Luminal A	2	2	2
+MB-3547	Luminal A	2	2	2
+MB-3548	Luminal A	2	2	2
+MB-3556	HER2-enriched	1	1	1
+MB-3576	HER2-enriched	3	3	3
+MB-3600	Luminal B	3	3	3
+MB-3606	HER2-enriched	1	1	1
+MB-3614	Luminal B	3	3	3
+MB-3706	Basal-like	0	0	0
+MB-3711	Luminal A	2	3	2
+MB-3748	Luminal A	2	2	2
+MB-3754	Luminal B	3	3	3
+MB-3781	Luminal A	2	2	2
+MB-3797	Luminal A	2	2	2
+MB-3823	Luminal A	2	2	2
+MB-3824	Luminal B	3	3	3
+MB-3838	Luminal B	3	3	3
+MB-3840	Luminal B	3	3	3
+MB-3842	Luminal B	3	3	3
+MB-3850	Luminal A	2	2	2
+MB-3852	Luminal A	2	2	2
+MB-3854	Luminal A	2	2	2
+MB-3866	HER2-enriched	1	1	1
+MB-3871	Luminal A	2	2	2
+MB-3874	Luminal A	2	2	2
+MB-3978	HER2-enriched	3	3	3
+MB-4000	Luminal A	2	2	2
+MB-4001	Luminal A	2	2	2
+MB-4003	HER2-enriched	3	3	3
+MB-4004	Luminal B	3	3	3
+MB-4008	Luminal B	2	2	2
+MB-4010	HER2-enriched	3	3	3
+MB-4011	Luminal A	3	3	3
+MB-4012	HER2-enriched	1	1	1
+MB-4015	HER2-enriched	1	1	1
+MB-4017	Luminal B	3	3	3
+MB-4018	Luminal A	2	2	2
+MB-4024	Basal-like	0	0	0
+MB-4033	Luminal A	2	2	2
+MB-4046	HER2-enriched	2	2	2
+MB-4079	HER2-enriched	3	3	3
+MB-4091	Luminal A	2	2	2
+MB-4098	HER2-enriched	2	2	2
+MB-4119	HER2-enriched	2	2	2
+MB-4120	Luminal A	2	2	2
+MB-4126	HER2-enriched	2	1	1
+MB-4127	HER2-enriched	1	1	1
+MB-4139	Luminal B	3	3	3
+MB-4140	Luminal A	2	2	2
+MB-4141	HER2-enriched	2	2	2
+MB-4145	HER2-enriched	3	3	3
+MB-4146	Basal-like	0	0	0
+MB-4148	Luminal B	3	3	3
+MB-4154	Luminal B	3	3	3
+MB-4171	HER2-enriched	2	2	2
+MB-4173	Luminal A	2	2	2
+MB-4189	HER2-enriched	3	3	3
+MB-4212	Luminal A	2	2	2
+MB-4213	Luminal B	2	2	2
+MB-4222	HER2-enriched	2	2	2
+MB-4230	Luminal A	3	3	3
+MB-4233	Luminal B	3	3	3
+MB-4234	Luminal A	2	2	2
+MB-4235	Basal-like	0	0	0
+MB-4236	HER2-enriched	2	2	2
+MB-4250	Luminal A	2	2	2
+MB-4254	Basal-like	0	0	0
+MB-4264	Luminal A	3	3	3
+MB-4266	Luminal A	2	2	2
+MB-4270	HER2-enriched	3	3	1
+MB-4274	Luminal B	2	2	2
+MB-4276	HER2-enriched	1	1	1
+MB-4278	HER2-enriched	3	3	3
+MB-4281	HER2-enriched	3	3	3
+MB-4282	Luminal A	2	2	2
+MB-4283	Luminal A	2	2	2
+MB-4289	HER2-enriched	3	3	3
+MB-4292	Luminal A	2	2	2
+MB-4293	Luminal A	2	2	2
+MB-4298	Luminal B	2	2	2
+MB-4300	HER2-enriched	1	1	1
+MB-4303	Basal-like	0	0	0
+MB-4306	Luminal A	2	2	2
+MB-4310	Luminal A	2	2	2
+MB-4313	Luminal A	2	2	2
+MB-4317	HER2-enriched	1	1	1
+MB-4318	Luminal B	3	3	3
+MB-4322	Luminal A	2	2	2
+MB-4323	Luminal A	2	2	2
+MB-4324	HER2-enriched	3	3	3
+MB-4328	Luminal A	2	2	2
+MB-4329	Luminal A	2	2	2
+MB-4331	HER2-enriched	3	3	3
+MB-4332	Basal-like	0	0	0
+MB-4333	Luminal A	2	2	2
+MB-4339	Luminal B	3	3	3
+MB-4341	HER2-enriched	1	1	1
+MB-4342	Luminal A	2	2	2
+MB-4343	HER2-enriched	2	1	1
+MB-4348	HER2-enriched	3	3	1
+MB-4350	HER2-enriched	1	1	1
+MB-4351	HER2-enriched	3	1	1
+MB-4353	Luminal B	2	3	3
+MB-4354	HER2-enriched	1	1	1
+MB-4357	Luminal A	2	2	2
+MB-4360	HER2-enriched	1	1	1
+MB-4368	Luminal A	2	2	2
+MB-4374	Luminal A	2	2	2
+MB-4390	Luminal A	2	2	2
+MB-4395	HER2-enriched	3	3	3
+MB-4407	Basal-like	0	0	0
+MB-4408	Basal-like	0	0	0
+MB-4417	Basal-like	0	0	0
+MB-4418	Luminal A	2	2	2
+MB-4421	Luminal A	2	2	2
+MB-4426	Basal-like	3	3	2
+MB-4434	HER2-enriched	3	3	3
+MB-4442	Luminal A	3	3	2
+MB-4529	Luminal A	2	2	2
+MB-4548	HER2-enriched	1	1	1
+MB-4557	Luminal A	2	2	2
+MB-4564	Luminal A	2	2	2
+MB-4578	Luminal A	2	2	2
+MB-4591	Luminal B	3	3	3
+MB-4593	Luminal A	2	2	2
+MB-4598	Luminal B	2	2	2
+MB-4599	Luminal A	2	2	2
+MB-4601	Basal-like	1	1	1
+MB-4602	Luminal B	3	3	3
+MB-4607	Luminal A	2	2	2
+MB-4616	Luminal A	2	2	2
+MB-4618	Luminal B	2	2	2
+MB-4621	Basal-like	0	0	0
+MB-4623	Luminal A	2	2	2
+MB-4626	HER2-enriched	2	2	2
+MB-4627	Luminal A	2	2	2
+MB-4630	Luminal B	3	3	3
+MB-4633	Luminal A	2	2	2
+MB-4634	Luminal A	2	2	2
+MB-4639	Luminal B	3	3	3
+MB-4640	HER2-enriched	1	1	1
+MB-4641	Luminal A	2	2	2
+MB-4642	Luminal B	3	3	3
+MB-4643	HER2-enriched	1	1	1
+MB-4644	Luminal B	3	3	3
+MB-4648	Luminal B	3	3	3
+MB-4649	Luminal B	3	3	3
+MB-4651	Luminal B	3	3	3
+MB-4654	Luminal B	3	3	3
+MB-4655	Luminal A	2	3	3
+MB-4660	Basal-like	0	0	0
+MB-4661	Luminal A	2	2	2
+MB-4663	Basal-like	1	0	0
+MB-4665	Luminal A	2	2	2
+MB-4666	Luminal A	2	2	2
+MB-4667	HER2-enriched	1	1	1
+MB-4669	Luminal B	2	3	3
+MB-4670	Luminal A	2	2	2
+MB-4671	Luminal B	3	2	2
+MB-4672	Luminal A	2	2	2
+MB-4673	Luminal B	3	3	3
+MB-4674	Luminal A	2	2	2
+MB-4675	Luminal A	2	2	2
+MB-4679	Basal-like	0	0	0
+MB-4681	Luminal A	2	2	2
+MB-4682	Luminal A	2	2	2
+MB-4685	Luminal B	2	2	3
+MB-4686	Luminal A	2	2	2
+MB-4687	Luminal A	2	1	1
+MB-4688	Luminal B	3	3	3
+MB-4691	Luminal A	2	2	2
+MB-4692	Luminal A	2	2	2
+MB-4694	Basal-like	0	0	0
+MB-4698	Luminal A	2	2	2
+MB-4701	Luminal A	2	2	2
+MB-4702	Luminal B	3	3	3
+MB-4704	Luminal A	2	2	2
+MB-4705	Luminal A	2	2	2
+MB-4706	Luminal A	2	2	2
+MB-4707	Basal-like	0	0	0
+MB-4708	Luminal A	2	2	2
+MB-4709	Luminal A	2	2	2
+MB-4710	Luminal A	2	2	2
+MB-4714	Basal-like	0	0	0
+MB-4715	Basal-like	0	0	0
+MB-4716	Luminal A	2	2	2
+MB-4717	Basal-like	0	0	0
+MB-4719	Luminal A	2	2	2
+MB-4721	Luminal A	2	2	2
+MB-4722	Luminal A	2	2	2
+MB-4723	Luminal B	3	3	3
+MB-4724	HER2-enriched	1	1	1
+MB-4725	HER2-enriched	3	1	1
+MB-4729	Luminal A	1	1	1
+MB-4730	Luminal A	2	2	2
+MB-4731	HER2-enriched	1	1	1
+MB-4732	Basal-like	0	0	0
+MB-4735	Luminal A	2	2	2
+MB-4737	Luminal B	3	3	3
+MB-4739	Luminal A	2	2	2
+MB-4741	Luminal B	2	2	2
+MB-4742	Luminal A	2	2	2
+MB-4744	Luminal B	3	3	3
+MB-4745	HER2-enriched	1	1	1
+MB-4749	Luminal A	2	2	2
+MB-4750	Luminal B	2	2	2
+MB-4752	Luminal A	2	2	2
+MB-4757	Basal-like	0	0	0
+MB-4758	Basal-like	2	0	0
+MB-4760	Luminal A	2	2	2
+MB-4762	Luminal A	2	2	2
+MB-4763	HER2-enriched	1	1	1
+MB-4764	Luminal A	2	2	2
+MB-4767	Luminal B	3	3	3
+MB-4769	Basal-like	0	0	0
+MB-4770	HER2-enriched	1	1	1
+MB-4771	Luminal A	2	2	2
+MB-4778	Luminal A	2	2	2
+MB-4779	Luminal A	2	2	2
+MB-4785	Luminal A	2	2	2
+MB-4787	Luminal A	2	2	2
+MB-4790	Luminal A	2	2	2
+MB-4791	Luminal B	3	3	3
+MB-4792	Basal-like	0	0	0
+MB-4793	Basal-like	0	0	0
+MB-4794	Luminal A	2	2	2
+MB-4796	Luminal B	3	3	3
+MB-4797	Luminal A	2	2	2
+MB-4800	Luminal A	2	2	2
+MB-4801	Luminal A	2	2	2
+MB-4802	Luminal B	3	3	3
+MB-4805	Luminal A	2	2	2
+MB-4806	Luminal A	2	2	2
+MB-4809	Basal-like	0	0	0
+MB-4818	Luminal B	2	2	2
+MB-4820	Luminal A	2	2	2
+MB-4822	Luminal A	2	2	2
+MB-4823	HER2-enriched	1	1	1
+MB-4825	Luminal A	2	2	2
+MB-4827	Luminal A	2	2	2
+MB-4828	Luminal B	3	3	3
+MB-4829	Luminal B	2	2	2
+MB-4832	Luminal A	2	2	2
+MB-4834	Luminal B	3	3	3
+MB-4836	HER2-enriched	3	3	3
+MB-4838	Luminal B	3	3	3
+MB-4839	Luminal B	2	2	2
+MB-4843	Luminal A	2	2	2
+MB-4845	Luminal A	2	2	2
+MB-4846	Luminal B	3	3	3
+MB-4849	Luminal A	2	2	2
+MB-4851	Luminal A	2	2	2
+MB-4853	Luminal A	2	2	2
+MB-4855	Luminal A	2	2	2
+MB-4858	Luminal A	1	1	1
+MB-4860	Luminal A	2	2	2
+MB-4862	Luminal B	3	3	3
+MB-4866	Luminal A	2	2	2
+MB-4867	Luminal A	2	2	2
+MB-4869	Luminal A	2	2	2
+MB-4870	Luminal A	2	2	2
+MB-4872	Luminal A	2	2	2
+MB-4873	Luminal B	2	2	2
+MB-4878	Luminal A	2	2	2
+MB-4879	HER2-enriched	1	1	1
+MB-4880	Basal-like	0	0	0
+MB-4881	Basal-like	0	0	0
+MB-4882	Luminal A	2	2	2
+MB-4883	Luminal A	2	2	2
+MB-4886	HER2-enriched	1	1	1
+MB-4894	Luminal A	3	3	3
+MB-4896	Basal-like	1	1	1
+MB-4898	Luminal A	2	2	2
+MB-4899	Luminal A	2	2	2
+MB-4900	Luminal B	3	3	3
+MB-4906	Luminal A	3	2	2
+MB-4908	Luminal B	3	3	3
+MB-4911	Basal-like	0	0	0
+MB-4912	Luminal B	3	3	3
+MB-4925	Luminal B	2	2	2
+MB-4928	HER2-enriched	3	3	3
+MB-4929	HER2-enriched	1	1	1
+MB-4930	Luminal B	3	3	3
+MB-4933	Luminal A	3	3	3
+MB-4934	Luminal B	2	2	2
+MB-4935	HER2-enriched	1	1	1
+MB-4937	Luminal B	3	3	3
+MB-4938	Basal-like	0	0	0
+MB-4941	Luminal A	2	2	2
+MB-4944	Luminal B	3	3	3
+MB-4945	Basal-like	0	0	0
+MB-4949	Luminal B	3	3	3
+MB-4950	Luminal A	2	2	2
+MB-4952	HER2-enriched	1	1	1
+MB-4956	Luminal B	3	3	3
+MB-4957	Luminal B	2	2	2
+MB-4959	Luminal A	2	2	2
+MB-4961	Luminal A	2	2	2
+MB-4962	Luminal A	2	2	2
+MB-4965	Luminal A	2	2	2
+MB-4966	Luminal B	2	2	2
+MB-4967	Luminal A	2	2	2
+MB-4968	Luminal A	2	2	2
+MB-4969	Luminal A	2	2	2
+MB-4970	Luminal B	2	3	3
+MB-4974	Basal-like	0	0	0
+MB-4976	Luminal A	2	2	2
+MB-4977	Luminal A	2	2	2
+MB-4981	Luminal A	2	2	2
+MB-4982	HER2-enriched	1	1	1
+MB-4986	Luminal A	2	2	2
+MB-4987	Luminal A	2	2	2
+MB-4991	Luminal B	3	3	3
+MB-4992	Luminal A	2	2	2
+MB-4993	HER2-enriched	1	1	1
+MB-4994	Luminal B	2	2	2
+MB-4996	Luminal A	2	2	2
+MB-4998	Luminal B	2	3	3
+MB-4999	Luminal A	2	2	2
+MB-5001	Luminal A	2	2	2
+MB-5004	HER2-enriched	3	3	1
+MB-5008	HER2-enriched	1	1	1
+MB-5011	Luminal A	2	2	2
+MB-5013	Luminal A	2	2	2
+MB-5014	Luminal B	3	3	3
+MB-5015	Luminal A	2	2	2
+MB-5018	Luminal A	2	3	3
+MB-5020	Luminal A	2	2	2
+MB-5022	HER2-enriched	1	1	1
+MB-5027	Luminal A	2	2	2
+MB-5033	Luminal B	2	2	2
+MB-5035	Luminal A	2	2	2
+MB-5039	Luminal B	2	3	3
+MB-5040	Luminal B	3	3	3
+MB-5043	Luminal A	2	2	2
+MB-5044	Luminal B	2	3	3
+MB-5045	Luminal A	3	1	1
+MB-5048	Luminal A	2	2	2
+MB-5049	Luminal B	3	3	2
+MB-5050	Luminal A	2	2	2
+MB-5053	Luminal A	2	2	2
+MB-5054	Basal-like	1	1	1
+MB-5057	Basal-like	0	0	0
+MB-5059	Luminal A	2	2	2
+MB-5060	Luminal B	2	3	3
+MB-5061	Luminal B	3	3	3
+MB-5062	Luminal B	3	3	3
+MB-5063	HER2-enriched	1	1	1
+MB-5064	Luminal A	2	2	2
+MB-5066	Luminal A	2	2	2
+MB-5068	Luminal A	2	2	2
+MB-5070	Basal-like	0	0	0
+MB-5072	HER2-enriched	1	1	1
+MB-5074	Luminal A	2	2	2
+MB-5076	Basal-like	0	0	0
+MB-5078	Luminal B	1	1	1
+MB-5079	Luminal A	2	2	2
+MB-5084	Luminal A	2	2	2
+MB-5086	Luminal A	2	2	2
+MB-5088	Luminal A	2	2	2
+MB-5092	Luminal A	2	2	2
+MB-5093	HER2-enriched	3	3	3
+MB-5097	Luminal B	3	3	3
+MB-5098	Luminal A	2	2	2
+MB-5101	Luminal B	3	3	3
+MB-5102	Basal-like	0	0	0
+MB-5104	Luminal A	2	2	2
+MB-5105	Luminal A	3	2	2
+MB-5106	Luminal A	2	2	2
+MB-5107	Luminal B	3	3	3
+MB-5109	Luminal A	2	2	2
+MB-5114	Basal-like	1	1	1
+MB-5115	Basal-like	0	0	0
+MB-5116	Luminal B	3	3	3
+MB-5117	Luminal A	2	2	2
+MB-5118	Luminal A	2	2	2
+MB-5119	Luminal A	2	2	2
+MB-5120	HER2-enriched	1	1	1
+MB-5121	Luminal B	3	3	3
+MB-5122	Luminal A	2	2	2
+MB-5123	Luminal A	2	2	2
+MB-5124	Luminal B	3	3	3
+MB-5126	Basal-like	0	0	0
+MB-5127	Luminal B	2	2	2
+MB-5130	Luminal A	2	2	2
+MB-5131	Luminal A	2	2	2
+MB-5134	Luminal A	2	2	2
+MB-5135	Basal-like	0	0	0
+MB-5136	Luminal A	2	2	2
+MB-5137	Basal-like	0	0	0
+MB-5138	Basal-like	0	0	0
+MB-5139	Luminal B	3	3	3
+MB-5140	Luminal B	3	3	3
+MB-5143	Luminal A	2	2	2
+MB-5144	Luminal B	3	3	3
+MB-5147	Luminal A	2	2	2
+MB-5148	HER2-enriched	2	1	1
+MB-5152	Luminal A	2	3	2
+MB-5158	Luminal A	2	2	2
+MB-5160	Luminal B	3	3	3
+MB-5163	Luminal A	2	2	2
+MB-5166	Luminal B	3	3	3
+MB-5167	Luminal B	3	3	3
+MB-5169	Luminal B	2	2	2
+MB-5172	HER2-enriched	1	1	1
+MB-5173	Basal-like	0	0	0
+MB-5174	HER2-enriched	3	3	3
+MB-5179	Luminal A	2	2	2
+MB-5182	Luminal A	2	2	2
+MB-5183	Luminal A	2	2	2
+MB-5184	Luminal A	2	2	2
+MB-5185	Luminal A	2	3	2
+MB-5186	Luminal A	2	2	2
+MB-5188	Basal-like	1	0	0
+MB-5189	Luminal A	2	2	2
+MB-5190	Basal-like	1	1	1
+MB-5191	Luminal A	2	2	2
+MB-5193	Luminal A	2	2	2
+MB-5195	Luminal A	1	1	1
+MB-5196	Luminal A	2	2	3
+MB-5197	Luminal A	3	3	3
+MB-5199	Basal-like	1	1	1
+MB-5200	Luminal B	3	3	3
+MB-5201	Luminal A	2	2	2
+MB-5204	Luminal A	2	2	2
+MB-5205	Basal-like	3	0	0
+MB-5206	Luminal A	2	2	2
+MB-5208	Basal-like	0	0	0
+MB-5209	Basal-like	1	1	1
+MB-5211	Luminal B	3	3	3
+MB-5212	Luminal B	1	1	1
+MB-5213	HER2-enriched	1	1	1
+MB-5215	Luminal B	2	2	2
+MB-5218	Luminal B	3	3	3
+MB-5219	Luminal A	2	2	2
+MB-5221	Luminal A	2	2	2
+MB-5224	Luminal A	2	2	2
+MB-5225	Basal-like	0	0	0
+MB-5226	Luminal B	2	2	2
+MB-5227	Luminal A	2	2	2
+MB-5228	Luminal B	3	3	3
+MB-5229	Basal-like	1	1	1
+MB-5230	Luminal A	2	2	2
+MB-5231	HER2-enriched	1	1	1
+MB-5232	Basal-like	0	0	0
+MB-5233	Luminal B	3	3	3
+MB-5235	Basal-like	0	0	0
+MB-5236	Basal-like	0	0	0
+MB-5239	Luminal B	3	3	3
+MB-5240	Luminal A	2	2	2
+MB-5243	Luminal B	3	3	3
+MB-5244	Luminal B	3	3	3
+MB-5251	Luminal A	2	2	2
+MB-5253	Luminal A	2	2	2
+MB-5256	Luminal A	2	2	2
+MB-5258	Basal-like	0	0	0
+MB-5259	HER2-enriched	1	1	1
+MB-5260	Luminal B	3	3	3
+MB-5261	Luminal B	2	2	2
+MB-5264	Luminal A	2	2	2
+MB-5266	Luminal B	3	3	3
+MB-5267	Luminal A	2	2	2
+MB-5268	Luminal A	2	2	2
+MB-5270	Luminal A	2	2	2
+MB-5271	Luminal B	3	3	3
+MB-5273	Luminal B	3	3	3
+MB-5275	HER2-enriched	2	2	2
+MB-5279	Luminal A	2	2	2
+MB-5281	Luminal A	2	2	1
+MB-5284	Luminal A	2	2	2
+MB-5287	Luminal A	2	2	2
+MB-5288	Luminal B	2	3	3
+MB-5289	Luminal A	2	2	2
+MB-5290	Luminal A	2	2	2
+MB-5291	Luminal B	3	3	3
+MB-5292	Luminal B	3	3	3
+MB-5293	Luminal A	2	2	2
+MB-5294	Basal-like	0	0	0
+MB-5295	Basal-like	0	0	0
+MB-5298	Basal-like	0	0	0
+MB-5299	Basal-like	0	0	0
+MB-5300	Luminal A	2	2	2
+MB-5301	HER2-enriched	2	1	1
+MB-5305	Luminal A	2	2	2
+MB-5306	Luminal A	3	3	3
+MB-5310	Luminal A	2	2	2
+MB-5312	HER2-enriched	1	1	1
+MB-5313	HER2-enriched	3	3	1
+MB-5315	HER2-enriched	1	1	1
+MB-5317	Luminal B	3	3	3
+MB-5318	Luminal B	3	3	3
+MB-5322	Luminal A	3	3	3
+MB-5324	Luminal A	2	2	2
+MB-5327	HER2-enriched	1	1	1
+MB-5328	Luminal B	2	3	3
+MB-5329	Luminal A	2	1	1
+MB-5330	Luminal A	2	2	2
+MB-5331	Luminal A	2	2	2
+MB-5332	HER2-enriched	3	3	1
+MB-5334	Luminal A	2	2	2
+MB-5335	Basal-like	0	0	0
+MB-5338	Luminal B	3	3	3
+MB-5341	Luminal B	2	2	2
+MB-5346	Basal-like	0	0	0
+MB-5347	Luminal B	3	3	3
+MB-5349	Luminal A	2	2	2
+MB-5358	Luminal A	2	2	2
+MB-5360	Luminal A	2	2	2
+MB-5361	Luminal A	2	2	2
+MB-5365	Luminal A	2	2	2
+MB-5366	HER2-enriched	3	3	1
+MB-5369	Luminal A	2	2	2
+MB-5370	Luminal B	3	3	3
+MB-5373	Luminal B	2	2	2
+MB-5377	Luminal B	2	2	2
+MB-5378	Basal-like	0	0	0
+MB-5381	HER2-enriched	1	1	1
+MB-5382	Luminal A	2	2	2
+MB-5383	Luminal A	2	3	2
+MB-5384	Luminal A	2	2	2
+MB-5385	Luminal A	2	2	2
+MB-5386	Luminal B	2	2	2
+MB-5387	Basal-like	0	0	0
+MB-5388	Luminal A	2	2	2
+MB-5389	Luminal A	2	2	2
+MB-5390	Basal-like	0	0	0
+MB-5393	Luminal B	2	2	2
+MB-5394	HER2-enriched	1	1	1
+MB-5395	Luminal A	2	2	2
+MB-5396	Luminal B	3	3	3
+MB-5397	Luminal A	3	3	2
+MB-5398	Luminal A	2	2	2
+MB-5399	Luminal A	2	2	2
+MB-5401	Luminal A	2	2	2
+MB-5402	Luminal A	2	2	2
+MB-5403	Luminal A	2	2	2
+MB-5404	Luminal A	2	3	2
+MB-5406	Luminal B	2	3	3
+MB-5407	Luminal A	2	2	2
+MB-5409	HER2-enriched	1	1	1
+MB-5410	Luminal A	2	2	2
+MB-5411	HER2-enriched	3	1	1
+MB-5412	Luminal A	2	2	2
+MB-5413	Luminal A	2	2	2
+MB-5414	Luminal B	3	3	3
+MB-5417	HER2-enriched	1	1	1
+MB-5418	Luminal B	3	3	3
+MB-5420	Basal-like	1	1	1
+MB-5421	Basal-like	0	0	0
+MB-5422	Luminal A	2	2	2
+MB-5424	Luminal A	2	2	2
+MB-5425	Luminal A	2	2	2
+MB-5426	Basal-like	1	1	1
+MB-5427	Basal-like	2	0	0
+MB-5428	Luminal A	2	2	2
+MB-5429	Luminal A	2	2	2
+MB-5432	Luminal A	2	2	2
+MB-5433	Luminal A	2	2	2
+MB-5434	Luminal B	3	3	3
+MB-5435	Luminal B	2	2	2
+MB-5441	HER2-enriched	1	1	1
+MB-5442	Basal-like	0	0	0
+MB-5444	Luminal A	2	2	2
+MB-5446	HER2-enriched	1	1	1
+MB-5447	Luminal B	2	3	3
+MB-5451	Luminal A	2	2	2
+MB-5452	Luminal A	2	2	2
+MB-5454	Luminal B	3	3	1
+MB-5455	Luminal A	2	2	2
+MB-5457	Luminal A	2	2	2
+MB-5458	Basal-like	1	1	1
+MB-5459	Luminal B	3	3	3
+MB-5460	Basal-like	2	3	3
+MB-5463	Luminal B	2	2	2
+MB-5464	Luminal A	2	2	2
+MB-5465	Basal-like	0	0	0
+MB-5468	Basal-like	0	0	0
+MB-5470	Basal-like	3	3	3
+MB-5471	Luminal A	2	2	2
+MB-5472	Luminal A	2	2	2
+MB-5473	Luminal A	2	2	2
+MB-5475	Luminal B	2	2	2
+MB-5477	Luminal B	3	3	3
+MB-5478	Luminal A	2	2	2
+MB-5481	Luminal B	3	3	3
+MB-5482	Basal-like	0	0	0
+MB-5483	HER2-enriched	1	1	1
+MB-5484	Luminal A	2	2	2
+MB-5485	Luminal B	3	3	3
+MB-5486	Luminal B	3	3	3
+MB-5489	Luminal A	2	2	2
+MB-5490	Luminal A	2	2	2
+MB-5491	Luminal B	2	2	2
+MB-5492	Luminal A	2	2	2
+MB-5493	Luminal B	3	3	3
+MB-5495	Luminal A	2	2	2
+MB-5497	Luminal B	3	3	3
+MB-5498	HER2-enriched	2	1	1
+MB-5499	Luminal A	2	2	2
+MB-5502	Luminal B	3	3	3
+MB-5505	Luminal B	3	3	3
+MB-5510	Luminal A	2	2	2
+MB-5511	HER2-enriched	1	1	1
+MB-5513	Basal-like	3	3	3
+MB-5514	Luminal A	2	2	2
+MB-5518	Luminal B	3	3	3
+MB-5519	Luminal A	2	2	2
+MB-5520	Luminal A	2	2	2
+MB-5521	Luminal B	3	3	3
+MB-5525	Luminal B	3	3	3
+MB-5526	Basal-like	0	0	0
+MB-5529	Basal-like	0	0	0
+MB-5530	Basal-like	2	2	2
+MB-5532	Luminal A	2	2	2
+MB-5535	HER2-enriched	1	1	1
+MB-5540	Luminal B	3	3	3
+MB-5541	Luminal A	2	2	2
+MB-5543	Luminal A	2	2	2
+MB-5547	Basal-like	0	0	0
+MB-5549	HER2-enriched	1	1	1
+MB-5550	Luminal A	2	2	2
+MB-5551	Basal-like	0	0	0
+MB-5552	Luminal B	3	3	3
+MB-5553	Luminal B	2	2	2
+MB-5554	Luminal A	2	2	2
+MB-5556	Luminal B	2	3	3
+MB-5558	Basal-like	2	0	0
+MB-5559	Basal-like	2	0	0
+MB-5560	Basal-like	0	0	0
+MB-5562	Luminal B	2	2	2
+MB-5563	Luminal A	2	2	2
+MB-5566	Basal-like	0	0	0
+MB-5567	Luminal A	2	2	2
+MB-5571	Luminal A	2	2	2
+MB-5575	Luminal B	3	3	3
+MB-5576	Luminal B	3	3	3
+MB-5579	Luminal A	2	2	2
+MB-5580	Luminal A	2	2	2
+MB-5582	Luminal A	2	2	2
+MB-5583	Luminal A	2	2	2
+MB-5584	HER2-enriched	3	3	3
+MB-5585	Luminal A	2	2	2
+MB-5589	Luminal A	2	2	2
+MB-5590	Luminal B	3	3	3
+MB-5591	Luminal A	2	2	2
+MB-5592	Luminal B	2	2	2
+MB-5593	HER2-enriched	1	1	1
+MB-5596	Luminal A	2	2	2
+MB-5597	Luminal A	2	2	2
+MB-5599	Luminal A	2	2	3
+MB-5601	Luminal A	2	2	2
+MB-5602	Basal-like	1	1	1
+MB-5603	Luminal A	2	2	2
+MB-5604	Luminal B	3	3	3
+MB-5605	Luminal B	2	2	2
+MB-5613	Luminal B	3	3	3
+MB-5614	Luminal A	2	2	2
+MB-5617	Luminal A	2	2	2
+MB-5620	Luminal A	2	2	2
+MB-5622	Luminal B	3	3	3
+MB-5623	Luminal B	2	2	2
+MB-5624	Basal-like	0	0	0
+MB-5625	Basal-like	0	0	0
+MB-5626	Luminal A	2	2	2
+MB-5628	Luminal B	3	3	3
+MB-5629	Luminal A	2	2	2
+MB-5632	Luminal B	3	3	3
+MB-5634	Basal-like	0	0	0
+MB-5635	Luminal A	2	2	2
+MB-5636	Luminal B	3	3	3
+MB-5638	Luminal A	2	3	2
+MB-5641	Luminal B	3	3	3
+MB-5642	Luminal A	2	2	2
+MB-5645	Luminal A	2	2	2
+MB-5646	Luminal B	2	2	2
+MB-5647	Luminal A	2	2	2
+MB-5648	Luminal A	2	2	2
+MB-5653	Luminal B	2	2	2
+MB-5654	Luminal B	2	2	2
+MB-5655	Basal-like	0	0	0
+MB-6001	Luminal A	2	2	2
+MB-6006	Luminal A	2	2	2
+MB-6007	HER2-enriched	2	2	2
+MB-6008	Luminal B	3	3	3
+MB-6010	Luminal B	3	3	3
+MB-6011	Luminal B	3	3	3
+MB-6012	Luminal A	2	2	2
+MB-6016	Luminal A	2	2	2
+MB-6017	Luminal A	2	2	2
+MB-6018	Luminal A	2	2	2
+MB-6020	Luminal B	3	3	3
+MB-6021	Luminal A	2	2	2
+MB-6022	Luminal B	3	2	2
+MB-6024	Luminal A	2	2	2
+MB-6026	Luminal B	3	3	3
+MB-6029	Luminal A	2	2	2
+MB-6030	Luminal A	2	2	2
+MB-6039	HER2-enriched	3	3	3
+MB-6044	HER2-enriched	2	1	1
+MB-6047	HER2-enriched	3	3	3
+MB-6048	HER2-enriched	3	3	3
+MB-6049	HER2-enriched	3	3	3
+MB-6050	Luminal A	2	2	2
+MB-6051	Luminal A	2	2	2
+MB-6053	Luminal B	3	3	3
+MB-6058	Basal-like	0	0	0
+MB-6060	Luminal B	3	3	3
+MB-6065	Luminal A	2	2	2
+MB-6068	Basal-like	0	0	0
+MB-6069	Luminal A	2	2	2
+MB-6071	Luminal A	2	2	2
+MB-6075	Luminal B	3	3	3
+MB-6079	Luminal B	2	2	2
+MB-6080	Luminal B	2	1	1
+MB-6083	Luminal A	2	2	2
+MB-6085	HER2-enriched	1	1	1
+MB-6097	Luminal A	2	2	2
+MB-6098	Basal-like	0	0	0
+MB-6100	HER2-enriched	1	1	1
+MB-6105	HER2-enriched	2	2	2
+MB-6108	Luminal A	2	2	2
+MB-6113	HER2-enriched	2	1	1
+MB-6114	HER2-enriched	1	1	1
+MB-6116	HER2-enriched	1	1	1
+MB-6118	Luminal A	2	2	2
+MB-6122	Basal-like	2	2	2
+MB-6124	Luminal A	2	2	2
+MB-6131	HER2-enriched	1	1	1
+MB-6133	Luminal A	2	2	2
+MB-6135	Luminal B	3	3	3
+MB-6138	Luminal B	2	3	3
+MB-6141	Luminal B	2	2	2
+MB-6145	Luminal B	3	3	3
+MB-6146	HER2-enriched	3	3	3
+MB-6149	Luminal A	2	2	2
+MB-6150	Luminal B	2	2	2
+MB-6152	Basal-like	1	1	1
+MB-6154	Luminal B	2	2	2
+MB-6156	HER2-enriched	1	1	1
+MB-6157	Basal-like	3	1	1
+MB-6160	HER2-enriched	1	1	1
+MB-6163	Luminal A	2	2	2
+MB-6164	Luminal B	2	2	2
+MB-6167	Luminal A	2	2	2
+MB-6168	Luminal A	2	2	2
+MB-6169	Basal-like	1	1	1
+MB-6171	Luminal A	2	2	2
+MB-6178	Basal-like	0	0	0
+MB-6179	Luminal A	2	3	2
+MB-6181	Luminal A	3	2	3
+MB-6182	HER2-enriched	1	1	1
+MB-6183	Luminal B	3	2	2
+MB-6184	HER2-enriched	3	3	3
+MB-6185	Luminal A	2	2	2
+MB-6189	Luminal B	3	3	3
+MB-6190	Luminal A	2	2	2
+MB-6192	Luminal B	3	3	3
+MB-6195	Luminal A	2	2	2
+MB-6200	Luminal A	2	2	2
+MB-6201	Luminal B	2	2	2
+MB-6207	Luminal A	2	2	2
+MB-6211	Luminal A	2	2	2
+MB-6212	Luminal A	2	2	2
+MB-6213	Luminal A	2	2	2
+MB-6214	Luminal A	2	2	2
+MB-6217	Luminal B	3	3	3
+MB-6218	Luminal A	2	2	2
+MB-6223	Basal-like	3	1	1
+MB-6224	HER2-enriched	1	1	1
+MB-6225	Luminal A	2	2	2
+MB-6229	Luminal A	2	2	2
+MB-6230	Luminal A	2	2	2
+MB-6232	Luminal A	2	2	2
+MB-6233	Luminal B	2	2	2
+MB-6237	Basal-like	0	0	0
+MB-6238	Luminal A	2	2	2
+MB-6242	Basal-like	0	0	0
+MB-6245	Basal-like	0	0	0
+MB-6246	HER2-enriched	3	1	1
+MB-6248	Basal-like	0	0	0
+MB-6251	Basal-like	0	0	0
+MB-6253	Luminal A	2	2	2
+MB-6254	Luminal B	2	2	2
+MB-6256	Luminal A	2	2	2
+MB-6257	Luminal B	2	3	3
+MB-6263	Luminal A	2	2	2
+MB-6271	Luminal A	2	2	2
+MB-6273	Luminal A	2	2	2
+MB-6280	Basal-like	0	0	0
+MB-6281	Luminal B	2	2	2
+MB-6283	Luminal A	2	2	2
+MB-6284	Luminal B	3	3	3
+MB-6286	Luminal A	2	2	2
+MB-6287	Luminal B	3	3	3
+MB-6288	Luminal B	2	2	2
+MB-6297	Luminal A	2	2	2
+MB-6300	Luminal B	2	2	2
+MB-6302	Luminal B	3	3	3
+MB-6306	Luminal B	3	3	3
+MB-6308	Luminal A	2	2	2
+MB-6312	Luminal B	3	3	3
+MB-6314	HER2-enriched	3	3	3
+MB-6317	Luminal B	3	3	3
+MB-6318	HER2-enriched	1	1	1
+MB-6322	Luminal B	2	2	2
+MB-6327	Luminal B	2	2	2
+MB-6328	Luminal A	2	2	2
+MB-6329	Luminal B	3	3	3
+MB-6330	HER2-enriched	1	1	1
+MB-6334	HER2-enriched	3	3	3
+MB-6336	Basal-like	0	0	0
+MB-6337	Basal-like	0	0	1
+MB-6344	Luminal B	3	3	3
+MB-6346	Luminal B	2	2	2
+MB-6358	HER2-enriched	1	1	1
+MB-6359	HER2-enriched	2	2	2
+MB-6363	Basal-like	1	1	1
+MB-7000	Luminal B	3	3	3
+MB-7001	Luminal A	2	2	2
+MB-7002	Luminal B	2	2	2
+MB-7004	Luminal A	2	2	2
+MB-7005	Luminal B	2	2	2
+MB-7006	Luminal A	2	2	2
+MB-7007	Basal-like	1	0	0
+MB-7009	Basal-like	0	0	0
+MB-7010	Luminal A	2	2	2
+MB-7011	Luminal B	3	3	3
+MB-7012	Basal-like	0	0	0
+MB-7013	Luminal A	2	2	2
+MB-7014	Basal-like	3	3	3
+MB-7015	Luminal B	3	3	3
+MB-7018	HER2-enriched	2	2	2
+MB-7019	Luminal B	2	2	2
+MB-7020	HER2-enriched	1	1	1
+MB-7022	Luminal B	2	2	2
+MB-7024	Luminal B	3	3	3
+MB-7026	Luminal B	2	2	2
+MB-7027	HER2-enriched	1	1	1
+MB-7028	Luminal B	3	3	3
+MB-7029	Luminal A	2	2	2
+MB-7030	Basal-like	2	0	0
+MB-7031	Basal-like	0	0	0
+MB-7032	Luminal A	2	2	2
+MB-7034	Luminal A	2	2	2
+MB-7035	HER2-enriched	1	1	1
+MB-7036	Basal-like	0	0	0
+MB-7037	Luminal A	2	2	2
+MB-7038	Basal-like	0	0	0
+MB-7039	Basal-like	2	2	2
+MB-7040	Luminal A	2	2	2
+MB-7041	Luminal A	2	2	2
+MB-7042	Luminal B	2	3	3
+MB-7045	HER2-enriched	1	1	1
+MB-7046	HER2-enriched	3	3	3
+MB-7048	HER2-enriched	3	3	3
+MB-7049	Basal-like	0	0	0
+MB-7050	HER2-enriched	1	1	1
+MB-7051	HER2-enriched	3	3	3
+MB-7053	Luminal A	2	2	2
+MB-7055	Basal-like	0	0	0
+MB-7056	Luminal A	2	2	2
+MB-7059	HER2-enriched	1	1	1
+MB-7060	Luminal A	2	2	2
+MB-7062	Luminal A	2	2	2
+MB-7063	Luminal A	2	2	2
+MB-7065	Luminal B	2	2	2
+MB-7066	HER2-enriched	1	1	1
+MB-7067	HER2-enriched	1	1	1
+MB-7068	HER2-enriched	3	3	3
+MB-7069	HER2-enriched	1	1	1
+MB-7070	HER2-enriched	2	3	3
+MB-7071	HER2-enriched	3	3	3
+MB-7072	Luminal B	3	3	3
+MB-7073	Basal-like	0	0	0
+MB-7075	Luminal B	3	3	3
+MB-7076	Luminal A	2	2	2
+MB-7077	Luminal A	2	2	2
+MB-7080	Luminal A	2	2	2
+MB-7082	HER2-enriched	1	1	1
+MB-7083	Luminal B	3	3	3
+MB-7084	Basal-like	0	0	0
+MB-7086	Luminal B	3	3	3
+MB-7087	Basal-like	0	0	0
+MB-7088	HER2-enriched	1	1	1
+MB-7090	Basal-like	0	0	0
+MB-7091	Luminal A	2	2	2
+MB-7092	HER2-enriched	3	3	3
+MB-7093	Luminal A	2	2	2
+MB-7094	Luminal B	3	3	3
+MB-7095	Luminal A	2	2	2
+MB-7096	Luminal A	2	2	2
+MB-7097	Luminal B	3	3	3
+MB-7099	Luminal B	3	3	3
+MB-7100	Luminal B	3	3	3
+MB-7101	Luminal A	2	2	2
+MB-7102	Luminal B	2	2	2
+MB-7106	Luminal A	2	2	2
+MB-7107	Luminal A	2	3	3
+MB-7109	Luminal B	3	3	3
+MB-7111	Basal-like	0	0	0
+MB-7112	Luminal B	3	3	3
+MB-7113	Luminal A	2	2	2
+MB-7114	Basal-like	0	0	0
+MB-7115	HER2-enriched	3	1	1
+MB-7116	Luminal B	2	3	3
+MB-7118	Luminal A	2	2	2
+MB-7119	Basal-like	0	0	0
+MB-7122	Basal-like	1	1	1
+MB-7123	Luminal A	2	2	2
+MB-7124	Luminal A	2	2	2
+MB-7128	Luminal A	2	2	2
+MB-7130	Luminal B	3	3	3
+MB-7131	Luminal B	3	3	3
+MB-7132	Luminal B	2	2	2
+MB-7133	Luminal B	3	3	3
+MB-7135	HER2-enriched	1	1	1
+MB-7137	Luminal A	2	2	2
+MB-7138	Luminal B	3	3	3
+MB-7140	Luminal B	3	3	3
+MB-7141	Luminal A	2	2	2
+MB-7142	Luminal B	2	2	2
+MB-7143	HER2-enriched	1	1	1
+MB-7144	Luminal B	3	3	3
+MB-7145	Basal-like	0	0	0
+MB-7147	Luminal B	3	3	3
+MB-7148	Luminal A	2	2	2
+MB-7149	Luminal B	3	3	3
+MB-7150	Luminal B	2	3	3
+MB-7151	Basal-like	0	0	0
+MB-7152	HER2-enriched	3	3	3
+MB-7153	HER2-enriched	1	1	1
+MB-7154	Basal-like	0	0	0
+MB-7155	Basal-like	0	0	0
+MB-7157	Luminal B	3	3	3
+MB-7159	Basal-like	0	0	0
+MB-7160	HER2-enriched	2	1	1
+MB-7161	Luminal A	2	2	2
+MB-7162	Luminal A	2	2	2
+MB-7163	Luminal A	2	2	2
+MB-7164	Luminal A	2	2	2
+MB-7165	Basal-like	0	0	0
+MB-7167	HER2-enriched	2	2	2
+MB-7168	Luminal A	2	2	2
+MB-7170	Luminal A	2	2	2
+MB-7171	Luminal B	3	3	3
+MB-7172	Luminal B	3	3	3
+MB-7173	Luminal A	2	2	2
+MB-7174	Luminal B	3	3	3
+MB-7176	Luminal A	3	3	3
+MB-7181	Luminal B	3	3	3
+MB-7182	HER2-enriched	3	3	3
+MB-7185	Luminal A	2	2	2
+MB-7186	Luminal B	3	3	3
+MB-7188	Luminal B	2	2	2
+MB-7189	Luminal B	3	3	3
+MB-7193	Luminal B	3	3	3
+MB-7194	Luminal B	3	3	3
+MB-7195	Luminal A	2	2	2
+MB-7196	HER2-enriched	3	3	3
+MB-7197	Luminal B	2	2	2
+MB-7198	Basal-like	2	0	0
+MB-7199	Luminal B	3	3	3
+MB-7200	Luminal B	2	2	2
+MB-7205	Basal-like	0	0	0
+MB-7207	HER2-enriched	1	1	1
+MB-7208	Basal-like	1	1	1
+MB-7212	Luminal A	2	2	2
+MB-7216	Luminal B	2	2	2
+MB-7217	Luminal A	2	2	2
+MB-7218	Luminal A	2	2	2
+MB-7219	Luminal A	2	2	2
+MB-7220	Luminal B	2	2	2
+MB-7225	Basal-like	0	0	0
+MB-7226	Luminal B	3	3	3
+MB-7229	Luminal A	2	2	2
+MB-7230	Luminal A	2	2	2
+MB-7231	Luminal A	2	2	2
+MB-7232	Luminal A	2	2	2
+MB-7233	HER2-enriched	2	2	2
+MB-7234	Luminal B	2	2	2
+MB-7235	Luminal A	2	2	2
+MB-7236	Luminal B	2	2	2
+MB-7238	HER2-enriched	3	3	3
+MB-7241	Luminal B	2	2	2
+MB-7243	Luminal A	2	2	2
+MB-7244	Luminal A	2	2	2
+MB-7249	Luminal A	2	2	2
+MB-7250	HER2-enriched	1	1	1
+MB-7251	HER2-enriched	1	1	1
+MB-7252	HER2-enriched	1	1	1
+MB-7253	Luminal B	2	3	3
+MB-7254	Luminal A	2	2	2
+MB-7256	HER2-enriched	1	1	1
+MB-7258	Basal-like	0	0	0
+MB-7260	HER2-enriched	1	1	1
+MB-7262	HER2-enriched	3	3	3
+MB-7263	Luminal B	3	3	2
+MB-7266	Luminal B	2	2	2
+MB-7267	Basal-like	0	0	0
+MB-7268	Luminal A	2	2	2
+MB-7269	Basal-like	0	0	0
+MB-7270	Basal-like	1	1	1
+MB-7273	HER2-enriched	1	1	1
+MB-7275	HER2-enriched	2	2	2
+MB-7276	Luminal A	2	2	2
+MB-7277	Luminal A	2	2	2
+MB-7278	Luminal A	2	2	2
+MB-7279	HER2-enriched	3	3	3
+MB-7280	Luminal A	2	2	2
+MB-7281	HER2-enriched	1	1	1
+MB-7283	Luminal B	2	2	2
+MB-7284	Luminal A	2	2	2
+MB-7286	Luminal B	2	2	2
+MB-7287	Luminal B	3	3	3
+MB-7288	Luminal B	3	3	3
+MB-7292	Luminal B	3	3	3
+MB-7293	Luminal A	2	2	2
+MB-7294	Luminal B	3	2	3
+MB-7295	Luminal A	2	2	2
+MB-7296	Luminal B	3	3	3
+MB-7297	Luminal B	3	3	3
+MB-7298	Luminal B	3	3	3
+MB-7299	Luminal B	3	3	3

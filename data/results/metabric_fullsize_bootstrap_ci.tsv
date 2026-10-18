@@ -1,0 +1,13 @@
+comparison	metric	point	lo95	hi95	p_two_sided
+LogisticRegression	accuracy	0.7917	0.7711	0.8109	
+LogisticRegression	macro_f1	0.7735	0.7491	0.7954	
+Dense	accuracy	0.8197	0.801	0.8377	
+Dense	macro_f1	0.8079	0.7863	0.8289	
+FullSizeCNN	accuracy	0.8203	0.8016	0.8383	
+FullSizeCNN	macro_f1	0.8099	0.7884	0.831	
+Dense_minus_LogisticRegression	accuracy	0.028	0.0155	0.041	0.0
+Dense_minus_LogisticRegression	macro_f1	0.0344	0.021	0.0488	0.0
+Dense_minus_FullSizeCNN	accuracy	-0.0006	-0.0087	0.0075	0.942
+Dense_minus_FullSizeCNN	macro_f1	-0.002	-0.0099	0.0061	0.618
+FullSizeCNN_minus_LogisticRegression	accuracy	0.0286	0.0162	0.0423	0.0
+FullSizeCNN_minus_LogisticRegression	macro_f1	0.0364	0.0225	0.052	0.0
