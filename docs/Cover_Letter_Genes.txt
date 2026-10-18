@@ -1,0 +1,21 @@
+Date: 18 October 2026
+
+To the Editorial Office, Genes (MDPI)
+
+Subject: Submission of a research article for consideration in Genes
+
+Dear Editors,
+
+We are pleased to submit our manuscript entitled "Jensen-Shannon Divergence-Guided Omics Imaging for Interpretable Breast Cancer Subtype Reconstruction and Candidate Gene Prioritization" for consideration as a research article in Genes.
+
+In this study we propose a supervised, Jensen-Shannon divergence (JSD)-guided approach that turns tabular mRNA, copy-number variation, and miRNA features into grayscale images and processes them with a full-size convolutional network. Using TCGA-BRCA data under leak-free five-fold cross-validation, with independent validation in METABRIC, we benchmark the representation against classical machine-learning, MLP, and censoring-aware survival models. The central finding is that the image format does not improve accuracy over the raw feature values; its value is interpretability. The pixel-to-gene coordinate system lets model decisions be traced back to individual genes, recovering candidate genes such as ESR1 and CCL19 and pointing to targetable estrogen-signaling, proliferation, and epithelial-development programs. The work therefore sits within Genes' scope on genomics, computational biology, and translational omics analysis.
+
+The manuscript is original, has not been published elsewhere, and is not under consideration by any other journal. All authors have read and approved the submission. The authors declare no conflicts of interest. All data are publicly available and de-identified, and the processed data, code, and reproducibility notes are deposited in a GitHub repository.
+
+We believe this work will be of interest to readers working on multi-omics integration, machine learning for genomics, and cancer biomarker discovery. Thank you for considering our manuscript.
+
+Sincerely,
+
+Lu Cai (Corresponding author)
+Inner Mongolia Key Laboratory of Life Health and Bioinformatics, College of Life Science and Technology, Inner Mongolia University of Science and Technology, Baotou 014010, China
+Email: nmcailu@163.com

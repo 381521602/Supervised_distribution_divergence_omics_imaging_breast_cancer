@@ -1,0 +1,4 @@
+model	accuracy	macro_f1
+LogisticRegression	0.7917	0.7735
+Dense	0.8165	0.8034
+FullSizeCNN	0.8203	0.8099
